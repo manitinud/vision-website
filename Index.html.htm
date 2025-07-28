@@ -1,0 +1,848 @@
+Put your HTML text here<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-g">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Vision Connects Academy - Professional Accounting Training</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <style>
+    /* A little custom CSS for smoother transitions */
+    .module-content {
+      display: none;
+      animation: fadeIn 0.7s ease-in-out;
+    }
+    .module-content.active {
+      display: block;
+    }
+    @keyframes fadeIn {
+      from { opacity: 0; transform: translateY(10px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+    .mobile-menu {
+        max-height: 0;
+        overflow: hidden;
+        transition: max-height 0.3s ease-out;
+    }
+    .mobile-menu.open {
+        max-height: 500px; /* Adjust as needed */
+    }
+  </style>
+</head>
+<body class="bg-white">
+
+  <svg width="0" height="0" style="position:absolute">
+    <symbol id="icon-book-open" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M2 3h6a4 4 0 0 1 4 4v14a3 3 0 0 0-3-3H2z"/><path d="M22 3h-6a4 4 0 0 0-4 4v14a3 3 0 0 1 3-3h7z"/></symbol>
+    <symbol id="icon-users" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M22 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></symbol>
+    <symbol id="icon-award" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="8" r="6"/><path d="M15.477 12.89 17 22l-5-3-5 3 1.523-9.11"/></symbol>
+    <symbol id="icon-calculator" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect width="16" height="20" x="4" y="2" rx="2"/><line x1="8" x2="16" y1="6" y2="6"/><line x1="16" x2="16" y1="14" y2="18"/><path d="M16 10h.01"/><path d="M12 10h.01"/><path d="M8 10h.01"/><path d="M12 14h.01"/><path d="M8 14h.01"/><path d="M12 18h.01"/><path d="M8 18h.01"/></symbol>
+    <symbol id="icon-file-text" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M15 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V7Z"/><path d="M14 2v4a2 2 0 0 0 2 2h4"/><path d="M10 9H8"/><path d="M16 13H8"/><path d="M16 17H8"/></symbol>
+    <symbol id="icon-trending-up" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="22 7 13.5 15.5 8.5 10.5 2 17"/><polyline points="16 7 22 7 22 13"/></symbol>
+    <symbol id="icon-check-circle" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/><polyline points="22 4 12 14.01 9 11.01"/></symbol>
+    <symbol id="icon-phone" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"/></symbol>
+    <symbol id="icon-map-pin" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 10c0 6-8 12-8 12s-8-6-8-12a8 8 0 0 1 16 0Z"/><circle cx="12" cy="10" r="3"/></symbol>
+    <symbol id="icon-menu" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="4" x2="20" y1="12" y2="12"/><line x1="4" x2="20" y1="6" y2="6"/><line x1="4" x2="20" y1="18" y2="18"/></symbol>
+    <symbol id="icon-x" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="18" x2="6" y1="6" y2="18"/><line x1="6" x2="18" y1="6" y2="18"/></symbol>
+    <symbol id="icon-globe" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><path d="M12 2a14.5 14.5 0 0 0 0 20 14.5 14.5 0 0 0 0-20"/><path d="M2 12h20"/></symbol>
+    <symbol id="icon-building" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect width="16" height="20" x="4" y="2" rx="2" ry="2"/><path d="M9 22v-4h6v4"/><path d="M8 6h.01"/><path d="M16 6h.01"/><path d="M12 6h.01"/><path d="M12 10h.01"/><path d="M12 14h.01"/><path d="M16 10h.01"/><path d="M16 14h.01"/><path d="M8 10h.01"/><path d="M8 14h.01"/></symbol>
+  </svg>
+
+  <div class="min-h-screen bg-white">
+    <nav class="fixed top-0 w-full z-50 bg-white/95 backdrop-blur-lg shadow-lg border-b border-gray-100">
+      <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div class="flex justify-between items-center py-4">
+          <div class="flex items-center space-x-4">
+            <div class="text-3xl font-bold bg-gradient-to-r from-emerald-600 to-blue-600 bg-clip-text text-transparent">
+              VISION CONNECTS
+            </div>
+            <div class="hidden lg:block text-sm text-gray-600 border-l border-gray-300 pl-4">
+              Quality Training by <a href="http://accountantsfactory.com/" target="_blank" rel="noopener noreferrer" class="text-blue-600 hover:underline font-semibold">Accountants Factory LLP</a>
+            </div>
+          </div>
+          
+          <div class="hidden md:flex space-x-8">
+            <a href="#home" class="text-gray-700 hover:text-emerald-600 transition-colors font-medium">Home</a>
+            <a href="#courses" class="text-gray-700 hover:text-emerald-600 transition-colors font-medium">Courses</a>
+            <a href="#about" class="text-gray-700 hover:text-emerald-600 transition-colors font-medium">About</a>
+            <a href="#careers" class="text-gray-700 hover:text-emerald-600 transition-colors font-medium">Careers</a>
+            <a href="#contact" class="text-gray-700 hover:text-emerald-600 transition-colors font-medium">Contact</a>
+          </div>
+
+          <button id="menu-button" class="md:hidden text-gray-700">
+            <svg class="w-6 h-6" id="menu-open-icon"><use href="#icon-menu"></use></svg>
+            <svg class="w-6 h-6 hidden" id="menu-close-icon"><use href="#icon-x"></use></svg>
+          </button>
+        </div>
+      </div>
+
+      <div id="mobile-menu" class="mobile-menu md:hidden bg-white border-t border-gray-100 shadow-lg">
+        <div class="px-4 py-4 space-y-4">
+          <a href="#home" class="mobile-link block text-gray-700 hover:text-emerald-600 transition-colors font-medium">Home</a>
+          <a href="#courses" class="mobile-link block text-gray-700 hover:text-emerald-600 transition-colors font-medium">Courses</a>
+          <a href="#about" class="mobile-link block text-gray-700 hover:text-emerald-600 transition-colors font-medium">About</a>
+          <a href="#careers" class="mobile-link block text-gray-700 hover:text-emerald-600 transition-colors font-medium">Careers</a>
+          <a href="#contact" class="mobile-link block text-gray-700 hover:text-emerald-600 transition-colors font-medium">Contact</a>
+        </div>
+      </div>
+    </nav>
+
+    <section id="home" class="pt-28 pb-16 bg-gradient-to-br from-emerald-50 via-teal-50 to-blue-50 relative overflow-hidden">
+      <div class="absolute inset-0 opacity-10">
+        <div class="absolute top-10 left-10 w-20 h-20 bg-emerald-500 rounded-full blur-xl"></div>
+        <div class="absolute top-40 right-20 w-32 h-32 bg-blue-500 rounded-full blur-xl"></div>
+        <div class="absolute bottom-20 left-1/3 w-24 h-24 bg-teal-500 rounded-full blur-xl"></div>
+      </div>
+      
+      <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative">
+        <div class="grid lg:grid-cols-2 gap-12 items-center">
+          <div class="text-left">
+            <div class="inline-flex items-center px-4 py-2 bg-emerald-100 text-emerald-800 rounded-full text-sm font-medium mb-6">
+              <svg class="w-4 h-4 mr-2"><use href="#icon-award"></use></svg>
+              Online & Offline Classes • Official Tally Training Partner • Zoho Certified Partner
+            </div>
+            
+            <h1 class="text-4xl md:text-6xl font-bold text-gray-900 mb-6 leading-tight">
+              Become a <span class="bg-gradient-to-r from-emerald-600 to-blue-600 bg-clip-text text-transparent">Certified Professional Accountant</span>
+            </h1>
+            
+            <p class="text-xl md:text-2xl text-gray-600 mb-8 leading-relaxed">
+              Master Professional Accounting, Tally Coaching, Zoho Books Training, GST Training, Income Tax Return Filing & Excel Training - Available both Online & Offline in Tirupati
+            </p>
+            
+            <div class="flex flex-col sm:flex-row gap-4 mb-8">
+              <button class="bg-gradient-to-r from-emerald-600 to-teal-600 hover:from-emerald-700 hover:to-teal-700 text-white px-8 py-4 rounded-xl text-lg font-semibold transition-all duration-300 transform hover:scale-105 shadow-lg hover:shadow-emerald-500/25">
+                Enroll Now - ₹15,000 Only
+              </button>
+              <button class="border-2 border-emerald-600 text-emerald-600 hover:bg-emerald-600 hover:text-white px-8 py-4 rounded-xl text-lg font-semibold transition-all duration-300">
+                Download Brochure
+              </button>
+            </div>
+            
+            <div class="grid grid-cols-1 sm:grid-cols-2 gap-4 text-sm">
+              <div class="flex items-center text-gray-600">
+                <svg class="w-5 h-5 text-emerald-500 mr-2 flex-shrink-0"><use href="#icon-check-circle"></use></svg>
+                Online & Offline Classes
+              </div>
+              <div class="flex items-center text-gray-600">
+                <svg class="w-5 h-5 text-emerald-500 mr-2 flex-shrink-0"><use href="#icon-check-circle"></use></svg>
+                100% Placement Support
+              </div>
+              <div class="flex items-center text-gray-600">
+                <svg class="w-5 h-5 text-emerald-500 mr-2 flex-shrink-0"><use href="#icon-check-circle"></use></svg>
+                Small Batch Training
+              </div>
+              <div class="flex items-center text-gray-600">
+                <svg class="w-5 h-5 text-emerald-500 mr-2 flex-shrink-0"><use href="#icon-check-circle"></use></svg>
+                Flexible Learning Options
+              </div>
+            </div>
+          </div>
+          
+          <div class="bg-white rounded-3xl shadow-2xl p-8 border border-gray-100">
+            <div class="text-center mb-6">
+              <div class="w-16 h-16 bg-gradient-to-r from-emerald-500 to-blue-500 rounded-2xl flex items-center justify-center mx-auto mb-4">
+                <svg class="w-8 h-8 text-white"><use href="#icon-book-open"></use></svg>
+              </div>
+              <h3 class="text-2xl font-bold text-gray-900">Complete Program</h3>
+              <p class="text-gray-600">All-inclusive training package</p>
+            </div>
+            
+            <div class="space-y-4">
+              <div class="flex items-center space-x-4 p-4 bg-gray-50 rounded-xl">
+                <div class="text-2xl">🏆</div>
+                <div>
+                  <h4 class="font-semibold text-gray-900">Official Tally Training Partner</h4>
+                  <p class="text-sm text-gray-600">Authorized Tally training partner with official certification</p>
+                </div>
+              </div>
+              <div class="flex items-center space-x-4 p-4 bg-gray-50 rounded-xl">
+                <div class="text-2xl">⭐</div>
+                <div>
+                  <h4 class="font-semibold text-gray-900">Zoho Certified Partner</h4>
+                  <p class="text-sm text-gray-600">Certified training in complete Zoho suite of applications</p>
+                </div>
+              </div>
+              <div class="flex items-center space-x-4 p-4 bg-gray-50 rounded-xl">
+                <div class="text-2xl">🎯</div>
+                <div>
+                  <h4 class="font-semibold text-gray-900">GST Practice Simulations</h4>
+                  <p class="text-sm text-gray-600">Live GST portal simulations for hands-on practice</p>
+                </div>
+              </div>
+            </div>
+            
+            <div class="mt-6 p-4 bg-gradient-to-r from-emerald-500 to-blue-500 rounded-xl text-white text-center">
+              <div class="text-2xl font-bold">₹15,000</div>
+              <div class="text-sm opacity-90">Complete 5-Module Program</div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="py-16 bg-gradient-to-br from-gray-50 to-blue-50">
+      <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div class="text-center mb-12">
+          <h2 class="text-3xl md:text-4xl font-bold text-gray-900 mb-4">
+            Individual Course Offerings
+          </h2>
+          <p class="text-lg text-gray-600">
+            Choose specific courses based on your career needs and learning goals
+          </p>
+        </div>
+
+        <div class="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-6 gap-4">
+            <div class="bg-white rounded-xl shadow-lg hover:shadow-xl transition-all duration-300 p-4 text-center group hover:scale-105">
+              <div class="bg-emerald-500 w-12 h-12 rounded-full flex items-center justify-center text-white text-xl mx-auto mb-3 group-hover:scale-110 transition-transform">
+                📊
+              </div>
+              <h3 class="font-semibold text-gray-900 text-sm mb-2">Professional Accounting Course</h3>
+              <button class="text-xs bg-gray-100 hover:bg-emerald-100 text-gray-700 hover:text-emerald-700 px-3 py-1 rounded-full transition-colors">
+                Learn More
+              </button>
+            </div>
+            <div class="bg-white rounded-xl shadow-lg hover:shadow-xl transition-all duration-300 p-4 text-center group hover:scale-105">
+              <div class="bg-blue-500 w-12 h-12 rounded-full flex items-center justify-center text-white text-xl mx-auto mb-3 group-hover:scale-110 transition-transform">
+                💼
+              </div>
+              <h3 class="font-semibold text-gray-900 text-sm mb-2">Tally Coaching Classes</h3>
+              <button class="text-xs bg-gray-100 hover:bg-emerald-100 text-gray-700 hover:text-emerald-700 px-3 py-1 rounded-full transition-colors">
+                Learn More
+              </button>
+            </div>
+            <div class="bg-white rounded-xl shadow-lg hover:shadow-xl transition-all duration-300 p-4 text-center group hover:scale-105">
+              <div class="bg-purple-500 w-12 h-12 rounded-full flex items-center justify-center text-white text-xl mx-auto mb-3 group-hover:scale-110 transition-transform">
+                📚
+              </div>
+              <h3 class="font-semibold text-gray-900 text-sm mb-2">Zoho Books Training</h3>
+              <button class="text-xs bg-gray-100 hover:bg-emerald-100 text-gray-700 hover:text-emerald-700 px-3 py-1 rounded-full transition-colors">
+                Learn More
+              </button>
+            </div>
+            <div class="bg-white rounded-xl shadow-lg hover:shadow-xl transition-all duration-300 p-4 text-center group hover:scale-105">
+              <div class="bg-orange-500 w-12 h-12 rounded-full flex items-center justify-center text-white text-xl mx-auto mb-3 group-hover:scale-110 transition-transform">
+                🎯
+              </div>
+              <h3 class="font-semibold text-gray-900 text-sm mb-2">GST Training Program</h3>
+              <button class="text-xs bg-gray-100 hover:bg-emerald-100 text-gray-700 hover:text-emerald-700 px-3 py-1 rounded-full transition-colors">
+                Learn More
+              </button>
+            </div>
+            <div class="bg-white rounded-xl shadow-lg hover:shadow-xl transition-all duration-300 p-4 text-center group hover:scale-105">
+              <div class="bg-red-500 w-12 h-12 rounded-full flex items-center justify-center text-white text-xl mx-auto mb-3 group-hover:scale-110 transition-transform">
+                📋
+              </div>
+              <h3 class="font-semibold text-gray-900 text-sm mb-2">Income Tax Return Filing</h3>
+              <button class="text-xs bg-gray-100 hover:bg-emerald-100 text-gray-700 hover:text-emerald-700 px-3 py-1 rounded-full transition-colors">
+                Learn More
+              </button>
+            </div>
+            <div class="bg-white rounded-xl shadow-lg hover:shadow-xl transition-all duration-300 p-4 text-center group hover:scale-105">
+              <div class="bg-green-500 w-12 h-12 rounded-full flex items-center justify-center text-white text-xl mx-auto mb-3 group-hover:scale-110 transition-transform">
+                📈
+              </div>
+              <h3 class="font-semibold text-gray-900 text-sm mb-2">Excel Training Course</h3>
+              <button class="text-xs bg-gray-100 hover:bg-emerald-100 text-gray-700 hover:text-emerald-700 px-3 py-1 rounded-full transition-colors">
+                Learn More
+              </button>
+            </div>
+        </div>
+
+        <div class="text-center mt-8">
+          <p class="text-gray-600 mb-4">All individual courses available in both online and offline modes</p>
+          <div class="flex flex-wrap justify-center gap-2 text-xs">
+            <span class="bg-emerald-100 text-emerald-800 px-3 py-1 rounded-full">Accounting Classes Tirupati</span>
+            <span class="bg-blue-100 text-blue-800 px-3 py-1 rounded-full">Tally Course Near Me</span>
+            <span class="bg-purple-100 text-purple-800 px-3 py-1 rounded-full">GST Training Institute</span>
+            <span class="bg-orange-100 text-orange-800 px-3 py-1 rounded-full">Excel Training Center</span>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section id="courses" class="py-20 bg-white">
+      <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div class="text-center mb-16">
+          <h2 class="text-4xl md:text-5xl font-bold text-gray-900 mb-6">
+            Complete Accounting Training Program
+          </h2>
+          <p class="text-xl text-gray-600 max-w-3xl mx-auto mb-4">
+            Comprehensive 5-module curriculum covering all aspects of professional accounting and taxation
+          </p>
+          <div class="flex flex-wrap justify-center gap-4 text-sm">
+            <span class="bg-emerald-100 text-emerald-800 px-4 py-2 rounded-full font-medium">
+              🏢 Classroom Training Tirupati
+            </span>
+            <span class="bg-blue-100 text-blue-800 px-4 py-2 rounded-full font-medium">
+              💻 Online Accounting Classes
+            </span>
+            <span class="bg-purple-100 text-purple-800 px-4 py-2 rounded-full font-medium">
+              🎯 Live GST Portal Practice
+            </span>
+          </div>
+        </div>
+
+        <div class="mb-12">
+          <div class="flex flex-wrap justify-center gap-3 mb-8">
+            <button data-module-index="0" class="module-tab px-6 py-4 rounded-2xl text-center transition-all duration-300 transform hover:scale-105 bg-gradient-to-r from-emerald-500 to-teal-600 text-white shadow-xl scale-105">
+              <div class="p-2 rounded-lg mx-auto mb-2 bg-white/20">
+                <div class="w-8 h-8 flex items-center justify-center text-white">
+                    <svg class="w-10 h-10"><use href="#icon-calculator"></use></svg>
+                </div>
+              </div>
+              <div class="text-xs opacity-75 font-medium mb-1">Module 1</div>
+              <div class="font-bold text-sm">Core Accounting</div>
+            </button>
+            <button data-module-index="1" class="module-tab px-6 py-4 rounded-2xl text-center transition-all duration-300 transform hover:scale-105 bg-white hover:bg-gray-50 text-gray-700 shadow-md border border-gray-200">
+              <div class="p-2 rounded-lg mx-auto mb-2 bg-gray-100">
+                <div class="w-8 h-8 flex items-center justify-center text-gray-600">
+                  <svg class="w-10 h-10"><use href="#icon-file-text"></use></svg>
+                </div>
+              </div>
+              <div class="text-xs opacity-75 font-medium mb-1">Module 2</div>
+              <div class="font-bold text-sm">Tally & Zoho</div>
+            </button>
+            <button data-module-index="2" class="module-tab px-6 py-4 rounded-2xl text-center transition-all duration-300 transform hover:scale-105 bg-white hover:bg-gray-50 text-gray-700 shadow-md border border-gray-200">
+              <div class="p-2 rounded-lg mx-auto mb-2 bg-gray-100">
+                <div class="w-8 h-8 flex items-center justify-center text-gray-600">
+                  <svg class="w-10 h-10"><use href="#icon-trending-up"></use></svg>
+                </div>
+              </div>
+              <div class="text-xs opacity-75 font-medium mb-1">Module 3</div>
+              <div class="font-bold text-sm">GST & Income Tax</div>
+            </button>
+            <button data-module-index="3" class="module-tab px-6 py-4 rounded-2xl text-center transition-all duration-300 transform hover:scale-105 bg-white hover:bg-gray-50 text-gray-700 shadow-md border border-gray-200">
+              <div class="p-2 rounded-lg mx-auto mb-2 bg-gray-100">
+                <div class="w-8 h-8 flex items-center justify-center text-gray-600">
+                  <svg class="w-10 h-10"><use href="#icon-book-open"></use></svg>
+                </div>
+              </div>
+              <div class="text-xs opacity-75 font-medium mb-1">Module 4</div>
+              <div class="font-bold text-sm">Advanced Excel</div>
+            </button>
+            <button data-module-index="4" class="module-tab px-6 py-4 rounded-2xl text-center transition-all duration-300 transform hover:scale-105 bg-white hover:bg-gray-50 text-gray-700 shadow-md border border-gray-200">
+              <div class="p-2 rounded-lg mx-auto mb-2 bg-gray-100">
+                <div class="w-8 h-8 flex items-center justify-center text-gray-600">
+                  <svg class="w-10 h-10"><use href="#icon-users"></use></svg>
+                </div>
+              </div>
+              <div class="text-xs opacity-75 font-medium mb-1">Module 5</div>
+              <div class="font-bold text-sm">Business Communication</div>
+            </button>
+          </div>
+          
+          <div id="module-container">
+            <div class="module-content active bg-gradient-to-br from-emerald-50 to-teal-50 rounded-3xl p-8 border border-gray-100 shadow-xl">
+              <div class="text-center mb-8">
+                <div class="bg-gradient-to-r from-emerald-500 to-teal-600 p-6 rounded-3xl text-white inline-block mb-4">
+                  <div class="w-12 h-12 flex items-center justify-center">
+                    <svg class="w-10 h-10"><use href="#icon-calculator"></use></svg>
+                  </div>
+                </div>
+                <div class="text-sm text-gray-600 font-medium">Module 1</div>
+                <h3 class="text-4xl font-bold text-gray-900 mb-4">Core Accounting</h3>
+                <p class="text-xl text-gray-700 max-w-3xl mx-auto">Master accounting fundamentals, ledgers, and financial statement preparation with comprehensive practical training</p>
+              </div>
+              <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 max-w-5xl mx-auto">
+                  <div class="flex items-center text-gray-700 bg-white/50 rounded-xl p-4"><svg class="w-5 h-5 text-emerald-500 mr-3 flex-shrink-0"><use href="#icon-check-circle"></use></svg><span class="font-medium">Accounting Fundamentals & Principles</span></div>
+                  <div class="flex items-center text-gray-700 bg-white/50 rounded-xl p-4"><svg class="w-5 h-5 text-emerald-500 mr-3 flex-shrink-0"><use href="#icon-check-circle"></use></svg><span class="font-medium">Ledger Management & Book Keeping</span></div>
+                  <div class="flex items-center text-gray-700 bg-white/50 rounded-xl p-4"><svg class="w-5 h-5 text-emerald-500 mr-3 flex-shrink-0"><use href="#icon-check-circle"></use></svg><span class="font-medium">Financial Statements Preparation</span></div>
+                  <div class="flex items-center text-gray-700 bg-white/50 rounded-xl p-4"><svg class="w-5 h-5 text-emerald-500 mr-3 flex-shrink-0"><use href="#icon-check-circle"></use></svg><span class="font-medium">Balance Sheets & P&L Analysis</span></div>
+                  <div class="flex items-center text-gray-700 bg-white/50 rounded-xl p-4"><svg class="w-5 h-5 text-emerald-500 mr-3 flex-shrink-0"><use href="#icon-check-circle"></use></svg><span class="font-medium">Trial Balance & Reconciliation</span></div>
+              </div>
+            </div>
+            <div class="module-content bg-gradient-to-br from-blue-50 to-indigo-50 rounded-3xl p-8 border border-gray-100 shadow-xl">
+              <div class="text-center mb-8">
+                <div class="bg-gradient-to-r from-blue-500 to-indigo-600 p-6 rounded-3xl text-white inline-block mb-4">
+                    <div class="w-12 h-12 flex items-center justify-center"><svg class="w-10 h-10"><use href="#icon-file-text"></use></svg></div>
+                </div>
+                <div class="text-sm text-gray-600 font-medium">Module 2</div>
+                <h3 class="text-4xl font-bold text-gray-900 mb-4">Tally & Zoho</h3>
+                <p class="text-xl text-gray-700 max-w-3xl mx-auto">Gain proficiency in India's leading accounting software as official Tally partner and Zoho certified partner</p>
+              </div>
+              <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 max-w-5xl mx-auto">
+                <div class="flex items-center text-gray-700 bg-white/50 rounded-xl p-4"><svg class="w-5 h-5 text-emerald-500 mr-3 flex-shrink-0"><use href="#icon-check-circle"></use></svg><span class="font-medium">Official Tally Prime Training</span></div>
+                <div class="flex items-center text-gray-700 bg-white/50 rounded-xl p-4"><svg class="w-5 h-5 text-emerald-500 mr-3 flex-shrink-0"><use href="#icon-check-circle"></use></svg><span class="font-medium">Zoho Books & Zoho Invoice (Certified)</span></div>
+                <div class="flex items-center text-gray-700 bg-white/50 rounded-xl p-4"><svg class="w-5 h-5 text-emerald-500 mr-3 flex-shrink-0"><use href="#icon-check-circle"></use></svg><span class="font-medium">Inventory Management Systems</span></div>
+                <div class="flex items-center text-gray-700 bg-white/50 rounded-xl p-4"><svg class="w-5 h-5 text-emerald-500 mr-3 flex-shrink-0"><use href="#icon-check-circle"></use></svg><span class="font-medium">Automated Report Generation</span></div>
+                <div class="flex items-center text-gray-700 bg-white/50 rounded-xl p-4"><svg class="w-5 h-5 text-emerald-500 mr-3 flex-shrink-0"><use href="#icon-check-circle"></use></svg><span class="font-medium">Software Integration Techniques</span></div>
+              </div>
+            </div>
+            <div class="module-content bg-gradient-to-br from-purple-50 to-violet-50 rounded-3xl p-8 border border-gray-100 shadow-xl">
+                <div class="text-center mb-8">
+                    <div class="bg-gradient-to-r from-purple-500 to-violet-600 p-6 rounded-3xl text-white inline-block mb-4">
+                        <div class="w-12 h-12 flex items-center justify-center"><svg class="w-10 h-10"><use href="#icon-trending-up"></use></svg></div>
+                    </div>
+                    <div class="text-sm text-gray-600 font-medium">Module 3</div>
+                    <h3 class="text-4xl font-bold text-gray-900 mb-4">GST & Income Tax</h3>
+                    <p class="text-xl text-gray-700 max-w-3xl mx-auto">Navigate modern tax compliance with expert guidance, latest regulatory updates and live GST simulations</p>
+                </div>
+                <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 max-w-5xl mx-auto">
+                    <div class="flex items-center text-gray-700 bg-white/50 rounded-xl p-4"><svg class="w-5 h-5 text-emerald-500 mr-3 flex-shrink-0"><use href="#icon-check-circle"></use></svg><span class="font-medium">GST Registration & Filing</span></div>
+                    <div class="flex items-center text-gray-700 bg-white/50 rounded-xl p-4"><svg class="w-5 h-5 text-emerald-500 mr-3 flex-shrink-0"><use href="#icon-check-circle"></use></svg><span class="font-medium">Live GST Portal Simulations</span></div>
+                    <div class="flex items-center text-gray-700 bg-white/50 rounded-xl p-4"><svg class="w-5 h-5 text-emerald-500 mr-3 flex-shrink-0"><use href="#icon-check-circle"></use></svg><span class="font-medium">Income Tax Return Preparation</span></div>
+                    <div class="flex items-center text-gray-700 bg-white/50 rounded-xl p-4"><svg class="w-5 h-5 text-emerald-500 mr-3 flex-shrink-0"><use href="#icon-check-circle"></use></svg><span class="font-medium">Tax Compliance & Planning</span></div>
+                    <div class="flex items-center text-gray-700 bg-white/50 rounded-xl p-4"><svg class="w-5 h-5 text-emerald-500 mr-3 flex-shrink-0"><use href="#icon-check-circle"></use></svg><span class="font-medium">Legal Updates & Amendments</span></div>
+                </div>
+            </div>
+            <div class="module-content bg-gradient-to-br from-orange-50 to-red-50 rounded-3xl p-8 border border-gray-100 shadow-xl">
+                <div class="text-center mb-8">
+                    <div class="bg-gradient-to-r from-orange-500 to-red-500 p-6 rounded-3xl text-white inline-block mb-4">
+                        <div class="w-12 h-12 flex items-center justify-center"><svg class="w-10 h-10"><use href="#icon-book-open"></use></svg></div>
+                    </div>
+                    <div class="text-sm text-gray-600 font-medium">Module 4</div>
+                    <h3 class="text-4xl font-bold text-gray-900 mb-4">Advanced Excel</h3>
+                    <p class="text-xl text-gray-700 max-w-3xl mx-auto">Master Excel fundamentals and advanced functions for professional accounting and data analysis</p>
+                </div>
+                <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 max-w-5xl mx-auto">
+                    <div class="flex items-center text-gray-700 bg-white/50 rounded-xl p-4"><svg class="w-5 h-5 text-emerald-500 mr-3 flex-shrink-0"><use href="#icon-check-circle"></use></svg><span class="font-medium">Advanced Excel Functions</span></div>
+                    <div class="flex items-center text-gray-700 bg-white/50 rounded-xl p-4"><svg class="w-5 h-5 text-emerald-500 mr-3 flex-shrink-0"><use href="#icon-check-circle"></use></svg><span class="font-medium">Lookup, Index & Match Functions</span></div>
+                    <div class="flex items-center text-gray-700 bg-white/50 rounded-xl p-4"><svg class="w-5 h-5 text-emerald-500 mr-3 flex-shrink-0"><use href="#icon-check-circle"></use></svg><span class="font-medium">Financial Data Analysis</span></div>
+                    <div class="flex items-center text-gray-700 bg-white/50 rounded-xl p-4"><svg class="w-5 h-5 text-emerald-500 mr-3 flex-shrink-0"><use href="#icon-check-circle"></use></svg><span class="font-medium">Pivot Tables & Charts</span></div>
+                    <div class="flex items-center text-gray-700 bg-white/50 rounded-xl p-4"><svg class="w-5 h-5 text-emerald-500 mr-3 flex-shrink-0"><use href="#icon-check-circle"></use></svg><span class="font-medium">Macro Development Basics</span></div>
+                </div>
+            </div>
+            <div class="module-content bg-gradient-to-br from-pink-50 to-rose-50 rounded-3xl p-8 border border-gray-100 shadow-xl">
+                <div class="text-center mb-8">
+                    <div class="bg-gradient-to-r from-pink-500 to-rose-600 p-6 rounded-3xl text-white inline-block mb-4">
+                        <div class="w-12 h-12 flex items-center justify-center"><svg class="w-10 h-10"><use href="#icon-users"></use></svg></div>
+                    </div>
+                    <div class="text-sm text-gray-600 font-medium">Module 5</div>
+                    <h3 class="text-4xl font-bold text-gray-900 mb-4">Business Communication</h3>
+                    <p class="text-xl text-gray-700 max-w-3xl mx-auto">Develop essential soft skills for interviews, workplace communication and career advancement</p>
+                </div>
+                <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 max-w-5xl mx-auto">
+                    <div class="flex items-center text-gray-700 bg-white/50 rounded-xl p-4"><svg class="w-5 h-5 text-emerald-500 mr-3 flex-shrink-0"><use href="#icon-check-circle"></use></svg><span class="font-medium">Professional Interview Skills</span></div>
+                    <div class="flex items-center text-gray-700 bg-white/50 rounded-xl p-4"><svg class="w-5 h-5 text-emerald-500 mr-3 flex-shrink-0"><use href="#icon-check-circle"></use></svg><span class="font-medium">Business Communication Ethics</span></div>
+                    <div class="flex items-center text-gray-700 bg-white/50 rounded-xl p-4"><svg class="w-5 h-5 text-emerald-500 mr-3 flex-shrink-0"><use href="#icon-check-circle"></use></svg><span class="font-medium">Resume Building & LinkedIn</span></div>
+                    <div class="flex items-center text-gray-700 bg-white/50 rounded-xl p-4"><svg class="w-5 h-5 text-emerald-500 mr-3 flex-shrink-0"><use href="#icon-check-circle"></use></svg><span class="font-medium">Personality Development</span></div>
+                    <div class="flex items-center text-gray-700 bg-white/50 rounded-xl p-4"><svg class="w-5 h-5 text-emerald-500 mr-3 flex-shrink-0"><use href="#icon-check-circle"></use></svg><span class="font-medium">Workplace Etiquette</span></div>
+                </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="text-center">
+          <div class="inline-flex items-center bg-gradient-to-r from-emerald-500 to-blue-500 text-white p-8 rounded-2xl shadow-xl">
+            <div class="text-center">
+              <h3 class="text-2xl font-bold mb-2">All-Inclusive Program Fee</h3>
+              <div class="text-4xl font-bold mb-2">₹15,000</div>
+              <p class="text-emerald-100">One fee covers all 5 modules • No hidden costs • Certificate included</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section id="careers" class="py-20 bg-gradient-to-br from-gray-50 to-blue-50">
+      <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div class="text-center mb-16">
+          <h2 class="text-4xl md:text-5xl font-bold text-gray-900 mb-6">
+            Career Opportunities
+          </h2>
+          <p class="text-xl text-gray-600">
+            High-demand job roles our graduates are qualified for
+          </p>
+        </div>
+
+        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+          <div class="bg-white rounded-xl shadow-lg hover:shadow-xl transition-all duration-300 p-6 border border-gray-100">
+            <div class="flex items-start justify-between mb-4">
+              <svg class="w-8 h-8 text-emerald-600 flex-shrink-0"><use href="#icon-award"></use></svg>
+              <span class="text-xs bg-emerald-100 text-emerald-800 px-2 py-1 rounded-full font-medium">High Demand</span>
+            </div>
+            <h3 class="text-lg font-bold text-gray-900 mb-2">Accounts Executive</h3>
+            <p class="text-emerald-600 font-semibold">₹2.5-4 LPA</p>
+          </div>
+          <div class="bg-white rounded-xl shadow-lg hover:shadow-xl transition-all duration-300 p-6 border border-gray-100">
+            <div class="flex items-start justify-between mb-4">
+              <svg class="w-8 h-8 text-emerald-600 flex-shrink-0"><use href="#icon-award"></use></svg>
+              <span class="text-xs bg-emerald-100 text-emerald-800 px-2 py-1 rounded-full font-medium">Growing Field</span>
+            </div>
+            <h3 class="text-lg font-bold text-gray-900 mb-2">Junior Accountant</h3>
+            <p class="text-emerald-600 font-semibold">₹2-3.5 LPA</p>
+          </div>
+          <div class="bg-white rounded-xl shadow-lg hover:shadow-xl transition-all duration-300 p-6 border border-gray-100">
+            <div class="flex items-start justify-between mb-4">
+              <svg class="w-8 h-8 text-emerald-600 flex-shrink-0"><use href="#icon-award"></use></svg>
+              <span class="text-xs bg-emerald-100 text-emerald-800 px-2 py-1 rounded-full font-medium">Entry Level</span>
+            </div>
+            <h3 class="text-lg font-bold text-gray-900 mb-2">Accounts Assistant</h3>
+            <p class="text-emerald-600 font-semibold">₹1.8-3 LPA</p>
+          </div>
+          <div class="bg-white rounded-xl shadow-lg hover:shadow-xl transition-all duration-300 p-6 border border-gray-100">
+            <div class="flex items-start justify-between mb-4">
+              <svg class="w-8 h-8 text-emerald-600 flex-shrink-0"><use href="#icon-award"></use></svg>
+              <span class="text-xs bg-emerald-100 text-emerald-800 px-2 py-1 rounded-full font-medium">High Demand</span>
+            </div>
+            <h3 class="text-lg font-bold text-gray-900 mb-2">Tally Operator</h3>
+            <p class="text-emerald-600 font-semibold">₹2-3.5 LPA</p>
+          </div>
+          <div class="bg-white rounded-xl shadow-lg hover:shadow-xl transition-all duration-300 p-6 border border-gray-100">
+            <div class="flex items-start justify-between mb-4">
+              <svg class="w-8 h-8 text-emerald-600 flex-shrink-0"><use href="#icon-award"></use></svg>
+              <span class="text-xs bg-emerald-100 text-emerald-800 px-2 py-1 rounded-full font-medium">Specialized Role</span>
+            </div>
+            <h3 class="text-lg font-bold text-gray-900 mb-2">GST Executive</h3>
+            <p class="text-emerald-600 font-semibold">₹3-5 LPA</p>
+          </div>
+          <div class="bg-white rounded-xl shadow-lg hover:shadow-xl transition-all duration-300 p-6 border border-gray-100">
+            <div class="flex items-start justify-between mb-4">
+              <svg class="w-8 h-8 text-emerald-600 flex-shrink-0"><use href="#icon-award"></use></svg>
+              <span class="text-xs bg-emerald-100 text-emerald-800 px-2 py-1 rounded-full font-medium">Professional Growth</span>
+            </div>
+            <h3 class="text-lg font-bold text-gray-900 mb-2">Tax Assistant</h3>
+            <p class="text-emerald-600 font-semibold">₹2.5-4 LPA</p>
+          </div>
+          <div class="bg-white rounded-xl shadow-lg hover:shadow-xl transition-all duration-300 p-6 border border-gray-100">
+            <div class="flex items-start justify-between mb-4">
+              <svg class="w-8 h-8 text-emerald-600 flex-shrink-0"><use href="#icon-award"></use></svg>
+              <span class="text-xs bg-emerald-100 text-emerald-800 px-2 py-1 rounded-full font-medium">Stable Career</span>
+            </div>
+            <h3 class="text-lg font-bold text-gray-900 mb-2">Bookkeeper</h3>
+            <p class="text-emerald-600 font-semibold">₹2-3.5 LPA</p>
+          </div>
+          <div class="bg-white rounded-xl shadow-lg hover:shadow-xl transition-all duration-300 p-6 border border-gray-100">
+            <div class="flex items-start justify-between mb-4">
+              <svg class="w-8 h-8 text-emerald-600 flex-shrink-0"><use href="#icon-award"></use></svg>
+              <span class="text-xs bg-emerald-100 text-emerald-800 px-2 py-1 rounded-full font-medium">Leadership Role</span>
+            </div>
+            <h3 class="text-lg font-bold text-gray-900 mb-2">Finance Executive</h3>
+            <p class="text-emerald-600 font-semibold">₹3.5-6 LPA</p>
+          </div>
+          <div class="bg-white rounded-xl shadow-lg hover:shadow-xl transition-all duration-300 p-6 border border-gray-100">
+            <div class="flex items-start justify-between mb-4">
+              <svg class="w-8 h-8 text-emerald-600 flex-shrink-0"><use href="#icon-award"></use></svg>
+              <span class="text-xs bg-emerald-100 text-emerald-800 px-2 py-1 rounded-full font-medium">Specialized Field</span>
+            </div>
+            <h3 class="text-lg font-bold text-gray-900 mb-2">Audit Assistant</h3>
+            <p class="text-emerald-600 font-semibold">₹2.5-4.5 LPA</p>
+          </div>
+        </div>
+
+        <div class="mt-12 bg-white rounded-2xl shadow-xl p-8 text-center border border-gray-100">
+          <h3 class="text-2xl font-bold text-gray-900 mb-4">100% Placement Support ❤️</h3>
+          <p class="text-gray-600 mb-6 max-w-2xl mx-auto">
+            We don't just train you - we help you land your dream job with our extensive industry network and dedicated placement assistance
+          </p>
+          <button class="bg-gradient-to-r from-emerald-600 to-teal-600 hover:from-emerald-700 hover:to-teal-700 text-white px-8 py-3 rounded-xl font-semibold transition-all duration-300 transform hover:scale-105">
+            Get Placement Support
+          </button>
+        </div>
+      </div>
+    </section>
+
+    <section id="about" class="py-20 bg-white">
+      <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div class="grid lg:grid-cols-2 gap-12 items-center">
+          <div>
+            <h2 class="text-4xl md:text-5xl font-bold text-gray-900 mb-6">
+              About Vision Connects
+            </h2>
+            <p class="text-xl text-gray-600 mb-6">
+              Vision Connects is a quality training arm supported by <a href="http://accountantsfactory.com/" target="_blank" rel="noopener noreferrer" class="text-emerald-600 hover:underline font-semibold">Accountants Factory LLP</a>, dedicated to creating skilled accounting professionals in Tirupati and surrounding regions.
+            </p>
+            
+            <div class="space-y-6">
+              <div class="flex items-start space-x-4">
+                <div class="w-12 h-12 bg-emerald-100 rounded-xl flex items-center justify-center flex-shrink-0">
+                  <svg class="w-6 h-6 text-emerald-600"><use href="#icon-award"></use></svg>
+                </div>
+                <div>
+                  <h4 class="text-lg font-semibold text-gray-900 mb-2">Authorized Training Partner</h4>
+                  <p class="text-gray-600">Official Tally and Zoho training partner with certified curriculum and latest software versions</p>
+                </div>
+              </div>
+              
+              <div class="flex items-start space-x-4">
+                <div class="w-12 h-12 bg-blue-100 rounded-xl flex items-center justify-center flex-shrink-0">
+                  <svg class="w-6 h-6 text-blue-600"><use href="#icon-building"></use></svg>
+                </div>
+                <div>
+                  <h4 class="text-lg font-semibold text-gray-900 mb-2">Industry Expertise</h4>
+                  <p class="text-gray-600">Backed by Accountants Factory LLP's years of industry experience and professional network</p>
+                </div>
+              </div>
+              
+              <div class="flex items-start space-x-4">
+                <div class="w-12 h-12 bg-purple-100 rounded-xl flex items-center justify-center flex-shrink-0">
+                  <svg class="w-6 h-6 text-purple-600"><use href="#icon-users"></use></svg>
+                </div>
+                <div>
+                  <h4 class="text-lg font-semibold text-gray-900 mb-2">Personalized Training</h4>
+                  <p class="text-gray-600">Small batch sizes ensure individual attention and better learning outcomes for every student</p>
+                </div>
+              </div>
+            </div>
+          </div>
+          
+          <div class="bg-gradient-to-br from-emerald-500 to-blue-600 rounded-3xl p-8 text-white">
+            <h3 class="text-2xl font-bold mb-6">Why Choose Vision Connects?</h3>
+            <div class="space-y-4">
+              <div class="flex items-center space-x-3">
+                <svg class="w-6 h-6 flex-shrink-0"><use href="#icon-check-circle"></use></svg>
+                <span>Comprehensive 5-module certified program</span>
+              </div>
+              <div class="flex items-center space-x-3">
+                <svg class="w-6 h-6 flex-shrink-0"><use href="#icon-check-circle"></use></svg>
+                <span>Expert faculty with real industry experience</span>
+              </div>
+              <div class="flex items-center space-x-3">
+                <svg class="w-6 h-6 flex-shrink-0"><use href="#icon-check-circle"></use></svg>
+                <span>Updated curriculum with latest tax laws</span>
+              </div>
+              <div class="flex items-center space-x-3">
+                <svg class="w-6 h-6 flex-shrink-0"><use href="#icon-check-circle"></use></svg>
+                <span>Hands-on practical training approach</span>
+              </div>
+              <div class="flex items-center space-x-3">
+                <svg class="w-6 h-6 flex-shrink-0"><use href="#icon-check-circle"></use></svg>
+                <span>100% placement assistance guarantee</span>
+              </div>
+              <div class="flex items-center space-x-3">
+                <svg class="w-6 h-6 flex-shrink-0"><use href="#icon-check-circle"></use></svg>
+                <span>Affordable fee with no hidden costs</span>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section id="contact" class="py-20 bg-gradient-to-br from-emerald-50 to-blue-50">
+      <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div class="text-center mb-16">
+          <h2 class="text-4xl md:text-5xl font-bold text-gray-900 mb-6">
+            Start Your Accounting Career Today
+          </h2>
+          <p class="text-xl text-gray-600">
+            Located in the heart of Tirupati. Visit us or call to begin your professional journey!
+          </p>
+        </div>
+
+        <div class="grid lg:grid-cols-2 gap-12">
+          <div class="bg-white rounded-3xl shadow-xl p-8 border border-gray-100">
+            <h3 class="text-2xl font-bold text-gray-900 mb-8">Get In Touch</h3>
+            
+            <div class="space-y-6">
+              <div class="flex items-start space-x-4">
+                <div class="w-12 h-12 bg-emerald-100 rounded-xl flex items-center justify-center flex-shrink-0">
+                  <svg class="w-6 h-6 text-emerald-600"><use href="#icon-phone"></use></svg>
+                </div>
+                <div>
+                  <h4 class="font-semibold text-gray-900 mb-1">Call Us</h4>
+                  <p class="text-gray-600">+91 91766 71206</p>
+                  <p class="text-gray-600">+91 984 984 3020</p>
+                </div>
+              </div>
+              
+              <div class="flex items-start space-x-4">
+                <div class="w-12 h-12 bg-blue-100 rounded-xl flex items-center justify-center flex-shrink-0">
+                  <svg class="w-6 h-6 text-blue-600"><use href="#icon-map-pin"></use></svg>
+                </div>
+                <div>
+                  <h4 class="font-semibold text-gray-900 mb-1">Visit Our Academy</h4>
+                  <p class="text-gray-600 leading-relaxed">
+                    2nd Floor, 19-8-114/A1, Kora Towers,<br />
+                    Air Bypass Rd, next to Maya Bazar,<br />
+                    Near Annamayya Circle, Tirupati,<br />
+                    Andhra Pradesh 517501
+                  </p>
+                </div>
+              </div>
+              
+              <div class="flex items-start space-x-4">
+                <div class="w-12 h-12 bg-purple-100 rounded-xl flex items-center justify-center flex-shrink-0">
+                  <svg class="w-6 h-6 text-purple-600"><use href="#icon-globe"></use></svg>
+                </div>
+                <div>
+                  <h4 class="font-semibold text-gray-900 mb-1">Partner Network</h4>
+                  <p class="text-gray-600">
+                    Supported by <a href="http://accountantsfactory.com/" target="_blank" rel="noopener noreferrer" class="text-emerald-600 hover:underline font-medium">Accountants Factory LLP</a>
+                  </p>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div class="bg-gradient-to-br from-emerald-600 to-blue-600 rounded-3xl p-8 text-white">
+            <h3 class="text-2xl font-bold mb-4">Ready to Transform Your Career?</h3>
+            <p class="text-emerald-100 mb-8 text-lg">
+              Join our next batch with flexible online or offline learning options. Choose what works best for you!
+            </p>
+            
+            <div class="bg-white/10 backdrop-blur-sm rounded-2xl p-6 mb-6">
+              <h4 class="text-lg font-semibold mb-3">What You Get:</h4>
+              <div class="space-y-2 text-sm">
+                <div class="flex items-center">
+                  <svg class="w-4 h-4 mr-2 flex-shrink-0"><use href="#icon-check-circle"></use></svg>
+                  Complete 5-module training program
+                </div>
+                <div class="flex items-center">
+                  <svg class="w-4 h-4 mr-2 flex-shrink-0"><use href="#icon-check-circle"></use></svg>
+                  Professional certification
+                </div>
+                <div class="flex items-center">
+                  <svg class="w-4 h-4 mr-2 flex-shrink-0"><use href="#icon-check-circle"></use></svg>
+                  100% placement assistance
+                </div>
+                <div class="flex items-center">
+                  <svg class="w-4 h-4 mr-2 flex-shrink-0"><use href="#icon-check-circle"></use></svg>
+                  Industry expert mentorship
+                </div>
+              </div>
+            </div>
+            
+            <button class="bg-white text-emerald-600 hover:bg-gray-100 px-8 py-4 rounded-xl text-lg font-semibold transition-all duration-300 transform hover:scale-105 shadow-lg w-full mb-4">
+              Enroll Now - ₹15,000
+            </button>
+            
+            <p class="text-sm text-emerald-100 text-center">
+              Call now for instant admission and course details!
+            </p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <footer class="bg-gray-900 text-white py-12">
+      <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div class="grid md:grid-cols-4 gap-8">
+          <div class="md:col-span-2">
+            <h3 class="text-2xl font-bold mb-4 bg-gradient-to-r from-emerald-400 to-blue-400 bg-clip-text text-transparent">
+              VISION CONNECTS
+            </h3>
+            <p class="text-gray-300 mb-4">
+              Quality training arm supported by <a href="http://accountantsfactory.com/" target="_blank" rel="noopener noreferrer" class="text-emerald-400 hover:underline">Accountants Factory LLP</a>
+            </p>
+            <p class="text-gray-400">
+              Transforming careers through professional accounting education in Tirupati
+            </p>
+          </div>
+          
+          <div>
+            <h4 class="text-lg font-semibold mb-4 text-emerald-400">Quick Links</h4>
+            <div class="space-y-2">
+              <a href="#courses" class="block text-gray-300 hover:text-white transition-colors">Courses</a>
+              <a href="#about" class="block text-gray-300 hover:text-white transition-colors">About Us</a>
+              <a href="#careers" class="block text-gray-300 hover:text-white transition-colors">Careers</a>
+              <a href="#contact" class="block text-gray-300 hover:text-white transition-colors">Contact</a>
+            </div>
+          </div>
+          
+          <div>
+            <h4 class="text-lg font-semibold mb-4 text-emerald-400">Individual Courses</h4>
+            <div class="space-y-2 text-gray-300 text-sm">
+              <div>Professional Accounting Course</div>
+              <div>Tally Coaching Classes</div>
+              <div>Zoho Books Training</div>
+              <div>GST Training Program</div>
+              <div>Income Tax Return Filing</div>
+              <div>Excel Training Course</div>
+            </div>
+          </div>
+        </div>
+        
+        <div class="border-t border-gray-800 mt-8 pt-8">
+          <div class="flex flex-col md:flex-row justify-between items-center">
+            <p class="text-gray-400 text-sm">
+              © 2025 Vision Connects Academy. All rights reserved.
+            </p>
+            <p class="text-gray-400 text-sm mt-2 md:mt-0">
+              Powered by <a href="http://accountantsfactory.com/" target="_blank" rel="noopener noreferrer" class="text-emerald-400 hover:underline">Accountants Factory LLP</a>
+            </p>
+          </div>
+        </div>
+      </div>
+    </footer>
+  </div>
+
+<script>
+document.addEventListener('DOMContentLoaded', function () {
+  // Mobile Menu Toggle
+  const menuButton = document.getElementById('menu-button');
+  const mobileMenu = document.getElementById('mobile-menu');
+  const menuOpenIcon = document.getElementById('menu-open-icon');
+  const menuCloseIcon = document.getElementById('menu-close-icon');
+  
+  menuButton.addEventListener('click', () => {
+    mobileMenu.classList.toggle('open');
+    menuOpenIcon.classList.toggle('hidden');
+    menuCloseIcon.classList.toggle('hidden');
+  });
+
+  document.querySelectorAll('.mobile-link').forEach(link => {
+    link.addEventListener('click', () => {
+        mobileMenu.classList.remove('open');
+        menuOpenIcon.classList.remove('hidden');
+        menuCloseIcon.classList.add('hidden');
+    });
+  });
+
+  // Interactive Module Display
+  const moduleTabs = document.querySelectorAll('.module-tab');
+  const moduleContents = document.querySelectorAll('.module-content');
+  let activeModuleIndex = 0;
+  const modulesData = [
+    { color: "from-emerald-500 to-teal-600" },
+    { color: "from-blue-500 to-indigo-600" },
+    { color: "from-purple-500 to-violet-600" },
+    { color: "from-orange-500 to-red-500" },
+    { color: "from-pink-500 to-rose-600" }
+  ];
+
+  function setActiveModule(index) {
+    // Deactivate all tabs and content
+    moduleTabs.forEach((tab, i) => {
+      tab.classList.remove('bg-gradient-to-r', `from-emerald-500`, `to-teal-600`, `from-blue-500`, `to-indigo-600`, `from-purple-500`, `to-violet-600`, `from-orange-500`, `to-red-500`, `from-pink-500`, `to-rose-600`, 'text-white', 'shadow-xl', 'scale-105');
+      tab.classList.add('bg-white', 'hover:bg-gray-50', 'text-gray-700', 'shadow-md', 'border', 'border-gray-200');
+      
+      const iconContainer = tab.querySelector('.p-2');
+      const icon = tab.querySelector('.w-8');
+      iconContainer.classList.remove('bg-white/20');
+      iconContainer.classList.add('bg-gray-100');
+      icon.classList.remove('text-white');
+      icon.classList.add('text-gray-600');
+
+      moduleContents[i].classList.remove('active');
+    });
+
+    // Activate the selected tab
+    const activeTab = moduleTabs[index];
+    const activeColor = modulesData[index].color.split(' ');
+    activeTab.classList.add('bg-gradient-to-r', activeColor[0], activeColor[1], 'text-white', 'shadow-xl', 'scale-105');
+    activeTab.classList.remove('bg-white', 'hover:bg-gray-50', 'text-gray-700', 'shadow-md', 'border', 'border-gray-200');
+
+    const activeIconContainer = activeTab.querySelector('.p-2');
+    const activeIcon = activeTab.querySelector('.w-8');
+    activeIconContainer.classList.add('bg-white/20');
+    activeIconContainer.classList.remove('bg-gray-100');
+    activeIcon.classList.add('text-white');
+    activeIcon.classList.remove('text-gray-600');
+    
+    // Activate the selected content
+    moduleContents[index].classList.add('active');
+    activeModuleIndex = index;
+  }
+
+  moduleTabs.forEach(tab => {
+    tab.addEventListener('click', () => {
+      const index = parseInt(tab.dataset.moduleIndex, 10);
+      setActiveModule(index);
+      // Reset interval on manual click
+      clearInterval(moduleInterval);
+      moduleInterval = setInterval(autoSwitchModule, 4000);
+    });
+  });
+
+  function autoSwitchModule() {
+    const nextIndex = (activeModuleIndex + 1) % modulesData.length;
+    setActiveModule(nextIndex);
+  }
+
+  // Auto-switcher interval
+  let moduleInterval = setInterval(autoSwitchModule, 4000);
+});
+</script>
+
+</body>
+</html>
