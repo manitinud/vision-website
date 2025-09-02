@@ -1,0 +1,554 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Excel Master Class - Vision Connects</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <style>
+    :root {
+        --primary-blue: #0d2d62; --accent-gold: #ff9900; --light-gray: #f8f9fa;
+        --text-dark: #212529; --text-light: #495057; --border-color: #dee2e6;
+    }
+    body {
+        font-family: 'Inter', sans-serif; line-height: 1.6; color: var(--text-dark);
+        background-color: var(--light-gray);
+    }
+    .excel-top-bar {
+        width: 100%; background-color: var(--primary-blue); color: white; padding: 10px 40px;
+        display: flex; justify-content: space-between; align-items: center;
+        box-sizing: border-box; flex-wrap: wrap; border-radius: 12px; margin-bottom: 2rem;
+    }
+    .excel-sidebar-header h2 { margin: 0; font-size: 1.5em; color: white; }
+    .excel-sidebar-header p { font-size: 0.9em; color: var(--accent-gold); margin: 5px 0 0; }
+    .session-dropdown {
+        background-color: var(--primary-blue); color: white; padding: 8px 12px;
+        border: 1px solid var(--accent-gold); border-radius: 6px; font-size: 1em;
+        font-weight: 500; cursor: pointer; -webkit-appearance: none; -moz-appearance: none; appearance: none;
+        background-image: url("data:image/svg+xml;charset=UTF-8,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='white' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3e%3cpolyline points='6 9 12 15 18 9'%3e%3c/polyline%3e%3c/svg%3e");
+        background-repeat: no-repeat; background-position: right 0.8rem center; background-size: 1em; padding-right: 2.5rem; margin: 5px 0;
+    }
+    .session-dropdown:hover { background-color: rgba(255, 255, 255, 0.1); }
+    .session-dropdown option { background-color: var(--primary-blue); color: white; }
+    .excel-main-content { width: 100%; box-sizing: border-box; }
+    .excel-page-content { display: none; animation: fadeIn 0.5s ease-in-out; }
+    .excel-page-content.active { display: block; }
+    .excel-day-module {
+        background: #ffffff; padding: 30px; border-radius: 12px;
+        box-shadow: 0 4px 12px rgba(0,0,0,0.08); max-width: 900px; margin: auto;
+    }
+    .excel-day-module h3 { margin-top: 0; color: var(--primary-blue); font-size: 1.8em; border-bottom: 1px solid var(--border-color); padding-bottom: 10px; }
+    .excel-example {
+        background-color: #eef5ff; border: 1px solid #b3d1ff; border-left: 5px solid var(--accent-gold);
+        padding: 15px 20px; margin: 20px 0; border-radius: 5px;
+    }
+    .excel-example h4 { margin-top: 0; color: var(--primary-blue); }
+    details { margin-top: 20px; border-radius: 5px; background-color: #f7faff; border: 1px solid #d1e0ff; }
+    details > summary { list-style: none; }
+    details > summary::-webkit-details-marker { display: none; }
+    summary {
+        font-weight: bold; cursor: pointer; color: #0056b3; padding: 12px 15px; outline: none;
+        display: flex; align-items: center; justify-content: space-between;
+    }
+    summary::after { content: '►'; font-size: 0.8em; transition: transform 0.2s ease; }
+    details[open] > summary::after { transform: rotate(90deg); }
+    .excel-exercises { padding: 15px 20px 20px 40px; border-top: 1px solid #d1e0ff; background-color: #fff; }
+    .excel-code {
+        background-color: #e9ecef; padding: 3px 6px; border-radius: 4px; font-family: "SFMono-Regular", Consolas, "Liberation Mono", Menlo, Courier, monospace;
+        font-size: 0.95em; color: #c7254e;
+    }
+    .excel-strong { color: var(--primary-blue); }
+    @keyframes fadeIn {
+        from { opacity: 0; }
+        to { opacity: 1; }
+    }
+  </style>
+</head>
+<body class="p-4 sm:p-6 md:p-8">
+
+    <nav class="w-full z-50 bg-white/95 backdrop-blur-lg shadow-md border-b border-gray-100 mb-6">
+      <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div class="flex justify-between items-center py-4">
+          <a href="index.html" class="flex items-center space-x-4">
+            <div class="text-3xl font-bold bg-gradient-to-r from-emerald-600 to-blue-600 bg-clip-text text-transparent">
+              VISION CONNECTS
+            </div>
+          </a>
+           <a href="index.html" class="px-4 py-2 text-sm font-medium text-white bg-emerald-600 hover:bg-emerald-700 rounded-lg transition-colors">
+              ← Back to Main Site
+           </a>
+        </div>
+      </div>
+    </nav>
+    
+    <div class="container mx-auto">
+        <div class="excel-top-bar">
+            <div class="excel-sidebar-header">
+                <h2>Vision Connects</h2>
+                <p>Excel Mastery Course</p>
+            </div>
+            <select id="excel-session-navigation" class="session-dropdown">
+                </select>
+        </div>
+        <div class="excel-main-content">
+            <div id="excel-session-1" class="excel-page-content active">
+                <div class="excel-day-module">
+                    <h3>Session 1: The Excel Landscape - Interface and Navigation</h3>
+                    <p>Today's goal is to become familiar and confident with the Excel environment. We will learn the names of the key components and how to navigate efficiently.</p>
+                    <h4>Core Concepts:</h4>
+                    <ul>
+                        <li><strong class="excel-strong">The Ribbon:</strong> The primary toolbar at the top, organized into Tabs (Home, Insert, Page Layout, etc.), Groups (Font, Alignment, etc.), and Commands (Bold, Merge & Center, etc.).</li>
+                        <li><strong class="excel-strong">Quick Access Toolbar (QAT):</strong> A small, customizable toolbar for your most-used commands, located at the very top-left.</li>
+                        <li><strong class="excel-strong">Formula Bar & Name Box:</strong> Located below the Ribbon. The Formula Bar shows the true content of a cell, while the Name Box shows the cell's address (e.g., A1).</li>
+                        <li><strong class="excel-strong">Workbook Structure:</strong> Understanding that a file is a Workbook, which contains one or more Worksheets (tabs at the bottom). Each sheet is a grid of Columns (letters), Rows (numbers), and Cells (the intersection, like B5).</li>
+                        <li><strong class="excel-strong">Basic Navigation:</strong> Using keyboard shortcuts like <code class="excel-code">Arrow Keys</code>, <code class="excel-code">Ctrl + Arrow Keys</code> (to jump to the edge of data), and <code class="excel-code">Ctrl + Home/End</code> (to go to the start/end of the sheet).</li>
+                    </ul>
+                    <div class="excel-example">
+                        <h4>Example: Identifying Key Areas</h4>
+                        <p>When you open Excel, you'll see the <strong class="excel-strong">Ribbon</strong> at the top (with tabs like Home, Insert, Page Layout). Just above it is the <strong class="excel-strong">Quick Access Toolbar</strong> for your favorite shortcuts. Below the Ribbon is the <strong class="excel-strong">Formula Bar</strong>, where you can see and edit the contents of the selected cell.</p>
+                    </div>
+                    <details>
+                        <summary>Practice Exercises</summary>
+                        <div class="excel-exercises">
+                            <ol>
+                                <li>Create a new workbook and save it as "MyFirstWorkbook.xlsx".</li>
+                                <li>Add the 'Sort Ascending' and 'Sort Descending' commands to your Quick Access Toolbar.</li>
+                                <li>Navigate to cell <strong class="excel-strong">XFD1048576</strong> (the very last cell) using the Name Box and then return to <strong class="excel-strong">A1</strong> using a keyboard shortcut (<code class="excel-code">Ctrl+Home</code>).</li>
+                            </ol>
+                        </div>
+                    </details>
+                </div>
+            </div>
+            <div id="excel-session-2" class="excel-page-content">
+                <div class="excel-day-module">
+                    <h3>Session 2: Data Entry and Professional Formatting</h3>
+                    <p>This session focuses on accurately entering data and applying formatting to make it clear, readable, and professional.</p>
+                    <h4>Core Concepts:</h4>
+                    <ul>
+                        <li><strong class="excel-strong">Entering Data:</strong> Typing text, numbers, dates, and times into cells. Using <code class="excel-code">Enter</code> to move down and <code class="excel-code">Tab</code> to move right.</li>
+                        <li><strong class="excel-strong">Editing Data:</strong> Modifying cell content by double-clicking, pressing <code class="excel-code">F2</code>, or using the Formula Bar.</li>
+                        <li><strong class="excel-strong">Font Formatting:</strong> Changing font type, size, color, and applying bold, italic, or underline.</li>
+                        <li><strong class="excel-strong">Alignment Formatting:</strong> Controlling horizontal and vertical alignment, wrapping long text within a cell, and merging multiple cells into one.</li>
+                        <li><strong class="excel-strong">Number Formatting:</strong> Applying specific formats like Currency (₹), Percentage (%), and changing decimal places. This is crucial as it changes how a number *looks* without changing its underlying value.</li>
+                    </ul>
+                    <div class="excel-example">
+                        <h4>Example: Formatting Currency in Rupees</h4>
+                        <p>Type the number <code class="excel-code">75000</code> into cell A1. To format it as Indian Rupees, select the cell, go to the 'Home' tab, in the 'Number' group, click the dropdown, and select 'More Number Formats...'. Choose 'Currency', and select the symbol '₹' for English (India). It will now appear as <strong class="excel-strong">₹75,000.00</strong>. The value in the formula bar remains 75000.</p>
+                    </div>
+                    <details>
+                        <summary>Practice Exercises</summary>
+                        <div class="excel-exercises">
+                            <ol>
+                                <li>Create a table with headers: "Employee Name", "City", "Joining Date", "Salary".</li>
+                                <li>Enter 5 records with cities like Mumbai, Delhi, Bengaluru. Format the "Joining Date" column as "dd-mm-yyyy" and the "Salary" column in the Indian Rupee (₹) currency format.</li>
+                                <li>Center all the headers. In the "City" column, use "Wrap Text" on a long city name like 'Thiruvananthapuram' to see how it works.</li>
+                                <li>Apply a "Thick Outside Borders" and "All Inside Borders" format to your table. Make the header row bold with a light grey background fill.</li>
+                            </ol>
+                        </div>
+                    </details>
+                </div>
+            </div>
+            <div id="excel-session-3" class="excel-page-content">
+                <div class="excel-day-module">
+                    <h3>Session 3: The Power of Formulas & Basic Functions</h3>
+                    <p>Unlock the core strength of Excel: calculations. We will learn to write basic formulas and use the most common functions to automate calculations.</p>
+                    <h4>Core Concepts:</h4>
+                    <ul>
+                        <li><strong class="excel-strong">Anatomy of a Formula:</strong> Every formula starts with an equals sign (<code class="excel-code">=</code>). It uses cell references (e.g., <code class="excel-code">A1</code>) and mathematical operators (<code class="excel-code">+</code>, <code class="excel-code">-</code>, <code class="excel-code">*</code>, <code class="excel-code">/</code>).</li>
+                        <li><strong class="excel-strong">Order of Operations (BODMAS):</strong> Excel follows a specific order for calculations: Brackets, Orders (powers/roots), Division/Multiplication, Addition/Subtraction.</li>
+                        <li><strong class="excel-strong">Functions:</strong> Pre-built formulas that simplify complex calculations.
+                            <ul>
+                                <li><code class="excel-code">SUM</code>: Adds numbers together.</li>
+                                <li><code class="excel-code">AVERAGE</code>: Calculates the average of a set of numbers.</li>
+                                <li><code class="excel-code">COUNT</code>: Counts how many cells in a range contain numbers.</li>
+                                <li><code class="excel-code">COUNTA</code>: Counts how many cells in a range are not empty (includes text).</li>
+                                <li><code class="excel-code">MAX</code> / <code class="excel-code">MIN</code>: Find the highest and lowest values in a range.</li>
+                            </ul>
+                        </li>
+                    </ul>
+                    <div class="excel-example">
+                        <h4>Example: Calculating Total Marks</h4>
+                        <p>Enter a student's marks for three subjects in cells A1, A2, and A3. In cell A4, type the formula <code class="excel-code">=SUM(A1:A3)</code> and press Enter. Excel will add the marks and display the total in A4.</p>
+                    </div>
+                    <details>
+                        <summary>Practice Exercises</summary>
+                        <div class="excel-exercises">
+                            <ol>
+                                <li>Create a column with the runs scored by a cricket player in 10 recent matches. Include some blank cells and a cell with text like "Did not bat".</li>
+                                <li>Below the column, calculate the total runs scored using <code class="excel-code">=SUM()</code>.</li>
+                                <li>In adjacent cells, find the player's batting average, highest score (<code class="excel-code">MAX</code>), and the number of innings played (<code class="excel-code">COUNT</code> vs <code class="excel-code">COUNTA</code>). Note the difference.</li>
+                            </ol>
+                        </div>
+                    </details>
+                </div>
+            </div>
+            <div id="excel-session-4" class="excel-page-content">
+                <div class="excel-day-module">
+                    <h3>Session 4: Cell References - Relative, Absolute & Mixed</h3>
+                    <p>Today is one of the most important foundational lessons. Mastering cell references is key to using Excel efficiently and avoiding errors when copying formulas.</p>
+                    <h4>Core Concepts:</h4>
+                    <ul>
+                        <li><strong class="excel-strong">Relative Reference (<code class="excel-code">A1</code>):</strong> This is the default. When you copy a formula, the reference changes relative to its new location.</li>
+                        <li><strong class="excel-strong">Absolute Reference (<code class="excel-code">$A$1</code>):</strong> The dollar signs ($) "lock" the reference. No matter where you copy the formula, it will *always* refer to cell A1. Use the <code class="excel-code">F4</code> key to cycle through reference types.</li>
+                        <li><strong class="excel-strong">Mixed Reference (<code class="excel-code">$A1</code> or <code class="excel-code">A$1</code>):</strong> This locks either the column (<code class="excel-code">$A</code>) or the row (<code class="excel-code">$1</code>), but allows the other part to change.</li>
+                    </ul>
+                    <div class="excel-example">
+                        <h4>Example: Using an Absolute Reference for GST Rate</h4>
+                        <p>Imagine cell <code class="excel-code">E1</code> contains a GST rate of <code class="excel-code">18%</code>. You have product prices in column A. In cell B1, you write the formula <code class="excel-code">=A1*$E$1</code> to calculate the GST amount. The dollar signs ($) make the reference to E1 absolute. When you drag this formula down column B, the A1 part will change to A2, A3, etc., but <code class="excel-code">$E$1</code> will always stay the same.</p>
+                    </div>
+                    <details>
+                        <summary>Practice Exercises</summary>
+                        <div class="excel-exercises">
+                            <ol>
+                                <li>Create a small table with columns: "Product", "Price (pre-GST)", "Quantity", "Subtotal".</li>
+                                <li>In a separate cell (e.g., G1), enter a GST rate of 18%.</li>
+                                <li>Calculate "Subtotal". In a new "GST Amount" column, calculate the tax for the first product using an <strong class="excel-strong">absolute reference</strong> to the GST rate cell. Drag both formulas down.</li>
+                                <li>Create a final "Total Price" column that sums the Subtotal and GST Amount.</li>
+                            </ol>
+                        </div>
+                    </details>
+                </div>
+            </div>
+            <div id="excel-session-5" class="excel-page-content">
+                <div class="excel-day-module">
+                    <h3>Session 5: Managing Worksheets and Viewing Data</h3>
+                    <p>Learn to organize your workbooks effectively and navigate large datasets with ease using Excel's viewing tools.</p>
+                    <h4>Core Concepts:</h4>
+                    <ul>
+                        <li><strong class="excel-strong">Worksheet Management:</strong> Right-clicking a sheet tab reveals options to <code class="excel-code">Insert</code>, <code class="excel-code">Delete</code>, <code class="excel-code">Rename</code>, <code class="excel-code">Move or Copy</code>, and change <code class="excel-code">Tab Color</code>.</li>
+                        <li><strong class="excel-strong">Grouping Worksheets:</strong> Hold <code class="excel-code">Ctrl</code> and click multiple sheet tabs to group them. Any change you make on one sheet will be applied to all grouped sheets. This is powerful but use with caution!</li>
+                        <li><strong class="excel-strong">Freeze Panes:</strong> Found on the 'View' tab, this tool locks specific rows and/or columns so they remain visible as you scroll. Essential for keeping headers in view.</li>
+                        <li><strong class="excel-strong">Split Screen:</strong> Also on the 'View' tab, this splits your worksheet into panes to view different parts of the same sheet simultaneously.</li>
+                    </ul>
+                    <div class="excel-example">
+                        <h4>Example: Freezing the Top Row</h4>
+                        <p>If you have a large table with headers in the first row, you'll want to see them as you scroll down. To do this, go to the <strong class="excel-strong">View</strong> tab, click on <strong class="excel-strong">Freeze Panes</strong>, and select <strong class="excel-strong">Freeze Top Row</strong>. Now, when you scroll, row 1 will always stay visible.</p>
+                    </div>
+                    <details>
+                        <summary>Practice Exercises</summary>
+                        <div class="excel-exercises">
+                            <ol>
+                                <li>Create three worksheets: "North Zone Sales", "South Zone Sales", and "All India Summary".</li>
+                                <li>Color the tab of the "All India Summary" sheet green and move it to be the first sheet.</li>
+                                <li>Group the "North Zone" and "South Zone" sheets. In cell A1 of either sheet, type "FY 2024-25 Sales Report" and format it. Check that the change appeared on both sheets. Remember to ungroup them afterwards.</li>
+                                <li>On the "North Zone Sales" sheet, create a large table and freeze the top row and the first column.</li>
+                            </ol>
+                        </div>
+                    </details>
+                </div>
+            </div>
+            <div id="excel-session-6" class="excel-page-content">
+                <div class="excel-day-module">
+                    <h3>Session 6: Logical Functions - IF, COUNTIF, SUMIF</h3>
+                    <p>Go beyond basic math. We'll learn to create formulas that make decisions and perform calculations based on specific criteria, making our spreadsheets "smarter".</p>
+                    <h4>Core Concepts:</h4>
+                    <ul>
+                        <li><strong class="excel-strong"><code class="excel-code">IF</code> Function:</strong> Checks if a condition is true. Syntax is <code class="excel-code">=IF(logical_test, value_if_true, value_if_false)</code>.</li>
+                        <li><strong class="excel-strong"><code class="excel-code">SUMIF</code> Function:</strong> Adds up cells that meet a single criterion. Syntax: <code class="excel-code">=SUMIF(range, criteria, [sum_range])</code>.</li>
+                        <li><strong class="excel-strong"><code class="excel-code">COUNTIF</code> Function:</strong> Counts cells that meet a single criterion. Syntax: <code class="excel-code">=COUNTIF(range, criteria)</code>.</li>
+                    </ul>
+                    <div class="excel-example">
+                        <h4>Example: Using the IF function for Results</h4>
+                        <p>A student's marks are in cell B2. The passing mark is 40. The formula would be: <code class="excel-code">=IF(B2>=40, "Pass", "Fail")</code>. This tells Excel: "If the value in B2 is greater than or equal to 40, show 'Pass'. Otherwise, show 'Fail'."</p>
+                    </div>
+                    <details>
+                        <summary>Practice Exercises</summary>
+                        <div class="excel-exercises">
+                            <ol>
+                                <li>Create a list of student marks. In the next column, use the <code class="excel-code">IF</code> function to display "Pass" if the mark is >= 40, and "Fail" otherwise.</li>
+                                <li>Create a sales table with "Zone" (North, South, East, West) and "Sales (₹)". Use <code class="excel-code">SUMIF</code> to calculate total sales for the "North" zone and <code class="excel-code">COUNTIF</code> to count how many sales were made there.</li>
+                                <li>Using the student marks list, use another <code class="excel-code">IF</code> function to assign a "Distinction" remark if marks are above 75, and "N/A" otherwise.</li>
+                            </ol>
+                        </div>
+                    </details>
+                </div>
+            </div>
+            <div id="excel-session-7" class="excel-page-content">
+                <div class="excel-day-module">
+                    <h3>Session 7: Cleaning and Manipulating Text Data</h3>
+                    <p>Often, data imported from other systems is messy. Today we learn how to clean and re-structure text data using both functions and built-in Excel tools.</p>
+                    <h4>Core Concepts:</h4>
+                    <ul>
+                        <li><strong class="excel-strong">Text Functions:</strong> <code class="excel-code">CONCAT</code> (or <code class="excel-code">&</code>), <code class="excel-code">TRIM</code>, <code class="excel-code">PROPER</code>, <code class="excel-code">UPPER</code>, <code class="excel-code">LOWER</code>, <code class="excel-code">LEFT</code>, <code class="excel-code">RIGHT</code>, <code class="excel-code">MID</code>, <code class="excel-code">LEN</code>.</li>
+                        <li><strong class="excel-strong">Excel Tools:</strong> <strong class="excel-strong">Flash Fill</strong> (a magical pattern-recognition tool) and <strong class="excel-strong">Text to Columns</strong> (to split data from one cell into multiple).</li>
+                    </ul>
+                    <div class="excel-example">
+                        <h4>Example: Cleaning up Indian names</h4>
+                        <p>If cell A1 contains "  priya sharma  " (with extra spaces and improper case), the formula <code class="excel-code">=TRIM(A1)</code> removes the extra spaces. To also fix capitalization, you can nest functions: <code class="excel-code">=PROPER(TRIM(A1))</code>, which returns the clean result "Priya Sharma".</p>
+                    </div>
+                    <details>
+                        <summary>Practice Exercises</summary>
+                        <div class="excel-exercises">
+                            <ol>
+                                <li>You have a column with names like "arjun kumar". Use a combination of <code class="excel-code">TRIM</code> and <code class="excel-code">PROPER</code> to clean it to "Arjun Kumar".</li>
+                                <li>From a column of PAN numbers like "ABCDE1234F", use <code class="excel-code">LEFT</code> and <code class="excel-code">MID</code> to extract the first 5 characters (alphabets) and the next 4 characters (numbers) into separate columns.</li>
+                                <li>You have data like "Tirupati-517501". Use 'Text to Columns' with a hyphen (-) delimiter to split the city and the pincode into two separate columns.</li>
+                                <li>Try the first name extraction again, but this time use 'Flash Fill' (type the first name once in the adjacent column, then press <code class="excel-code">Ctrl+E</code>).</li>
+                            </ol>
+                        </div>
+                    </details>
+                </div>
+            </div>
+            <div id="excel-session-8" class="excel-page-content">
+                <div class="excel-day-module">
+                    <h3>Session 8: Visualizing Data with Charts</h3>
+                    <p>A picture is worth a thousand words, and a chart is worth a thousand rows of data. We'll learn to transform numbers into insightful visualizations.</p>
+                    <h4>Core Concepts:</h4>
+                    <ul>
+                        <li><strong class="excel-strong">Choosing the Right Chart:</strong> Column/Bar for comparisons, Line for trends over time, Pie for proportions (parts of a whole), Scatter for correlations.</li>
+                        <li><strong class="excel-strong">Creating a Chart:</strong> Select your data, then go to the 'Insert' tab and choose a chart type.</li>
+                        <li><strong class="excel-strong">Chart Elements:</strong> Using the '+' icon next to a selected chart to add or remove Chart Title, Axis Titles, Legend, Data Labels, and Gridlines.</li>
+                        <li><strong class="excel-strong">Formatting Charts:</strong> Using the 'Chart Design' and 'Format' contextual tabs that appear when a chart is selected to change colors, styles, and layouts.</li>
+                    </ul>
+                    <div class="excel-example">
+                        <h4>Example: Creating a Column Chart for Sales</h4>
+                        <p>Select a table with "Quarters" (Q1, Q2, Q3, Q4) in one column and "Sales (in ₹ Lakhs)" in another. Go to the <strong class="excel-strong">Insert</strong> tab, click on <strong class="excel-strong">Column</strong>, and choose a 2-D Column chart. Excel will instantly generate a chart comparing sales across the four quarters.</p>
+                    </div>
+                    <details>
+                        <summary>Practice Exercises</summary>
+                        <div class="excel-exercises">
+                            <ol>
+                                <li>Create a table of "Month" and "Revenue (₹ Cr)". Create a Line chart to show the revenue trend over the months.</li>
+                                <li>Add a chart title "Monthly Revenue Trend", and label the Y-axis as "Revenue in Crores".</li>
+                                <li>Create a Pie chart to show the sales breakdown by 4 different product categories (e.g., Electronics, Apparel, Groceries, Home Goods). Add data labels that show the percentage for each slice.</li>
+                            </ol>
+                        </div>
+                    </details>
+                </div>
+            </div>
+            <div id="excel-session-9" class="excel-page-content">
+                <div class="excel-day-module">
+                    <h3>Session 9: Organizing Data - Sorting and Filtering</h3>
+                    <p>When faced with large datasets, finding the information you need can be a challenge. Sorting and Filtering are the essential tools for managing and analyzing data.</p>
+                    <h4>Core Concepts:</h4>
+                    <ul>
+                        <li><strong class="excel-strong">Sorting:</strong> Arranging data in ascending (A-Z, smallest to largest) or descending order. This can be done on a single column or multiple levels.</li>
+                        <li><strong class="excel-strong">Multi-level Sorting:</strong> Go to 'Data' -> 'Sort' to open a dialog box where you can add levels (e.g., Sort first by State, then by City).</li>
+                        <li><strong class="excel-strong">Filtering:</strong> Using the AutoFilter dropdowns to temporarily hide rows that don't meet your criteria. You can filter by values, colors, or conditions (e.g., "Top 10", "Greater Than").</li>
+                    </ul>
+                    <div class="excel-example">
+                        <h4>Example: Basic Filtering</h4>
+                        <p>Select your data table. Go to the <strong class="excel-strong">Data</strong> tab and click <strong class="excel-strong">Filter</strong>. Dropdown arrows will appear in your header cells. Click the arrow in the 'State' column and uncheck all boxes except for "Andhra Pradesh". The table will now only show data for that state.</p>
+                    </div>
+                    <details>
+                        <summary>Practice Exercises</summary>
+                        <div class="excel-exercises">
+                            <ol>
+                                <li>Create a table of employee data (Name, Department, Salary, City).</li>
+                                <li>Perform a custom sort: sort by Department alphabetically (A to Z), and then within each department, sort by Salary from highest to lowest.</li>
+                                <li>Filter the list to show only employees from the "Bengaluru" office who work in the "IT" department.</li>
+                                <li>Clear the previous filter. Now, filter the salary column to show only the "Top 5" highest salaries.</li>
+                            </ol>
+                        </div>
+                    </details>
+                </div>
+            </div>
+            <div id="excel-session-10" class="excel-page-content">
+                <div class="excel-day-module">
+                    <h3>Session 10: Using Excel Tables for Dynamic Data</h3>
+                    <p>Learn one of the most powerful features in Excel. Formatting your data as an official Excel Table (<code class="excel-code">Ctrl+T</code>) unlocks benefits that make your data more dynamic and easier to manage.</p>
+                    <h4>Core Concepts:</h4>
+                    <ul>
+                        <li><strong class="excel-strong">Creating a Table:</strong> Select your data and press <code class="excel-code">Ctrl+T</code>.</li>
+                        <li><strong class="excel-strong">Benefits:</strong> Tables automatically expand, formulas are easier to read with structured references, and you get built-in formatting and filtering.</li>
+                        <li><strong class="excel-strong">Structured References:</strong> Instead of <code class="excel-code">=SUM(C2:C50)</code>, a formula can look like <code class="excel-code">=SUM(EmployeeData[Salary])</code>, which is much more readable.</li>
+                        <li><strong class="excel-strong">Total Row:</strong> A special row at the end of the table that can be toggled on to quickly calculate Sums, Averages, Counts, etc., for any column.</li>
+                    </ul>
+                    <div class="excel-example">
+                        <h4>Example: Creating a Table</h4>
+                        <p>Select your data range. Press <code class="excel-code">Ctrl+T</code>. A dialog box will appear. Ensure the "My table has headers" box is checked, and click OK. Your data is now a dynamic, formatted table. Notice the new "Table Design" tab on the Ribbon.</p>
+                    </div>
+                    <details>
+                        <summary>Practice Exercises</summary>
+                        <div class="excel-exercises">
+                            <ol>
+                                <li>Convert the employee data from Session 9 into an Excel Table.</li>
+                                <li>From the "Table Design" tab, change the style and give the table a name (e.g., "EmployeeData").</li>
+                                <li>Add a "Total Row" and use the dropdown in the 'Salary' column to calculate the Average Salary. Use the dropdown in the 'Name' column to get a Total Count of employees.</li>
+                                <li>Add a new employee to the row immediately below the table and watch the table's range, formatting, and total row automatically update.</li>
+                            </ol>
+                        </div>
+                    </details>
+                </div>
+            </div>
+            <div id="excel-session-11" class="excel-page-content">
+                <div class="excel-day-module">
+                    <h3>Session 11: Highlighting Data with Conditional Formatting</h3>
+                    <p>Make your data speak for itself. We'll learn to apply formatting automatically based on the data in the cells, creating visual cues that highlight important information.</p>
+                    <h4>Core Concepts:</h4>
+                    <ul>
+                        <li><strong class="excel-strong">Highlighting Rules:</strong> Apply formatting based on conditions like "Greater Than," "Less Than," "Between," "Text that Contains," or "Duplicate Values."</li>
+                        <li><strong class="excel-strong">Data Visualization Tools:</strong>
+                            <ul>
+                                <li><strong class="excel-strong">Data Bars:</strong> Mini bar charts inside cells.</li>
+                                <li><strong class="excel-strong">Color Scales:</strong> Heat maps that color cells based on their value relative to others.</li>
+                                <li><strong class="excel-strong">Icon Sets:</strong> Add arrows, traffic lights, or other icons to cells.</li>
+                            </ul>
+                        </li>
+                        <li><strong class="excel-strong">Formula-Based Rules:</strong> The most powerful option. Use a custom formula to decide which cells get formatted (e.g., highlight an entire row if a condition is met).</li>
+                    </ul>
+                    <div class="excel-example">
+                        <h4>Example: Highlighting High Sales</h4>
+                        <p>Select a range of sales figures (in ₹). On the <strong class="excel-strong">Home</strong> tab, click <strong class="excel-strong">Conditional Formatting</strong> -> <strong class="excel-strong">Highlight Cells Rules</strong> -> <strong class="excel-strong">Greater Than...</strong>. Enter <code class="excel-code">100000</code> and choose a format (like 'Green Fill with Dark Green Text'). Excel will now instantly highlight all sales over ₹ 1 Lakh.</p>
+                    </div>
+                    <details>
+                        <summary>Practice Exercises</summary>
+                        <div class="excel-exercises">
+                            <ol>
+                                <li>In a list of sales figures, highlight all sales greater than ₹5,00,000 in green and all sales less than ₹50,000 in red.</li>
+                                <li>Apply "Data Bars" (Gradient Fill) to a column of student marks to visually compare performance.</li>
+                                <li>Use a formula-based rule to highlight an entire row if the "Status" column for that row says "Delayed". (Hint: The formula will look something like <code class="excel-code">=$E2="Delayed"</code>).</li>
+                            </ol>
+                        </div>
+                    </details>
+                </div>
+            </div>
+            <div id="excel-session-12" class="excel-page-content">
+                <div class="excel-day-module">
+                    <h3>Session 12: Lookup Functions - VLOOKUP & the Modern XLOOKUP</h3>
+                    <p>This is one of Excel's most valued skills: finding and retrieving related data from different tables. We will focus on the modern, superior <code class="excel-code">XLOOKUP</code>, but also understand the classic <code class="excel-code">VLOOKUP</code>.</p>
+                    <h4>Core Concepts:</h4>
+                    <ul>
+                        <li><strong class="excel-strong">Goal of Lookups:</strong> To find a value (like an Employee ID) in one table and return a related value (like Employee Name) from another table.</li>
+                        <li><strong class="excel-strong"><code class="excel-code">VLOOKUP</code> (Classic):</strong> <code class="excel-code">VLOOKUP(lookup_value, table_array, col_index_num, [range_lookup])</code>. It can only look to the right and is prone to errors if columns are inserted.</li>
+                        <li><strong class="excel-strong"><code class="excel-code">XLOOKUP</code> (Modern & Recommended):</strong> More powerful and flexible. Syntax: <code class="excel-code">=XLOOKUP(lookup_value, lookup_array, return_array, [if_not_found])</code>. It can look left or right and is more robust.</li>
+                    </ul>
+                    <div class="excel-example">
+                        <h4>Example: Using XLOOKUP</h4>
+                        <p>You want to find an employee's department. You have their Employee Code in cell G2. A master table from A2:C50 contains codes in column A and departments in column C. The formula is: <code class="excel-code">=XLOOKUP(G2, A2:A50, C2:C50, "Not Found")</code>. It means: "Look for the value in G2 within the range A2:A50. If you find it, return the corresponding value from C2:C50. If you don't find it, show 'Not Found'."</p>
+                    </div>
+                    <details>
+                        <summary>Practice Exercises</summary>
+                        <div class="excel-exercises">
+                            <ol>
+                                <li>Create two tables. Table 1: "EmpCode", "EmployeeName", "Department". Table 2: "EmpCode", "Salary".</li>
+                                <li>In Table 2, use <code class="excel-code">XLOOKUP</code> to pull the "EmployeeName" and "Department" from Table 1 based on the matching "EmpCode".</li>
+                                <li>Try to look up an "EmpCode" that doesn't exist in Table 1 and see how your "if_not_found" argument works.</li>
+                            </ol>
+                        </div>
+                    </details>
+                </div>
+            </div>
+            <div id="excel-session-13" class="excel-page-content">
+                <div class="excel-day-module">
+                    <h3>Session 13: Summarizing Data with PivotTables</h3>
+                    <p>PivotTables are arguably the most powerful data analysis tool in Excel. They allow you to summarize thousands of rows of data with just a few clicks, without writing any formulas.</p>
+                    <h4>Core Concepts:</h4>
+                    <ul>
+                        <li><strong class="excel-strong">What is a PivotTable?:</strong> An interactive summary table that lets you "pivot" or reorganize your data to see different perspectives.</li>
+                        <li><strong class="excel-strong">Building a PivotTable:</strong> Dragging fields from your field list into four areas: Rows, Columns, Values (for calculations), and Filters.</li>
+                        <li><strong class="excel-strong">Modifying and Refreshing:</strong> Changing calculations (e.g., from Sum to Average), formatting numbers, and refreshing the PivotTable when your source data changes.</li>
+                        <li><strong class="excel-strong">Slicers:</strong> Visual, interactive buttons for filtering your PivotTable, making it much more user-friendly.</li>
+                    </ul>
+                    <div class="excel-example">
+                        <h4>Example: Creating a PivotTable</h4>
+                        <p>Select your sales data (ideally formatted as an Excel Table). Go to <strong class="excel-strong">Insert</strong> -> <strong class="excel-strong">PivotTable</strong>. In the PivotTable Fields pane on the right, drag 'State' to the 'Rows' area and 'Sale Amount' to the 'Values' area. Instantly, you'll have a summary table showing total sales for each State.</p>
+                    </div>
+                    <details>
+                        <summary>Practice Exercises</summary>
+                        <div class="excel-exercises">
+                            <ol>
+                                <li>Create a sales dataset: Date, State, Product Category, Sales Rep, Sale Amount (₹).</li>
+                                <li>Create a PivotTable showing the total Sale Amount for each State.</li>
+                                <li>Modify the PivotTable: Put "Product Category" in the Columns area and "Sales Rep" in the Rows area to see who sold what.</li>
+                                <li>Add a Slicer for "State" to easily filter the entire report for one or more states.</li>
+                            </ol>
+                        </div>
+                    </details>
+                </div>
+            </div>
+            <div id="excel-session-14" class="excel-page-content">
+                <div class="excel-day-module">
+                    <h3>Session 14: Ensuring Data Integrity and Security</h3>
+                    <p>Control what data can be entered into your worksheets to prevent errors, and learn how to protect your work from accidental or unauthorized changes.</p>
+                    <h4>Core Concepts:</h4>
+                    <ul>
+                        <li><strong class="excel-strong">Data Validation:</strong> Restricts what users can type into a cell. This is perfect for creating dropdown lists or ensuring only numbers within a specific range are entered. Found under the 'Data' tab.</li>
+                        <li><strong class="excel-strong">Worksheet Protection:</strong> Found under the 'Review' tab. This allows you to lock all cells on a sheet, and then selectively unlock only the cells you want users to be able to edit. You can add a password for extra security.</li>
+                        <li><strong class="excel-strong">Workbook Protection:</strong> Protects the structure of the workbook, preventing users from adding, deleting, or renaming worksheets.</li>
+                    </ul>
+                    <div class="excel-example">
+                        <h4>Example: Creating a Dropdown List</h4>
+                        <p>Select a cell where a user should choose a city. Go to <strong class="excel-strong">Data</strong> -> <strong class="excel-strong">Data Validation</strong>. In the settings, under 'Allow:', choose <strong class="excel-strong">List</strong>. In the 'Source:' box, type your options separated by commas (e.g., <code class="excel-code">Mumbai,Delhi,Chennai,Kolkata</code>). Click OK. The cell will now have a dropdown arrow with those four options.</p>
+                    </div>
+                    <details>
+                        <summary>Practice Exercises</summary>
+                        <div class="excel-exercises">
+                            <ol>
+                                <li>In a form, create a cell for "Department" and use Data Validation to create a dropdown list with options: "Sales", "HR", "IT", "Admin".</li>
+                                <li>Restrict another cell so users can only enter a whole number between 18 and 65 for an "Age" field. Add an input message explaining the rule.</li>
+                                <li>Protect your worksheet but leave a specific range (e.g., C1:C20) unlocked for user input. Try to edit a locked cell to see the warning.</li>
+                            </ol>
+                        </div>
+                    </details>
+                </div>
+            </div>
+            <div id="excel-session-15" class="excel-page-content">
+                <div class="excel-day-module">
+                    <h3>Session 15: Productivity Boosters & Course Review</h3>
+                    <p>We'll cap off the course by reviewing all key topics and learning final tips and tricks to make you a faster, more efficient, and more confident Excel user.</p>
+                    <h4>Core Concepts:</h4>
+                    <ul>
+                        <li><strong class="excel-strong">Essential Keyboard Shortcuts:</strong> <code class="excel-code">Ctrl+S</code> (Save), <code class="excel-code">Ctrl+C/V/X</code> (Copy/Paste/Cut), <code class="excel-code">Ctrl+Z/Y</code> (Undo/Redo), <code class="excel-code">Ctrl+1</code> (Format Cells), <code class="excel-code">Ctrl+T</code> (Create Table), <code class="excel-code">Alt+=</code> (AutoSum).</li>
+                        <li><strong class="excel-strong">What-If Analysis - Goal Seek:</strong> A powerful tool that finds the input value needed to achieve a desired result in a formula.</li>
+                        <li><strong class="excel-strong">Paste Special:</strong> Go beyond a simple paste to paste only values, formats, or formulas, or even transpose data (switch rows and columns).</li>
+                        <li><strong class="excel-strong">Course Review & Best Practices:</strong> Recap of key topics and discussion on structuring data for success.</li>
+                    </ul>
+                    <div class="excel-example">
+                        <h4>Example: Using Goal Seek for a Loan EMI</h4>
+                        <p>You have a complex formula that calculates a loan EMI based on principal, rate, and tenure. The result is ₹15,500, but you can only afford an EMI of exactly ₹15,000. Use Goal Seek (<strong class="excel-strong">Data</strong> -> <strong class="excel-strong">What-If Analysis</strong>) to tell Excel: "Set the EMI cell to 15000 by changing the loan principal amount cell." Excel will run iterations and find the exact loan principal you can afford.</p>
+                    </div>
+                    <details>
+                        <summary>Practice Exercises</summary>
+                        <div class="excel-exercises">
+                            <ol>
+                                <li>Practice the keyboard shortcuts listed above to format, save, and navigate your sheet without using the mouse.</li>
+                                <li>Create a small table of student marks. Use 'Paste Special' to copy the data and paste it as a transposed table (rows become columns).</li>
+                                <li>Use 'Goal Seek' to determine what score a student needs in their final exam to achieve an overall average of exactly 75%.</li>
+                            </ol>
+                        </div>
+                    </details>
+                </div>
+            </div>
+        </div>
+    </div>
+<script>
+document.addEventListener('DOMContentLoaded', function () {
+    const excelSessionNavigation = document.getElementById('excel-session-navigation');
+    const excelPageContents = document.querySelectorAll('.excel-page-content');
+    const totalSessions = 15;
+
+    // Populate the dropdown
+    for (let i = 1; i <= totalSessions; i++) {
+        const option = document.createElement('option');
+        option.value = i;
+        const title = document.querySelector(`#excel-session-${i} h3`).textContent;
+        option.textContent = title; // Use full title for better UX
+        excelSessionNavigation.appendChild(option);
+    }
+    
+    function switchExcelPage(sessionNumber) {
+        excelPageContents.forEach(page => {
+            page.classList.remove('active');
+        });
+        const activePage = document.getElementById(`excel-session-${sessionNumber}`);
+        if(activePage){
+            activePage.classList.add('active');
+        }
+        excelSessionNavigation.value = sessionNumber;
+    }
+
+    excelSessionNavigation.addEventListener('change', function(e) {
+        const session = parseInt(e.target.value);
+        switchExcelPage(session);
+    });
+
+    // Initialize with the first session
+    switchExcelPage(1);
+});
+</script>
+</body>
+</html>

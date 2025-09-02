@@ -1,0 +1,247 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Income Tax Calculator - Vision Connects</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <style>
+    body { font-family: 'Inter', sans-serif; background-color: #f8fafc; }
+    .chart-container { position: relative; width: 100%; max-width: 600px; margin-left: auto; margin-right: auto; height: 300px; max-height: 400px; }
+    @media (min-width: 768px) { .chart-container { height: 350px; } }
+    .section-card { transition: transform 0.3s, box-shadow 0.3s; }
+    .section-card:hover { transform: translateY(-5px); box-shadow: 0 10px 15px -3px rgb(0 0 0 / 0.1), 0 4px 6px -4px rgb(0 0 0 / 0.1); }
+    details > summary { list-style: none; }
+    details > summary::-webkit-details-marker { display: none; }
+  </style>
+</head>
+<body>
+
+    <nav class="w-full z-50 bg-white/95 backdrop-blur-lg shadow-md border-b border-gray-100">
+      <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div class="flex justify-between items-center py-4">
+          <a href="index.html" class="flex items-center space-x-4">
+            <div class="text-3xl font-bold bg-gradient-to-r from-emerald-600 to-blue-600 bg-clip-text text-transparent">
+              VISION CONNECTS
+            </div>
+          </a>
+           <a href="index.html" class="px-4 py-2 text-sm font-medium text-white bg-emerald-600 hover:bg-emerald-700 rounded-lg transition-colors">
+              ← Back to Main Site
+           </a>
+        </div>
+      </div>
+    </nav>
+
+    <main class="container mx-auto px-6 py-8 md:py-12">
+        <section class="text-center mb-16 pt-12">
+            <h1 class="text-4xl md:text-5xl font-extrabold text-slate-800 mb-4">Your Personal Tax Command Center</h1>
+            <p class="text-lg text-slate-600 max-w-3xl mx-auto">Welcome to the Vision Connects Interactive Tax Guide for AY 2026-27. This application transforms complex tax rules into simple, actionable tools. Calculate your liability, compare regimes, and discover your optimal tax strategy in minutes.</p>
+        </section>
+        <section id="calculator-tax" class="mb-16 bg-white p-6 md:p-8 rounded-2xl shadow-lg border border-slate-200">
+            <div class="text-center mb-8">
+                <h2 class="text-3xl font-bold text-slate-800">Which Tax Regime Saves You More?</h2>
+                <p class="text-slate-600 mt-2">This calculator helps you make the most important tax decision of the year. Enter your financial details to get a personalized, data-driven comparison and find out which regime is financially superior for you.</p>
+            </div>
+            <div class="grid grid-cols-1 lg:grid-cols-2 gap-8 items-start">
+                <div class="space-y-4">
+                    <div>
+                        <label for="grossIncome" class="block text-sm font-medium text-slate-700">Your Gross Annual Income (₹)</label>
+                        <input type="number" id="grossIncome" class="mt-1 block w-full rounded-md border-slate-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm" placeholder="e.g., 1500000">
+                    </div>
+                    <div>
+                        <label class="block text-sm font-medium text-slate-700">Your Age</label>
+                        <select id="age" class="mt-1 block w-full rounded-md border-slate-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm">
+                            <option value="below60">Below 60 years</option>
+                            <option value="60to80">60 to 80 years (Senior Citizen)</option>
+                            <option value="above80">Above 80 years (Super Senior Citizen)</option>
+                        </select>
+                    </div>
+                    <div class="bg-slate-50 p-4 rounded-lg border border-slate-200">
+                        <h4 class="font-semibold text-slate-700 mb-2">Enter Deductions (for Old Regime)</h4>
+                        <div class="space-y-3">
+                            <div><label for="deduction80C" class="block text-sm font-medium text-slate-600">Sec 80C, 80CCC, 80CCD(1) (Max ₹1,50,000)</label><input type="number" id="deduction80C" class="mt-1 block w-full rounded-md border-slate-300 shadow-sm" placeholder="e.g., 150000" max="150000"></div>
+                            <div><label for="deduction80D" class="block text-sm font-medium text-slate-600">Sec 80D (Health Insurance)</label><input type="number" id="deduction80D" class="mt-1 block w-full rounded-md border-slate-300 shadow-sm" placeholder="e.g., 25000"></div>
+                            <div><label for="homeLoanInterest" class="block text-sm font-medium text-slate-600">Home Loan Interest (Self-Occupied)</label><input type="number" id="homeLoanInterest" class="mt-1 block w-full rounded-md border-slate-300 shadow-sm" placeholder="e.g., 200000" max="200000"></div>
+                            <div><label for="otherDeductions" class="block text-sm font-medium text-slate-600">Other Deductions (HRA, 80E, etc.)</label><input type="number" id="otherDeductions" class="mt-1 block w-full rounded-md border-slate-300 shadow-sm" placeholder="e.g., 84000"></div>
+                        </div>
+                    </div>
+                    <button id="calculateBtn" class="w-full bg-indigo-600 text-white font-bold py-3 px-4 rounded-lg hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500 transition-colors">Calculate My Tax</button>
+                </div>
+                <div class="bg-slate-50 p-4 md:p-6 rounded-lg min-h-[300px] flex flex-col justify-center">
+                    <div id="result" class="text-center"><p class="text-slate-500">Your personalized comparison chart will appear here.</p></div>
+                    <div class="chart-container"><canvas id="taxChart"></canvas></div>
+                    <div id="verdict" class="text-center mt-4 font-bold text-lg p-3 rounded-md"></div>
+                </div>
+            </div>
+             <p class="text-xs text-slate-500 mt-6 text-center">
+                Disclaimer: This tool is taking standard deduction for salary income and for educational purposes only and should not be considered as financial recommendation. Please consult a qualified professional for financial advice.
+            </p>
+        </section>
+        <div class="space-y-12">
+            <section id="regimes" class="section-card bg-white p-6 md:p-8 rounded-2xl shadow-md border border-slate-200">
+                <h2 class="text-2xl font-bold mb-4">The Regimes Explained</h2>
+                <p class="text-slate-600 mb-6">The Indian tax system offers two paths. The Old Regime rewards savings and investments with deductions, while the New Regime (the default choice) offers lower tax rates with fewer deductions. This section helps you understand the core differences beyond the numbers.</p>
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                    <div class="bg-blue-50 border border-blue-200 p-6 rounded-lg">
+                        <h3 class="text-xl font-bold text-blue-800 mb-2">Old Tax Regime</h3>
+                        <p class="text-blue-900">This regime is built on the principle of encouraging savings. It allows you to reduce your taxable income by claiming over 70 deductions for various investments and expenses.</p>
+                        <ul class="mt-4 space-y-2 text-sm">
+                            <li class="flex items-start"><span class="text-green-600 font-bold mr-2">✔</span><span>Full access to deductions like 80C, 80D, HRA, and home loan interest.</span></li>
+                            <li class="flex items-start"><span class="text-green-600 font-bold mr-2">✔</span><span>Ideal for those with high investments and expenses like rent or home loans.</span></li>
+                            <li class="flex items-start"><span class="text-red-600 font-bold mr-2">✖</span><span>Higher tax slab rates compared to the new regime.</span></li>
+                        </ul>
+                    </div>
+                    <div class="bg-green-50 border border-green-200 p-6 rounded-lg">
+                        <h3 class="text-xl font-bold text-green-800 mb-2">New Tax Regime</h3>
+                        <p class="text-green-900">This regime prioritizes simplicity and lower tax rates. It is the default option and is designed for those who prefer a straightforward tax filing experience.</p>
+                        <ul class="mt-4 space-y-2 text-sm">
+                            <li class="flex items-start"><span class="text-green-600 font-bold mr-2">✔</span><span>Lower tax rates and more slabs for gradual tax increase.</span></li>
+                            <li class="flex items-start"><span class="text-green-600 font-bold mr-2">✔</span><span>Enhanced standard deduction (₹75,000) and a powerful tax rebate making income up to ₹12 Lakh effectively tax-free.</span></li>
+                            <li class="flex items-start"><span class="text-red-600 font-bold mr-2">✖</span><span>Forgoes most major deductions, including 80C, 80D, and HRA.</span></li>
+                        </ul>
+                    </div>
+                </div>
+            </section>
+            <section id="deductions" class="section-card bg-white p-6 md:p-8 rounded-2xl shadow-md border border-slate-200">
+                <h2 class="text-2xl font-bold mb-4">Deductions Explorer (Old Regime)</h2>
+                <p class="text-slate-600 mb-6">This is your toolkit for tax saving under the Old Regime. Each deduction you claim reduces your taxable income, directly lowering your tax outgo. Explore the most powerful options available in Chapter VI-A of the Income Tax Act.</p>
+                <div class="space-y-3">
+                    <details class="group bg-slate-50 p-4 rounded-lg"><summary class="font-semibold cursor-pointer list-none flex justify-between items-center">Section 80C: The Investment Powerhouse (up to ₹1.5 Lakh) <span class="text-indigo-600 text-2xl group-open:rotate-45 transition-transform">+</span></summary><p class="text-sm text-slate-600 mt-3 pt-3 border-t border-slate-200">This is a basket of popular options including PPF, ELSS Mutual Funds, Life Insurance Premiums, Home Loan Principal, and Children's Tuition Fees. A strategic mix can help achieve both tax savings and long-term financial goals.</p></details>
+                    <details class="group bg-slate-50 p-4 rounded-lg"><summary class="font-semibold cursor-pointer list-none flex justify-between items-center">Section 80D: The Health Guardian <span class="text-indigo-600 text-2xl group-open:rotate-45 transition-transform">+</span></summary><p class="text-sm text-slate-600 mt-3 pt-3 border-t border-slate-200">Allows deduction for health insurance premiums. You can claim up to ₹25,000 for self/family, plus an additional ₹25,000 (or ₹50,000 if they are senior citizens) for your parents' policy. This makes the maximum possible deduction ₹1,00,000.</p></details>
+                    <details class="group bg-slate-50 p-4 rounded-lg"><summary class="font-semibold cursor-pointer list-none flex justify-between items-center">NPS: The Retirement Booster (up to ₹50,000 extra) <span class="text-indigo-600 text-2xl group-open:rotate-45 transition-transform">+</span></summary><p class="text-sm text-slate-600 mt-3 pt-3 border-t border-slate-200">Section 80CCD(1B) provides an exclusive deduction of ₹50,000 for contributions to the National Pension System. This is *over and above* the ₹1.5 Lakh limit of Section 80C, enabling a total deduction of ₹2 Lakh.</p></details>
+                    <details class="group bg-slate-50 p-4 rounded-lg"><summary class="font-semibold cursor-pointer list-none flex justify-between items-center">Section 24(b): The Homeowner's Advantage <span class="text-indigo-600 text-2xl group-open:rotate-45 transition-transform">+</span></summary><p class="text-sm text-slate-600 mt-3 pt-3 border-t border-slate-200">Allows deduction for interest paid on a home loan for a self-occupied property, up to a maximum of ₹2,00,000 per year. This is one of the single largest deductions available to taxpayers.</p></details>
+                </div>
+            </section>
+            <section id="filing" class="section-card bg-white p-6 md:p-8 rounded-2xl shadow-md border border-slate-200">
+                <h2 class="text-2xl font-bold mb-4">Your ITR Filing Guide</h2>
+                <p class="text-slate-600 mb-6">Filing your tax return accurately and on time is a critical final step. This guide provides interactive tools to help you choose the right form and follow the correct procedure, avoiding common mistakes.</p>
+                <div class="grid grid-cols-1 lg:grid-cols-2 gap-8">
+                    <div>
+                        <h3 class="font-semibold text-lg mb-3">Which ITR Form Should I Use?</h3>
+                        <div class="space-y-3 text-sm">
+                            <div><label class="font-medium">1. Do you have income from Business or Profession?</label><select id="q1" class="mt-1 block w-full rounded-md border-slate-300 text-sm"><option value="">Select...</option><option value="yes">Yes</option><option value="no">No</option></select></div>
+                            <div id="q2_container" class="hidden"><label class="font-medium">2. Is this income under a Presumptive Scheme (44AD/ADA)?</label><select id="q2" class="mt-1 block w-full rounded-md border-slate-300 text-sm"><option value="">Select...</option><option value="yes">Yes</option><option value="no">No</option></select></div>
+                            <div id="q3_container" class="hidden"><label class="font-medium">3. Do you have income from Capital Gains?</label><select id="q3" class="mt-1 block w-full rounded-md border-slate-300 text-sm"><option value="">Select...</option><option value="yes">Yes</option><option value="no">No</option></select></div>
+                        </div>
+                        <div id="formResult" class="mt-4 font-bold text-center p-3 bg-indigo-100 text-indigo-800 rounded-lg"></div>
+                    </div>
+                    <div>
+                        <h3 class="font-semibold text-lg mb-3">Pre-Filing Checklist</h3>
+                        <div class="space-y-2">
+                            <label class="flex items-center space-x-3 p-2 rounded-md hover:bg-slate-50 cursor-pointer"><input type="checkbox" class="h-4 w-4 rounded border-slate-400 text-indigo-600 focus:ring-indigo-500"><span>Link PAN with Aadhaar.</span></label>
+                            <label class="flex items-center space-x-3 p-2 rounded-md hover:bg-slate-50 cursor-pointer"><input type="checkbox" class="h-4 w-4 rounded border-slate-400 text-indigo-600 focus:ring-indigo-500"><span>Gather Form 16s, bank statements, deduction proofs.</span></label>
+                            <label class="flex items-center space-x-3 p-2 rounded-md hover:bg-slate-50 cursor-pointer"><input type="checkbox" class="h-4 w-4 rounded border-slate-400 text-indigo-600 focus:ring-indigo-500"><span>Download and reconcile income with Form 26AS & AIS.</span></label>
+                            <label class="flex items-center space-x-3 p-2 rounded-md hover:bg-slate-50 cursor-pointer"><input type="checkbox" class="h-4 w-4 rounded border-slate-400 text-indigo-600 focus:ring-indigo-500"><span>Pre-validate at least one bank account for refunds.</span></label>
+                            <label class="flex items-center space-x-3 p-2 rounded-md hover:bg-slate-50 cursor-pointer"><input type="checkbox" class="h-4 w-4 rounded border-slate-400 text-indigo-600 focus:ring-indigo-500"><span class="font-bold text-red-600">CRITICAL: Verify ITR within 30 days of filing.</span></label>
+                        </div>
+                    </div>
+                </div>
+            </section>
+        </div>
+    </main>
+
+<script>
+document.addEventListener('DOMContentLoaded', function () {
+  const calculateBtn = document.getElementById('calculateBtn');
+  const grossIncomeEl = document.getElementById('grossIncome');
+  const ageEl = document.getElementById('age');
+  const deduction80CEl = document.getElementById('deduction80C');
+  const deduction80DEl = document.getElementById('deduction80D');
+  const homeLoanInterestEl = document.getElementById('homeLoanInterest');
+  const otherDeductionsEl = document.getElementById('otherDeductions');
+  const resultEl = document.getElementById('result');
+  const verdictEl = document.getElementById('verdict');
+  let taxChart = null;
+
+  const formatCurrency = (value) => new Intl.NumberFormat('en-IN', { style: 'currency', currency: 'INR', maximumFractionDigits: 0 }).format(value);
+
+  const calculateTaxOld = (taxableIncome, age) => {
+      let tax = 0;
+      let exemptionLimit = 250000;
+      if (age === '60to80') exemptionLimit = 300000;
+      if (age === 'above80') exemptionLimit = 500000;
+      if (taxableIncome <= exemptionLimit) return 0;
+      if (taxableIncome > 1000000) tax += (taxableIncome - 1000000) * 0.30;
+      if (taxableIncome > 500000) tax += (Math.min(taxableIncome, 1000000) - 500000) * 0.20;
+      if (taxableIncome > exemptionLimit) tax += (Math.min(taxableIncome, 500000) - exemptionLimit) * 0.05;
+      if (taxableIncome <= 500000) tax = Math.max(0, tax - 12500); // Rebate
+      return tax > 0 ? tax + (tax * 0.04) : 0; // Cess
+  };
+  
+  const calculateTaxNew = (taxableIncome) => {
+      let tax = 0;
+      if (taxableIncome <= 400000) tax = 0; // Includes rebate up to 7 Lakhs, simplified here
+      else if (taxableIncome <= 800000) tax = (taxableIncome - 400000) * 0.05;
+      else if (taxableIncome <= 1200000) tax = 20000 + (taxableIncome - 800000) * 0.10;
+      else if (taxableIncome <= 1600000) tax = 60000 + (taxableIncome - 1200000) * 0.15;
+      else if (taxableIncome <= 2000000) tax = 120000 + (taxableIncome - 1600000) * 0.20;
+      else if (taxableIncome <= 2400000) tax = 200000 + (taxableIncome - 2000000) * 0.25;
+      else tax = 300000 + (taxableIncome - 2400000) * 0.30;
+      return tax > 0 ? tax + (tax * 0.04) : 0; // Cess
+  };
+
+  calculateBtn.addEventListener('click', () => {
+    const grossIncome = parseFloat(grossIncomeEl.value) || 0;
+    if (grossIncome <= 0) {
+      resultEl.innerHTML = `<p class="text-red-500 font-semibold">Please enter a valid income.</p>`;
+      verdictEl.innerHTML = ''; verdictEl.className = 'text-center mt-4 font-bold text-lg p-3 rounded-md';
+      if(taxChart) taxChart.destroy();
+      return;
+    }
+    const age = ageEl.value;
+    const deduction80C = Math.min(parseFloat(deduction80CEl.value) || 0, 150000);
+    const deduction80D = parseFloat(deduction80DEl.value) || 0;
+    const homeLoanInterest = Math.min(parseFloat(homeLoanInterestEl.value) || 0, 200000);
+    const otherDeductions = parseFloat(otherDeductionsEl.value) || 0;
+    
+    const standardDeductionOld = 50000;
+    const totalDeductions = standardDeductionOld + deduction80C + deduction80D + homeLoanInterest + otherDeductions;
+    const oldRegimeTaxableIncome = Math.max(0, grossIncome - totalDeductions);
+    const oldRegimeTax = calculateTaxOld(oldRegimeTaxableIncome, age);
+    
+    const standardDeductionNew = 75000; 
+    const newRegimeTaxableIncome = Math.max(0, grossIncome - standardDeductionNew);
+    const newRegimeTax = calculateTaxNew(newRegimeTaxableIncome);
+
+    resultEl.innerHTML = `<div class="grid grid-cols-1 sm:grid-cols-2 gap-4 text-left"><div class="p-4 bg-blue-100 rounded-lg"><h4 class="font-bold text-blue-800">Old Regime</h4><p class="text-sm text-blue-600">Taxable: ${formatCurrency(oldRegimeTaxableIncome)}</p><p class="text-lg font-bold text-blue-900 mt-1">Tax: ${formatCurrency(oldRegimeTax)}</p></div><div class="p-4 bg-green-100 rounded-lg"><h4 class="font-bold text-green-800">New Regime</h4><p class="text-sm text-green-600">Taxable: ${formatCurrency(newRegimeTaxableIncome)}</p><p class="text-lg font-bold text-green-900 mt-1">Tax: ${formatCurrency(newRegimeTax)}</p></div></div>`;
+    
+    const savings = Math.abs(oldRegimeTax - newRegimeTax);
+    verdictEl.className = 'text-center mt-4 font-bold text-lg p-3 rounded-md';
+    if (newRegimeTax < oldRegimeTax) { verdictEl.innerHTML = `The New Regime saves you ${formatCurrency(savings)}!`; verdictEl.classList.add('bg-green-200', 'text-green-800'); }
+    else if (oldRegimeTax < newRegimeTax) { verdictEl.innerHTML = `The Old Regime saves you ${formatCurrency(savings)}!`; verdictEl.classList.add('bg-blue-200', 'text-blue-800'); }
+    else { verdictEl.innerHTML = `Both regimes have the same tax liability.`; verdictEl.classList.add('bg-slate-200', 'text-slate-800'); }
+    
+    const ctx = document.getElementById('taxChart').getContext('2d');
+    if (taxChart) taxChart.destroy();
+    taxChart = new Chart(ctx, { type: 'bar', data: { labels: ['Old Regime', 'New Regime'], datasets: [{ label: 'Tax Liability', data: [oldRegimeTax, newRegimeTax], backgroundColor: ['rgba(59, 130, 246, 0.7)', 'rgba(16, 185, 129, 0.7)'], borderColor: ['rgba(59, 130, 246, 1)', 'rgba(16, 185, 129, 1)'], borderWidth: 1 }] }, options: { responsive: true, maintainAspectRatio: false, plugins: { legend: { display: false }, tooltip: { callbacks: { label: (c) => `Tax: ${formatCurrency(c.raw)}` } } }, scales: { y: { beginAtZero: true, ticks: { callback: (v) => formatCurrency(v).replace('₹', '₹ ') } } } } });
+  });
+
+  // --- ITR Form Finder Logic ---
+  const q1 = document.getElementById('q1'), q2 = document.getElementById('q2'), q3 = document.getElementById('q3');
+  const q2_container = document.getElementById('q2_container'), q3_container = document.getElementById('q3_container');
+  const formResult = document.getElementById('formResult');
+  
+  function updateFormFinder() {
+    const hasBusinessIncome = q1.value, isPresumptive = q2.value, hasCapitalGains = q3.value;
+    q2_container.classList.add('hidden'); q3_container.classList.add('hidden'); formResult.textContent = '';
+    if (hasBusinessIncome === 'yes') {
+      q2_container.classList.remove('hidden');
+      if(isPresumptive === 'yes') formResult.textContent = 'You should file ITR-4 (Sugam).';
+      else if (isPresumptive === 'no') formResult.textContent = 'You should file ITR-3.';
+    } else if (hasBusinessIncome === 'no') {
+      q3_container.classList.remove('hidden');
+      if(hasCapitalGains === 'yes') formResult.textContent = 'You should file ITR-2.';
+      else if (hasCapitalGains === 'no') formResult.textContent = 'You should file ITR-1 (Sahaj).';
+    }
+  }
+  [q1, q2, q3].forEach(el => el.addEventListener('change', updateFormFinder));
+  updateFormFinder();
+});
+</script>
+
+</body>
+</html>

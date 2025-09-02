@@ -1,0 +1,175 @@
+:root {
+    --primary-blue: #0d2d62; 
+    --accent-gold: #ff9900; 
+    --light-gray: #f8f9fa;
+    --text-dark: #212529; 
+    --text-light: #495057; 
+    --border-color: #dee2e6;
+}
+
+body {
+    font-family: 'Inter', sans-serif; 
+    line-height: 1.6; 
+    color: var(--text-dark);
+    background-color: var(--light-gray);
+}
+
+.excel-top-bar {
+    width: 100%; 
+    background-color: var(--primary-blue); 
+    color: white; 
+    padding: 10px 40px;
+    display: flex; 
+    justify-content: space-between; 
+    align-items: center;
+    box-sizing: border-box; 
+    flex-wrap: wrap; 
+    border-radius: 12px; 
+    margin-bottom: 2rem;
+}
+
+.excel-sidebar-header h2 { 
+    margin: 0; 
+    font-size: 1.5em; 
+    color: white; 
+}
+
+.excel-sidebar-header p { 
+    font-size: 0.9em; 
+    color: var(--accent-gold); 
+    margin: 5px 0 0; 
+}
+
+.session-dropdown {
+    background-color: var(--primary-blue); 
+    color: white; 
+    padding: 8px 12px;
+    border: 1px solid var(--accent-gold); 
+    border-radius: 6px; 
+    font-size: 1em;
+    font-weight: 500; 
+    cursor: pointer; 
+    -webkit-appearance: none; 
+    -moz-appearance: none; 
+    appearance: none;
+    background-image: url("data:image/svg+xml;charset=UTF-8,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='white' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3e%3cpolyline points='6 9 12 15 18 9'%3e%3c/polyline%3e%3c/svg%3e");
+    background-repeat: no-repeat; 
+    background-position: right 0.8rem center; 
+    background-size: 1em; 
+    padding-right: 2.5rem; 
+    margin: 5px 0;
+}
+
+.session-dropdown:hover { 
+    background-color: rgba(255, 255, 255, 0.1); 
+}
+
+.session-dropdown option { 
+    background-color: var(--primary-blue); 
+    color: white; 
+}
+
+.excel-main-content { 
+    width: 100%; 
+    box-sizing: border-box; 
+}
+
+.excel-page-content { 
+    display: none; 
+    animation: fadeIn 0.5s ease-in-out; 
+}
+
+.excel-page-content.active { 
+    display: block; 
+}
+
+.excel-day-module {
+    background: #ffffff; 
+    padding: 30px; 
+    border-radius: 12px;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.08); 
+    max-width: 900px; 
+    margin: auto;
+}
+
+.excel-day-module h3 { 
+    margin-top: 0; 
+    color: var(--primary-blue); 
+    font-size: 1.8em; 
+    border-bottom: 1px solid var(--border-color); 
+    padding-bottom: 10px; 
+}
+
+.excel-example {
+    background-color: #eef5ff; 
+    border: 1px solid #b3d1ff; 
+    border-left: 5px solid var(--accent-gold);
+    padding: 15px 20px; 
+    margin: 20px 0; 
+    border-radius: 5px;
+}
+
+.excel-example h4 { 
+    margin-top: 0; 
+    color: var(--primary-blue); 
+}
+
+details { 
+    margin-top: 20px; 
+    border-radius: 5px; 
+    background-color: #f7faff; 
+    border: 1px solid #d1e0ff; 
+}
+
+details > summary { 
+    list-style: none; 
+}
+
+details > summary::-webkit-details-marker { 
+    display: none; 
+}
+
+summary {
+    font-weight: bold; 
+    cursor: pointer; 
+    color: #0056b3; 
+    padding: 12px 15px; 
+    outline: none;
+    display: flex; 
+    align-items: center; 
+    justify-content: space-between;
+}
+
+summary::after { 
+    content: '►'; 
+    font-size: 0.8em; 
+    transition: transform 0.2s ease; 
+}
+
+details[open] > summary::after { 
+    transform: rotate(90deg); 
+}
+
+.excel-exercises { 
+    padding: 15px 20px 20px 40px; 
+    border-top: 1px solid #d1e0ff; 
+    background-color: #fff; 
+}
+
+.excel-code {
+    background-color: #e9ecef; 
+    padding: 3px 6px; 
+    border-radius: 4px; 
+    font-family: "SFMono-Regular", Consolas, "Liberation Mono", Menlo, Courier, monospace;
+    font-size: 0.95em; 
+    color: #c7254e;
+}
+
+.excel-strong { 
+    color: var(--primary-blue); 
+}
+
+@keyframes fadeIn {
+    from { opacity: 0; }
+    to { opacity: 1; }
+}
