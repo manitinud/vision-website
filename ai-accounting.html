@@ -16,299 +16,478 @@
       from { opacity: 0; }
       to { opacity: 1; }
     }
+    .mobile-menu {
+        max-height: 0;
+        overflow: hidden;
+        transition: max-height 0.3s ease-out;
+    }
+    .mobile-menu.open {
+        max-height: 500px;
+    }
+    .dropdown-arrow.open {
+        transform: rotate(180deg);
+    }
+    .dropdown-arrow {
+        transition: transform 0.2s ease-in-out;
+    }
   </style>
 </head>
 <body>
 
-    <nav class="w-full z-50 bg-white/95 backdrop-blur-lg shadow-md border-b border-gray-100 mb-6">
+    <svg width="0" height="0" style="position:absolute">
+        <symbol id="icon-menu" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="4" x2="20" y1="12" y2="12"/><line x1="4" x2="20" y1="6" y2="6"/><line x1="4" x2="20" y1="18" y2="18"/></symbol>
+        <symbol id="icon-x" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="18" x2="6" y1="6" y2="18"/><line x1="6" x2="18" y1="6" y2="18"/></symbol>
+        <symbol id="icon-chevron-down" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"></polyline></symbol>
+    </svg>
+
+    <nav class="fixed top-0 w-full z-50 bg-white/95 backdrop-blur-lg shadow-lg border-b border-gray-100">
       <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div class="flex justify-between items-center py-4">
-          <a href="index.html" class="flex items-center space-x-4">
+          <a href="index.html#home" class="flex items-center space-x-4">
             <div class="text-3xl font-bold bg-gradient-to-r from-emerald-600 to-blue-600 bg-clip-text text-transparent">
               VISION CONNECTS
             </div>
+            <div class="hidden lg:block text-sm text-gray-600 border-l border-gray-300 pl-4">
+              Quality Training by <a href="http://accountantsfactory.com/" target="_blank" rel="noopener noreferrer" class="text-blue-600 hover:underline font-semibold">Accountants Factory LLP</a>
+            </div>
           </a>
-           <a href="index.html" class="px-4 py-2 text-sm font-medium text-white bg-emerald-600 hover:bg-emerald-700 rounded-lg transition-colors">
-              ← Back to Main Site
-           </a>
+          
+          <div class="hidden md:flex items-center space-x-8">
+            <a href="index.html#home" class="text-gray-700 hover:text-emerald-600 transition-colors font-medium">Home</a>
+            <a href="index.html#courses" class="text-gray-700 hover:text-emerald-600 transition-colors font-medium">Courses</a>
+            <div class="relative" id="webinar-dropdown-container">
+              <button id="webinar-dropdown-button" class="text-gray-700 hover:text-emerald-600 transition-colors font-medium flex items-center">
+                Online Webinars
+                <svg class="w-5 h-5 ml-1 text-gray-500 dropdown-arrow"><use href="#icon-chevron-down"></use></svg>
+              </button>
+              <div id="webinar-dropdown-menu" class="absolute right-0 mt-2 w-56 rounded-md shadow-lg bg-white ring-1 ring-black ring-opacity-5 hidden z-50">
+                <div class="py-1" role="menu" aria-orientation="vertical" aria-labelledby="webinar-dropdown-button">
+                  <a href="incometax.html" class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 hover:text-emerald-600" role="menuitem">Income Tax Series</a>
+                  <a href="ai-accounting.html" class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 hover:text-emerald-600" role="menuitem">AI in Accounting</a>
+                  <a href="excel.html" class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 hover:text-emerald-600" role="menuitem">Excel Master Class</a>
+                </div>
+              </div>
+            </div>
+            <div class="relative" id="practice-dropdown-container">
+                <button id="practice-dropdown-button" class="text-gray-700 hover:text-emerald-600 transition-colors font-medium flex items-center">
+                  Practice Session
+                  <svg class="w-5 h-5 ml-1 text-gray-500 dropdown-arrow"><use href="#icon-chevron-down"></use></svg>
+                </button>
+                <div id="practice-dropdown-menu" class="absolute right-0 mt-2 w-56 rounded-md shadow-lg bg-white ring-1 ring-black ring-opacity-5 hidden z-50">
+                  <div class="py-1" role="menu" aria-orientation="vertical" aria-labelledby="practice-dropdown-button">
+                    <a href="excel-practice.html" class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 hover:text-emerald-600" role="menuitem">Excel Practice</a>
+                  </div>
+                </div>
+            </div>
+            <a href="index.html#about" class="text-gray-700 hover:text-emerald-600 transition-colors font-medium">About</a>
+            <a href="index.html#careers" class="text-gray-700 hover:text-emerald-600 transition-colors font-medium">Careers</a>
+            <a href="index.html#contact" class="text-gray-700 hover:text-emerald-600 transition-colors font-medium">Contact</a>
+          </div>
+
+          <button id="menu-button" class="md:hidden text-gray-700">
+            <svg class="w-6 h-6" id="menu-open-icon"><use href="#icon-menu"></use></svg>
+            <svg class="w-6 h-6 hidden" id="menu-close-icon"><use href="#icon-x"></use></svg>
+          </button>
+        </div>
+      </div>
+
+      <div id="mobile-menu" class="mobile-menu md:hidden bg-white border-t border-gray-100 shadow-lg">
+        <div class="px-4 py-4 space-y-4">
+          <a href="index.html#home" class="mobile-link block text-gray-700 hover:text-emerald-600 transition-colors font-medium">Home</a>
+          <a href="index.html#courses" class="mobile-link block text-gray-700 hover:text-emerald-600 transition-colors font-medium">Courses</a>
+          <div class="relative">
+            <button id="mobile-webinar-dropdown-button" class="w-full text-left mobile-link block text-gray-700 hover:text-emerald-600 transition-colors font-medium flex justify-between items-center">
+              <span>Online Webinars </span>
+              <svg class="w-5 h-5 text-gray-500 dropdown-arrow"><use href="#icon-chevron-down"></use></svg>
+            </button>
+            <div id="mobile-webinar-dropdown-menu" class="pl-4 mt-2 space-y-2 hidden">
+              <a href="incometax.html" class="block text-gray-600 hover:text-emerald-600">Income Tax Series</a>
+              <a href="ai-accounting.html" class="block text-gray-600 hover:text-emerald-600">AI in Accounting</a>
+              <a href="excel.html" class="block text-gray-600 hover:text-emerald-600">Excel Master Class</a>
+            </div>
+          </div>
+           <div class="relative">
+            <button id="mobile-practice-dropdown-button" class="w-full text-left mobile-link block text-gray-700 hover:text-emerald-600 transition-colors font-medium flex justify-between items-center">
+              <span>Practice Session</span>
+              <svg class="w-5 h-5 text-gray-500 dropdown-arrow"><use href="#icon-chevron-down"></use></svg>
+            </button>
+            <div id="mobile-practice-dropdown-menu" class="pl-4 mt-2 space-y-2 hidden">
+              <a href="excel-practice.html" class="block text-gray-600 hover:text-emerald-600">Excel Practice</a>
+            </div>
+          </div>
+          <a href="index.html#about" class="mobile-link block text-gray-700 hover:text-emerald-600 transition-colors font-medium">About</a>
+          <a href="index.html#careers" class="mobile-link block text-gray-700 hover:text-emerald-600 transition-colors font-medium">Careers</a>
+          <a href="index.html#contact" class="mobile-link block text-gray-700 hover:text-emerald-600 transition-colors font-medium">Contact</a>
         </div>
       </div>
     </nav>
 
-    <div class="container mx-auto p-4 sm:p-6 lg:p-8 max-w-4xl text-gray-800">
-        <header class="bg-white shadow-md rounded-lg p-6 mb-6 text-center">
-            <h1 class="text-3xl font-bold text-orange-600">AI in Accounting: Student Notebook</h1>
-            <p class="text-gray-600 mt-2">An Interactive Guide to the Future of Finance</p>
-        </header>
+    <div class="pt-24">
+      <div class="container mx-auto p-4 sm:p-6 lg:p-8 max-w-4xl text-gray-800">
+          <header class="bg-white shadow-md rounded-lg p-6 mb-6 text-center">
+              <h1 class="text-3xl font-bold bg-gradient-to-r from-emerald-600 to-blue-600 bg-clip-text text-transparent">AI in Accounting: Student Notebook</h1>
+              <p class="text-gray-600 mt-2">An Interactive Guide to the Future of Finance</p>
+          </header>
 
-        <main class="bg-white shadow-md rounded-lg p-6 sm:p-8">
-            <div id="page-1" class="page-content active">
-                <h2 class="text-2xl font-bold mb-4 border-b pb-2 text-orange-500">Chapter 1: Welcome to the Future of Accounting</h2>
-                <p class="mb-4">Welcome! AI is the next major evolution in accounting tools, similar to how spreadsheets revolutionized the work of accountants who previously used manual ledgers and calculators. Each new tool didn't replace the accountant; it automated tedious work and unlocked new capabilities.</p>
-                <p class="mb-4"><strong>What is AI in this context?</strong> It’s not about robots at desks. It's about creating "smart" software that performs tasks requiring human intelligence, like learning from data, recognizing patterns, understanding documents, and making predictions. AI handles the "what" (processing data), so you can focus on the "why" and "what's next" (strategy and advice).</p>
-                <div class="bg-orange-50 border-l-4 border-orange-500 text-orange-700 p-4 rounded-r-lg mb-6">
-                    <p><strong>Key Takeaway:</strong> AI isn't about replacing accountants; it's about <span class="font-semibold">augmenting</span> their abilities, freeing them from repetitive tasks to focus on high-value strategic analysis.</p>
-                </div>
+          <main class="bg-white shadow-md rounded-lg p-6 sm:p-8 min-h-[650px]">
+              <div id="page-1" class="page-content active">
+                  <h2 class="text-2xl font-bold mb-4 border-b pb-2 text-emerald-600">Chapter 1: Welcome to the Future of Accounting</h2>
+                  <p class="mb-4">Welcome! AI is the next major evolution in accounting tools, similar to how spreadsheets revolutionized the work of accountants who previously used manual ledgers and calculators. Each new tool didn't replace the accountant; it automated tedious work and unlocked new capabilities.</p>
+                  <p class="mb-4"><strong>What is AI in this context?</strong> It’s not about robots at desks. It's about creating "smart" software that performs tasks requiring human intelligence, like learning from data, recognizing patterns, understanding documents, and making predictions. AI handles the "what" (processing data), so you can focus on the "why" and "what's next" (strategy and advice).</p>
+                  <div class="bg-emerald-50 border-l-4 border-emerald-500 text-emerald-800 p-4 rounded-r-lg mb-6">
+                      <p><strong>Key Takeaway:</strong> AI isn't about replacing accountants; it's about <span class="font-semibold">augmenting</span> their abilities, freeing them from repetitive tasks to focus on high-value strategic analysis.</p>
+                  </div>
 
-                <h3 class="text-xl font-semibold mt-6 mb-3">Chapter 1: Assignment</h3>
-                <div class="space-y-4" id="quiz-1">
-                    <div class="quiz-question">
-                        <p class="font-semibold">1. What is the primary role of AI in accounting as described in this chapter?</p>
-                        <div class="ml-4 mt-2 space-y-1">
-                            <label><input type="radio" name="q1-1" value="a"> a) To completely replace all accounting professionals.</label><br>
-                            <label><input type="radio" name="q1-1" value="b"> b) To augment the capabilities of accountants and automate repetitive tasks.</label><br>
-                            <label><input type="radio" name="q1-1" value="c"> c) To make accounting more complicated and difficult.</label><br>
-                        </div>
-                    </div>
-                    <div class="quiz-question">
-                        <p class="font-semibold">2. AI in accounting is best described as software that can...</p>
-                        <div class="ml-4 mt-2 space-y-1">
-                            <label><input type="radio" name="q1-2" value="a"> a) Only perform basic calculations like a calculator.</label><br>
-                            <label><input type="radio" name="q1-2" value="b"> b) Only work when a human manually inputs every step.</label><br>
-                            <label><input type="radio" name="q1-2" value="c"> c) Learn from data, recognize patterns, and make predictions.</label><br>
-                        </div>
-                    </div>
-                </div>
-            </div>
+                  <h3 class="text-xl font-semibold mt-6 mb-3">Chapter 1: Assignment</h3>
+                  <div class="space-y-4" id="quiz-1">
+                      <div class="quiz-question">
+                          <p class="font-semibold">1. What is the primary role of AI in accounting as described in this chapter?</p>
+                          <div class="ml-4 mt-2 space-y-1">
+                              <label><input type="radio" name="q1-1" value="a"> a) To completely replace all accounting professionals.</label><br>
+                              <label><input type="radio" name="q1-1" value="b"> b) To augment the capabilities of accountants and automate repetitive tasks.</label><br>
+                              <label><input type="radio" name="q1-1" value="c"> c) To make accounting more complicated and difficult.</label><br>
+                          </div>
+                      </div>
+                      <div class="quiz-question">
+                          <p class="font-semibold">2. AI in accounting is best described as software that can...</p>
+                          <div class="ml-4 mt-2 space-y-1">
+                              <label><input type="radio" name="q1-2" value="a"> a) Only perform basic calculations like a calculator.</label><br>
+                              <label><input type="radio" name="q1-2" value="b"> b) Only work when a human manually inputs every step.</label><br>
+                              <label><input type="radio" name="q1-2" value="c"> c) Learn from data, recognize patterns, and make predictions.</label><br>
+                          </div>
+                      </div>
+                  </div>
+              </div>
 
-            <div id="page-2" class="page-content">
-                <h2 class="text-2xl font-bold mb-4 border-b pb-2 text-orange-500">Chapter 2: The Core Technologies</h2>
-                <p class="mb-4">Think of these three technologies as a highly efficient digital finance team:</p>
-                <ul class="list-disc list-inside space-y-4 mb-6">
-                    <li><strong>Robotic Process Automation (RPA):</strong> This is your diligent intern. It performs high-volume, repetitive digital tasks perfectly every time, like logging into systems, copying data from a spreadsheet to a database, or downloading bank statements. It follows rules without deviation.</li>
-                    <li><strong>Natural Language Processing (NLP):</strong> This is your language specialist. It can read and understand human language in documents. When an invoice arrives as a PDF, NLP reads it, understands what a "vendor," "invoice date," and "total amount" are, and extracts that information.</li>
-                    <li><strong>Machine Learning (ML):</strong> This is your senior analyst. It takes the data provided by NLP and RPA, learns from historical patterns, and makes intelligent decisions. For example, it can predict which invoices are safe to pay automatically and which ones look suspicious and need your review.</li>
-                </ul>
+              <div id="page-2" class="page-content">
+                  <h2 class="text-2xl font-bold mb-4 border-b pb-2 text-emerald-600">Chapter 2: The Core Technologies</h2>
+                  <p class="mb-4">Think of these three technologies as a highly efficient digital finance team:</p>
+                  <ul class="list-disc list-inside space-y-4 mb-6">
+                      <li><strong>Robotic Process Automation (RPA):</strong> This is your diligent intern. It performs high-volume, repetitive digital tasks perfectly every time, like logging into systems, copying data from a spreadsheet to a database, or downloading bank statements. It follows rules without deviation.</li>
+                      <li><strong>Natural Language Processing (NLP):</strong> This is your language specialist. It can read and understand human language in documents. When an invoice arrives as a PDF, NLP reads it, understands what a "vendor," "invoice date," and "total amount" are, and extracts that information.</li>
+                      <li><strong>Machine Learning (ML):</strong> This is your senior analyst. It takes the data provided by NLP and RPA, learns from historical patterns, and makes intelligent decisions. For example, it can predict which invoices are safe to pay automatically and which ones look suspicious and need your review.</li>
+                  </ul>
 
-                <h3 class="text-xl font-semibold mt-6 mb-3">Chapter 2: Assignment</h3>
-                <div class="space-y-4" id="quiz-2">
-                     <div class="quiz-question">
-                        <p class="font-semibold">1. Which technology is responsible for understanding the text on a scanned invoice?</p>
-                        <div class="ml-4 mt-2 space-y-1">
-                            <label><input type="radio" name="q2-1" value="a"> a) Machine Learning (ML)</label><br>
-                            <label><input type="radio" name="q2-1" value="b"> b) Robotic Process Automation (RPA)</label><br>
-                            <label><input type="radio" name="q2-1" value="c"> c) Natural Language Processing (NLP)</label><br>
-                        </div>
-                    </div>
-                     <div class="quiz-question">
-                        <p class="font-semibold">2. A bot that automatically copies data from an Excel sheet to a financial system every day is an example of:</p>
-                        <div class="ml-4 mt-2 space-y-1">
-                            <label><input type="radio" name="q2-2" value="a"> a) RPA</label><br>
-                            <label><input type="radio" name="q2-2" value="b"> b) ML</label><br>
-                            <label><input type="radio" name="q2-2" value="c"> c) NLP</label><br>
-                        </div>
-                    </div>
-                </div>
-            </div>
+                  <h3 class="text-xl font-semibold mt-6 mb-3">Chapter 2: Assignment</h3>
+                  <div class="space-y-4" id="quiz-2">
+                      <div class="quiz-question">
+                          <p class="font-semibold">1. Which technology is responsible for understanding the text on a scanned invoice?</p>
+                          <div class="ml-4 mt-2 space-y-1">
+                              <label><input type="radio" name="q2-1" value="a"> a) Machine Learning (ML)</label><br>
+                              <label><input type="radio" name="q2-1" value="b"> b) Robotic Process Automation (RPA)</label><br>
+                              <label><input type="radio" name="q2-1" value="c"> c) Natural Language Processing (NLP)</label><br>
+                          </div>
+                      </div>
+                      <div class="quiz-question">
+                          <p class="font-semibold">2. A bot that automatically copies data from an Excel sheet to a financial system every day is an example of:</p>
+                          <div class="ml-4 mt-2 space-y-1">
+                              <label><input type="radio" name="q2-2" value="a"> a) RPA</label><br>
+                              <label><input type="radio" name="q2-2" value="b"> b) ML</label><br>
+                              <label><input type="radio" name="q2-2" value="c"> c) NLP</label><br>
+                          </div>
+                      </div>
+                  </div>
+              </div>
 
-            <div id="page-3" class="page-content">
-                <h2 class="text-2xl font-bold mb-4 border-b pb-2 text-orange-500">Chapter 3: Automating Data Entry</h2>
-                <p class="mb-4">Manual data entry is not just tedious; it's prone to human error. Consider a company processing 500 invoices a month. If each takes 5 minutes to enter manually, that's over 40 hours of work—an entire week! AI eliminates this bottleneck.</p>
-                <p class="font-semibold mb-2">The Automated Process:</p>
-                <ol class="list-decimal list-inside space-y-2 mb-6">
-                    <li>An invoice arrives in an email inbox. An RPA bot downloads it.</li>
-                    <li><strong>Optical Character Recognition (OCR)</strong> scans the document, turning the image into text.</li>
-                    <li>NLP reads the text, extracts key data (vendor, date, amount), and understands the line items.</li>
-                    <li>A Machine Learning model, trained on your past data, correctly assigns the expense to a GL code (e.g., "Office Supplies") and creates the journal entry.</li>
-                </ol>
-                <div class="bg-green-50 border-l-4 border-green-500 text-green-700 p-4 rounded-r-lg">
-                    <p><strong>Benefit:</strong> The accountant's job shifts from typing to reviewing. They manage the exceptions, not the routine, and can use the time saved to analyze spending patterns.</p>
-                </div>
+              <div id="page-3" class="page-content">
+                  <h2 class="text-2xl font-bold mb-4 border-b pb-2 text-emerald-600">Chapter 3: Automating Data Entry</h2>
+                  <p class="mb-4">Manual data entry is not just tedious; it's prone to human error. Consider a company processing 500 invoices a month. If each takes 5 minutes to enter manually, that's over 40 hours of work—an entire week! AI eliminates this bottleneck.</p>
+                  <p class="font-semibold mb-2">The Automated Process:</p>
+                  <ol class="list-decimal list-inside space-y-2 mb-6">
+                      <li>An invoice arrives in an email inbox. An RPA bot downloads it.</li>
+                      <li><strong>Optical Character Recognition (OCR)</strong> scans the document, turning the image into text.</li>
+                      <li>NLP reads the text, extracts key data (vendor, date, amount), and understands the line items.</li>
+                      <li>A Machine Learning model, trained on your past data, correctly assigns the expense to a GL code (e.g., "Office Supplies") and creates the journal entry.</li>
+                  </ol>
+                  <div class="bg-green-50 border-l-4 border-green-500 text-green-700 p-4 rounded-r-lg">
+                      <p><strong>Benefit:</strong> The accountant's job shifts from typing to reviewing. They manage the exceptions, not the routine, and can use the time saved to analyze spending patterns.</p>
+                  </div>
 
-                <h3 class="text-xl font-semibold mt-6 mb-3">Chapter 3: Assignment</h3>
-                <div class="space-y-4" id="quiz-3">
-                    <div class="quiz-question">
-                        <p class="font-semibold">1. What does OCR stand for?</p>
-                        <div class="ml-4 mt-2 space-y-1">
-                            <label><input type="radio" name="q3-1" value="a"> a) Optical Character Recognition</label><br>
-                            <label><input type="radio" name="q3-1" value="b"> b) Online Cash Reconciliation</label><br>
-                            <label><input type="radio" name="q3-1" value="c"> c) Official Company Register</label><br>
-                        </div>
-                    </div>
-                    <div class="quiz-question">
-                        <p class="font-semibold">2. The main benefit of automating data entry is:</p>
-                        <div class="ml-4 mt-2 space-y-1">
-                            <label><input type="radio" name="q3-2" value="a"> a) Making invoices look nicer.</label><br>
-                            <label><input type="radio" name="q3-2" value="b"> b) Reducing errors and saving time.</label><br>
-                            <label><input type="radio" name="q3-2" value="c"> c) Increasing the amount of paper used.</label><br>
-                        </div>
-                    </div>
-                </div>
-            </div>
+                  <h3 class="text-xl font-semibold mt-6 mb-3">Chapter 3: Assignment</h3>
+                  <div class="space-y-4" id="quiz-3">
+                      <div class="quiz-question">
+                          <p class="font-semibold">1. What does OCR stand for?</p>
+                          <div class="ml-4 mt-2 space-y-1">
+                              <label><input type="radio" name="q3-1" value="a"> a) Optical Character Recognition</label><br>
+                              <label><input type="radio" name="q3-1" value="b"> b) Online Cash Reconciliation</label><br>
+                              <label><input type="radio" name="q3-1" value="c"> c) Official Company Register</label><br>
+                          </div>
+                      </div>
+                      <div class="quiz-question">
+                          <p class="font-semibold">2. The main benefit of automating data entry is:</p>
+                          <div class="ml-4 mt-2 space-y-1">
+                              <label><input type="radio" name="q3-2" value="a"> a) Making invoices look nicer.</label><br>
+                              <label><input type="radio" name="q3-2" value="b"> b) Reducing errors and saving time.</label><br>
+                              <label><input type="radio" name="q3-2" value="c"> c) Increasing the amount of paper used.</label><br>
+                          </div>
+                      </div>
+                  </div>
+              </div>
 
-            <div id="page-4" class="page-content">
-                <h2 class="text-2xl font-bold mb-4 border-b pb-2 text-orange-500">Chapter 4: Intelligent Reconciliation</h2>
-                <p class="mb-4">Reconciliation is about ensuring your books match reality (e.g., your bank statements). AI makes this process faster and smarter, especially for complex tasks like <strong>three-way matching</strong> (comparing the Purchase Order, Goods Receipt Note, and Invoice).</p>
-                <p class="mb-4"><strong>AI takes it a step further:</strong></p>
-                <ul class="list-disc list-inside space-y-3 mb-6">
-                    <li><strong>Fuzzy Matching:</strong> It can match "Vision Connects Inc." on an invoice to "Vision Con." on the bank statement, something simple rules can't do.</li>
-                    <li><strong>Pattern Recognition:</strong> It learns how you handle certain transactions. If you always group multiple small payments to a specific vendor, the AI will learn to suggest that grouping automatically.</li>
-                    <li><strong>Intelligent Exception Handling:</strong> In a three-way match, if the quantity is correct but the price is 5% higher on the invoice than the PO, the AI can automatically route it to the purchasing manager for approval instead of just flagging it as a generic error for the accountant to solve.</li>
-                </ul>
+              <div id="page-4" class="page-content">
+                  <h2 class="text-2xl font-bold mb-4 border-b pb-2 text-emerald-600">Chapter 4: Intelligent Reconciliation</h2>
+                  <p class="mb-4">Reconciliation is about ensuring your books match reality (e.g., your bank statements). AI makes this process faster and smarter, especially for complex tasks like <strong>three-way matching</strong> (comparing the Purchase Order, Goods Receipt Note, and Invoice).</p>
+                  <p class="mb-4"><strong>AI takes it a step further:</strong></p>
+                  <ul class="list-disc list-inside space-y-3 mb-6">
+                      <li><strong>Fuzzy Matching:</strong> It can match "Vision Connects Inc." on an invoice to "Vision Con." on the bank statement, something simple rules can't do.</li>
+                      <li><strong>Pattern Recognition:</strong> It learns how you handle certain transactions. If you always group multiple small payments to a specific vendor, the AI will learn to suggest that grouping automatically.</li>
+                      <li><strong>Intelligent Exception Handling:</strong> In a three-way match, if the quantity is correct but the price is 5% higher on the invoice than the PO, the AI can automatically route it to the purchasing manager for approval instead of just flagging it as a generic error for the accountant to solve.</li>
+                  </ul>
 
-                <h3 class="text-xl font-semibold mt-6 mb-3">Chapter 4: Assignment</h3>
-                <div class="space-y-4" id="quiz-4">
-                    <div class="quiz-question">
-                        <p class="font-semibold">1. What is "fuzzy matching" in reconciliation?</p>
-                        <div class="ml-4 mt-2 space-y-1">
-                            <label><input type="radio" name="q4-1" value="a"> a) Only matching amounts that are perfectly identical.</label><br>
-                            <label><input type="radio" name="q4-1" value="b"> b) Identifying likely matches even with minor differences in data.</label><br>
-                            <label><input type="radio" name="q4-1" value="c"> c) Ignoring all transactions that don't match.</label><br>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            
-            <div id="page-5" class="page-content">
-                <h2 class="text-2xl font-bold mb-4 border-b pb-2 text-orange-500">Chapter 5: AI in Auditing</h2>
-                 <p class="mb-4">AI is shifting auditing from a historical, sample-based review to a real-time, comprehensive analysis. This changes the nature of audit assurance.</p>
-                <ul class="list-disc list-inside space-y-3 mb-6">
-                    <li><strong>100% Transaction Analysis:</strong> Instead of an auditor testing just 5% of invoices, AI can test 100%. This provides a much higher level of assurance that the financial statements are free from material misstatement.</li>
-                    <li><strong>From Detective to Preventive:</strong> A traditional audit is <strong>detective</strong>; it finds errors months after they occurred. Continuous auditing with AI is <strong>preventive</strong>; it can flag a non-compliant transaction the moment it's entered, allowing for immediate correction.</li>
-                    <li><strong>Risk-Based Focus:</strong> By analyzing all data, AI can identify the riskiest areas (e.g., unusual journal entries, high-value manual adjustments), allowing human auditors to focus their expert judgment where it's needed most.</li>
-                </ul>
+                  <h3 class="text-xl font-semibold mt-6 mb-3">Chapter 4: Assignment</h3>
+                  <div class="space-y-4" id="quiz-4">
+                      <div class="quiz-question">
+                          <p class="font-semibold">1. What is "fuzzy matching" in reconciliation?</p>
+                          <div class="ml-4 mt-2 space-y-1">
+                              <label><input type="radio" name="q4-1" value="a"> a) Only matching amounts that are perfectly identical.</label><br>
+                              <label><input type="radio" name="q4-1" value="b"> b) Identifying likely matches even with minor differences in data.</label><br>
+                              <label><input type="radio" name="q4-1" value="c"> c) Ignoring all transactions that don't match.</label><br>
+                          </div>
+                      </div>
+                  </div>
+              </div>
+              
+              <div id="page-5" class="page-content">
+                  <h2 class="text-2xl font-bold mb-4 border-b pb-2 text-emerald-600">Chapter 5: AI in Auditing</h2>
+                  <p class="mb-4">AI is shifting auditing from a historical, sample-based review to a real-time, comprehensive analysis. This changes the nature of audit assurance.</p>
+                  <ul class="list-disc list-inside space-y-3 mb-6">
+                      <li><strong>100% Transaction Analysis:</strong> Instead of an auditor testing just 5% of invoices, AI can test 100%. This provides a much higher level of assurance that the financial statements are free from material misstatement.</li>
+                      <li><strong>From Detective to Preventive:</strong> A traditional audit is <strong>detective</strong>; it finds errors months after they occurred. Continuous auditing with AI is <strong>preventive</strong>; it can flag a non-compliant transaction the moment it's entered, allowing for immediate correction.</li>
+                      <li><strong>Risk-Based Focus:</strong> By analyzing all data, AI can identify the riskiest areas (e.g., unusual journal entries, high-value manual adjustments), allowing human auditors to focus their expert judgment where it's needed most.</li>
+                  </ul>
 
-                <h3 class="text-xl font-semibold mt-6 mb-3">Chapter 5: Assignment</h3>
-                <div class="space-y-4" id="quiz-5">
-                    <div class="quiz-question">
-                        <p class="font-semibold">1. What is the main advantage of AI over traditional auditing?</p>
-                        <div class="ml-4 mt-2 space-y-1">
-                            <label><input type="radio" name="q5-1" value="a"> a) It tests a smaller, more focused sample of data.</label><br>
-                            <label><input type="radio" name="q5-1" value="b"> b) It allows for the analysis of 100% of transactions.</label><br>
-                            <label><input type="radio" name="q5-1" value="c"> c) It makes the audit process take longer.</label><br>
-                        </div>
-                    </div>
-                </div>
-            </div>
+                  <h3 class="text-xl font-semibold mt-6 mb-3">Chapter 5: Assignment</h3>
+                  <div class="space-y-4" id="quiz-5">
+                      <div class="quiz-question">
+                          <p class="font-semibold">1. What is the main advantage of AI over traditional auditing?</p>
+                          <div class="ml-4 mt-2 space-y-1">
+                              <label><input type="radio" name="q5-1" value="a"> a) It tests a smaller, more focused sample of data.</label><br>
+                              <label><input type="radio" name="q5-1" value="b"> b) It allows for the analysis of 100% of transactions.</label><br>
+                              <label><input type="radio" name="q5-1" value="c"> c) It makes the audit process take longer.</label><br>
+                          </div>
+                      </div>
+                  </div>
+              </div>
 
-            <div id="page-6" class="page-content">
-                <h2 class="text-2xl font-bold mb-4 border-b pb-2 text-orange-500">Chapter 6: Advanced Fraud Detection</h2>
-                <p class="mb-4">AI is a powerful fraud investigator because it can connect dots across different systems that a human would never see.</p>
-                <p class="font-semibold mb-2">A Sophisticated Fraud Example:</p>
-                <p class="mb-4">An employee creates a fake "shell" company to bill their employer. A human might approve the invoices if they look legitimate. But an AI could connect multiple data points and flag the risk:</p>
-                <ul class="list-disc list-inside space-y-2 mb-6">
-                    <li>The vendor's address is a residential P.O. Box (from public records).</li>
-                    <li>The vendor's bank account was opened just last week (from banking data).</li>
-                    <li>The approving employee's home address is the same as the vendor's registered address.</li>
-                </ul>
-                <p>No single data point is proof of fraud, but together, they create a high-risk alert that demands human investigation.</p>
+              <div id="page-6" class="page-content">
+                  <h2 class="text-2xl font-bold mb-4 border-b pb-2 text-emerald-600">Chapter 6: Advanced Fraud Detection</h2>
+                  <p class="mb-4">AI is a powerful fraud investigator because it can connect dots across different systems that a human would never see.</p>
+                  <p class="font-semibold mb-2">A Sophisticated Fraud Example:</p>
+                  <p class="mb-4">An employee creates a fake "shell" company to bill their employer. A human might approve the invoices if they look legitimate. But an AI could connect multiple data points and flag the risk:</p>
+                  <ul class="list-disc list-inside space-y-2 mb-6">
+                      <li>The vendor's address is a residential P.O. Box (from public records).</li>
+                      <li>The vendor's bank account was opened just last week (from banking data).</li>
+                      <li>The approving employee's home address is the same as the vendor's registered address.</li>
+                  </ul>
+                  <p>No single data point is proof of fraud, but together, they create a high-risk alert that demands human investigation.</p>
 
-                <h3 class="text-xl font-semibold mt-6 mb-3">Chapter 6: Assignment</h3>
-                <div class="space-y-4" id="quiz-6">
-                    <div class="quiz-question">
-                        <p class="font-semibold">1. "Anomaly detection" in fraud analysis refers to:</p>
-                        <div class="ml-4 mt-2 space-y-1">
-                            <label><input type="radio" name="q6-1" value="a"> a) Approving all transactions automatically.</label><br>
-                            <label><input type="radio" name="q6-1" value="b"> b) Identifying activities that deviate from a normal baseline.</label><br>
-                            <label><input type="radio" name="q6-1" value="c"> c) Only looking for large, obvious errors.</label><br>
-                        </div>
-                    </div>
-                </div>
-            </div>
+                  <h3 class="text-xl font-semibold mt-6 mb-3">Chapter 6: Assignment</h3>
+                  <div class="space-y-4" id="quiz-6">
+                      <div class="quiz-question">
+                          <p class="font-semibold">1. "Anomaly detection" in fraud analysis refers to:</p>
+                          <div class="ml-4 mt-2 space-y-1">
+                              <label><input type="radio" name="q6-1" value="a"> a) Approving all transactions automatically.</label><br>
+                              <label><input type="radio" name="q6-1" value="b"> b) Identifying activities that deviate from a normal baseline.</label><br>
+                              <label><input type="radio" name="q6-1" value="c"> c) Only looking for large, obvious errors.</label><br>
+                          </div>
+                      </div>
+                  </div>
+              </div>
 
-            <div id="page-7" class="page-content">
-                <h2 class="text-2xl font-bold mb-4 border-b pb-2 text-orange-500">Chapter 7: AI for Financial Planning & Analysis (FP&A)</h2>
-                <p class="mb-4">FP&A is about looking to the future. AI makes forecasting more scientific and less based on guesswork.</p>
-                <p class="font-semibold mb-2">How AI Forecasting Works:</p>
-                <p class="mb-4">AI uses statistical models to find relationships in data. For example, it might use <strong>regression analysis</strong> to determine that for every $1 spent on a specific marketing campaign, sales increase by $5. It might use <strong>time-series analysis</strong> to understand that sales always dip in February but spike in November. The power of AI is that it can analyze hundreds of these variables (internal data like marketing spend, and external data like consumer confidence indexes or weather) at once to create a far more accurate prediction than a human ever could in a spreadsheet.</p>
+              <div id="page-7" class="page-content">
+                  <h2 class="text-2xl font-bold mb-4 border-b pb-2 text-emerald-600">Chapter 7: AI for Financial Planning & Analysis (FP&A)</h2>
+                  <p class="mb-4">FP&A is about looking to the future. AI makes forecasting more scientific and less based on guesswork.</p>
+                  <p class="font-semibold mb-2">How AI Forecasting Works:</p>
+                  <p class="mb-4">AI uses statistical models to find relationships in data. For example, it might use <strong>regression analysis</strong> to determine that for every $1 spent on a specific marketing campaign, sales increase by $5. It might use <strong>time-series analysis</strong> to understand that sales always dip in February but spike in November. The power of AI is that it can analyze hundreds of these variables (internal data like marketing spend, and external data like consumer confidence indexes or weather) at once to create a far more accurate prediction than a human ever could in a spreadsheet.</p>
 
-                <h3 class="text-xl font-semibold mt-6 mb-3">Chapter 7: Assignment</h3>
-                <div class="space-y-4" id="quiz-7">
-                    <div class="quiz-question">
-                        <p class="font-semibold">1. What makes AI-powered forecasting more powerful than traditional methods?</p>
-                        <div class="ml-4 mt-2 space-y-1">
-                            <label><input type="radio" name="q7-1" value="a"> a) It only uses data from the previous year.</label><br>
-                            <label><input type="radio" name="q7-1" value="b"> b) It ignores all external economic factors.</label><br>
-                            <label><input type="radio" name="q7-1" value="c"> c) It can incorporate a wide range of internal and external variables.</label><br>
-                        </div>
-                    </div>
-                </div>
-            </div>
+                  <h3 class="text-xl font-semibold mt-6 mb-3">Chapter 7: Assignment</h3>
+                  <div class="space-y-4" id="quiz-7">
+                      <div class="quiz-question">
+                          <p class="font-semibold">1. What makes AI-powered forecasting more powerful than traditional methods?</p>
+                          <div class="ml-4 mt-2 space-y-1">
+                              <label><input type="radio" name="q7-1" value="a"> a) It only uses data from the previous year.</label><br>
+                              <label><input type="radio" name="q7-1" value="b"> b) It ignores all external economic factors.</label><br>
+                              <label><input type="radio" name="q7-1" value="c"> c) It can incorporate a wide range of internal and external variables.</label><br>
+                          </div>
+                      </div>
+                  </div>
+              </div>
 
-            <div id="page-8" class="page-content">
-                <h2 class="text-2xl font-bold mb-4 border-b pb-2 text-orange-500">Chapter 8: Advanced FP&A - Scenarios & Reports</h2>
-                <p class="mb-4">Beyond forecasting, AI makes strategic analysis faster and more insightful.</p>
-                <p class="font-semibold mb-2">1. Scenario Modeling</p>
-                <p class="mb-4">This allows for instant answers to complex "what-if" questions. Instead of taking days to build a new spreadsheet model, you can get immediate results, allowing leadership to make faster, more data-driven decisions.</p>
-                <p class="font-semibold mb-2">2. Automated Narrative Reporting</p>
-                <p class="mb-4">This is about turning numbers into stories. Compare the following:</p>
-                <ul class="list-disc list-inside space-y-2 mb-6">
-                    <li><strong>Before AI:</strong> "Sales were $1.2M (Budget: $1M). Expenses were $800k (Budget: $750k)."</li>
-                    <li><strong>After AI:</strong> "The company achieved a 20% positive revenue variance, driven by a 35% sales surge in the new product line. The negative expense variance was caused by a spike in logistics costs related to this unexpectedly high demand."</li>
-                </ul>
-                <p>The AI provides the "why" behind the numbers automatically.</p>
+              <div id="page-8" class="page-content">
+                  <h2 class="text-2xl font-bold mb-4 border-b pb-2 text-emerald-600">Chapter 8: Advanced FP&A - Scenarios & Reports</h2>
+                  <p class="mb-4">Beyond forecasting, AI makes strategic analysis faster and more insightful.</p>
+                  <p class="font-semibold mb-2">1. Scenario Modeling</p>
+                  <p class="mb-4">This allows for instant answers to complex "what-if" questions. Instead of taking days to build a new spreadsheet model, you can get immediate results, allowing leadership to make faster, more data-driven decisions.</p>
+                  <p class="font-semibold mb-2">2. Automated Narrative Reporting</p>
+                  <p class="mb-4">This is about turning numbers into stories. Compare the following:</p>
+                  <ul class="list-disc list-inside space-y-2 mb-6">
+                      <li><strong>Before AI:</strong> "Sales were $1.2M (Budget: $1M). Expenses were $800k (Budget: $750k)."</li>
+                      <li><strong>After AI:</strong> "The company achieved a 20% positive revenue variance, driven by a 35% sales surge in the new product line. The negative expense variance was caused by a spike in logistics costs related to this unexpectedly high demand."</li>
+                  </ul>
+                  <p>The AI provides the "why" behind the numbers automatically.</p>
 
-                <h3 class="text-xl font-semibold mt-6 mb-3">Chapter 8: Assignment</h3>
-                <div class="space-y-4" id="quiz-8">
-                    <div class="quiz-question">
-                        <p class="font-semibold">1. Running a "what-if" analysis on the impact of a price increase is an example of:</p>
-                        <div class="ml-4 mt-2 space-y-1">
-                            <label><input type="radio" name="q8-1" value="a"> a) Scenario Modeling</label><br>
-                            <label><input type="radio" name="q8-1" value="b"> b) Data Entry</label><br>
-                            <label><input type="radio" name="q8-1" value="c"> c) Bank Reconciliation</label><br>
-                        </div>
-                    </div>
-                </div>
-            </div>
+                  <h3 class="text-xl font-semibold mt-6 mb-3">Chapter 8: Assignment</h3>
+                  <div class="space-y-4" id="quiz-8">
+                      <div class="quiz-question">
+                          <p class="font-semibold">1. Running a "what-if" analysis on the impact of a price increase is an example of:</p>
+                          <div class="ml-4 mt-2 space-y-1">
+                              <label><input type="radio" name="q8-1" value="a"> a) Scenario Modeling</label><br>
+                              <label><input type="radio" name="q8-1" value="b"> b) Data Entry</label><br>
+                              <label><input type="radio" name="q8-1" value="c"> c) Bank Reconciliation</label><br>
+                          </div>
+                      </div>
+                  </div>
+              </div>
 
-            <div id="page-9" class="page-content">
-                <h2 class="text-2xl font-bold mb-4 border-b pb-2 text-orange-500">Chapter 9: The Evolving Accountant & Ethics</h2>
-                <p class="mb-4">With AI handling routine work, your value comes from skills machines can't replicate. The focus shifts from processing data to interpreting it and advising the business.</p>
-                <p class="font-semibold mb-2">Your Future Role: Strategic Advisor</p>
-                <p class="mb-4">Your career path may lead to new roles like <strong>Finance Technologist</strong> (managing the AI tools) or <strong>Data Storyteller</strong> (translating data into strategy for leaders).</p>
-                <h3 class="text-xl font-semibold mt-6 mb-3">Ethical Responsibilities</h3>
-                <p class="mb-4">Using AI responsibly is as important as using it effectively.</p>
-                <ul class="list-disc list-inside space-y-3 mb-6">
-                    <li><strong>Algorithmic Bias:</strong> If an AI is trained on biased data, it may produce biased results. Human oversight is needed to ensure fairness.</li>
-                    <li><strong>Accountability:</strong> The AI is a tool. <span class="font-semibold">You</span>, the professional, are ultimately responsible for the numbers and the advice you give based on them.</li>
-                </ul>
+              <div id="page-9" class="page-content">
+                  <h2 class="text-2xl font-bold mb-4 border-b pb-2 text-emerald-600">Chapter 9: The Evolving Accountant & Ethics</h2>
+                  <p class="mb-4">With AI handling routine work, your value comes from skills machines can't replicate. The focus shifts from processing data to interpreting it and advising the business.</p>
+                  <p class="font-semibold mb-2">Your Future Role: Strategic Advisor</p>
+                  <p class="mb-4">Your career path may lead to new roles like <strong>Finance Technologist</strong> (managing the AI tools) or <strong>Data Storyteller</strong> (translating data into strategy for leaders).</p>
+                  <h3 class="text-xl font-semibold mt-6 mb-3">Ethical Responsibilities</h3>
+                  <p class="mb-4">Using AI responsibly is as important as using it effectively.</p>
+                  <ul class="list-disc list-inside space-y-3 mb-6">
+                      <li><strong>Algorithmic Bias:</strong> If an AI is trained on biased data, it may produce biased results. Human oversight is needed to ensure fairness.</li>
+                      <li><strong>Accountability:</strong> The AI is a tool. <span class="font-semibold">You</span>, the professional, are ultimately responsible for the numbers and the advice you give based on them.</li>
+                  </ul>
 
-                <h3 class="text-xl font-semibold mt-6 mb-3">Chapter 9: Assignment</h3>
-                <div class="space-y-4" id="quiz-9">
-                    <div class="quiz-question">
-                        <p class="font-semibold">1. The future role of the accountant will be more focused on:</p>
-                        <div class="ml-4 mt-2 space-y-1">
-                            <label><input type="radio" name="q9-1" value="a"> a) Manual data entry.</label><br>
-                            <label><input type="radio" name="q9-1" value="b"> b) Strategic advising and analysis.</label><br>
-                            <label><input type="radio" name="q9-1" value="c"> c) Running basic reports.</label><br>
-                        </div>
-                    </div>
-                     <div class="quiz-question">
-                        <p class="font-semibold">2. Why is human oversight important for AI in accounting?</p>
-                        <div class="ml-4 mt-2 space-y-1">
-                            <label><input type="radio" name="q9-2" value="a"> a) Because AI systems are always perfect.</label><br>
-                            <label><input type="radio" name="q9-2" value="b"> b) To check for algorithmic bias and ensure accountability.</label><br>
-                            <label><input type="radio" name="q9-2" value="c"> c) Because computers need to be turned off at night.</label><br>
-                        </div>
-                    </div>
-                </div>
-            </div>
+                  <h3 class="text-xl font-semibold mt-6 mb-3">Chapter 9: Assignment</h3>
+                  <div class="space-y-4" id="quiz-9">
+                      <div class="quiz-question">
+                          <p class="font-semibold">1. The future role of the accountant will be more focused on:</p>
+                          <div class="ml-4 mt-2 space-y-1">
+                              <label><input type="radio" name="q9-1" value="a"> a) Manual data entry.</label><br>
+                              <label><input type="radio" name="q9-1" value="b"> b) Strategic advising and analysis.</label><br>
+                              <label><input type="radio" name="q9-1" value="c"> c) Running basic reports.</label><br>
+                          </div>
+                      </div>
+                      <div class="quiz-question">
+                          <p class="font-semibold">2. Why is human oversight important for AI in accounting?</p>
+                          <div class="ml-4 mt-2 space-y-1">
+                              <label><input type="radio" name="q9-2" value="a"> a) Because AI systems are always perfect.</label><br>
+                              <label><input type="radio" name="q9-2" value="b"> b) To check for algorithmic bias and ensure accountability.</label><br>
+                              <label><input type="radio" name="q9-2" value="c"> c) Because computers need to be turned off at night.</label><br>
+                          </div>
+                      </div>
+                  </div>
+              </div>
 
-            <div id="page-10" class="page-content">
-                <h2 class="text-2xl font-bold mb-4 border-b pb-2 text-orange-500">Submit Your Notebook</h2>
-                <p class="mb-4 text-lg">You have reached the end of the notebook.</p>
-                <p class="mb-6">Please ensure you have answered the questions on all previous pages. When you are ready, click the button below to submit your answers and see your total score.</p>
-                
-                <button id="submit-quiz-btn" class="w-full bg-orange-500 text-white font-bold py-3 px-4 rounded-lg hover:bg-orange-600 transition text-xl shadow-lg">
-                    Submit and See Total Score
-                </button>
-                
-                <div id="final-results" class="mt-8 hidden">
-                    <h3 class="text-3xl font-bold mb-4 text-center" id="total-score-display"></h3>
-                    <div id="detailed-results" class="space-y-4 bg-gray-50 p-4 rounded-lg">
-                        </div>
-                </div>
-            </div>
-        </main>
+              <div id="page-10" class="page-content">
+                  <h2 class="text-2xl font-bold mb-4 border-b pb-2 text-emerald-600">Submit Your Notebook</h2>
+                  <p class="mb-4 text-lg">You have reached the end of the notebook.</p>
+                  <p class="mb-6">Please ensure you have answered the questions on all previous pages. When you are ready, click the button below to submit your answers and see your total score.</p>
+                  
+                  <button id="submit-quiz-btn" class="w-full bg-emerald-600 text-white font-bold py-3 px-4 rounded-lg hover:bg-emerald-700 transition text-xl shadow-lg">
+                      Submit and See Total Score
+                  </button>
+                  
+                  <div id="final-results" class="mt-8 hidden">
+                      <h3 class="text-3xl font-bold mb-4 text-center" id="total-score-display"></h3>
+                      <div id="detailed-results" class="space-y-4 bg-gray-50 p-4 rounded-lg">
+                          </div>
+                  </div>
+              </div>
+          </main>
 
-        <footer class="mt-6 flex justify-between items-center">
-            <button id="prev-btn" class="bg-gray-300 hover:bg-gray-400 text-gray-800 font-bold py-2 px-4 rounded-lg transition disabled:opacity-50" disabled>Previous</button>
-            <div id="page-indicator" class="text-gray-600 font-medium">Page 1 of 10</div>
-            <button id="next-btn" class="bg-orange-500 text-white font-bold py-2 px-4 rounded-lg hover:bg-orange-600 transition">Next</button>
-        </footer>
+          <footer class="mt-6 flex justify-between items-center">
+              <button id="prev-btn" class="bg-gray-300 hover:bg-gray-400 text-gray-800 font-bold py-2 px-4 rounded-lg transition disabled:opacity-50" disabled>Previous</button>
+              <div id="page-indicator" class="text-gray-600 font-medium">Page 1 of 10</div>
+              <button id="next-btn" class="bg-emerald-600 text-white font-bold py-2 px-4 rounded-lg hover:bg-emerald-700 transition">Next</button>
+          </footer>
+      </div>
     </div>
+    
+    <footer class="bg-gray-900 text-white py-12 mt-12">
+      <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div class="grid md:grid-cols-4 gap-8">
+          <div class="md:col-span-2">
+            <h3 class="text-2xl font-bold mb-4 bg-gradient-to-r from-emerald-400 to-blue-400 bg-clip-text text-transparent">VISION CONNECTS</h3>
+            <p class="text-gray-300 mb-4">Quality training arm supported by <a href="http://accountantsfactory.com/" target="_blank" rel="noopener noreferrer" class="text-emerald-400 hover:underline">Accountants Factory LLP</a></p>
+            <p class="text-gray-400">Transforming careers through professional accounting education in Tirupati</p>
+          </div>
+          <div>
+            <h4 class="text-lg font-semibold mb-4 text-emerald-400">Quick Links</h4>
+            <div class="space-y-2">
+              <a href="index.html#courses" class="block text-gray-300 hover:text-white transition-colors">Courses</a>
+              <a href="index.html#about" class="block text-gray-300 hover:text-white transition-colors">About Us</a>
+              <a href="index.html#careers" class="block text-gray-300 hover:text-white transition-colors">Careers</a>
+              <a href="index.html#contact" class="block text-gray-300 hover:text-white transition-colors">Contact</a>
+            </div>
+          </div>
+          <div>
+            <h4 class="text-lg font-semibold mb-4 text-emerald-400">Individual Courses</h4>
+            <div class="space-y-2 text-gray-300 text-sm">
+              <div>Professional Accounting Course</div><div>Tally Coaching Classes</div><div>Zoho Books Training</div><div>GST Training Program</div><div>Income Tax Return Filing</div><div>Excel Training Course</div>
+            </div>
+          </div>
+        </div>
+        <div class="border-t border-gray-800 mt-8 pt-8">
+          <div class="flex flex-col md:flex-row justify-between items-center">
+            <p class="text-gray-400 text-sm">© 2025 Vision Connects Academy. All rights reserved.</p>
+            <p class="text-gray-400 text-sm mt-2 md:mt-0">Powered by <a href="http://accountantsfactory.com/" target="_blank" rel="noopener noreferrer" class="text-emerald-400 hover:underline">Accountants Factory LLP</a></p>
+          </div>
+        </div>
+      </div>
+    </footer>
+
 <script>
 document.addEventListener('DOMContentLoaded', function () {
+    // --- Navigation and Dropdown Logic ---
+    const menuButton = document.getElementById('menu-button');
+    const mobileMenu = document.getElementById('mobile-menu');
+    const menuOpenIcon = document.getElementById('menu-open-icon');
+    const menuCloseIcon = document.getElementById('menu-close-icon');
+    const mobileLinks = document.querySelectorAll('.mobile-link');
+    
+    function closeAllMenus() {
+        if(mobileMenu) mobileMenu.classList.remove('open');
+        if(menuOpenIcon) menuOpenIcon.classList.remove('hidden');
+        if(menuCloseIcon) menuCloseIcon.classList.add('hidden');
+        document.querySelectorAll('[id$="-dropdown-menu"]').forEach(menu => menu.classList.add('hidden'));
+        document.querySelectorAll('[id$="-dropdown-button"] .dropdown-arrow').forEach(arrow => arrow.classList.remove('open'));
+    }
+
+    if (menuButton) {
+        menuButton.addEventListener('click', () => {
+            mobileMenu.classList.toggle('open');
+            menuOpenIcon.classList.toggle('hidden');
+            menuCloseIcon.classList.toggle('hidden');
+        });
+    }
+    
+    mobileLinks.forEach(link => {
+        link.addEventListener('click', (e) => {
+            if (!e.currentTarget.id.includes('dropdown')) {
+               setTimeout(closeAllMenus, 150);
+            }
+        });
+    });
+
+    const setupDropdown = (buttonId, menuId) => {
+        const button = document.getElementById(buttonId);
+        const menu = document.getElementById(menuId);
+        if (!button || !menu) return;
+        const arrow = button.querySelector('.dropdown-arrow');
+        button.addEventListener('click', (event) => {
+            event.stopPropagation();
+            const isHidden = menu.classList.toggle('hidden');
+            if (arrow) arrow.classList.toggle('open', !isHidden);
+        });
+    };
+
+    setupDropdown('webinar-dropdown-button', 'webinar-dropdown-menu');
+    setupDropdown('practice-dropdown-button', 'practice-dropdown-menu');
+    setupDropdown('mobile-webinar-dropdown-button', 'mobile-webinar-dropdown-menu');
+    setupDropdown('mobile-practice-dropdown-button', 'mobile-practice-dropdown-menu');
+
+    document.addEventListener('click', (event) => {
+        if (!event.target.closest('[id$="-dropdown-container"]') && !event.target.closest('[id$="-dropdown-button"]')) {
+            document.querySelectorAll('[id$="-dropdown-menu"]').forEach(menu => menu.classList.add('hidden'));
+            document.querySelectorAll('.dropdown-arrow').forEach(arrow => arrow.classList.remove('open'));
+        }
+    });
+
+    // --- Notebook Logic ---
     let currentPage = 1;
     const totalPages = 10;
     const pageIndicator = document.getElementById('page-indicator');
@@ -321,9 +500,9 @@ document.addEventListener('DOMContentLoaded', function () {
             page.classList.remove('active');
         });
         document.getElementById(`page-${pageNumber}`).classList.add('active');
-        pageIndicator.textContent = `Page ${pageNumber} of ${totalPages}`;
-        prevBtn.disabled = pageNumber === 1;
-        nextBtn.disabled = pageNumber === totalPages;
+        if(pageIndicator) pageIndicator.textContent = `Page ${pageNumber} of ${totalPages}`;
+        if(prevBtn) prevBtn.disabled = pageNumber === 1;
+        if(nextBtn) nextBtn.disabled = pageNumber === totalPages;
     }
 
     function navigatePage(direction) {
@@ -333,8 +512,8 @@ document.addEventListener('DOMContentLoaded', function () {
         showPage(currentPage);
     }
     
-    prevBtn.addEventListener('click', () => navigatePage(-1));
-    nextBtn.addEventListener('click', () => navigatePage(1));
+    if(prevBtn) prevBtn.addEventListener('click', () => navigatePage(-1));
+    if(nextBtn) nextBtn.addEventListener('click', () => navigatePage(1));
     
     function calculateAndShowFinalScore() {
         const allCorrectAnswers = [
@@ -346,11 +525,15 @@ document.addEventListener('DOMContentLoaded', function () {
         let totalScore = 0;
         let totalQuestions = 0;
         const detailedResultsContainer = document.getElementById('detailed-results');
+        if(!detailedResultsContainer) return;
         detailedResultsContainer.innerHTML = ''; 
 
         allCorrectAnswers.forEach((pageAnswers, pageIndex) => {
             const pageNum = pageIndex + 1;
-            const chapterTitle = document.querySelector(`#page-${pageNum} h2`).textContent;
+            const chapterTitleEl = document.querySelector(`#page-${pageNum} h2`);
+            if (!chapterTitleEl) return;
+            const chapterTitle = chapterTitleEl.textContent;
+            
             const chapterResultHeader = document.createElement('h4');
             chapterResultHeader.className = 'text-xl font-semibold mt-4 border-t pt-3';
             chapterResultHeader.textContent = chapterTitle;
@@ -361,7 +544,10 @@ document.addEventListener('DOMContentLoaded', function () {
             
             Object.keys(pageAnswers).forEach((questionKey, questionIndex) => {
                 totalQuestions++;
-                const questionText = quizDiv.querySelectorAll('.quiz-question p.font-semibold')[questionIndex].textContent;
+                const questionTextEl = quizDiv.querySelectorAll('.quiz-question p.font-semibold')[questionIndex];
+                if (!questionTextEl) return;
+                const questionText = questionTextEl.textContent;
+                
                 const selected = quizDiv.querySelector(`input[name=${questionKey}]:checked`);
                 const correctAnswer = pageAnswers[questionKey];
                 const resultP = document.createElement('p');
@@ -391,8 +577,10 @@ document.addEventListener('DOMContentLoaded', function () {
         document.getElementById('final-results').style.display = 'block';
     }
 
-    submitBtn.addEventListener('click', calculateAndShowFinalScore);
-    showPage(currentPage);
+    if(submitBtn) submitBtn.addEventListener('click', calculateAndShowFinalScore);
+    if (document.getElementById('page-1')) {
+        showPage(currentPage);
+    }
 });
 </script>
 </body>
