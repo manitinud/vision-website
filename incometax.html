@@ -17,27 +17,114 @@
     .section-card:hover { transform: translateY(-5px); box-shadow: 0 10px 15px -3px rgb(0 0 0 / 0.1), 0 4px 6px -4px rgb(0 0 0 / 0.1); }
     details > summary { list-style: none; }
     details > summary::-webkit-details-marker { display: none; }
+    .mobile-menu {
+        max-height: 0;
+        overflow: hidden;
+        transition: max-height 0.3s ease-out;
+    }
+    .mobile-menu.open {
+        max-height: 500px;
+    }
+    .dropdown-arrow.open {
+        transform: rotate(180deg);
+    }
+    .dropdown-arrow {
+        transition: transform 0.2s ease-in-out;
+    }
   </style>
 </head>
 <body>
 
-    <nav class="w-full z-50 bg-white/95 backdrop-blur-lg shadow-md border-b border-gray-100">
+  <svg width="0" height="0" style="position:absolute">
+    <symbol id="icon-menu" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="4" x2="20" y1="12" y2="12"/><line x1="4" x2="20" y1="6" y2="6"/><line x1="4" x2="20" y1="18" y2="18"/></symbol>
+    <symbol id="icon-x" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="18" x2="6" y1="6" y2="18"/><line x1="6" x2="18" y1="6" y2="18"/></symbol>
+    <symbol id="icon-chevron-down" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"></polyline></symbol>
+  </svg>
+
+    <nav class="fixed top-0 w-full z-50 bg-white/95 backdrop-blur-lg shadow-lg border-b border-gray-100">
       <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div class="flex justify-between items-center py-4">
-          <a href="index.html" class="flex items-center space-x-4">
+          <a href="index.html#home" class="flex items-center space-x-4">
             <div class="text-3xl font-bold bg-gradient-to-r from-emerald-600 to-blue-600 bg-clip-text text-transparent">
               VISION CONNECTS
             </div>
+            <div class="hidden lg:block text-sm text-gray-600 border-l border-gray-300 pl-4">
+              Quality Training by <a href="http://accountantsfactory.com/" target="_blank" rel="noopener noreferrer" class="text-blue-600 hover:underline font-semibold">Accountants Factory LLP</a>
+            </div>
           </a>
-           <a href="index.html" class="px-4 py-2 text-sm font-medium text-white bg-emerald-600 hover:bg-emerald-700 rounded-lg transition-colors">
-              ← Back to Main Site
-           </a>
+          
+          <div class="hidden md:flex items-center space-x-8">
+            <a href="index.html#home" class="text-gray-700 hover:text-emerald-600 transition-colors font-medium">Home</a>
+            <a href="index.html#courses" class="text-gray-700 hover:text-emerald-600 transition-colors font-medium">Courses</a>
+            <div class="relative" id="webinar-dropdown-container">
+              <button id="webinar-dropdown-button" class="text-gray-700 hover:text-emerald-600 transition-colors font-medium flex items-center">
+                Online Webinars
+                <svg class="w-5 h-5 ml-1 text-gray-500 dropdown-arrow"><use href="#icon-chevron-down"></use></svg>
+              </button>
+              <div id="webinar-dropdown-menu" class="absolute right-0 mt-2 w-56 rounded-md shadow-lg bg-white ring-1 ring-black ring-opacity-5 hidden z-50">
+                <div class="py-1" role="menu" aria-orientation="vertical" aria-labelledby="webinar-dropdown-button">
+                  <a href="incometax.html" class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 hover:text-emerald-600" role="menuitem">Income Tax Series</a>
+                  <a href="ai-accounting.html" class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 hover:text-emerald-600" role="menuitem">AI in Accounting</a>
+                  <a href="excel.html" class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 hover:text-emerald-600" role="menuitem">Excel Master Class</a>
+                </div>
+              </div>
+            </div>
+            <div class="relative" id="practice-dropdown-container">
+                <button id="practice-dropdown-button" class="text-gray-700 hover:text-emerald-600 transition-colors font-medium flex items-center">
+                  Practice Session
+                  <svg class="w-5 h-5 ml-1 text-gray-500 dropdown-arrow"><use href="#icon-chevron-down"></use></svg>
+                </button>
+                <div id="practice-dropdown-menu" class="absolute right-0 mt-2 w-56 rounded-md shadow-lg bg-white ring-1 ring-black ring-opacity-5 hidden z-50">
+                  <div class="py-1" role="menu" aria-orientation="vertical" aria-labelledby="practice-dropdown-button">
+                    <a href="excel-practice.html" class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 hover:text-emerald-600" role="menuitem">Excel Practice</a>
+                  </div>
+                </div>
+            </div>
+            <a href="index.html#about" class="text-gray-700 hover:text-emerald-600 transition-colors font-medium">About</a>
+            <a href="index.html#careers" class="text-gray-700 hover:text-emerald-600 transition-colors font-medium">Careers</a>
+            <a href="index.html#contact" class="text-gray-700 hover:text-emerald-600 transition-colors font-medium">Contact</a>
+          </div>
+
+          <button id="menu-button" class="md:hidden text-gray-700">
+            <svg class="w-6 h-6" id="menu-open-icon"><use href="#icon-menu"></use></svg>
+            <svg class="w-6 h-6 hidden" id="menu-close-icon"><use href="#icon-x"></use></svg>
+          </button>
+        </div>
+      </div>
+
+      <div id="mobile-menu" class="mobile-menu md:hidden bg-white border-t border-gray-100 shadow-lg">
+        <div class="px-4 py-4 space-y-4">
+          <a href="index.html#home" class="mobile-link block text-gray-700 hover:text-emerald-600 transition-colors font-medium">Home</a>
+          <a href="index.html#courses" class="mobile-link block text-gray-700 hover:text-emerald-600 transition-colors font-medium">Courses</a>
+          <div class="relative">
+            <button id="mobile-webinar-dropdown-button" class="w-full text-left mobile-link block text-gray-700 hover:text-emerald-600 transition-colors font-medium flex justify-between items-center">
+              <span>Online Webinars </span>
+              <svg class="w-5 h-5 text-gray-500 dropdown-arrow"><use href="#icon-chevron-down"></use></svg>
+            </button>
+            <div id="mobile-webinar-dropdown-menu" class="pl-4 mt-2 space-y-2 hidden">
+              <a href="incometax.html" class="block text-gray-600 hover:text-emerald-600">Income Tax Series</a>
+              <a href="ai-accounting.html" class="block text-gray-600 hover:text-emerald-600">AI in Accounting</a>
+              <a href="excel.html" class="block text-gray-600 hover:text-emerald-600">Excel Master Class</a>
+            </div>
+          </div>
+           <div class="relative">
+            <button id="mobile-practice-dropdown-button" class="w-full text-left mobile-link block text-gray-700 hover:text-emerald-600 transition-colors font-medium flex justify-between items-center">
+              <span>Practice Session</span>
+              <svg class="w-5 h-5 text-gray-500 dropdown-arrow"><use href="#icon-chevron-down"></use></svg>
+            </button>
+            <div id="mobile-practice-dropdown-menu" class="pl-4 mt-2 space-y-2 hidden">
+              <a href="excel-practice.html" class="block text-gray-600 hover:text-emerald-600">Excel Practice</a>
+            </div>
+          </div>
+          <a href="index.html#about" class="mobile-link block text-gray-700 hover:text-emerald-600 transition-colors font-medium">About</a>
+          <a href="index.html#careers" class="mobile-link block text-gray-700 hover:text-emerald-600 transition-colors font-medium">Careers</a>
+          <a href="index.html#contact" class="mobile-link block text-gray-700 hover:text-emerald-600 transition-colors font-medium">Contact</a>
         </div>
       </div>
     </nav>
 
     <main class="container mx-auto px-6 py-8 md:py-12">
-        <section class="text-center mb-16 pt-12">
+        <section class="text-center mb-16 pt-24">
             <h1 class="text-4xl md:text-5xl font-extrabold text-slate-800 mb-4">Your Personal Tax Command Center</h1>
             <p class="text-lg text-slate-600 max-w-3xl mx-auto">Welcome to the Vision Connects Interactive Tax Guide for AY 2026-27. This application transforms complex tax rules into simple, actionable tools. Calculate your liability, compare regimes, and discover your optimal tax strategy in minutes.</p>
         </section>
@@ -143,9 +230,101 @@
             </section>
         </div>
     </main>
+    
+    <footer class="bg-gray-900 text-white py-12">
+      <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div class="grid md:grid-cols-4 gap-8">
+          <div class="md:col-span-2">
+            <h3 class="text-2xl font-bold mb-4 bg-gradient-to-r from-emerald-400 to-blue-400 bg-clip-text text-transparent">VISION CONNECTS</h3>
+            <p class="text-gray-300 mb-4">Quality training arm supported by <a href="http://accountantsfactory.com/" target="_blank" rel="noopener noreferrer" class="text-emerald-400 hover:underline">Accountants Factory LLP</a></p>
+            <p class="text-gray-400">Transforming careers through professional accounting education in Tirupati</p>
+          </div>
+          <div>
+            <h4 class="text-lg font-semibold mb-4 text-emerald-400">Quick Links</h4>
+            <div class="space-y-2">
+              <a href="index.html#courses" class="block text-gray-300 hover:text-white transition-colors">Courses</a>
+              <a href="index.html#about" class="block text-gray-300 hover:text-white transition-colors">About Us</a>
+              <a href="index.html#careers" class="block text-gray-300 hover:text-white transition-colors">Careers</a>
+              <a href="index.html#contact" class="block text-gray-300 hover:text-white transition-colors">Contact</a>
+            </div>
+          </div>
+          <div>
+            <h4 class="text-lg font-semibold mb-4 text-emerald-400">Individual Courses</h4>
+            <div class="space-y-2 text-gray-300 text-sm">
+              <div>Professional Accounting Course</div><div>Tally Coaching Classes</div><div>Zoho Books Training</div><div>GST Training Program</div><div>Income Tax Return Filing</div><div>Excel Training Course</div>
+            </div>
+          </div>
+        </div>
+        <div class="border-t border-gray-800 mt-8 pt-8">
+          <div class="flex flex-col md:flex-row justify-between items-center">
+            <p class="text-gray-400 text-sm">© 2025 Vision Connects Academy. All rights reserved.</p>
+            <p class="text-gray-400 text-sm mt-2 md:mt-0">Powered by <a href="http://accountantsfactory.com/" target="_blank" rel="noopener noreferrer" class="text-emerald-400 hover:underline">Accountants Factory LLP</a></p>
+          </div>
+        </div>
+      </div>
+    </footer>
 
 <script>
 document.addEventListener('DOMContentLoaded', function () {
+  
+  // --- Navigation and Dropdown Logic ---
+  const menuButton = document.getElementById('menu-button');
+  const mobileMenu = document.getElementById('mobile-menu');
+  const menuOpenIcon = document.getElementById('menu-open-icon');
+  const menuCloseIcon = document.getElementById('menu-close-icon');
+  const mobileLinks = document.querySelectorAll('.mobile-link');
+  
+  function closeAllMenus() {
+      mobileMenu.classList.remove('open');
+      menuOpenIcon.classList.remove('hidden');
+      menuCloseIcon.classList.add('hidden');
+      document.querySelectorAll('[id$="-dropdown-menu"]').forEach(menu => menu.classList.add('hidden'));
+      document.querySelectorAll('[id$="-dropdown-button"] .dropdown-arrow').forEach(arrow => arrow.classList.remove('open'));
+      document.querySelectorAll('[id$="-dropdown-menu-mobile"]').forEach(menu => menu.classList.add('hidden'));
+      document.querySelectorAll('[id$="-dropdown-button-mobile"] .dropdown-arrow').forEach(arrow => arrow.classList.remove('open'));
+  }
+
+  if (menuButton) {
+      menuButton.addEventListener('click', () => {
+        mobileMenu.classList.toggle('open');
+        menuOpenIcon.classList.toggle('hidden');
+        menuCloseIcon.classList.toggle('hidden');
+      });
+  }
+  
+  mobileLinks.forEach(link => {
+      link.addEventListener('click', (e) => {
+          if (!e.currentTarget.id.includes('dropdown')) {
+             setTimeout(closeAllMenus, 150);
+          }
+      });
+  });
+
+  const setupDropdown = (buttonId, menuId) => {
+      const button = document.getElementById(buttonId);
+      const menu = document.getElementById(menuId);
+      if (!button || !menu) return;
+      const arrow = button.querySelector('.dropdown-arrow');
+      button.addEventListener('click', (event) => {
+          event.stopPropagation();
+          const isHidden = menu.classList.toggle('hidden');
+          if (arrow) arrow.classList.toggle('open', !isHidden);
+      });
+  };
+
+  setupDropdown('webinar-dropdown-button', 'webinar-dropdown-menu');
+  setupDropdown('practice-dropdown-button', 'practice-dropdown-menu');
+  setupDropdown('mobile-webinar-dropdown-button', 'mobile-webinar-dropdown-menu');
+  setupDropdown('mobile-practice-dropdown-button', 'mobile-practice-dropdown-menu');
+
+  document.addEventListener('click', (event) => {
+      if (!event.target.closest('[id$="-dropdown-container"]') && !event.target.closest('[id$="-dropdown-button"]')) {
+          document.querySelectorAll('[id$="-dropdown-menu"]').forEach(menu => menu.classList.add('hidden'));
+          document.querySelectorAll('.dropdown-arrow').forEach(arrow => arrow.classList.remove('open'));
+      }
+  });
+
+  // --- Calculator Logic ---
   const calculateBtn = document.getElementById('calculateBtn');
   const grossIncomeEl = document.getElementById('grossIncome');
   const ageEl = document.getElementById('age');
@@ -160,25 +339,19 @@ document.addEventListener('DOMContentLoaded', function () {
   const formatCurrency = (value) => new Intl.NumberFormat('en-IN', { style: 'currency', currency: 'INR', maximumFractionDigits: 0 }).format(value);
 
   const calculateTaxOld = (taxableIncome, age) => {
-      if (taxableIncome <= 500000) {
-          return 0;
-      }
+      if (taxableIncome <= 500000) { return 0; }
       let tax = 0;
       let exemptionLimit = 250000;
       if (age === '60to80') exemptionLimit = 300000;
       if (age === 'above80') exemptionLimit = 500000;
-      
       if (taxableIncome > 1000000) tax += (taxableIncome - 1000000) * 0.30;
       if (taxableIncome > 500000) tax += (Math.min(taxableIncome, 1000000) - 500000) * 0.20;
       if (taxableIncome > exemptionLimit) tax += (Math.min(taxableIncome, 500000) - exemptionLimit) * 0.05;
-      
       return tax > 0 ? tax + (tax * 0.04) : 0;
   };
   
   const calculateTaxNew = (taxableIncome) => {
-      if (taxableIncome <= 1200000) {
-          return 0;
-      }
+      if (taxableIncome <= 1200000) { return 0; }
       let tax = 0;
       if (taxableIncome <= 1600000) {
           tax = 60000 + (taxableIncome - 1200000) * 0.15;
@@ -192,61 +365,70 @@ document.addEventListener('DOMContentLoaded', function () {
       return tax > 0 ? tax + (tax * 0.04) : 0;
   };
 
-  calculateBtn.addEventListener('click', () => {
-    const grossIncome = parseFloat(grossIncomeEl.value) || 0;
-    if (grossIncome <= 0) {
-      resultEl.innerHTML = `<p class="text-red-500 font-semibold">Please enter a valid income.</p>`;
-      verdictEl.innerHTML = ''; verdictEl.className = 'text-center mt-4 font-bold text-lg p-3 rounded-md';
-      if(taxChart) taxChart.destroy();
-      return;
-    }
-    const age = ageEl.value;
-    const deduction80C = Math.min(parseFloat(deduction80CEl.value) || 0, 150000);
-    const deduction80D = parseFloat(deduction80DEl.value) || 0;
-    const homeLoanInterest = Math.min(parseFloat(homeLoanInterestEl.value) || 0, 200000);
-    const otherDeductions = parseFloat(otherDeductionsEl.value) || 0;
-    
-    const standardDeductionOld = 50000;
-    const totalDeductions = standardDeductionOld + deduction80C + deduction80D + homeLoanInterest + otherDeductions;
-    const oldRegimeTaxableIncome = Math.max(0, grossIncome - totalDeductions);
-    const oldRegimeTax = calculateTaxOld(oldRegimeTaxableIncome, age);
-    
-    const standardDeductionNew = 75000; 
-    const newRegimeTaxableIncome = Math.max(0, grossIncome - standardDeductionNew);
-    const newRegimeTax = calculateTaxNew(newRegimeTaxableIncome);
+  if (calculateBtn) {
+    calculateBtn.addEventListener('click', () => {
+        const grossIncome = parseFloat(grossIncomeEl.value) || 0;
+        if (grossIncome <= 0) {
+          resultEl.innerHTML = `<p class="text-red-500 font-semibold">Please enter a valid income.</p>`;
+          verdictEl.innerHTML = ''; verdictEl.className = 'text-center mt-4 font-bold text-lg p-3 rounded-md';
+          if(taxChart) taxChart.destroy();
+          return;
+        }
+        const age = ageEl.value;
+        const deduction80C = Math.min(parseFloat(deduction80CEl.value) || 0, 150000);
+        const deduction80D = parseFloat(deduction80DEl.value) || 0;
+        const homeLoanInterest = Math.min(parseFloat(homeLoanInterestEl.value) || 0, 200000);
+        const otherDeductions = parseFloat(otherDeductionsEl.value) || 0;
+        
+        const standardDeductionOld = 50000;
+        const totalDeductions = standardDeductionOld + deduction80C + deduction80D + homeLoanInterest + otherDeductions;
+        const oldRegimeTaxableIncome = Math.max(0, grossIncome - totalDeductions);
+        const oldRegimeTax = calculateTaxOld(oldRegimeTaxableIncome, age);
+        
+        const standardDeductionNew = 75000; 
+        const newRegimeTaxableIncome = Math.max(0, grossIncome - standardDeductionNew);
+        const newRegimeTax = calculateTaxNew(newRegimeTaxableIncome);
 
-    resultEl.innerHTML = `<div class="grid grid-cols-1 sm:grid-cols-2 gap-4 text-left"><div class="p-4 bg-blue-100 rounded-lg"><h4 class="font-bold text-blue-800">Old Regime</h4><p class="text-sm text-blue-600">Taxable: ${formatCurrency(oldRegimeTaxableIncome)}</p><p class="text-lg font-bold text-blue-900 mt-1">Tax: ${formatCurrency(oldRegimeTax)}</p></div><div class="p-4 bg-green-100 rounded-lg"><h4 class="font-bold text-green-800">New Regime</h4><p class="text-sm text-green-600">Taxable: ${formatCurrency(newRegimeTaxableIncome)}</p><p class="text-lg font-bold text-green-900 mt-1">Tax: ${formatCurrency(newRegimeTax)}</p></div></div>`;
-    
-    const savings = Math.abs(oldRegimeTax - newRegimeTax);
-    verdictEl.className = 'text-center mt-4 font-bold text-lg p-3 rounded-md';
-    if (newRegimeTax < oldRegimeTax) { verdictEl.innerHTML = `The New Regime saves you ${formatCurrency(savings)}!`; verdictEl.classList.add('bg-green-200', 'text-green-800'); }
-    else if (oldRegimeTax < newRegimeTax) { verdictEl.innerHTML = `The Old Regime saves you ${formatCurrency(savings)}!`; verdictEl.classList.add('bg-blue-200', 'text-blue-800'); }
-    else { verdictEl.innerHTML = `Both regimes have the same tax liability.`; verdictEl.classList.add('bg-slate-200', 'text-slate-800'); }
-    
-    const ctx = document.getElementById('taxChart').getContext('2d');
-    if (taxChart) taxChart.destroy();
-    taxChart = new Chart(ctx, { type: 'bar', data: { labels: ['Old Regime', 'New Regime'], datasets: [{ label: 'Tax Liability', data: [oldRegimeTax, newRegimeTax], backgroundColor: ['rgba(59, 130, 246, 0.7)', 'rgba(16, 185, 129, 0.7)'], borderColor: ['rgba(59, 130, 246, 1)', 'rgba(16, 185, 129, 1)'], borderWidth: 1 }] }, options: { responsive: true, maintainAspectRatio: false, plugins: { legend: { display: false }, tooltip: { callbacks: { label: (c) => `Tax: ${formatCurrency(c.raw)}` } } }, scales: { y: { beginAtZero: true, ticks: { callback: (v) => formatCurrency(v).replace('₹', '₹ ') } } } } });
-  });
+        resultEl.innerHTML = `<div class="grid grid-cols-1 sm:grid-cols-2 gap-4 text-left"><div class="p-4 bg-blue-100 rounded-lg"><h4 class="font-bold text-blue-800">Old Regime</h4><p class="text-sm text-blue-600">Taxable: ${formatCurrency(oldRegimeTaxableIncome)}</p><p class="text-lg font-bold text-blue-900 mt-1">Tax: ${formatCurrency(oldRegimeTax)}</p></div><div class="p-4 bg-green-100 rounded-lg"><h4 class="font-bold text-green-800">New Regime</h4><p class="text-sm text-green-600">Taxable: ${formatCurrency(newRegimeTaxableIncome)}</p><p class="text-lg font-bold text-green-900 mt-1">Tax: ${formatCurrency(newRegimeTax)}</p></div></div>`;
+        
+        const savings = Math.abs(oldRegimeTax - newRegimeTax);
+        verdictEl.className = 'text-center mt-4 font-bold text-lg p-3 rounded-md';
+        if (newRegimeTax < oldRegimeTax) { verdictEl.innerHTML = `The New Regime saves you ${formatCurrency(savings)}!`; verdictEl.classList.add('bg-green-200', 'text-green-800'); }
+        else if (oldRegimeTax < newRegimeTax) { verdictEl.innerHTML = `The Old Regime saves you ${formatCurrency(savings)}!`; verdictEl.classList.add('bg-blue-200', 'text-blue-800'); }
+        else { verdictEl.innerHTML = `Both regimes have the same tax liability.`; verdictEl.classList.add('bg-slate-200', 'text-slate-800'); }
+        
+        const ctx = document.getElementById('taxChart').getContext('2d');
+        if (taxChart) taxChart.destroy();
+        taxChart = new Chart(ctx, { type: 'bar', data: { labels: ['Old Regime', 'New Regime'], datasets: [{ label: 'Tax Liability', data: [oldRegimeTax, newRegimeTax], backgroundColor: ['rgba(59, 130, 246, 0.7)', 'rgba(16, 185, 129, 0.7)'], borderColor: ['rgba(59, 130, 246, 1)', 'rgba(16, 185, 129, 1)'], borderWidth: 1 }] }, options: { responsive: true, maintainAspectRatio: false, plugins: { legend: { display: false }, tooltip: { callbacks: { label: (c) => `Tax: ${formatCurrency(c.raw)}` } } }, scales: { y: { beginAtZero: true, ticks: { callback: (v) => formatCurrency(v).replace('₹', '₹ ') } } } } });
+    });
+  }
 
+  // --- ITR Form Finder Logic ---
   const q1 = document.getElementById('q1'), q2 = document.getElementById('q2'), q3 = document.getElementById('q3');
   const q2_container = document.getElementById('q2_container'), q3_container = document.getElementById('q3_container');
   const formResult = document.getElementById('formResult');
   
   function updateFormFinder() {
     const hasBusinessIncome = q1.value, isPresumptive = q2.value, hasCapitalGains = q3.value;
-    q2_container.classList.add('hidden'); q3_container.classList.add('hidden'); formResult.textContent = '';
+    q2_container.classList.add('hidden'); q3_container.classList.add('hidden'); 
+    if(formResult) formResult.textContent = '';
+    
     if (hasBusinessIncome === 'yes') {
-      q2_container.classList.remove('hidden');
+      if(q2_container) q2_container.classList.remove('hidden');
       if(isPresumptive === 'yes') formResult.textContent = 'You should file ITR-4 (Sugam).';
       else if (isPresumptive === 'no') formResult.textContent = 'You should file ITR-3.';
     } else if (hasBusinessIncome === 'no') {
-      q3_container.classList.remove('hidden');
+      if(q3_container) q3_container.classList.remove('hidden');
       if(hasCapitalGains === 'yes') formResult.textContent = 'You should file ITR-2.';
       else if (hasCapitalGains === 'no') formResult.textContent = 'You should file ITR-1 (Sahaj).';
     }
   }
-  [q1, q2, q3].forEach(el => el.addEventListener('change', updateFormFinder));
-  updateFormFinder();
+  
+  if (q1 && q2 && q3) {
+      [q1, q2, q3].forEach(el => el.addEventListener('change', updateFormFinder));
+      updateFormFinder();
+  }
+
 });
 </script>
 
