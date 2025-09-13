@@ -163,9 +163,9 @@
                             <a href="enrollnow.html" class="bg-gradient-to-r from-emerald-600 to-teal-600 hover:from-emerald-700 hover:to-teal-700 text-white px-8 py-4 rounded-xl text-lg font-semibold transition-all duration-300 transform hover:scale-105 shadow-lg hover:shadow-emerald-500/25 text-center">
                                 Enroll Now - ₹15,000 Only
                             </a>
-                            <a href="#contact" class="border-2 border-emerald-600 text-emerald-600 hover:bg-emerald-600 hover:text-white px-8 py-4 rounded-xl text-lg font-semibold transition-all duration-300 text-center">
-                                Download Brochure
-                            </a>
+                            <button id="open-brochure-modal-btn" class="border-2 border-emerald-600 text-emerald-600 hover:bg-emerald-600 hover:text-white px-8 py-4 rounded-xl text-lg font-semibold transition-all duration-300 text-center">
+    Download Brochure
+</button>
                         </div>
                         <div class="grid grid-cols-1 sm:grid-cols-2 gap-4 text-sm">
                             <div class="flex items-center text-gray-600">
@@ -598,11 +598,9 @@ document.addEventListener('DOMContentLoaded', function () {
       menuOpenIcon.classList.remove('hidden');
       menuCloseIcon.classList.add('hidden');
       
-      // Close all desktop dropdowns
       document.querySelectorAll('[id$="-dropdown-menu"]').forEach(menu => menu.classList.add('hidden'));
       document.querySelectorAll('[id$="-dropdown-button"] .dropdown-arrow').forEach(arrow => arrow.classList.remove('open'));
       
-      // Close all mobile dropdowns
       document.querySelectorAll('[id$="-dropdown-menu-mobile"]').forEach(menu => menu.classList.add('hidden'));
       document.querySelectorAll('[id$="-dropdown-button-mobile"] .dropdown-arrow').forEach(arrow => arrow.classList.remove('open'));
   }
@@ -621,7 +619,6 @@ document.addEventListener('DOMContentLoaded', function () {
       });
   });
 
-  // Generic Dropdown Toggle Function
   const setupDropdown = (buttonId, menuId) => {
       const button = document.getElementById(buttonId);
       const menu = document.getElementById(menuId);
@@ -636,14 +633,11 @@ document.addEventListener('DOMContentLoaded', function () {
       });
   };
 
-  // Setup all dropdowns
   setupDropdown('webinar-dropdown-button', 'webinar-dropdown-menu');
   setupDropdown('practice-dropdown-button', 'practice-dropdown-menu');
   setupDropdown('mobile-webinar-dropdown-button', 'mobile-webinar-dropdown-menu');
   setupDropdown('mobile-practice-dropdown-button', 'mobile-practice-dropdown-menu');
 
-
-  // Close dropdowns if clicked outside
   document.addEventListener('click', (event) => {
       if (!event.target.closest('[id$="-dropdown-container"]') && !event.target.closest('[id$="-dropdown-button"]')) {
           document.querySelectorAll('[id$="-dropdown-menu"]').forEach(menu => menu.classList.add('hidden'));
@@ -651,7 +645,6 @@ document.addEventListener('DOMContentLoaded', function () {
       }
   });
 
-  // Module switching logic (remains the same)
   const moduleTabs = document.querySelectorAll('.module-tab');
   const moduleContents = document.querySelectorAll('.module-content');
   let activeModuleIndex = 0;
@@ -699,8 +692,41 @@ document.addEventListener('DOMContentLoaded', function () {
   if (moduleTabs.length > 0) {
     var moduleInterval = setInterval(autoSwitchModule, 4000);
   }
+
+  // --- START: Code for Brochure Modal (MOVED INSIDE) ---
+  const brochureModal = document.getElementById('brochure-modal');
+  const openModalBtn = document.getElementById('open-brochure-modal-btn');
+  const closeModalBtn = document.getElementById('close-modal-btn');
+
+  if (brochureModal && openModalBtn && closeModalBtn) {
+    const openModal = () => brochureModal.classList.remove('hidden');
+    const closeModal = () => brochureModal.classList.add('hidden');
+
+    openModalBtn.addEventListener('click', openModal);
+    closeModalBtn.addEventListener('click', closeModal);
+
+    brochureModal.addEventListener('click', (e) => {
+      if (e.target === brochureModal) {
+        closeModal();
+      }
+    });
+  }
+  // --- END: Code for Brochure Modal ---
+
 });
 </script>
+<div id="brochure-modal" class="fixed inset-0 bg-gray-900 bg-opacity-75 flex items-center justify-center p-4 z-50 hidden">
+  <div class="bg-white rounded-2xl shadow-2xl p-4 max-w-md w-full relative transform transition-all" id="modal-content">
 
+    <button id="close-modal-btn" class="absolute top-2 right-2 text-gray-400 hover:text-gray-700 z-10">
+      <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path></svg>
+    </button>
+
+    <div class="z-0">
+      <iframe aria-label='vision-website-forms' frameborder="0" style="height:500px;width:100%;border:none;" src='https://forms.zohopublic.in/accountantsfactoryllp/form/visionwebsiteforms/formperma/sBJe7hpM9Dwgcs3z09SCn9WNzx0Z8KjsmcfT_k5-oJc'></iframe>
+    </div>
+
+  </div>
+</div>
 </body>
 </html>
