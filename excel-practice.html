@@ -10,19 +10,27 @@
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
   <style>
     body { font-family: 'Inter', sans-serif; }
-    table { border-collapse: collapse; width: 100%; }
+    table { border-collapse: collapse; width: 100%; margin-top: 1rem; margin-bottom: 1rem; }
     th, td { border: 1px solid #e2e8f0; padding: 12px; text-align: left; }
     th { background-color: #3b82f6; color: white; }
-    .tip { background-color: #e0f2fe; border-left: 4px solid #3b82f6; padding: 10px; margin: 10px 0; border-radius: 5px; }
-    .visual { background-color: #fef9c3; padding: 10px; margin: 10px 0; border-radius: 5px; font-style: italic; }
-    canvas { max-width: 500px; margin: 20px 0; }
+    .tip { background-color: #e0f2fe; border-left: 4px solid #3b82f6; padding: 1rem; margin: 1rem 0; border-radius: 5px; }
+    .solution { background-color: #f0fdf4; border-left: 4px solid #22c55e; padding: 1rem; margin-top: 1.5rem; border-radius: 5px;}
+    .solution pre { 
+        background-color: #eef2ff; 
+        padding: 1rem; 
+        border-radius: 5px; 
+        margin-top: 1rem;
+        white-space: pre;
+        overflow-x: auto;
+        font-family: monospace;
+    }
     .exercise-content {
         display: none;
-        animation: fadeIn 0.7s ease-in-out;
+        animation: fadeIn 0.5s ease-in-out;
     }
     .exercise-content.active { display: block; }
     @keyframes fadeIn {
-        from { opacity: 0; transform: translateY(10px); }
+        from { opacity: 0; transform: translateY(15px); }
         to { opacity: 1; transform: translateY(0); }
     }
     .mobile-menu {
@@ -33,25 +41,30 @@
     .mobile-menu.open { max-height: 500px; }
     .dropdown-arrow.open { transform: rotate(180deg); }
     .dropdown-arrow { transition: transform 0.2s ease-in-out; }
+    /* Style for the custom dropdown arrow */
+    select {
+        -webkit-appearance: none;
+        -moz-appearance: none;
+        appearance: none;
+        background-image: url('data:image/svg+xml;charset=US-ASCII,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20width%3D%2224%22%20height%3D%2224%22%20viewBox%3D%220%200%2024%2024%22%20fill%3D%22none%22%20stroke%3D%22white%22%20stroke-width%3D%222%22%20stroke-linecap%3D%22round%22%20stroke-linejoin%3D%22round%22%3E%3Cpolyline%20points%3D%226%209%2012%2015%2018%209%22%3E%3C%2Fpolyline%3E%3C%2Fsvg%3E');
+        background-repeat: no-repeat;
+        background-position: right 1rem center;
+        background-size: 1.2em;
+        padding-right: 3rem;
+    }
   </style>
 </head>
-<body class="bg-white">
+<body class="bg-gray-100">
 
+  <!-- SVG Icons Definition -->
   <svg width="0" height="0" style="position:absolute">
-    <symbol id="icon-book-open" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M2 3h6a4 4 0 0 1 4 4v14a3 3 0 0 0-3-3H2z"/><path d="M22 3h-6a4 4 0 0 0-4 4v14a3 3 0 0 1 3-3h7z"/></symbol>
-    <symbol id="icon-users" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M22 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></symbol>
-    <symbol id="icon-award" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="8" r="6"/><path d="M15.477 12.89 17 22l-5-3-5 3 1.523-9.11"/></symbol>
-    <symbol id="icon-check-circle" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/><polyline points="22 4 12 14.01 9 11.01"/></symbol>
-    <symbol id="icon-phone" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"/></symbol>
-    <symbol id="icon-map-pin" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 10c0 6-8 12-8 12s-8-6-8-12a8 8 0 0 1 16 0Z"/><circle cx="12" cy="10" r="3"/></symbol>
+    <symbol id="icon-chevron-down" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"></polyline></symbol>
     <symbol id="icon-menu" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="4" x2="20" y1="12" y2="12"/><line x1="4" x2="20" y1="6" y2="6"/><line x1="4" x2="20" y1="18" y2="18"/></symbol>
     <symbol id="icon-x" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="18" x2="6" y1="6" y2="18"/><line x1="6" x2="18" y1="6" y2="18"/></symbol>
-    <symbol id="icon-globe" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><path d="M12 2a14.5 14.5 0 0 0 0 20 14.5 14.5 0 0 0 0-20"/><path d="M2 12h20"/></symbol>
-    <symbol id="icon-building" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect width="16" height="20" x="4" y="2" rx="2" ry="2"/><path d="M9 22v-4h6v4"/><path d="M8 6h.01"/><path d="M16 6h.01"/><path d="M12 6h.01"/><path d="M12 10h.01"/><path d="M12 14h.01"/><path d="M16 10h.01"/><path d="M16 14h.01"/><path d="M8 10h.01"/><path d="M8 14h.01"/></symbol>
-    <symbol id="icon-chevron-down" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"></polyline></symbol>
   </svg>
 
-  <nav class="fixed top-0 w-full z-50 bg-white/95 backdrop-blur-lg shadow-lg border-b border-gray-100">
+  <!-- Navigation Bar -->
+  <nav class="fixed top-0 w-full z-50 bg-white/95 backdrop-blur-lg shadow-md border-b border-gray-200">
     <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
       <div class="flex justify-between items-center py-4">
         <a href="index.html" class="flex items-center space-x-4">
@@ -79,7 +92,7 @@
           <div class="relative" id="practice-dropdown-container">
               <button id="practice-dropdown-button" class="text-emerald-600 font-bold transition-colors font-medium flex items-center">
                 Practice Session
-                <svg class="w-5 h-5 ml-1 dropdown-arrow"><use href="#icon-chevron-down"></use></svg>
+                <svg class="w-5 h-5 ml-1 dropdown-arrow open"><use href="#icon-chevron-down"></use></svg>
               </button>
               <div id="practice-dropdown-menu" class="absolute right-0 mt-2 w-56 rounded-md shadow-lg bg-white ring-1 ring-black ring-opacity-5 hidden z-50">
                 <div class="py-1" role="menu" aria-orientation="vertical" aria-labelledby="practice-dropdown-button">
@@ -99,30 +112,12 @@
       </div>
     </div>
 
+    <!-- Mobile Menu -->
     <div id="mobile-menu" class="mobile-menu md:hidden bg-white border-t border-gray-100 shadow-lg">
       <div class="px-4 py-4 space-y-4">
         <a href="index.html#home" class="mobile-link block text-gray-700 hover:text-emerald-600 transition-colors font-medium">Home</a>
         <a href="index.html#courses" class="mobile-link block text-gray-700 hover:text-emerald-600 transition-colors font-medium">Courses</a>
-        <div class="relative">
-          <button id="mobile-webinar-dropdown-button" class="w-full text-left mobile-link block text-gray-700 hover:text-emerald-600 transition-colors font-medium flex justify-between items-center">
-            <span>Online Webinars </span>
-            <svg class="w-5 h-5 text-gray-500 dropdown-arrow"><use href="#icon-chevron-down"></use></svg>
-          </button>
-          <div id="mobile-webinar-dropdown-menu" class="pl-4 mt-2 space-y-2 hidden">
-            <a href="incometax.html" class="block text-gray-600 hover:text-emerald-600">Income Tax Series</a>
-            <a href="ai-accounting.html" class="block text-gray-600 hover:text-emerald-600">AI in Accounting</a>
-            <a href="excel.html" class="block text-gray-600 hover:text-emerald-600">Excel Master Class</a>
-          </div>
-        </div>
-         <div class="relative">
-          <button id="mobile-practice-dropdown-button" class="w-full text-left mobile-link block text-emerald-600 font-bold transition-colors font-medium flex justify-between items-center">
-            <span>Practice Session</span>
-            <svg class="w-5 h-5 text-gray-500 dropdown-arrow open"><use href="#icon-chevron-down"></use></svg>
-          </button>
-          <div id="mobile-practice-dropdown-menu" class="pl-4 mt-2 space-y-2">
-            <a href="excel-practice.html" class="block text-emerald-600 font-bold">Excel Practice</a>
-          </div>
-        </div>
+        <a href="excel-practice.html" class="mobile-link block text-emerald-600 font-bold">Excel Practice</a>
         <a href="index.html#about" class="mobile-link block text-gray-700 hover:text-emerald-600 transition-colors font-medium">About</a>
         <a href="index.html#careers" class="mobile-link block text-gray-700 hover:text-emerald-600 transition-colors font-medium">Careers</a>
         <a href="index.html#contact" class="mobile-link block text-gray-700 hover:text-emerald-600 transition-colors font-medium">Contact</a>
@@ -130,701 +125,304 @@
     </div>
   </nav>
 
-  <main class="bg-gray-50 pt-28">
-    <section class="py-16">
+  <!-- Main Content -->
+  <main class="bg-gray-50 pt-24">
+    <section class="py-12">
       <div class="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8">
-          <h1 class="text-3xl font-bold text-gray-800 mb-4">Excel Master Class - Interactive Exercises</h1>
-          <p class="text-lg text-gray-600 mb-6">Select an exercise from the dropdown to practice Excel skills. Exercises progress from Beginner to Pro. Each includes downloadable data and steps for Excel or Google Sheets.</p>
+          <div class="text-center mb-10">
+            <h1 class="text-4xl font-extrabold text-gray-800 mb-2">Excel Practice Exercises</h1>
+            <p class="text-lg text-gray-600">Select an exercise to build your skills from beginner to pro.</p>
+          </div>
 
-          <div class="relative inline-block mb-6">
-              <select id="exerciseSelector" class="bg-blue-600 text-white p-3 rounded-lg">
+          <!-- Exercise Selector Dropdown -->
+          <div class="mb-8">
+              <select id="exerciseSelector" class="bg-blue-600 text-white p-3 rounded-lg shadow-sm focus:outline-none focus:ring-2 focus:ring-blue-500 cursor-pointer">
                   <option value="" disabled>Select an Exercise</option>
-                  <optgroup label="Beginner (1-5)">
-                      <option value="1">Exercise 1: SUM and AVERAGE</option>
+                  <optgroup label="Beginner">
+                      <option value="1">Exercise 1: SUM & AVERAGE</option>
                       <option value="2">Exercise 2: IF Function</option>
                       <option value="3">Exercise 3: AND/OR Functions</option>
                       <option value="4">Exercise 4: Text Functions</option>
                       <option value="5">Exercise 5: Date Functions</option>
                   </optgroup>
-                  <optgroup label="Intermediate (6-10)">
-                      <option value="6">Exercise 6: Basic VLOOKUP</option>
+                  <optgroup label="Intermediate">
+                      <option value="6">Exercise 6: VLOOKUP</option>
                       <option value="7">Exercise 7: INDEX & MATCH</option>
-                      <option value="8">Exercise 8: Nested VLOOKUP</option>
-                      <option value="9">Exercise 9: PMT for Loans</option>
-                      <option value="10">Exercise 10: NPV for Investments</option>
+                      <option value="8">Exercise 8: SUMIFS & COUNTIFS</option>
+                      <option value="9">Exercise 9: Data Validation</option>
                   </optgroup>
-                  <optgroup label="Pro (11-15)">
-                      <option value="11">Exercise 11: Goal Seek</option>
-                      <option value="12">Exercise 12: PivotTables</option>
-                      <option value="13">Exercise 13: Scenario Analysis</option>
-                      <option value="14">Exercise 14: Data Validation</option>
-                      <option value="15">Exercise 15: Forecasting</option>
+                  <optgroup label="Pro">
+                      <option value="10">Exercise 10: PivotTables & Slicers</option>
+                      <option value="11">Exercise 11: SUMPRODUCT</option>
+                      <option value="12">Exercise 12: Cell Locking & Protection</option>
+                      <option value="13">Exercise 13: XLOOKUP Function</option>
+                      <option value="14">Exercise 14: Intro to Power Query</option>
+                      <option value="15">Exercise 15: PMT Function for Loans</option>
                   </optgroup>
               </select>
           </div>
           
-            <div id="exercise1" class="exercise-content bg-white p-6 rounded-lg shadow-md mb-6">
-                <h2 class="text-2xl font-semibold text-gray-800 mb-2">Exercise 1: SUM and AVERAGE (Beginner)</h2>
-                <p class="text-gray-600"><strong>Goal</strong>: Calculate total and average expenses for a monthly budget report.</p>
-                <p class="text-gray-600"><strong>Steps</strong>:</p>
-                <ol class="list-decimal pl-6 text-gray-600">
-                    <li>Create a table with columns: Item, Amount.</li>
-                    <li>Copy sample data to A1:B11.</li>
-                    <li>In A12, use <code>=SUM(B2:B11)</code> to calculate total expenses.</li>
-                    <li>In A13, use <code>=AVERAGE(B2:B11)</code> for average.</li>
-                    <li>Highlight Amounts > $150 in yellow: Home > Conditional Formatting > Greater Than > 150, set yellow fill.</li>
-                </ol>
-                <p class="text-gray-600"><strong>Sample Data</strong> (A1:B11):</p>
-                <table class="mb-4">
-                    <tr><th>Item</th><th>Amount</th></tr>
-                    <tr><td>Rent</td><td>1200</td></tr>
-                    <tr><td>Food</td><td>300</td></tr>
-                    <tr><td>Travel</td><td>150</td></tr>
-                    <tr><td>Supplies</td><td>80</td></tr>
-                    <tr><td>Utilities</td><td>200</td></tr>
-                    <tr><td>Phone</td><td>100</td></tr>
-                    <tr><td>Internet</td><td>50</td></tr>
-                    <tr><td>Books</td><td>75</td></tr>
-                    <tr><td>Gas</td><td>120</td></tr>
-                    <tr><td>Misc</td><td>90</td></tr>
-                </table>
-                <a href="data:text/csv;charset=utf-8,Item,Amount%0ARent,1200%0AFood,300%0ATravel,150%0ASupplies,80%0AUtilities,200%0APhone,100%0AInternet,50%0ABooks,75%0AGas,120%0AMisc,90" download="exercise1.csv" class="text-blue-600 underline">Download CSV</a>
-                <div class="tip"><strong>Tip</strong>: SUM adds all values in a range; AVERAGE finds the mean. Drag the bottom-right corner of a cell to copy formulas.</div>
-                <h4 class="text-lg font-semibold text-gray-800 mt-4">Solution</h4>
-                <p><strong>Detailed Steps</strong>:</p>
-                <ol class="list-decimal pl-6 text-gray-600">
-                    <li>In A12, type <code class="bg-gray-200 p-1 rounded">=SUM(B2:B11)</code>. Result: $2365.</li>
-                    <li>In A13, type <code class="bg-gray-200 p-1 rounded">=AVERAGE(B2:B11)</code>. Result: $236.50.</li>
-                    <li>Select B2:B11, Home > Conditional Formatting > Greater Than, enter 150, choose yellow fill. Highlights Rent ($1200), Food ($300), Utilities ($200).</li>
-                </ol>
-                <p><strong>Output</strong> (Partial):</p>
-                <table>
-                    <tr><th>Item</th><th>Amount</th></tr>
-                    <tr><td>Rent</td><td style="background-color:#ffff99;">1200</td></tr>
-                    <tr><td>Food</td><td style="background-color:#ffff99;">300</td></tr>
-                    <tr><td>Travel</td><td>150</td></tr>
-                    <tr><td>Supplies</td><td>80</td></tr>
-                    <tr><td>Utilities</td><td style="background-color:#ffff99;">200</td></tr>
-                    <tr><td>Total</td><td>2365</td></tr>
-                    <tr><td>Average</td><td>236.50</td></tr>
-                </table>
-                <p class="visual"><strong>Visual</strong>: Bar chart would show Rent, Food, and Utilities as prominent bars with a red line at $150 for high expenses.</p>
-                <canvas id="chart1"></canvas>
+          <div id="exercise-wrapper">
+            <!-- Exercise 1 -->
+            <div id="exercise1" class="exercise-content bg-white p-8 rounded-lg shadow-lg">
+                <h2 class="text-3xl font-bold text-gray-800 mb-4">SUM & AVERAGE (Beginner)</h2>
+                <p class="text-gray-600 mb-4"><strong>Goal:</strong> Calculate total and average expenses from a list.</p>
+                <h3 class="text-xl font-semibold text-gray-700 mt-6 mb-2">Steps:</h3>
+                <ol class="list-decimal pl-6 text-gray-700 space-y-2"><li>Use <code>=SUM(B2:B6)</code> to get the total expenses.</li><li>Use <code>=AVERAGE(B2:B6)</code> to get the average expense.</li><li>Select the amounts, then go to <strong>Home &gt; Conditional Formatting &gt; Highlight Cell Rules &gt; Greater Than...</strong> to highlight values over 150.</li></ol>
+                <h3 class="text-xl font-semibold text-gray-700 mt-6 mb-2">Sample Data:</h3>
+                <table><tbody><tr><th>Item</th><th>Amount</th></tr><tr><td>Rent</td><td>1200</td></tr><tr><td>Food</td><td>300</td></tr><tr><td>Travel</td><td>150</td></tr><tr><td>Supplies</td><td>80</td></tr><tr><td>Utilities</td><td>200</td></tr></tbody></table>
+                <a href="data:text/csv;charset=utf-8,Item,Amount%0ARent,1200%0AFood,300%0ATravel,150%0ASupplies,80%0AUtilities,200" download="exercise1.csv" class="text-blue-600 hover:underline">Download CSV</a>
+                <div class="tip"><strong>Tip:</strong> <code>SUM</code> adds all numbers in a range, while <code>AVERAGE</code> calculates the mean.</div>
+                <div class="solution">
+                    <h3 class="text-xl font-semibold text-gray-700 mb-2">Solution</h3>
+                    <p class="text-gray-700">The formulas will produce the following results. Conditional formatting will highlight the amounts for Rent, Food, and Utilities.</p>
+                    <table><tbody><tr><th>Item</th><th>Amount</th></tr><tr><td>Rent</td><td style="background-color:#ffff99;">1200</td></tr><tr><td>Food</td><td style="background-color:#ffff99;">300</td></tr><tr><td>Travel</td><td>150</td></tr><tr><td>Supplies</td><td>80</td></tr><tr><td>Utilities</td><td style="background-color:#ffff99;">200</td></tr><tr><td><strong>Total</strong></td><td><strong>1930</strong></td></tr><tr><td><strong>Average</strong></td><td><strong>386</strong></td></tr></tbody></table>
+                </div>
             </div>
-    
-            <div id="exercise2" class="exercise-content bg-white p-6 rounded-lg shadow-md mb-6">
-                <h2 class="text-2xl font-semibold text-gray-800 mb-2">Exercise 2: IF Function (Beginner)</h2>
-                <p class="text-gray-600"><strong>Goal</strong>: Categorize product sales as "High" (> $500) or "Low".</p>
-                <p class="text-gray-600"><strong>Steps</strong>:</p>
-                <ol class="list-decimal pl-6 text-gray-600">
-                    <li>Create columns: Product, Sales, Category.</li>
-                    <li>Copy sample data to A1:C11.</li>
-                    <li>In C2, use <code>=IF(B2>500, "High", "Low")</code>, drag down.</li>
-                    <li>Create bar chart for Sales by Category.</li>
-                </ol>
-                <p class="text-gray-600"><strong>Sample Data</strong> (A1:C11):</p>
-                <table class="mb-4">
-                    <tr><th>Product</th><th>Sales</th><th>Category</th></tr>
-                    <tr><td>Laptop</td><td>800</td><td></td></tr>
-                    <tr><td>Mouse</td><td>200</td><td></td></tr>
-                    <tr><td>Keyboard</td><td>600</td><td></td></tr>
-                    <tr><td>Monitor</td><td>900</td><td></td></tr>
-                    <tr><td>Printer</td><td>400</td><td></td></tr>
-                    <tr><td>Scanner</td><td>300</td><td></td></tr>
-                    <tr><td>Webcam</td><td>150</td><td></td></tr>
-                    <tr><td>Speaker</td><td>700</td><td></td></tr>
-                    <tr><td>Headset</td><td>250</td><td></td></tr>
-                    <tr><td>Cable</td><td>100</td><td></td></tr>
-                </table>
-                <a href="data:text/csv;charset=utf-8,Product,Sales,Category%0ALaptop,800,%0AMouse,200,%0AKeyboard,600,%0AMonitor,900,%0APrinter,400,%0AScanner,300,%0AWebcam,150,%0ASpeaker,700,%0AHeadset,250,%0ACable,100" download="exercise2.csv" class="text-blue-600 underline">Download CSV</a>
-                <div class="tip"><strong>Tip</strong>: IF evaluates a condition and returns one value if true, another if false.</div>
-                <h4 class="text-lg font-semibold text-gray-800 mt-4">Solution</h4>
-                <p><strong>Detailed Steps</strong>:</p>
-                <ol class="list-decimal pl-6 text-gray-600">
-                    <li>In C2, type <code class="bg-gray-200 p-1 rounded">=IF(B2>500, "High", "Low")</code>. Drag to C11.</li>
-                    <li>Select A1:C11, Insert > Bar Chart. Add title: "Sales by Category".</li>
-                </ol>
-                <p><strong>Output</strong> (Partial):</p>
-                <table>
-                    <tr><th>Product</th><th>Sales</th><th>Category</th></tr>
-                    <tr><td>Laptop</td><td>800</td><td>High</td></tr>
-                    <tr><td>Mouse</td><td>200</td><td>Low</td></tr>
-                    <tr><td>Keyboard</td><td>600</td><td>High</td></tr>
-                    <tr><td>Monitor</td><td>900</td><td>High</td></tr>
-                </table>
-                <p class="visual"><strong>Visual</strong>: Bar chart would show High sales (Monitor: $900) as taller bars.</p>
-                <canvas id="chart2"></canvas>
+
+            <!-- Exercise 2 -->
+            <div id="exercise2" class="exercise-content bg-white p-8 rounded-lg shadow-lg">
+                <h2 class="text-3xl font-bold text-gray-800 mb-4">IF Function (Beginner)</h2>
+                <p class="text-gray-600 mb-4"><strong>Goal:</strong> Categorize sales as 'High' or 'Low' based on a value.</p>
+                <h3 class="text-xl font-semibold text-gray-700 mt-6 mb-2">Steps:</h3>
+                <ol class="list-decimal pl-6 text-gray-700 space-y-2"><li>In cell C2, type <code>=IF(B2&gt;500, "High", "Low")</code>.</li><li>Drag the fill handle down to apply the formula to all rows.</li></ol>
+                <h3 class="text-xl font-semibold text-gray-700 mt-6 mb-2">Sample Data:</h3>
+                <table><tbody><tr><th>Product</th><th>Sales</th><th>Category</th></tr><tr><td>Laptop</td><td>800</td><td></td></tr><tr><td>Monitor</td><td>900</td><td></td></tr><tr><td>Printer</td><td>400</td><td></td></tr><tr><td>Speaker</td><td>700</td><td></td></tr></tbody></table>
+                <a href="data:text/csv;charset=utf-8,Product,Sales,Category%0ALaptop,800,%0AMonitor,900,%0APrinter,400,%0ASpeaker,700," download="exercise2.csv" class="text-blue-600 hover:underline">Download CSV</a>
+                <div class="tip"><strong>Tip:</strong> The <code>IF</code> function checks a condition. Syntax: <code>IF(condition, value_if_true, value_if_false)</code>.</div>
+                <div class="solution">
+                    <h3 class="text-xl font-semibold text-gray-700 mb-2">Solution</h3>
+                    <p class="text-gray-700">The formula will automatically fill the 'Category' column based on the sales value.</p>
+                    <table><tbody><tr><th>Product</th><th>Sales</th><th>Category</th></tr><tr><td>Laptop</td><td>800</td><td>High</td></tr><tr><td>Monitor</td><td>900</td><td>High</td></tr><tr><td>Printer</td><td>400</td><td>Low</td></tr><tr><td>Speaker</td><td>700</td><td>High</td></tr></tbody></table>
+                </div>
             </div>
-    
-            <div id="exercise3" class="exercise-content bg-white p-6 rounded-lg shadow-md mb-6">
-                <h2 class="text-2xl font-semibold text-gray-800 mb-2">Exercise 3: AND/OR Functions (Beginner)</h2>
-                <p class="text-gray-600"><strong>Goal</strong>: Flag products as "Priority" if Sales > $400 AND Region = "North".</p>
-                <p class="text-gray-600"><strong>Steps</strong>:</p>
-                <ol class="list-decimal pl-6 text-gray-600">
-                    <li>Create columns: Product, Sales, Region, Flag.</li>
-                    <li>Copy sample data to A1:D11.</li>
-                    <li>In D2, use <code>=IF(AND(B2>400, C2="North"), "Priority", "Standard")</code>, drag down.</li>
-                    <li>Create pie chart for Flag distribution.</li>
-                </ol>
-                <p class="text-gray-600"><strong>Sample Data</strong> (A1:D11):</p>
-                <table class="mb-4">
-                    <tr><th>Product</th><th>Sales</th><th>Region</th><th>Flag</th></tr>
-                    <tr><td>Book A</td><td>450</td><td>North</td><td></td></tr>
-                    <tr><td>Book B</td><td>300</td><td>South</td><td></td></tr>
-                    <tr><td>Book C</td><td>500</td><td>North</td><td></td></tr>
-                    <tr><td>Book D</td><td>200</td><td>North</td><td></td></tr>
-                    <tr><td>Book E</td><td>600</td><td>South</td><td></td></tr>
-                    <tr><td>Book F</td><td>350</td><td>North</td><td></td></tr>
-                    <tr><td>Book G</td><td>550</td><td>North</td><td></td></tr>
-                    <tr><td>Book H</td><td>250</td><td>South</td><td></td></tr>
-                    <tr><td>Book I</td><td>700</td><td>North</td><td></td></tr>
-                    <tr><td>Book J</td><td>150</td><td>South</td><td></td></tr>
-                </table>
-                <a href="data:text/csv;charset=utf-8,Product,Sales,Region,Flag%0ABook%20A,450,North,%0ABook%20B,300,South,%0ABook%20C,500,North,%0ABook%20D,200,North,%0ABook%20E,600,South,%0ABook%20F,350,North,%0ABook%20G,550,North,%0ABook%20H,250,South,%0ABook%20I,700,North,%0ABook%20J,150,South" download="exercise3.csv" class="text-blue-600 underline">Download CSV</a>
-                <div class="tip"><strong>Tip</strong>: AND requires all conditions to be true; OR needs at least one true.</div>
-                <h4 class="text-lg font-semibold text-gray-800 mt-4">Solution</h4>
-                <p><strong>Detailed Steps</strong>:</p>
-                <ol class="list-decimal pl-6 text-gray-600">
-                    <li>In D2, type <code class="bg-gray-200 p-1 rounded">=IF(AND(B2>400, C2="North"), "Priority", "Standard")</code>. Drag to D11.</li>
-                    <li>Select D2:D11, Insert > Pie Chart. Add title: "Priority Distribution".</li>
-                </ol>
-                <p><strong>Output</strong> (Partial):</p>
-                <table>
-                    <tr><th>Product</th><th>Sales</th><th>Region</th><th>Flag</th></tr>
-                    <tr><td>Book A</td><td>450</td><td>North</td><td>Priority</td></tr>
-                    <tr><td>Book B</td><td>300</td><td>South</td><td>Standard</td></tr>
-                    <tr><td>Book C</td><td>500</td><td>North</td><td>Priority</td></tr>
-                </table>
-                <p class="visual"><strong>Visual</strong>: Pie chart would show ~40% Priority (North, Sales > $400).</p>
-                <canvas id="chart3"></canvas>
+
+            <!-- Exercise 3 -->
+            <div id="exercise3" class="exercise-content bg-white p-8 rounded-lg shadow-lg">
+                <h2 class="text-3xl font-bold text-gray-800 mb-4">AND/OR Functions (Beginner)</h2>
+                <p class="text-gray-600 mb-4"><strong>Goal:</strong> Flag products as 'Priority' if Sales &gt; $400 AND Region is 'North'.</p>
+                <h3 class="text-xl font-semibold text-gray-700 mt-6 mb-2">Steps:</h3>
+                <ol class="list-decimal pl-6 text-gray-700 space-y-2"><li>In cell D2, use <code>=IF(AND(B2&gt;400, C2="North"), "Priority", "Standard")</code>.</li><li>Drag the formula down to evaluate all products.</li></ol>
+                <h3 class="text-xl font-semibold text-gray-700 mt-6 mb-2">Sample Data:</h3>
+                <table><tbody><tr><th>Product</th><th>Sales</th><th>Region</th><th>Flag</th></tr><tr><td>Book A</td><td>450</td><td>North</td><td></td></tr><tr><td>Book B</td><td>300</td><td>South</td><td></td></tr><tr><td>Book C</td><td>500</td><td>North</td><td></td></tr></tbody></table>
+                <a href="data:text/csv;charset=utf-8,Product,Sales,Region,Flag%0ABook%20A,450,North,%0ABook%20B,300,South,%0ABook%20C,500,North," download="exercise3.csv" class="text-blue-600 hover:underline">Download CSV</a>
+                <div class="tip"><strong>Tip:</strong> <code>AND</code> requires all conditions to be true. <code>OR</code> requires at least one to be true.</div>
+                <div class="solution">
+                    <h3 class="text-xl font-semibold text-gray-700 mb-2">Solution</h3>
+                    <p class="text-gray-700">The 'Flag' column will be populated based on both the sales and region criteria.</p>
+                    <table><tbody><tr><th>Product</th><th>Sales</th><th>Region</th><th>Flag</th></tr><tr><td>Book A</td><td>450</td><td>North</td><td style="background-color:#bbf7d0;">Priority</td></tr><tr><td>Book B</td><td>300</td><td>South</td><td>Standard</td></tr><tr><td>Book C</td><td>500</td><td>North</td><td style="background-color:#bbf7d0;">Priority</td></tr></tbody></table>
+                </div>
             </div>
-    
-            <div id="exercise4" class="exercise-content bg-white p-6 rounded-lg shadow-md mb-6">
-                <h2 class="text-2xl font-semibold text-gray-800 mb-2">Exercise 4: Text Functions (Beginner)</h2>
-                <p class="text-gray-600"><strong>Goal</strong>: Create inventory codes by combining product and category.</p>
-                <p class="text-gray-600"><strong>Steps</strong>:</p>
-                <ol class="list-decimal pl-6 text-gray-600">
-                    <li>Create columns: Product, Category, Code.</li>
-                    <li>Copy sample data to A1:C11.</li>
-                    <li>In C2, use <code>=LEFT(A2,3)&"-"&B2</code>, drag down.</li>
-                    <li>Create bar chart for Code frequency.</li>
-                </ol>
-                <p class="text-gray-600"><strong>Sample Data</strong> (A1:C11):</p>
-                <table class="mb-4">
-                    <tr><th>Product</th><th>Category</th><th>Code</th></tr>
-                    <tr><td>Laptop</td><td>Electronics</td><td></td></tr>
-                    <tr><td>Mouse</td><td>Accessories</td><td></td></tr>
-                    <tr><td>Keyboard</td><td>Accessories</td><td></td></tr>
-                    <tr><td>Monitor</td><td>Electronics</td><td></td></tr>
-                    <tr><td>Printer</td><td>Electronics</td><td></td></tr>
-                    <tr><td>Scanner</td><td>Electronics</td><td></td></tr>
-                    <tr><td>Webcam</td><td>Accessories</td><td></td></tr>
-                    <tr><td>Speaker</td><td>Electronics</td><td></td></tr>
-                    <tr><td>Headset</td><td>Accessories</td><td></td></tr>
-                    <tr><td>Cable</td><td>Accessories</td><td></td></tr>
-                </table>
-                <a href="data:text/csv;charset=utf-8,Product,Category,Code%0ALaptop,Electronics,%0AMouse,Accessories,%0AKeyboard,Accessories,%0AMonitor,Electronics,%0APrinter,Electronics,%0AScanner,Electronics,%0AWebcam,Accessories,%0ASpeaker,Electronics,%0AHeadset,Accessories,%0ACable,Accessories" download="exercise4.csv" class="text-blue-600 underline">Download CSV</a>
-                <div class="tip"><strong>Tip</strong>: LEFT extracts characters from the start; & concatenates strings.</div>
-                <h4 class="text-lg font-semibold text-gray-800 mt-4">Solution</h4>
-                <p><strong>Detailed Steps</strong>:</p>
-                <ol class="list-decimal pl-6 text-gray-600">
-                    <li>In C2, type <code class="bg-gray-200 p-1 rounded">=LEFT(A2,3)&"-"&B2</code>. Drag to C11.</li>
-                    <li>Select C2:C11, Insert > Bar Chart. Add title: "Code Frequency".</li>
-                </ol>
-                <p><strong>Output</strong> (Partial):</p>
-                <table>
-                    <tr><th>Product</th><th>Category</th><th>Code</th></tr>
-                    <tr><td>Laptop</td><td>Electronics</td><td>Lap-Electronics</td></tr>
-                    <tr><td>Mouse</td><td>Accessories</td><td>Mou-Accessories</td></tr>
-                    <tr><td>Keyboard</td><td>Accessories</td><td>Key-Accessories</td></tr>
-                </table>
-                <p class="visual"><strong>Visual</strong>: Bar chart would show frequency of Electronics vs. Accessories codes.</p>
-                <canvas id="chart4"></canvas>
+
+            <!-- Exercise 4 -->
+            <div id="exercise4" class="exercise-content bg-white p-8 rounded-lg shadow-lg">
+                <h2 class="text-3xl font-bold text-gray-800 mb-4">Text Functions (Beginner)</h2>
+                <p class="text-gray-600 mb-4"><strong>Goal:</strong> Create inventory codes by combining product and category.</p>
+                <h3 class="text-xl font-semibold text-gray-700 mt-6 mb-2">Steps:</h3>
+                <ol class="list-decimal pl-6 text-gray-700 space-y-2"><li>In cell C2, use <code>=UPPER(LEFT(A2,3)&amp;"-"&amp;B2)</code>.</li></ol>
+                <h3 class="text-xl font-semibold text-gray-700 mt-6 mb-2">Sample Data:</h3>
+                <table><tbody><tr><th>Product</th><th>Category</th><th>Code</th></tr><tr><td>Laptop</td><td>Electronics</td><td></td></tr><tr><td>Mouse</td><td>Accessories</td><td></td></tr><tr><td>Keyboard</td><td>Accessories</td><td></td></tr></tbody></table>
+                <a href="data:text/csv;charset=utf-8,Product,Category,Code%0ALaptop,Electronics,%0AMouse,Accessories,%0AKeyboard,Accessories," download="exercise4.csv" class="text-blue-600 hover:underline">Download CSV</a>
+                <div class="tip"><strong>Tip:</strong> <code>LEFT()</code> extracts text from the start. <code>&amp;</code> joins text strings. <code>UPPER()</code> converts to uppercase.</div>
+                <div class="solution">
+                    <h3 class="text-xl font-semibold text-gray-700 mb-2">Solution</h3>
+                    <p class="text-gray-700">The formula generates a standardized code for each item.</p>
+                    <table><tbody><tr><th>Product</th><th>Category</th><th>Code</th></tr><tr><td>Laptop</td><td>Electronics</td><td>LAP-ELECTRONICS</td></tr><tr><td>Mouse</td><td>Accessories</td><td>MOU-ACCESSORIES</td></tr><tr><td>Keyboard</td><td>Accessories</td><td>KEY-ACCESSORIES</td></tr></tbody></table>
+                </div>
             </div>
-    
-            <div id="exercise5" class="exercise-content bg-white p-6 rounded-lg shadow-md mb-6">
-                <h2 class="text-2xl font-semibold text-gray-800 mb-2">Exercise 5: Date Functions (Beginner)</h2>
-                <p class="text-gray-600"><strong>Goal</strong>: Calculate invoice due dates 30 days from issue.</p>
-                <p class="text-gray-600"><strong>Steps</strong>:</p>
-                <ol class="list-decimal pl-6 text-gray-600">
-                    <li>Create columns: Invoice, Issue Date, Due Date.</li>
-                    <li>Copy sample data to A1:C11.</li>
-                    <li>In C2, use <code>=B2+30</code>, drag down.</li>
-                    <li>Create line chart for Due Dates.</li>
-                </ol>
-                <p class="text-gray-600"><strong>Sample Data</strong> (A1:C11):</p>
-                <table class="mb-4">
-                    <tr><th>Invoice</th><th>Issue Date</th><th>Due Date</th></tr>
-                    <tr><td>INV001</td><td>01/01/2025</td><td></td></tr>
-                    <tr><td>INV002</td><td>01/02/2025</td><td></td></tr>
-                    <tr><td>INV003</td><td>01/03/2025</td><td></td></tr>
-                    <tr><td>INV004</td><td>01/04/2025</td><td></td></tr>
-                    <tr><td>INV005</td><td>01/05/2025</td><td></td></tr>
-                    <tr><td>INV006</td><td>01/06/2025</td><td></td></tr>
-                    <tr><td>INV007</td><td>01/07/2025</td><td></td></tr>
-                    <tr><td>INV008</td><td>01/08/2025</td><td></td></tr>
-                    <tr><td>INV009</td><td>01/09/2025</td><td></td></tr>
-                    <tr><td>INV010</td><td>01/10/2025</td><td></td></tr>
-                </table>
-                <a href="data:text/csv;charset=utf-8,Invoice,Issue%20Date,Due%20Date%0AINV001,01/01/2025,%0AINV002,01/02/2025,%0AINV003,01/03/2025,%0AINV004,01/04/2025,%0AINV005,01/05/2025,%0AINV006,01/06/2025,%0AINV007,01/07/2025,%0AINV008,01/08/2025,%0AINV009,01/09/2025,%0AINV010,01/10/2025" download="exercise5.csv" class="text-blue-600 underline">Download CSV</a>
-                <div class="tip"><strong>Tip</strong>: Adding days to a date in Excel calculates a new date automatically.</div>
-                <h4 class="text-lg font-semibold text-gray-800 mt-4">Solution</h4>
-                <p><strong>Detailed Steps</strong>:</p>
-                <ol class="list-decimal pl-6 text-gray-600">
-                    <li>In C2, type <code class="bg-gray-200 p-1 rounded">=B2+30</code>. Drag to C11.</li>
-                    <li>Select A1:C11, Insert > Line Chart. Add title: "Due Dates".</li>
-                </ol>
-                <p><strong>Output</strong> (Partial):</p>
-                <table>
-                    <tr><th>Invoice</th><th>Issue Date</th><th>Due Date</th></tr>
-                    <tr><td>INV001</td><td>01/01/2025</td><td>01/31/2025</td></tr>
-                    <tr><td>INV002</td><td>01/02/2025</td><td>02/01/2025</td></tr>
-                </table>
-                <p class="visual"><strong>Visual</strong>: Line chart would show due dates progressing over time.</p>
-                <canvas id="chart5"></canvas>
+            
+            <!-- Exercise 5 -->
+            <div id="exercise5" class="exercise-content bg-white p-8 rounded-lg shadow-lg">
+                <h2 class="text-3xl font-bold text-gray-800 mb-4">Date Functions (Beginner)</h2>
+                <p class="text-gray-600 mb-4"><strong>Goal:</strong> Calculate invoice due dates that are 30 days from the issue date.</p>
+                <h3 class="text-xl font-semibold text-gray-700 mt-6 mb-2">Steps:</h3>
+                <ol class="list-decimal pl-6 text-gray-700 space-y-2"><li>In cell C2, use the formula <code>=B2+30</code>.</li><li>Ensure the column is formatted as a Date.</li></ol>
+                <h3 class="text-xl font-semibold text-gray-700 mt-6 mb-2">Sample Data:</h3>
+                <table><tbody><tr><th>Invoice</th><th>Issue Date</th><th>Due Date</th></tr><tr><td>INV001</td><td>2025-01-01</td><td></td></tr><tr><td>INV002</td><td>2025-01-15</td><td></td></tr></tbody></table>
+                <a href="data:text/csv;charset=utf-8,Invoice,Issue%20Date,Due%20Date%0AINV001,2025-01-01,%0AINV002,2025-01-15," download="exercise5.csv" class="text-blue-600 hover:underline">Download CSV</a>
+                <div class="tip"><strong>Tip:</strong> Excel stores dates as serial numbers, allowing you to perform simple math on them.</div>
+                <div class="solution">
+                    <h3 class="text-xl font-semibold text-gray-700 mb-2">Solution</h3>
+                    <p class="text-gray-700">The due dates are calculated by simply adding 30 days.</p>
+                    <table><tbody><tr><th>Invoice</th><th>Issue Date</th><th>Due Date</th></tr><tr><td>INV001</td><td>2025-01-01</td><td>2025-01-31</td></tr><tr><td>INV002</td><td>2025-01-15</td><td>2025-02-14</td></tr></tbody></table>
+                </div>
             </div>
-    
-            <div id="exercise6" class="exercise-content bg-white p-6 rounded-lg shadow-md mb-6">
-                <h2 class="text-2xl font-semibold text-gray-800 mb-2">Exercise 6: Basic VLOOKUP (Intermediate)</h2>
-                <p class="text-gray-600"><strong>Goal</strong>: Lookup employee salaries for payroll processing.</p>
-                <p class="text-gray-600"><strong>Steps</strong>:</p>
-                <ol class="list-decimal pl-6 text-gray-600">
-                    <li>Create "Employees" sheet: ID, Name, Salary (A1:C11).</li>
-                    <li>Create "Payroll" sheet: ID, Name, Salary (A1:C11).</li>
-                    <li>In Payroll C2, use <code>=VLOOKUP(A2, Employees!A:C, 3, FALSE)</code>, drag down.</li>
-                    <li>Create bar chart for salaries: Insert > Bar Chart.</li>
-                </ol>
-                <p class="text-gray-600"><strong>Sample Data</strong> (Employees A1:C11):</p>
-                <table class="mb-4">
-                    <tr><th>ID</th><th>Name</th><th>Salary</th></tr>
-                    <tr><td>1</td><td>Alice</td><td>50000</td></tr>
-                    <tr><td>2</td><td>Bob</td><td>45000</td></tr>
-                    <tr><td>3</td><td>Carol</td><td>60000</td></tr>
-                    <tr><td>4</td><td>Dave</td><td>40000</td></tr>
-                    <tr><td>5</td><td>Eve</td><td>55000</td></tr>
-                    <tr><td>6</td><td>Frank</td><td>48000</td></tr>
-                    <tr><td>7</td><td>Grace</td><td>70000</td></tr>
-                    <tr><td>8</td><td>Hank</td><td>42000</td></tr>
-                    <tr><td>9</td><td>Iris</td><td>52000</td></tr>
-                    <tr><td>10</td><td>Jack</td><td>38000</td></tr>
-                </table>
-                <a href="data:text/csv;charset=utf-8,ID,Name,Salary%0A1,Alice,50000%0A2,Bob,45000%0A3,Carol,60000%0A4,Dave,40000%0A5,Eve,55000%0A6,Frank,48000%0A7,Grace,70000%0A8,Hank,42000%0A9,Iris,52000%0A10,Jack,38000" download="exercise6.csv" class="text-blue-600 underline">Download CSV</a>
-                <div class="tip"><strong>Tip</strong>: VLOOKUP searches the first column and returns a value. Use FALSE for exact matches.</div>
-                <h4 class="text-lg font-semibold text-gray-800 mt-4">Solution</h4>
-                <p><strong>Detailed Steps</strong>:</p>
-                <ol class="list-decimal pl-6 text-gray-600">
-                    <li>In Payroll C2, type <code class="bg-gray-200 p-1 rounded">=VLOOKUP(A2, Employees!A:C, 3, FALSE)</code>. Drag to C11.</li>
-                    <li>Select Payroll A1:C11, Insert > Bar Chart. Add title: "Employee Salaries".</li>
-                </ol>
-                <p><strong>Output</strong> (Partial):</p>
-                <table>
-                    <tr><th>ID</th><th>Name</th><th>Salary</th></tr>
-                    <tr><td>1</td><td>Alice</td><td>50000</td></tr>
-                    <tr><td>2</td><td>Bob</td><td>45000</td></tr>
-                </table>
-                <p class="visual"><strong>Visual</strong>: Bar chart would highlight Grace’s $70,000 as the tallest bar with an average salary line at $50,000.</p>
-                <canvas id="chart6"></canvas>
+
+            <!-- Exercise 6 -->
+            <div id="exercise6" class="exercise-content bg-white p-8 rounded-lg shadow-lg">
+                <h2 class="text-3xl font-bold text-gray-800 mb-4">VLOOKUP (Intermediate)</h2>
+                <p class="text-gray-600 mb-4"><strong>Goal:</strong> Look up an employee's salary from a master table using their ID.</p>
+                <h3 class="text-xl font-semibold text-gray-700 mt-6 mb-2">Steps:</h3>
+                <ol class="list-decimal pl-6 text-gray-700 space-y-2"><li>On your payroll sheet, use the formula <code>=VLOOKUP(A2, Employees!A:C, 3, FALSE)</code> in the salary column.</li></ol>
+                <h3 class="text-xl font-semibold text-gray-700 mt-6 mb-2">Sample Data (on 'Employees' sheet):</h3>
+                <table><tbody><tr><th>ID</th><th>Name</th><th>Salary</th></tr><tr><td>101</td><td>Alice</td><td>50000</td></tr><tr><td>102</td><td>Bob</td><td>45000</td></tr><tr><td>103</td><td>Carol</td><td>60000</td></tr></tbody></table>
+                <a href="data:text/csv;charset=utf-8,ID,Name,Salary%0A101,Alice,50000%0A102,Bob,45000%0A103,Carol,60000" download="exercise6.csv" class="text-blue-600 hover:underline">Download CSV</a>
+                <div class="tip"><strong>Tip:</strong> VLOOKUP is essential for combining data. The 'V' stands for vertical. <strong>FALSE</strong> ensures an exact match.</div>
+                <div class="solution">
+                    <h3 class="text-xl font-semibold text-gray-700 mb-2">Solution</h3>
+                    <p class="text-gray-700">Your payroll sheet will now pull the correct salaries from the master list.</p>
+                    <table><tbody><tr><th>ID</th><th>Name</th><th>Salary</th></tr><tr><td>103</td><td>Carol</td><td>60000</td></tr><tr><td>101</td><td>Alice</td><td>50000</td></tr></tbody></table>
+                </div>
             </div>
-    
-            <div id="exercise7" class="exercise-content bg-white p-6 rounded-lg shadow-md mb-6">
-                <h2 class="text-2xl font-semibold text-gray-800 mb-2">Exercise 7: INDEX & MATCH (Intermediate)</h2>
-                <p class="text-gray-600"><strong>Goal</strong>: Lookup tax rates by city for sales tax calculation.</p>
-                <p class="text-gray-600"><strong>Steps</strong>:</p>
-                <ol class="list-decimal pl-6 text-gray-600">
-                    <li>Create "TaxRates" sheet: City, Rate (A1:B11).</li>
-                    <li>Create "Sales" sheet: City, Amount, Tax Rate (A1:C11).</li>
-                    <li>In Sales C2, use <code>=INDEX(TaxRates!B:B, MATCH(A2, TaxRates!A:A, 0))</code>, drag down.</li>
-                    <li>Create pie chart for Tax Rates.</li>
-                </ol>
-                <p class="text-gray-600"><strong>Sample Data</strong> (TaxRates A1:B11):</p>
-                <table class="mb-4">
-                    <tr><th>City</th><th>Rate</th></tr>
-                    <tr><td>New York</td><td>0.08</td></tr>
-                    <tr><td>Los Angeles</td><td>0.09</td></tr>
-                    <tr><td>Chicago</td><td>0.10</td></tr>
-                    <tr><td>Houston</td><td>0.08</td></tr>
-                    <tr><td>Miami</td><td>0.07</td></tr>
-                    <tr><td>Seattle</td><td>0.10</td></tr>
-                    <tr><td>Boston</td><td>0.06</td></tr>
-                    <tr><td>Denver</td><td>0.08</td></tr>
-                    <tr><td>Atlanta</td><td>0.09</td></tr>
-                    <tr><td>Phoenix</td><td>0.08</td></tr>
-                </table>
-                <a href="data:text/csv;charset=utf-8,City,Rate%0ANew%20York,0.08%0ALos%20Angeles,0.09%0AChicago,0.10%0AHouston,0.08%0AMiami,0.07%0ASeattle,0.10%0ABoston,0.06%0ADenver,0.08%0AAtlanta,0.09%0APhoenix,0.08" download="exercise7.csv" class="text-blue-600 underline">Download CSV</a>
-                <div class="tip"><strong>Tip</strong>: INDEX returns a value from a range; MATCH finds the position of a value.</div>
-                <h4 class="text-lg font-semibold text-gray-800 mt-4">Solution</h4>
-                <p><strong>Detailed Steps</strong>:</p>
-                <ol class="list-decimal pl-6 text-gray-600">
-                    <li>In Sales C2, type <code class="bg-gray-200 p-1 rounded">=INDEX(TaxRates!B:B, MATCH(A2, TaxRates!A:A, 0))</code>. Drag to C11.</li>
-                    <li>Select Sales C2:C11, Insert > Pie Chart. Add title: "Tax Rate Distribution".</li>
-                </ol>
-                <p><strong>Output</strong> (Partial, Sales Sheet):</p>
-                <table>
-                    <tr><th>City</th><th>Amount</th><th>Tax Rate</th></tr>
-                    <tr><td>New York</td><td>1000</td><td>0.08</td></tr>
-                    <tr><td>Los Angeles</td><td>1500</td><td>0.09</td></tr>
-                </table>
-                <p class="visual"><strong>Visual</strong>: Pie chart would show distribution of tax rates, with 0.08 and 0.09 most common.</p>
-                <canvas id="chart7"></canvas>
+
+            <!-- Exercise 7 -->
+            <div id="exercise7" class="exercise-content bg-white p-8 rounded-lg shadow-lg">
+                <h2 class="text-3xl font-bold text-gray-800 mb-4">INDEX & MATCH (Intermediate)</h2>
+                <p class="text-gray-600 mb-4"><strong>Goal:</strong> Look up a product's price, even if the lookup column isn't the first one.</p>
+                <h3 class="text-xl font-semibold text-gray-700 mt-6 mb-2">Steps:</h3>
+                <ol class="list-decimal pl-6 text-gray-700 space-y-2"><li>Use <code>=INDEX(C:C, MATCH(E2, B:B, 0))</code>, where E2 contains the product name you're searching for.</li></ol>
+                <h3 class="text-xl font-semibold text-gray-700 mt-6 mb-2">Sample Data:</h3>
+                <table><tbody><tr><th>Category</th><th>Product Name</th><th>Price</th></tr><tr><td>Electronics</td><td>Laptop</td><td>1200</td></tr><tr><td>Accessories</td><td>Mouse</td><td>25</td></tr></tbody></table>
+                <a href="data:text/csv;charset=utf-8,Category,Product%20Name,Price%0AElectronics,Laptop,1200%0AAccessories,Mouse,25" download="exercise7.csv" class="text-blue-600 hover:underline">Download CSV</a>
+                <div class="tip"><strong>Tip:</strong> INDEX & MATCH is more flexible and faster than VLOOKUP.</div>
+                <div class="solution">
+                    <h3 class="text-xl font-semibold text-gray-700 mb-2">Solution</h3>
+                    <p class="text-gray-700">This combination correctly finds the price even though the lookup column isn't the first one.</p>
+                    <table><tbody><tr><th>Product to Find</th><th>Price</th></tr><tr><td>Mouse</td><td>25</td></tr></tbody></table>
+                </div>
             </div>
-    
-            <div id="exercise8" class="exercise-content bg-white p-6 rounded-lg shadow-md mb-6">
-                <h2 class="text-2xl font-semibold text-gray-800 mb-2">Exercise 8: Nested VLOOKUP (Intermediate)</h2>
-                <p class="text-gray-600"><strong>Goal</strong>: Lookup department and salary from employee IDs.</p>
-                <p class="text-gray-600"><strong>Steps</strong>:</p>
-                <ol class="list-decimal pl-6 text-gray-600">
-                    <li>Create "Employees" sheet: ID, Name, Dept ID (A1:C11).</li>
-                    <li>Create "Departments" sheet: Dept ID, Dept Name, Salary (A1:C11).</li>
-                    <li>Create "Payroll" sheet: ID, Name, Dept Name, Salary (A1:D11).</li>
-                    <li>In Payroll C2, use <code>=VLOOKUP(VLOOKUP(A2, Employees!A:C, 3, FALSE), Departments!A:C, 2, FALSE)</code>.</li>
-                    <li>In Payroll D2, use <code>=VLOOKUP(VLOOKUP(A2, Employees!A:C, 3, FALSE), Departments!A:C, 3, FALSE)</code>.</li>
-                    <li>Create bar chart for Salaries.</li>
-                </ol>
-                <p class="text-gray-600"><strong>Sample Data</strong> (Employees A1:C11):</p>
-                <table class="mb-4">
-                    <tr><th>ID</th><th>Name</th><th>Dept ID</th></tr>
-                    <tr><td>1</td><td>Alice</td><td>D1</td></tr>
-                    <tr><td>2</td><td>Bob</td><td>D2</td></tr>
-                    <tr><td>3</td><td>Carol</td><td>D1</td></tr>
-                    <tr><td>4</td><td>Dave</td><td>D3</td></tr>
-                    <tr><td>5</td><td>Eve</td><td>D2</td></tr>
-                    <tr><td>6</td><td>Frank</td><td>D1</td></tr>
-                    <tr><td>7</td><td>Grace</td><td>D3</td></tr>
-                    <tr><td>8</td><td>Hank</td><td>D2</td></tr>
-                    <tr><td>9</td><td>Iris</td><td>D1</td></tr>
-                    <tr><td>10</td><td>Jack</td><td>D3</td></tr>
-                </table>
-                <p class="text-gray-600"><strong>Sample Data</strong> (Departments A1:C11):</p>
-                <table class="mb-4">
-                    <tr><th>Dept ID</th><th>Dept Name</th><th>Salary</th></tr>
-                    <tr><td>D1</td><td>Sales</td><td>50000</td></tr>
-                    <tr><td>D2</td><td>IT</td><td>60000</td></tr>
-                    <tr><td>D3</td><td>HR</td><td>45000</td></tr>
-                </table>
-                <a href="data:text/csv;charset=utf-8,ID,Name,Dept%20ID%0A1,Alice,D1%0A2,Bob,D2%0A3,Carol,D1%0A4,Dave,D3%0A5,Eve,D2%0A6,Frank,D1%0A7,Grace,D3%0A8,Hank,D2%0A9,Iris,D1%0A10,Jack,D3" download="exercise8_employees.csv" class="text-blue-600 underline">Download Employees CSV</a>
-                <a href="data:text/csv;charset=utf-8,Dept%20ID,Dept%20Name,Salary%0AD1,Sales,50000%0AD2,IT,60000%0AD3,HR,45000" download="exercise8_departments.csv" class="text-blue-600 underline ml-4">Download Departments CSV</a>
-                <div class="tip"><strong>Tip</strong>: Nested VLOOKUP uses one VLOOKUP’s result as input for another.</div>
-                <h4 class="text-lg font-semibold text-gray-800 mt-4">Solution</h4>
-                <p><strong>Detailed Steps</strong>:</p>
-                <ol class="list-decimal pl-6 text-gray-600">
-                    <li>In Payroll C2, type <code class="bg-gray-200 p-1 rounded">=VLOOKUP(VLOOKUP(A2, Employees!A:C, 3, FALSE), Departments!A:C, 2, FALSE)</code>.</li>
-                    <li>In Payroll D2, type <code class="bg-gray-200 p-1 rounded">=VLOOKUP(VLOOKUP(A2, Employees!A:C, 3, FALSE), Departments!A:C, 3, FALSE)</code>. Drag to D11.</li>
-                    <li>Select Payroll A1:D11, Insert > Bar Chart. Add title: "Salaries by Department".</li>
-                </ol>
-                <p><strong>Output</strong> (Partial):</p>
-                <table>
-                    <tr><th>ID</th><th>Name</th><th>Dept Name</th><th>Salary</th></tr>
-                    <tr><td>1</td><td>Alice</td><td>Sales</td><td>50000</td></tr>
-                    <tr><td>2</td><td>Bob</td><td>IT</td><td>60000</td></tr>
-                </table>
-                <p class="visual"><strong>Visual</strong>: Bar chart would show IT salaries ($60,000) as the tallest.</p>
-                <canvas id="chart8"></canvas>
+            
+            <!-- Exercise 8 -->
+            <div id="exercise8" class="exercise-content bg-white p-8 rounded-lg shadow-lg">
+                <h2 class="text-3xl font-bold text-gray-800 mb-4">SUMIFS & COUNTIFS (Intermediate)</h2>
+                <p class="text-gray-600 mb-4"><strong>Goal:</strong> Calculate total sales and transaction count for a specific product and region.</p>
+                <h3 class="text-xl font-semibold text-gray-700 mt-6 mb-2">Steps:</h3>
+                <ol class="list-decimal pl-6 text-gray-700 space-y-2"><li>To sum sales: <code>=SUMIFS(C:C, A:A, "North", B:B, "Book")</code>.</li><li>To count sales: <code>=COUNTIFS(A:A, "North", B:B, "Book")</code>.</li></ol>
+                <h3 class="text-xl font-semibold text-gray-700 mt-6 mb-2">Sample Data:</h3>
+                <table><tbody><tr><th>Region</th><th>Product</th><th>Sales</th></tr><tr><td>North</td><td>Book</td><td>150</td></tr><tr><td>South</td><td>Book</td><td>250</td></tr><tr><td>North</td><td>Book</td><td>300</td></tr></tbody></table>
+                <a href="data:text/csv;charset=utf-8,Region,Product,Sales%0ANorth,Book,150%0ASouth,Book,250%0ANorth,Book,300" download="exercise8.csv" class="text-blue-600 hover:underline">Download CSV</a>
+                <div class="tip"><strong>Tip:</strong> The 'S' in SUMIFS and COUNTIFS lets you add multiple criteria.</div>
+                <div class="solution">
+                    <h3 class="text-xl font-semibold text-gray-700 mb-2">Solution</h3>
+                    <p class="text-gray-700">The formulas provide a quick summary based on your specific conditions.</p>
+                    <table><tbody><tr><th>Metric</th><th>Result</th></tr><tr><td>Total Sales (North, Book)</td><td>$450</td></tr><tr><td>Transaction Count (North, Book)</td><td>2</td></tr></tbody></table>
+                </div>
             </div>
-    
-            <div id="exercise9" class="exercise-content bg-white p-6 rounded-lg shadow-md mb-6">
-                <h2 class="text-2xl font-semibold text-gray-800 mb-2">Exercise 9: PMT for Loans (Intermediate)</h2>
-                <p class="text-gray-600"><strong>Goal</strong>: Calculate monthly loan payments.</p>
-                <p class="text-gray-600"><strong>Steps</strong>:</p>
-                <ol class="list-decimal pl-6 text-gray-600">
-                    <li>Create columns: Loan, Rate, Years, Monthly Payment.</li>
-                    <li>Copy sample data to A1:D11.</li>
-                    <li>In D2, use <code>=PMT(B2/12, C2*12, A2)</code>, drag down.</li>
-                    <li>Create line chart for Monthly Payments.</li>
-                </ol>
-                <p class="text-gray-600"><strong>Sample Data</strong> (A1:D11):</p>
-                <table class="mb-4">
-                    <tr><th>Loan</th><th>Rate</th><th>Years</th><th>Monthly Payment</th></tr>
-                    <tr><td>10000</td><td>0.05</td><td>3</td><td></td></tr>
-                    <tr><td>15000</td><td>0.06</td><td>5</td><td></td></tr>
-                    <tr><td>20000</td><td>0.04</td><td>4</td><td></td></tr>
-                    <tr><td>12000</td><td>0.07</td><td>2</td><td></td></tr>
-                    <tr><td>18000</td><td>0.05</td><td>3</td><td></td></tr>
-                    <tr><td>25000</td><td>0.06</td><td>5</td><td></td></tr>
-                    <tr><td>14000</td><td>0.04</td><td>4</td><td></td></tr>
-                    <tr><td>16000</td><td>0.07</td><td>2</td><td></td></tr>
-                    <tr><td>22000</td><td>0.05</td><td>3</td><td></td></tr>
-                    <tr><td>13000</td><td>0.06</td><td>5</td><td></td></tr>
-                </table>
-                <a href="data:text/csv;charset=utf-8,Loan,Rate,Years,Monthly%20Payment%0A10000,0.05,3,%0A15000,0.06,5,%0A20000,0.04,4,%0A12000,0.07,2,%0A18000,0.05,3,%0A25000,0.06,5,%0A14000,0.04,4,%0A16000,0.07,2,%0A22000,0.05,3,%0A13000,0.06,5" download="exercise9.csv" class="text-blue-600 underline">Download CSV</a>
-                <div class="tip"><strong>Tip</strong>: PMT calculates payments; divide annual rate by 12 for monthly, multiply years by 12 for periods.</div>
-                <h4 class="text-lg font-semibold text-gray-800 mt-4">Solution</h4>
-                <p><strong>Detailed Steps</strong>:</p>
-                <ol class="list-decimal pl-6 text-gray-600">
-                    <li>In D2, type <code class="bg-gray-200 p-1 rounded">=PMT(B2/12, C2*12, A2)</code>. Drag to D11.</li>
-                    <li>Select A1:D11, Insert > Line Chart. Add title: "Monthly Payments".</li>
-                </ol>
-                <p><strong>Output</strong> (Partial):</p>
-                <table>
-                    <tr><th>Loan</th><th>Rate</th><th>Years</th><th>Monthly Payment</th></tr>
-                    <tr><td>10000</td><td>0.05</td><td>3</td><td>-304.22</td></tr>
-                    <tr><td>15000</td><td>0.06</td><td>5</td><td>-289.99</td></tr>
-                </table>
-                <p class="visual"><strong>Visual</strong>: Line chart would show monthly payments varying by loan size.</p>
-                <canvas id="chart9"></canvas>
+
+            <!-- Exercise 9 -->
+            <div id="exercise9" class="exercise-content bg-white p-8 rounded-lg shadow-lg">
+                <h2 class="text-3xl font-bold text-gray-800 mb-4">Data Validation (Intermediate)</h2>
+                <p class="text-gray-600 mb-4"><strong>Goal:</strong> Restrict data entry to a dropdown list to prevent errors.</p>
+                <h3 class="text-xl font-semibold text-gray-700 mt-6 mb-2">Steps:</h3>
+                <ol class="list-decimal pl-6 text-gray-700 space-y-2"><li>Create your list of valid entries (e.g., 'IT', 'Sales', 'HR').</li><li>Select the cell(s) where you want the dropdown.</li><li>Go to <strong>Data &gt; Data Validation</strong>, select <strong>List</strong>, and select your list as the <strong>Source</strong>.</li></ol>
+                <h3 class="text-xl font-semibold text-gray-700 mt-6 mb-2">Source Data for List:</h3>
+                <table><tbody><tr><th>Department List</th></tr><tr><td>IT</td></tr><tr><td>Sales</td></tr><tr><td>HR</td></tr></tbody></table>
+                <a href="data:text/csv;charset=utf-8,Department%20List%0AIT%0ASales%0AHR" download="exercise9.csv" class="text-blue-600 hover:underline">Download CSV</a>
+                <div class="tip"><strong>Tip:</strong> Data Validation is crucial for creating templates that ensure data integrity.</div>
+                <div class="solution">
+                    <h3 class="text-xl font-semibold text-gray-700 mb-2">Solution</h3>
+                    <p class="text-gray-700">The result is interactive. The selected cells in your main table will now have a dropdown arrow, allowing users to only pick from your predefined list. This prevents typos and keeps data consistent.</p>
+                </div>
             </div>
-    
-            <div id="exercise10" class="exercise-content bg-white p-6 rounded-lg shadow-md mb-6">
-                <h2 class="text-2xl font-semibold text-gray-800 mb-2">Exercise 10: NPV for Investments (Intermediate)</h2>
-                <p class="text-gray-600"><strong>Goal</strong>: Calculate Net Present Value for project cash flows.</p>
-                <p class="text-gray-600"><strong>Steps</strong>:</p>
-                <ol class="list-decimal pl-6 text-gray-600">
-                    <li>Create columns: Project, Year 1, Year 2, Year 3, NPV (rate=0.05).</li>
-                    <li>Copy sample data to A1:E11.</li>
-                    <li>In E2, use <code>=NPV(0.05, B2:D2) - B2</code>, drag down.</li>
-                    <li>Create bar chart for NPV.</li>
-                </ol>
-                <p class="text-gray-600"><strong>Sample Data</strong> (A1:E11):</p>
-                <table class="mb-4">
-                    <tr><th>Project</th><th>Year 1</th><th>Year 2</th><th>Year 3</th><th>NPV</th></tr>
-                    <tr><td>P1</td><td>-10000</td><td>5000</td><td>6000</td><td></td></tr>
-                    <tr><td>P2</td><td>-12000</td><td>6000</td><td>7000</td><td></td></tr>
-                    <tr><td>P3</td><td>-15000</td><td>8000</td><td>9000</td><td></td></tr>
-                    <tr><td>P4</td><td>-8000</td><td>4000</td><td>5000</td><td></td></tr>
-                    <tr><td>P5</td><td>-11000</td><td>5500</td><td>6500</td><td></td></tr>
-                    <tr><td>P6</td><td>-13000</td><td>7000</td><td>8000</td><td></td></tr>
-                    <tr><td>P7</td><td>-9000</td><td>4500</td><td>5500</td><td></td></tr>
-                    <tr><td>P8</td><td>-14000</td><td>7500</td><td>8500</td><td></td></tr>
-                    <tr><td>P9</td><td>-10000</td><td>5000</td><td>6000</td><td></td></tr>
-                    <tr><td>P10</td><td>-16000</td><td>8000</td><td>9500</td></tr>
-                </table>
-                <a href="data:text/csv;charset=utf-8,Project,Year%201,Year%202,Year%203,NPV%0AP1,-10000,5000,6000,%0AP2,-12000,6000,7000,%0AP3,-15000,8000,9000,%0AP4,-8000,4000,5000,%0AP5,-11000,5500,6500,%0AP6,-13000,7000,8000,%0AP7,-9000,4500,5500,%0AP8,-14000,7500,8500,%0AP9,-10000,5000,6000,%0AP10,-16000,8000,9500" download="exercise10.csv" class="text-blue-600 underline">Download CSV</a>
-                <div class="tip"><strong>Tip</strong>: NPV discounts future cash flows; subtract initial investment if negative.</div>
-                <h4 class="text-lg font-semibold text-gray-800 mt-4">Solution</h4>
-                <p><strong>Detailed Steps</strong>:</p>
-                <ol class="list-decimal pl-6 text-gray-600">
-                    <li>In E2, type <code class="bg-gray-200 p-1 rounded">=NPV(0.05, B2:D2) - B2</code>. Drag to E11.</li>
-                    <li>Select A1:E11, Insert > Bar Chart. Add title: "NPV by Project".</li>
-                </ol>
-                <p><strong>Output</strong> (Partial):</p>
-                <table>
-                    <tr><th>Project</th><th>Year 1</th><th>Year 2</th><th>Year 3</th><th>NPV</th></tr>
-                    <tr><td>P1</td><td>-10000</td><td>5000</td><td>6000</td><td>452.90</td></tr>
-                    <tr><td>P2</td><td>-12000</td><td>6000</td><td>7000</td><td>543.48</td></tr>
-                </table>
-                <p class="visual"><strong>Visual</strong>: Bar chart would show NPV values, with P3 highest (~$815).</p>
-                <canvas id="chart10"></canvas>
+
+            <!-- Exercise 10 -->
+            <div id="exercise10" class="exercise-content bg-white p-8 rounded-lg shadow-lg">
+                <h2 class="text-3xl font-bold text-gray-800 mb-4">PivotTables & Slicers (Pro)</h2>
+                <p class="text-gray-600 mb-4"><strong>Goal:</strong> Summarize sales data and create interactive filters.</p>
+                <h3 class="text-xl font-semibold text-gray-700 mt-6 mb-2">Steps:</h3>
+                <ol class="list-decimal pl-6 text-gray-700 space-y-2"><li>Select your data and go to <strong>Insert &gt; PivotTable</strong>.</li><li>Drag fields to the Rows, Columns, and Values areas to build your report.</li><li>With the PivotTable selected, go to <strong>PivotTable Analyze &gt; Insert Slicer</strong>.</li></ol>
+                <h3 class="text-xl font-semibold text-gray-700 mt-6 mb-2">Sample Data:</h3>
+                <table><tbody><tr><th>Region</th><th>Product</th><th>Sales</th></tr><tr><td>North</td><td>Book</td><td>150</td></tr><tr><td>South</td><td>Book</td><td>250</td></tr><tr><td>North</td><td>Pen</td><td>80</td></tr></tbody></table>
+                 <a href="data:text/csv;charset=utf-8,Region,Product,Sales%0ANorth,Book,150%0ASouth,Book,250%0ANorth,Pen,80" download="exercise10.csv" class="text-blue-600 hover:underline">Download CSV</a>
+                <div class="tip"><strong>Tip:</strong> PivotTables are the most powerful reporting tool in Excel. Slicers make them interactive.</div>
+                <div class="solution">
+                    <h3 class="text-xl font-semibold text-gray-700 mb-2">Solution</h3>
+                    <p class="text-gray-700">The PivotTable provides an instant summary of your data. Slicers add interactive buttons to filter it.</p>
+                    <table><tbody><tr><th>Sum of Sales</th><th>Product</th><th></th><th>Grand Total</th></tr><tr><td>Region</td><td>Book</td><td>Pen</td><td></td></tr><tr><td>North</td><td>150</td><td>80</td><td>230</td></tr><tr><td>South</td><td>250</td><td></td><td>250</td></tr><tr><td>Grand Total</td><td>400</td><td>80</td><td>480</td></tr></tbody></table>
+                </div>
             </div>
-    
-            <div id="exercise11" class="exercise-content bg-white p-6 rounded-lg shadow-md mb-6">
-                <h2 class="text-2xl font-semibold text-gray-800 mb-2">Exercise 11: Goal Seek (Pro)</h2>
-                <p class="text-gray-600"><strong>Goal</strong>: Find break-even sales quantity for budgeting.</p>
-                <p class="text-gray-600"><strong>Steps</strong>:</p>
-                <ol class="list-decimal pl-6 text-gray-600">
-                    <li>Create columns: Fixed Costs, Variable Cost, Price, Quantity, Profit.</li>
-                    <li>Copy sample data to A1:E11.</li>
-                    <li>In E2, use <code>=(D2*C2) - (A2 + B2*D2)</code>, drag down.</li>
-                    <li>Use Goal Seek: Data > What-If Analysis > Goal Seek, set E2 to 0 by changing D2.</li>
-                    <li>Create scatter chart for Profit vs. Quantity.</li>
-                </ol>
-                <p class="text-gray-600"><strong>Sample Data</strong> (A1:E11):</p>
-                <table class="mb-4">
-                    <tr><th>Fixed Costs</th><th>Variable Cost</th><th>Price</th><th>Quantity</th><th>Profit</th></tr>
-                    <tr><td>10000</td><td>10</td><td>50</td><td>300</td><td></td></tr>
-                    <tr><td>10000</td><td>15</td><td>60</td><td>200</td><td></td></tr>
-                    <tr><td>15000</td><td>20</td><td>70</td><td>250</td><td></td></tr>
-                    <tr><td>8000</td><td>5</td><td>40</td><td>400</td><td></td></tr>
-                    <tr><td>12000</td><td>12</td><td>55</td><td>350</td><td></td></tr>
-                    <tr><td>9000</td><td>8</td><td>45</td><td>280</td><td></td></tr>
-                    <tr><td>11000</td><td>18</td><td>65</td><td>220</td><td></td></tr>
-                    <tr><td>7000</td><td>7</td><td>35</td><td>450</td><td></td></tr>
-                    <tr><td>13000</td><td>22</td><td>75</td><td>180</td><td></td></tr>
-                    <tr><td>10000</td><td>11</td><td>52</td><td>310</td><td></td></tr>
-                </table>
-                <a href="data:text/csv;charset=utf-8,Fixed%20Costs,Variable%20Cost,Price,Quantity,Profit%0A10000,10,50,300,%0A10000,15,60,200,%0A15000,20,70,250,%0A8000,5,40,400,%0A12000,12,55,350,%0A9000,8,45,280,%0A11000,18,65,220,%0A7000,7,35,450,%0A13000,22,75,180,%0A10000,11,52,310" download="exercise11.csv" class="text-blue-600 underline">Download CSV</a>
-                <div class="tip"><strong>Tip</strong>: Goal Seek adjusts one cell to meet a target (e.g., Profit = 0).</div>
-                <h4 class="text-lg font-semibold text-gray-800 mt-4">Solution</h4>
-                <p><strong>Detailed Steps</strong>:</p>
-                <ol class="list-decimal pl-6 text-gray-600">
-                    <li>In E2, type <code class="bg-gray-200 p-1 rounded">=(D2*C2) - (A2 + B2*D2)</code>. Drag to E11.</li>
-                    <li>Data > What-If Analysis > Goal Seek, set E2 to 0 by changing D2 (~250 units).</li>
-                    <li>Select D2:E11, Insert > Scatter Chart. Add title: "Profit vs. Quantity".</li>
-                </ol>
-                <p><strong>Output</strong> (Partial):</p>
-                <table>
-                    <tr><th>Fixed Costs</th><th>Variable Cost</th><th>Price</th><th>Quantity</th><th>Profit</th></tr>
-                    <tr><td>10000</td><td>10</td><td>50</td><td>250</td><td>0</td></tr>
-                </table>
-                <p class="visual"><strong>Visual</strong>: Scatter chart would show profit crossing zero at break-even (~250 units) with a line indicating break-even.</p>
-                <canvas id="chart11"></canvas>
+
+            <!-- Exercise 11 -->
+            <div id="exercise11" class="exercise-content bg-white p-8 rounded-lg shadow-lg">
+                <h2 class="text-3xl font-bold text-gray-800 mb-4">SUMPRODUCT (Pro)</h2>
+                <p class="text-gray-600 mb-4"><strong>Goal:</strong> Calculate total revenue in one step without a helper column.</p>
+                <h3 class="text-xl font-semibold text-gray-700 mt-6 mb-2">Steps:</h3>
+                <ol class="list-decimal pl-6 text-gray-700 space-y-2"><li>Use the formula <code>=SUMPRODUCT(B2:B4, C2:C4)</code>.</li></ol>
+                <h3 class="text-xl font-semibold text-gray-700 mt-6 mb-2">Sample Data:</h3>
+                <table><tbody><tr><th>Product</th><th>Quantity</th><th>Price</th></tr><tr><td>Laptop</td><td>10</td><td>1200</td></tr><tr><td>Mouse</td><td>50</td><td>25</td></tr><tr><td>Keyboard</td><td>30</td><td>75</td></tr></tbody></table>
+                 <a href="data:text/csv;charset=utf-8,Product,Quantity,Price%0ALaptop,10,1200%0AMouse,50,25%0AKeyboard,30,75" download="exercise11.csv" class="text-blue-600 hover:underline">Download CSV</a>
+                <div class="tip"><strong>Tip:</strong> SUMPRODUCT is efficient for weighted averages and other calculations that normally require extra columns.</div>
+                <div class="solution">
+                    <h3 class="text-xl font-semibold text-gray-700 mb-2">Solution</h3>
+                    <p class="text-gray-700">The formula calculates (10*1200) + (50*25) + (30*75) in one step.</p>
+                    <table><tbody><tr><th>Metric</th><th>Result</th></tr><tr><td>Total Revenue</td><td>$15,500</td></tr></tbody></table>
+                </div>
             </div>
-    
-            <div id="exercise12" class="exercise-content bg-white p-6 rounded-lg shadow-md mb-6">
-                <h2 class="text-2xl font-semibold text-gray-800 mb-2">Exercise 12: PivotTables (Pro)</h2>
-                <p class="text-gray-600"><strong>Goal</strong>: Summarize sales by region and product for reporting.</p>
-                <p class="text-gray-600"><strong>Steps</strong>:</p>
-                <ol class="list-decimal pl-6 text-gray-600">
-                    <li>Create columns: Date, Product, Sales, Region.</li>
-                    <li>Copy sample data to A1:D11.</li>
-                    <li>Insert > PivotTable (new sheet), set Rows: Region, Columns: Product, Values: Sum of Sales.</li>
-                    <li>Add slicer for Date: Insert > Slicer.</li>
-                    <li>Create stacked bar chart for PivotTable data.</li>
-                </ol>
-                <p class="text-gray-600"><strong>Sample Data</strong> (A1:D11):</p>
-                <table class="mb-4">
-                    <tr><th>Date</th><th>Product</th><th>Sales</th><th>Region</th></tr>
-                    <tr><td>01/01/2025</td><td>Pen</td><td>100</td><td>North</td></tr>
-                    <tr><td>01/02/2025</td><td>Book</td><td>200</td><td>South</td></tr>
-                    <tr><td>01/03/2025</td><td>Pen</td><td>150</td><td>North</td></tr>
-                    <tr><td>01/04/2025</td><td>Book</td><td>250</td><td>South</td></tr>
-                    <tr><td>01/05/2025</td><td>Pencil</td><td>80</td><td>North</td></tr>
-                    <tr><td>01/06/2025</td><td>Book</td><td>300</td><td>North</td></tr>
-                    <tr><td>01/07/2025</td><td>Pen</td><td>120</td><td>South</td></tr>
-                    <tr><td>01/08/2025</td><td>Pencil</td><td>90</td><td>South</td></tr>
-                    <tr><td>01/09/2025</td><td>Book</td><td>180</td><td>North</td></tr>
-                    <tr><td>01/10/2025</td><td>Pen</td><td>140</td><td>North</td></tr>
-                </table>
-                <a href="data:text/csv;charset=utf-8,Date,Product,Sales,Region%0A01/01/2025,Pen,100,North%0A01/02/2025,Book,200,South%0A01/03/2025,Pen,150,North%0A01/04/2025,Book,250,South%0A01/05/2025,Pencil,80,North%0A01/06/2025,Book,300,North%0A01/07/2025,Pen,120,South%0A01/08/2025,Pencil,90,South%0A01/09/2025,Book,180,North%0A01/10/2025,Pen,140,North" download="exercise12.csv" class="text-blue-600 underline">Download CSV</a>
-                <div class="tip"><strong>Tip</strong>: PivotTables summarize data; slicers filter interactively.</div>
-                <h4 class="text-lg font-semibold text-gray-800 mt-4">Solution</h4>
-                <p><strong>Detailed Steps</strong>:</p>
-                <ol class="list-decimal pl-6 text-gray-600">
-                    <li>Insert > PivotTable, set Rows: Region, Columns: Product, Values: Sum of Sales.</li>
-                    <li>Insert > Slicer for Date.</li>
-                    <li>Select PivotTable data, Insert > Bar Chart (Stacked). Add title: "Sales by Region and Product".</li>
-                </ol>
-                <p><strong>Output</strong> (PivotTable, Partial):</p>
-                <table>
-                    <tr><th>Region</th><th>Pen</th><th>Book</th><th>Pencil</th></tr>
-                    <tr><td>North</td><td>390</td><td>480</td><td>80</td></tr>
-                    <tr><td>South</td><td>120</td><td>450</td><td>90</td></tr>
-                </table>
-                <p class="visual"><strong>Visual</strong>: Stacked bar chart would show North and South sales, with Book highest in both.</p>
-                <canvas id="chart12"></canvas>
+
+            <!-- Exercise 12 -->
+            <div id="exercise12" class="exercise-content bg-white p-8 rounded-lg shadow-lg">
+                <h2 class="text-3xl font-bold text-gray-800 mb-4">Cell Locking & Protection (Pro)</h2>
+                <p class="text-gray-600 mb-4"><strong>Goal:</strong> Create a template where users can only edit specific input cells.</p>
+                <h3 class="text-xl font-semibold text-gray-700 mt-6 mb-2">Steps:</h3>
+                <ol class="list-decimal pl-6 text-gray-700 space-y-2"><li>Select the input cells (e.g., B2:B3). Right-click &gt; <strong>Format Cells</strong>.</li><li>Go to the <strong>Protection</strong> tab and <strong>uncheck</strong> the 'Locked' box.</li><li>Go to the <strong>Review</strong> tab and click <strong>Protect Sheet</strong>.</li></ol>
+                <h3 class="text-xl font-semibold text-gray-700 mt-6 mb-2">Starting Template:</h3>
+                <table><tbody><tr><th>Item</th><th>Value</th></tr><tr><td>Quantity (Input)</td><td></td></tr><tr><td>Price (Input)</td><td></td></tr><tr><td>Total (Formula)</td><td>=B2*B3</td></tr></tbody></table>
+                 <a href="data:text/csv;charset=utf-8,Item,Value%0AQuantity%20(Input),%0APrice%20(Input),%0ATotal%20(Formula),=B2*B3" download="exercise12.csv" class="text-blue-600 hover:underline">Download CSV</a>
+                <div class="tip"><strong>Tip:</strong> This is essential for building robust models that prevent accidental formula deletion.</div>
+                <div class="solution">
+                    <h3 class="text-xl font-semibold text-gray-700 mb-2">Solution</h3>
+                    <p class="text-gray-700">The result is an interactive sheet. Users will be able to type in the 'Value' cells for Quantity and Price, but if they try to click on or edit the 'Total' formula cell, they will be blocked by an error message, protecting your formula from being changed.</p>
+                </div>
             </div>
-    
-            <div id="exercise13" class="exercise-content bg-white p-6 rounded-lg shadow-md mb-6">
-                <h2 class="text-2xl font-semibold text-gray-800 mb-2">Exercise 13: Scenario Analysis (Pro)</h2>
-                <p class="text-gray-600"><strong>Goal</strong>: Compare profit scenarios for different sales volumes.</p>
-                <p class="text-gray-600"><strong>Steps</strong>:</p>
-                <ol class="list-decimal pl-6 text-gray-600">
-                    <li>Create columns: Scenario, Price, Volume, Cost, Profit.</li>
-                    <li>Copy sample data to A1:E11.</li>
-                    <li>In E2, use <code>=(B2*C2) - D2</code>, drag down.</li>
-                    <li>Create combo chart (bar for Profit, line for Volume).</li>
-                </ol>
-                <p class="text-gray-600"><strong>Sample Data</strong> (A1:E11):</p>
-                <table class="mb-4">
-                    <tr><th>Scenario</th><th>Price</th><th>Volume</th><th>Cost</th><th>Profit</th></tr>
-                    <tr><td>Base</td><td>50</td><td>1000</td><td>30000</td><td></td></tr>
-                    <tr><td>High</td><td>60</td><td>1200</td><td>35000</td><td></td></tr>
-                    <tr><td>Low</td><td>40</td><td>800</td><td>25000</td><td></td></tr>
-                    <tr><td>Optimistic</td><td>55</td><td>1500</td><td>40000</td><td></td></tr>
-                    <tr><td>Pessimistic</td><td>45</td><td>600</td><td>20000</td><td></td></tr>
-                    <tr><td>Normal</td><td>50</td><td>1100</td><td>32000</td><td></td></tr>
-                    <tr><td>Aggressive</td><td>65</td><td>1300</td><td>38000</td><td></td></tr>
-                    <tr><td>Conservative</td><td>42</td><td>700</td><td>23000</td><td></td></tr>
-                    <tr><td>Balanced</td><td>52</td><td>1000</td><td>31000</td><td></td></tr>
-                    <tr><td>Extreme</td><td>70</td><td>1400</td><td>45000</td><td></td></tr>
-                </table>
-                <a href="data:text/csv;charset=utf-8,Scenario,Price,Volume,Cost,Profit%0ABase,50,1000,30000,%0AHigh,60,1200,35000,%0ALow,40,800,25000,%0AOptimistic,55,1500,40000,%0APessimistic,45,600,20000,%0ANormal,50,1100,32000,%0AAggressive,65,1300,38000,%0AConservative,42,700,23000,%0ABalanced,52,1000,31000,%0AExtreme,70,1400,45000" download="exercise13.csv" class="text-blue-600 underline">Download CSV</a>
-                <div class="tip"><strong>Tip</strong>: Scenario analysis compares outcomes under different assumptions.</div>
-                <h4 class="text-lg font-semibold text-gray-800 mt-4">Solution</h4>
-                <p><strong>Detailed Steps</strong>:</p>
-                <ol class="list-decimal pl-6 text-gray-600">
-                    <li>In E2, type <code class="bg-gray-200 p-1 rounded">=(B2*C2) - D2</code>. Drag to E11.</li>
-                    <li>Select A1:E11, Insert > Combo Chart (Bar for Profit, Line for Volume). Add title: "Scenario Analysis".</li>
-                </ol>
-                <p><strong>Output</strong> (Partial):</p>
-                <table>
-                    <tr><th>Scenario</th><th>Price</th><th>Volume</th><th>Cost</th><th>Profit</th></tr>
-                    <tr><td>Base</td><td>50</td><td>1000</td><td>30000</td><td>20000</td></tr>
-                    <tr><td>High</td><td>60</td><td>1200</td><td>35000</td><td>37000</td></tr>
-                </table>
-                <p class="visual"><strong>Visual</strong>: Combo chart would show Profit bars with a Volume line, highlighting Aggressive ($46,500) as highest profit.</p>
-                <canvas id="chart13"></canvas>
+            
+            <!-- Exercise 13 -->
+            <div id="exercise13" class="exercise-content bg-white p-8 rounded-lg shadow-lg">
+                <h2 class="text-3xl font-bold text-gray-800 mb-4">XLOOKUP Function (Pro)</h2>
+                <p class="text-gray-600 mb-4"><strong>Goal:</strong> Use the modern XLOOKUP to find an employee's department.</p>
+                <h3 class="text-xl font-semibold text-gray-700 mt-6 mb-2">Steps:</h3>
+                <ol class="list-decimal pl-6 text-gray-700 space-y-2"><li>In cell F2, use the formula: <code>=XLOOKUP(E2, A2:A5, C2:C5, "Not Found")</code></li></ol>
+                <h3 class="text-xl font-semibold text-gray-700 mt-6 mb-2">Sample Data:</h3>
+                <table><tbody><tr><th>Emp ID</th><th>Name</th><th>Department</th><th></th><th>Lookup ID</th><th>Result</th></tr><tr><td>101</td><td>Alice</td><td>Sales</td><td></td><td>103</td><td></td></tr><tr><td>102</td><td>Bob</td><td>IT</td><td></td><td>105</td><td></td></tr><tr><td>103</td><td>Carol</td><td>HR</td><td></td><td></td><td></td></tr><tr><td>104</td><td>Dave</td><td>Sales</td><td></td><td></td><td></td></tr></tbody></table>
+                <a href="data:text/csv;charset=utf-8,Emp%20ID,Name,Department,,Lookup%20ID,Result%0A101,Alice,Sales,,103,%0A102,Bob,IT,,105,%0A103,Carol,HR,,,," download="exercise13.csv" class="text-blue-600 hover:underline">Download CSV</a>
+                <div class="tip"><strong>Tip:</strong> XLOOKUP replaces VLOOKUP. It's more powerful, flexible, and easier to use.</div>
+                <div class="solution">
+                    <h3 class="text-xl font-semibold text-gray-700 mb-2">Solution</h3>
+                    <p class="text-gray-700">The formula correctly finds the department for existing IDs and returns a custom message for non-existing ones.</p>
+                    <table><tbody><tr><th>Lookup ID</th><th>Result</th></tr><tr><td>103</td><td>HR</td></tr><tr><td>105</td><td>Not Found</td></tr></tbody></table>
+                </div>
             </div>
-    
-            <div id="exercise14" class="exercise-content bg-white p-6 rounded-lg shadow-md mb-6">
-                <h2 class="text-2xl font-semibold text-gray-800 mb-2">Exercise 14: Data Validation (Pro)</h2>
-                <p class="text-gray-600"><strong>Goal</strong>: Restrict expense categories to a dropdown list for data entry.</p>
-                <p class="text-gray-600"><strong>Steps</strong>:</p>
-                <ol class="list-decimal pl-6 text-gray-600">
-                    <li>Create columns: Item, Category, Amount.</li>
-                    <li>Copy sample data to A1:C11.</li>
-                    <li>In B2:B11, Data > Data Validation > List, enter "Rent,Food,Travel,Other".</li>
-                    <li>Create doughnut chart for Amount by Category.</li>
-                </ol>
-                <p class="text-gray-600"><strong>Sample Data</strong> (A1:C11):</p>
-                <table class="mb-4">
-                    <tr><th>Item</th><th>Category</th><th>Amount</th></tr>
-                    <tr><td>Office</td><td>Rent</td><td>1000</td></tr>
-                    <tr><td>Lunch</td><td>Food</td><td>200</td></tr>
-                    <tr><td>Flight</td><td>Travel</td><td>500</td></tr>
-                    <tr><td>Supplies</td><td>Other</td><td>150</td></tr>
-                    <tr><td>Desk</td><td>Rent</td><td>800</td></tr>
-                    <tr><td>Snacks</td><td>Food</td><td>100</td></tr>
-                    <tr><td>Taxi</td><td>Travel</td><td>300</td></tr>
-                    <tr><td>Paper</td><td>Other</td><td>50</td></tr>
-                    <tr><td>Chair</td><td>Rent</td><td>600</td></tr>
-                    <tr><td>Dinner</td><td>Food</td><td>250</td></tr>
-                </table>
-                <a href="data:text/csv;charset=utf-8,Item,Category,Amount%0AOffice,Rent,1000%0ALunch,Food,200%0AFlight,Travel,500%0ASupplies,Other,150%0ADesk,Rent,800%0ASnacks,Food,100%0ATaxi,Travel,300%0APaper,Other,50%0AChair,Rent,600%0ADinner,Food,250" download="exercise14.csv" class="text-blue-600 underline">Download CSV</a>
-                <div class="tip"><strong>Tip</strong>: Data Validation ensures consistent data entry via dropdowns.</div>
-                <h4 class="text-lg font-semibold text-gray-800 mt-4">Solution</h4>
-                <p><strong>Detailed Steps</strong>:</p>
-                <ol class="list-decimal pl-6 text-gray-600">
-                    <li>Select B2:B11, Data > Data Validation > List, enter "Rent,Food,Travel,Other".</li>
-                    <li>Select B1:C11, Insert > Doughnut Chart. Add title: "Expenses by Category".</li>
-                </ol>
-                <p><strong>Output</strong> (Partial):</p>
-                <table>
-                    <tr><th>Item</th><th>Category</th><th>Amount</th></tr>
-                    <tr><td>Office</td><td>Rent</td><td>1000</td></tr>
-                    <tr><td>Lunch</td><td>Food</td><td>200</td></tr>
-                    <tr><td>Flight</td><td>Travel</td><td>500</td></tr>
-                </table>
-                <p class="visual"><strong>Visual</strong>: Doughnut chart would show Rent (~60%) as the largest segment.</p>
-                <canvas id="chart14"></canvas>
+
+            <!-- Exercise 14 -->
+            <div id="exercise14" class="exercise-content bg-white p-8 rounded-lg shadow-lg">
+                <h2 class="text-3xl font-bold text-gray-800 mb-4">Intro to Power Query (Pro)</h2>
+                <p class="text-gray-600 mb-4"><strong>Goal:</strong> Combine two tables into one master table without formulas.</p>
+                <h3 class="text-xl font-semibold text-gray-700 mt-6 mb-2">Steps:</h3>
+                <ol class="list-decimal pl-6 text-gray-700 space-y-2"><li>Format your data as Excel Tables (Ctrl+T).</li><li>Load each table into Power Query via <strong>Data &gt; From Table/Range</strong>.</li><li>Use the <strong>Merge Queries</strong> feature to join the tables on a common column.</li><li>Click <strong>Close &amp; Load</strong> to output the new merged table.</li></ol>
+                <h3 class="text-xl font-semibold text-gray-700 mt-6 mb-2">Sample Data:</h3>
+                <p>Table 1: Sales</p><table><tbody><tr><th>ProductID</th><th>Units</th></tr><tr><td>P1</td><td>10</td></tr><tr><td>P2</td><td>5</td></tr></tbody></table>
+                <p>Table 2: Products</p><table><tbody><tr><th>ProductID</th><th>Name</th></tr><tr><td>P1</td><td>Laptop</td></tr><tr><td>P2</td><td>Mouse</td></tr></tbody></table>
+                <a href="data:text/csv;charset=utf-8,ProductID,Units%0AP1,10%0AP2,5" download="exercise14_sales.csv" class="text-blue-600 hover:underline">Download Sales CSV</a>
+                <a href="data:text/csv;charset=utf-8,ProductID,Name%0AP1,Laptop%0AP2,Mouse" download="exercise14_products.csv" class="text-blue-600 hover:underline ml-4">Download Products CSV</a>
+                <div class="tip"><strong>Tip:</strong> Power Query automates data cleaning. Once set up, just click 'Refresh' to update when source data changes.</div>
+                <div class="solution">
+                    <h3 class="text-xl font-semibold text-gray-700 mb-2">Solution</h3>
+                    <p class="text-gray-700">The final output is a single, clean table combining the information from both source tables.</p>
+                    <table><tbody><tr><th>ProductID</th><th>Units</th><th>Name</th></tr><tr><td>P1</td><td>10</td><td>Laptop</td></tr><tr><td>P2</td><td>5</td><td>Mouse</td></tr></tbody></table>
+                </div>
             </div>
-    
-            <div id="exercise15" class="exercise-content bg-white p-6 rounded-lg shadow-md mb-6">
-                <h2 class="text-2xl font-semibold text-gray-800 mb-2">Exercise 15: Forecasting (Pro)</h2>
-                <p class="text-gray-600"><strong>Goal</strong>: Forecast future sales using trend analysis.</p>
-                <p class="text-gray-600"><strong>Steps</strong>:</p>
-                <ol class="list-decimal pl-6 text-gray-600">
-                    <li>Create columns: Month, Sales.</li>
-                    <li>Copy sample data to A1:B11.</li>
-                    <li>In B12, use <code>=FORECAST.LINEAR(12, B2:B11, A2:A11)</code> to predict sales for Month 12.</li>
-                    <li>Create a line chart for Sales with a trendline: Insert > Line Chart, add trendline.</li>
-                </ol>
-                <p class="text-gray-600"><strong>Sample Data</strong> (A1:B11):</p>
-                <table class="mb-4">
-                    <tr><th>Month</th><th>Sales</th></tr>
-                    <tr><td>1</td><td>1000</td></tr>
-                    <tr><td>2</td><td>1200</td></tr>
-                    <tr><td>3</td><td>1300</td></tr>
-                    <tr><td>4</td><td>1100</td></tr>
-                    <tr><td>5</td><td>1400</td></tr>
-                    <tr><td>6</td><td>1500</td></tr>
-                    <tr><td>7</td><td>1600</td></tr>
-                    <tr><td>8</td><td>1700</td></tr>
-                    <tr><td>9</td><td>1800</td></tr>
-                    <tr><td>10</td><td>1900</td></tr>
-                </table>
-                <a href="data:text/csv;charset=utf-8,Month,Sales%0A1,1000%0A2,1200%0A3,1300%0A4,1100%0A5,1400%0A6,1500%0A7,1600%0A8,1700%0A9,1800%0A10,1900" download="exercise15.csv" class="text-blue-600 underline">Download CSV</a>
-                <div class="tip"><strong>Tip</strong>: FORECAST.LINEAR predicts values based on linear regression of existing data.</div>
-                <h4 class="text-lg font-semibold text-gray-800 mt-4">Solution</h4>
-                <p><strong>Detailed Steps</strong>:</p>
-                <ol class="list-decimal pl-6 text-gray-600">
-                    <li>In B12, type <code class="bg-gray-200 p-1 rounded">=FORECAST.LINEAR(12, B2:B11, A2:A11)</code>. Result: ~$2054.55.</li>
-                    <li>Select A1:B11, Insert > Line Chart. Right-click chart, Add Trendline (Linear). Add title: "Sales Forecast".</li>
-                </ol>
-                <p><strong>Output</strong> (Partial):</p>
-                <table>
-                    <tr><th>Month</th><th>Sales</th></tr>
-                    <tr><td>1</td><td>1000</td></tr>
-                    <tr><td>2</td><td>1200</td></tr>
-                    <tr><td>...</td><td>...</td></tr>
-                    <tr><td>10</td><td>1900</td></tr>
-                    <tr><td>12</td><td>2054.55</td></tr>
-                </table>
-                <p class="visual"><strong>Visual</strong>: Line chart would show sales increasing from 1000 to 1900, with a trendline projecting ~$2054 for Month 12.</p>
-                <canvas id="chart15"></canvas>
+
+            <!-- Exercise 15 -->
+            <div id="exercise15" class="exercise-content bg-white p-8 rounded-lg shadow-lg">
+                <h2 class="text-3xl font-bold text-gray-800 mb-4">PMT Function for Loans (Pro)</h2>
+                <p class="text-gray-600 mb-4"><strong>Goal:</strong> Calculate the fixed monthly payment for a loan.</p>
+                <h3 class="text-xl font-semibold text-gray-700 mt-6 mb-2">Steps:</h3>
+                <ol class="list-decimal pl-6 text-gray-700 space-y-2"><li>In cell D2, use the formula: <code>=PMT(B2/12, C2*12, -A2)</code></li></ol>
+                <h3 class="text-xl font-semibold text-gray-700 mt-6 mb-2">Sample Data:</h3>
+                <table><tbody><tr><th>Loan Amount</th><th>Annual Rate</th><th>Years</th><th>Monthly Payment</th></tr><tr><td>2000000</td><td>8%</td><td>20</td><td></td></tr></tbody></table>
+                <a href="data:text/csv;charset=utf-8,Loan%20Amount,Annual%20Rate,Years,Monthly%20Payment%0A2000000,8%25,20," download="exercise15.csv" class="text-blue-600 hover:underline">Download CSV</a>
+                <div class="tip"><strong>Tip:</strong> The PMT function is essential for financial analysis, helping you model payments for cars, homes, or business loans.</div>
+                <div class="solution">
+                    <h3 class="text-xl font-semibold text-gray-700 mb-2">Solution</h3>
+                    <p class="text-gray-700">The formula calculates the fixed monthly payment required to pay off the loan.</p>
+                     <table><tbody><tr><th>Loan Amount</th><th>Annual Rate</th><th>Years</th><th>Monthly Payment</th></tr><tr><td>2,000,000</td><td>8%</td><td>20</td><td><strong>₹16,728.84</strong></td></tr></tbody></table>
+                </div>
             </div>
+        </div>
       </div>
     </section>
   </main>
   
+  <!-- Footer -->
   <footer class="bg-gray-900 text-white py-12">
     <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
       <div class="grid md:grid-cols-4 gap-8">
@@ -859,71 +457,76 @@
 
 <script>
 document.addEventListener('DOMContentLoaded', function () {
-  // --- Navigation and Dropdown Logic from index.html ---
-  const menuButton = document.getElementById('menu-button');
-  const mobileMenu = document.getElementById('mobile-menu');
-  const menuOpenIcon = document.getElementById('menu-open-icon');
-  const menuCloseIcon = document.getElementById('menu-close-icon');
-  
-  if (menuButton) {
-      menuButton.addEventListener('click', () => {
-        mobileMenu.classList.toggle('open');
-        menuOpenIcon.classList.toggle('hidden');
-        menuCloseIcon.classList.toggle('hidden');
-      });
-  }
+    // --- Full Navigation and Dropdown Logic ---
+    const menuButton = document.getElementById('menu-button');
+    const mobileMenu = document.getElementById('mobile-menu');
+    const menuOpenIcon = document.getElementById('menu-open-icon');
+    const menuCloseIcon = document.getElementById('menu-close-icon');
+    
+    if (menuButton) {
+        menuButton.addEventListener('click', () => {
+          mobileMenu.classList.toggle('open');
+          menuOpenIcon.classList.toggle('hidden');
+          menuCloseIcon.classList.toggle('hidden');
+        });
+    }
 
-  const setupDropdown = (buttonId, menuId) => {
-      const button = document.getElementById(buttonId);
-      const menu = document.getElementById(menuId);
-      if (!button || !menu) return;
-      const arrow = button.querySelector('.dropdown-arrow');
-      button.addEventListener('click', (event) => {
-          event.stopPropagation();
-          const isHidden = menu.classList.toggle('hidden');
-          if (arrow) arrow.classList.toggle('open', !isHidden);
-      });
-  };
+    const setupDropdown = (buttonId, menuId) => {
+        const button = document.getElementById(buttonId);
+        const menu = document.getElementById(menuId);
+        if (!button || !menu) return;
+        const arrow = button.querySelector('.dropdown-arrow');
+        button.addEventListener('click', (event) => {
+            event.stopPropagation();
+            // Close other dropdowns
+            document.querySelectorAll('[id$="-dropdown-menu"]').forEach(otherMenu => {
+                if (otherMenu.id !== menuId) {
+                    otherMenu.classList.add('hidden');
+                    const otherArrow = otherMenu.previousElementSibling.querySelector('.dropdown-arrow');
+                    if(otherArrow) otherArrow.classList.remove('open');
+                }
+            });
+            const isHidden = menu.classList.toggle('hidden');
+            if (arrow) arrow.classList.toggle('open', !isHidden);
+        });
+    };
 
-  setupDropdown('webinar-dropdown-button', 'webinar-dropdown-menu');
-  setupDropdown('practice-dropdown-button', 'practice-dropdown-menu');
-  setupDropdown('mobile-webinar-dropdown-button', 'mobile-webinar-dropdown-menu');
-  setupDropdown('mobile-practice-dropdown-button', 'mobile-practice-dropdown-menu');
+    setupDropdown('webinar-dropdown-button', 'webinar-dropdown-menu');
+    setupDropdown('practice-dropdown-button', 'practice-dropdown-menu');
 
-  document.addEventListener('click', (event) => {
-      if (!event.target.closest('[id$="-dropdown-container"]') && !event.target.closest('[id$="-dropdown-button"]')) {
-          document.querySelectorAll('[id$="-dropdown-menu"]').forEach(menu => menu.classList.add('hidden'));
-          document.querySelectorAll('.dropdown-arrow').forEach(arrow => arrow.classList.remove('open'));
-      }
-  });
+    document.addEventListener('click', (event) => {
+        if (!event.target.closest('[id$="-dropdown-container"]') && !event.target.closest('[id$="-dropdown-button"]')) {
+            document.querySelectorAll('[id$="-dropdown-menu"]').forEach(menu => menu.classList.add('hidden'));
+            document.querySelectorAll('.dropdown-arrow').forEach(arrow => arrow.classList.remove('open'));
+        }
+    });
 
-  // --- Excel Practice Page Logic ---
-  const exercises = document.querySelectorAll('.exercise-content');
-  const selector = document.getElementById('exerciseSelector');
+    // --- Excel Practice Page Logic ---
+    const selector = document.getElementById('exerciseSelector');
+    const exercises = document.querySelectorAll('.exercise-content');
 
-  function showExercise(value) {
-      if (!exercises.length) return;
-      exercises.forEach(exercise => {
-          exercise.style.display = 'none';
-      });
-      if (value) {
-          const selectedExercise = document.getElementById('exercise' + value);
-          if (selectedExercise) {
-              selectedExercise.style.display = 'block';
-          }
-      }
-  }
-  
-  if (selector) {
-      selector.addEventListener('change', function() {
-          showExercise(this.value);
-      });
-      
-      selector.value = '1';
-      showExercise('1');
-  }
+    const showExercise = (id) => {
+        exercises.forEach(exercise => {
+            if (exercise.id === `exercise${id}`) {
+                exercise.classList.add('active');
+            } else {
+                exercise.classList.remove('active');
+            }
+        });
+    };
+    
+    if (selector) {
+        selector.addEventListener('change', function() {
+            showExercise(this.value);
+        });
+        
+        // Initialize with the first exercise
+        selector.value = '1';
+        showExercise('1');
+    }
 });
 </script>
 
 </body>
 </html>
+
