@@ -1,0 +1,571 @@
+<!DOCTYPE html>
+<html lang="en" class="scroll-smooth">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Certified Professional Accountant Course - Vision Connects</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <style>
+    body { font-family: 'Inter', sans-serif; }
+    .module-content, .tax-content-panel {
+      display: none;
+      animation: fadeIn 0.5s ease-in-out;
+    }
+    .module-content.active, .tax-content-panel.active {
+      display: block;
+    }
+    @keyframes fadeIn {
+      from { opacity: 0; transform: translateY(10px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+    .mobile-menu {
+        max-height: 0;
+        overflow: hidden;
+        transition: max-height 0.3s ease-out;
+    }
+    .mobile-menu.open {
+        max-height: 500px;
+    }
+    .dropdown-arrow.open {
+        transform: rotate(180deg);
+    }
+    .dropdown-arrow {
+        transition: transform 0.2s ease-in-out;
+    }
+    .modal-content-scroll::-webkit-scrollbar {
+        width: 6px;
+    }
+    .modal-content-scroll::-webkit-scrollbar-track {
+        background: #f1f1f1;
+        border-radius: 10px;
+    }
+    .modal-content-scroll::-webkit-scrollbar-thumb {
+        background: #ccc;
+        border-radius: 10px;
+    }
+    .modal-content-scroll::-webkit-scrollbar-thumb:hover {
+        background: #aaa;
+    }
+  </style>
+</head>
+<body class="bg-gray-50">
+
+  <!-- SVG Icons -->
+  <svg width="0" height="0" style="position:absolute">
+    <symbol id="icon-book-open" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M2 3h6a4 4 0 0 1 4 4v14a3 3 0 0 0-3-3H2z"/><path d="M22 3h-6a4 4 0 0 0-4 4v14a3 3 0 0 1 3-3h7z"/></symbol>
+    <symbol id="icon-users" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M22 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></symbol>
+    <symbol id="icon-calculator" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect width="16" height="20" x="4" y="2" rx="2"/><line x1="8" x2="16" y1="6" y2="6"/><line x1="16" x2="16" y1="14" y2="18"/><path d="M16 10h.01"/><path d="M12 10h.01"/><path d="M8 10h.01"/><path d="M12 14h.01"/><path d="M8 14h.01"/><path d="M12 18h.01"/><path d="M8 18h.01"/></symbol>
+    <symbol id="icon-check-circle" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/><polyline points="22 4 12 14.01 9 11.01"/></symbol>
+    <symbol id="icon-phone" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"/></symbol>
+    <symbol id="icon-map-pin" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 10c0 6-8 12-8 12s-8-6-8-12a8 8 0 0 1 16 0Z"/><circle cx="12" cy="10" r="3"/></symbol>
+    <symbol id="icon-menu" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="4" x2="20" y1="12" y2="12"/><line x1="4" x2="20" y1="6" y2="6"/><line x1="4" x2="20" y1="18" y2="18"/></symbol>
+    <symbol id="icon-x" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="18" x2="6" y1="6" y2="18"/><line x1="6" x2="18" y1="6" y2="18"/></symbol>
+    <symbol id="icon-globe" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><path d="M12 2a14.5 14.5 0 0 0 0 20 14.5 14.5 0 0 0 0-20"/><path d="M2 12h20"/></symbol>
+    <symbol id="icon-chevron-down" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"></polyline></symbol>
+    <symbol id="icon-tally" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M12 22C17.5228 22 22 17.5228 22 12C22 6.47715 17.5228 2 12 2C6.47715 2 2 6.47715 2 12C2 17.5228 6.47715 22 12 22Z"/><path d="M15.5 8H8.5V11H15.5V8Z"/><path d="M12 11V16M12 16H14.5M12 16H9.5"/></symbol>
+    <symbol id="icon-zoho" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M4 16.331C4 14.4925 5.49255 13 7.33102 13H15V15.5C15 18.5 12.5 21 9.5 21C6.5 21 4 18.5 4 15.5V16.331ZM4 16.331C4 17.7915 5.20853 19 6.66901 19C8.12949 19 9.33752 17.7915 9.33752 16.331V8.66898C9.33752 6.83051 7.84497 5.33796 6 5.33796C4.15503 5.33796 2.66248 6.83051 2.66248 8.66898V9M20 7.66898C20 9.50745 18.5075 11 16.669 11H9V8.5C9 5.5 11.5 3 14.5 3C17.5 3 20 5.5 20 8.5V7.66898ZM20 7.66898C20 6.20851 18.7915 5 17.331 5C15.8705 5 14.6625 6.20851 14.6625 7.66898V15.331C14.6625 17.1695 16.155 18.662 18 18.662C19.845 18.662 21.3375 17.1695 21.3375 15.331V15"/></symbol>
+    <symbol id="icon-excel" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"></path><polyline points="14 2 14 8 20 8"></polyline><line x1="16" y1="13" x2="8" y2="13"></line><line x1="16" y1="17" x2="8" y2="17"></line><polyline points="10 9 9 9 8 9"></polyline></symbol>
+    <symbol id="icon-tax" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M2 9.55V14.55C2 15.1023 2.44772 15.55 3 15.55H21C21.5523 15.55 22 15.1023 22 14.55V9.55C22 9.0023 21.5523 8.55 21 8.55H3C2.44772 8.55 2 9.0023 2 9.55Z"/><path d="M3 14.55L5.67296 20.3551C5.83965 20.7397 6.20794 21 6.61803 21H17.382C17.7921 21 18.1604 20.7397 18.327 20.3551L21 14.55"/><path d="M12 15.5V21"/><path d="M8 8.55V3.5C8 2.94772 8.44772 2.5 9 2.5H15C15.5523 2.5 16 2.94772 16 3.5V8.55"/><path d="M12 2.5V8.55"/></symbol>
+  </svg>
+
+  <!-- Header / Navigation -->
+  <nav class="sticky top-0 w-full z-50 bg-white/95 backdrop-blur-lg shadow-lg border-b border-gray-100">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="flex justify-between items-center py-4">
+        <a href="index.html" class="flex items-center space-x-4">
+          <div class="text-3xl font-bold bg-gradient-to-r from-emerald-600 to-blue-600 bg-clip-text text-transparent">
+            VISION CONNECTS
+          </div>
+        </a>
+        <div class="hidden md:flex items-center space-x-8">
+          <a href="index.html" class="text-gray-700 hover:text-emerald-600 transition-colors font-medium">Home</a>
+          <div class="relative" id="courses-dropdown-container">
+            <button id="courses-dropdown-button" class="text-emerald-600 transition-colors font-bold flex items-center">
+              Courses
+              <svg class="w-5 h-5 ml-1 text-gray-500 dropdown-arrow open"><use href="#icon-chevron-down"></use></svg>
+            </button>
+            <div id="courses-dropdown-menu" class="absolute left-0 mt-2 w-72 rounded-md shadow-lg bg-white ring-1 ring-black ring-opacity-5 hidden z-50">
+              <div class="py-1" role="menu" aria-orientation="vertical" aria-labelledby="courses-dropdown-button">
+                <a href="course-cpa.html" class="block px-4 py-3 text-sm text-gray-700 hover:bg-gray-100 hover:text-emerald-600 font-semibold" role="menuitem">Certified Professional Accountant</a>
+              </div>
+            </div>
+          </div>
+          <div class="relative" id="webinar-dropdown-container">
+            <button id="webinar-dropdown-button" class="text-gray-700 hover:text-emerald-600 transition-colors font-medium flex items-center">
+              Online Webinars
+              <svg class="w-5 h-5 ml-1 text-gray-500 dropdown-arrow"><use href="#icon-chevron-down"></use></svg>
+            </button>
+            <div id="webinar-dropdown-menu" class="absolute right-0 mt-2 w-56 rounded-md shadow-lg bg-white ring-1 ring-black ring-opacity-5 hidden z-50">
+              <div class="py-1" role="menu" aria-orientation="vertical" aria-labelledby="webinar-dropdown-button">
+                <a href="incometax.html" class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 hover:text-emerald-600" role="menuitem">Income Tax Series</a>
+                <a href="ai-accounting.html" class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 hover:text-emerald-600" role="menuitem">AI in Accounting</a>
+                <a href="excel.html" class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 hover:text-emerald-600" role="menuitem">Excel Master Class</a>
+              </div>
+            </div>
+          </div>
+           <div class="relative" id="practice-dropdown-container">
+                <button id="practice-dropdown-button" class="text-gray-700 hover:text-emerald-600 transition-colors font-medium flex items-center">
+                  Practice Session
+                  <svg class="w-5 h-5 ml-1 text-gray-500 dropdown-arrow"><use href="#icon-chevron-down"></use></svg>
+                </button>
+                <div id="practice-dropdown-menu" class="absolute right-0 mt-2 w-56 rounded-md shadow-lg bg-white ring-1 ring-black ring-opacity-5 hidden z-50">
+                  <div class="py-1" role="menu" aria-orientation="vertical" aria-labelledby="practice-dropdown-button">
+                    <a href="excel-practice.html" class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 hover:text-emerald-600" role="menuitem">Excel Practice</a>
+                  </div>
+                </div>
+            </div>
+          <a href="index.html#about" class="text-gray-700 hover:text-emerald-600 transition-colors font-medium">About</a>
+          <a href="index.html#contact" class="text-gray-700 hover:text-emerald-600 transition-colors font-medium">Contact</a>
+        </div>
+        <button id="menu-button" class="md:hidden text-gray-700">
+          <svg class="w-6 h-6" id="menu-open-icon"><use href="#icon-menu"></use></svg>
+          <svg class="w-6 h-6 hidden" id="menu-close-icon"><use href="#icon-x"></use></svg>
+        </button>
+      </div>
+    </div>
+    <div id="mobile-menu" class="mobile-menu md:hidden bg-white border-t border-gray-100 shadow-lg">
+      <div class="px-4 py-4 space-y-4">
+        <a href="index.html" class="mobile-link block text-gray-700 hover:text-emerald-600 transition-colors font-medium">Home</a>
+        <div class="relative">
+          <button id="mobile-courses-dropdown-button" class="w-full text-left mobile-link block text-gray-700 hover:text-emerald-600 transition-colors font-medium flex justify-between items-center">
+            <span>Courses</span>
+            <svg class="w-5 h-5 text-gray-500 dropdown-arrow"><use href="#icon-chevron-down"></use></svg>
+          </button>
+          <div id="mobile-courses-dropdown-menu" class="pl-4 mt-2 space-y-2 hidden">
+            <a href="course-cpa.html" class="block text-emerald-600 font-semibold">Certified Professional Accountant</a>
+          </div>
+        </div>
+         <div class="relative">
+          <button id="mobile-webinar-dropdown-button" class="w-full text-left mobile-link block text-gray-700 hover:text-emerald-600 transition-colors font-medium flex justify-between items-center">
+            <span>Online Webinars</span>
+            <svg class="w-5 h-5 text-gray-500 dropdown-arrow"><use href="#icon-chevron-down"></use></svg>
+          </button>
+          <div id="mobile-webinar-dropdown-menu" class="pl-4 mt-2 space-y-2 hidden">
+            <a href="incometax.html" class="block text-gray-600 hover:text-emerald-600">Income Tax Series</a>
+            <a href="ai-accounting.html" class="block text-gray-600 hover:text-emerald-600">AI in Accounting</a>
+            <a href="excel.html" class="block text-gray-600 hover:text-emerald-600">Excel Master Class</a>
+          </div>
+        </div>
+        <div class="relative">
+            <button id="mobile-practice-dropdown-button" class="w-full text-left mobile-link block text-gray-700 hover:text-emerald-600 transition-colors font-medium flex justify-between items-center">
+              <span>Practice Session</span>
+              <svg class="w-5 h-5 text-gray-500 dropdown-arrow"><use href="#icon-chevron-down"></use></svg>
+            </button>
+            <div id="mobile-practice-dropdown-menu" class="pl-4 mt-2 space-y-2 hidden">
+              <a href="excel-practice.html" class="block text-gray-600 hover:text-emerald-600">Excel Practice</a>
+            </div>
+        </div>
+        <a href="index.html#about" class="mobile-link block text-gray-700 hover:text-emerald-600 transition-colors font-medium">About</a>
+        <a href="index.html#contact" class="mobile-link block text-gray-700 hover:text-emerald-600 transition-colors font-medium">Contact</a>
+      </div>
+    </div>
+  </nav>
+
+  <main>
+    <!-- Course Hero Section -->
+    <section class="pt-20 pb-16 bg-white">
+      <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div class="text-center">
+          <h1 class="text-4xl md:text-5xl font-extrabold text-gray-900 mb-4 leading-tight">
+            Certified Professional Accountant Program
+          </h1>
+          <p class="text-xl text-gray-600 max-w-3xl mx-auto mb-8">
+            Our flagship 6-module program designed to transform you into a job-ready accounting professional. Master in-demand skills from core principles to advanced software.
+          </p>
+          <div class="flex flex-col sm:flex-row gap-4 justify-center">
+            <a href="enrollnow.html" class="bg-gradient-to-r from-emerald-600 to-teal-600 hover:from-emerald-700 hover:to-teal-700 text-white px-8 py-4 rounded-xl text-lg font-semibold transition-all duration-300 transform hover:scale-105 shadow-lg hover:shadow-emerald-500/25 text-center">
+              Enroll Now - ₹15,000
+            </a>
+            <button id="open-enquiry-modal-btn" class="border-2 border-emerald-600 text-emerald-600 hover:bg-emerald-600 hover:text-white px-8 py-4 rounded-xl text-lg font-semibold transition-all duration-300 text-center">
+              Enquire Now
+            </button>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Course Modules Section -->
+    <section id="courses" class="py-16 bg-gradient-to-br from-emerald-50 via-gray-50 to-blue-50">
+      <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div class="text-center mb-12">
+            <h2 class="text-3xl md:text-4xl font-bold text-gray-900 mb-3">Course Curriculum</h2>
+            <p class="text-lg text-gray-600">Explore the comprehensive 6-module syllabus.</p>
+        </div>
+        
+        <div class="lg:grid lg:grid-cols-12 lg:gap-8 items-start">
+          <!-- Vertical Tabs -->
+          <div class="lg:col-span-4 mb-8 lg:mb-0">
+            <div class="flex flex-col space-y-2">
+              <button data-module="0" class="module-tab bg-emerald-600 text-white p-4 w-full text-left rounded-lg flex items-center space-x-4 shadow-lg transition-all duration-300">
+                <svg class="w-7 h-7 flex-shrink-0"><use href="#icon-calculator"></use></svg>
+                <div>
+                  <p class="text-xs font-semibold opacity-80">Module 1</p>
+                  <h3 class="font-bold text-lg">Core Accounting</h3>
+                </div>
+              </button>
+              <button data-module="1" class="module-tab bg-white hover:bg-gray-100 text-gray-800 p-4 w-full text-left rounded-lg flex items-center space-x-4 transition-all duration-300">
+                <svg class="w-7 h-7 flex-shrink-0 text-emerald-600"><use href="#icon-tax"></use></svg>
+                <div>
+                  <p class="text-xs font-semibold text-gray-500">Module 2</p>
+                  <h3 class="font-bold text-lg">Tax (GST & Income Tax)</h3>
+                </div>
+              </button>
+              <button data-module="2" class="module-tab bg-white hover:bg-gray-100 text-gray-800 p-4 w-full text-left rounded-lg flex items-center space-x-4 transition-all duration-300">
+                <svg class="w-7 h-7 flex-shrink-0 text-emerald-600"><use href="#icon-users"></use></svg>
+                <div>
+                  <p class="text-xs font-semibold text-gray-500">Module 3</p>
+                  <h3 class="font-bold text-lg">Business Communication</h3>
+                </div>
+              </button>
+              <button data-module="3" class="module-tab bg-white hover:bg-gray-100 text-gray-800 p-4 w-full text-left rounded-lg flex items-center space-x-4 transition-all duration-300">
+                <svg class="w-7 h-7 flex-shrink-0 text-emerald-600"><use href="#icon-excel"></use></svg>
+                <div>
+                  <p class="text-xs font-semibold text-gray-500">Module 4</p>
+                  <h3 class="font-bold text-lg">Excel Practice</h3>
+                </div>
+              </button>
+              <button data-module="4" class="module-tab bg-white hover:bg-gray-100 text-gray-800 p-4 w-full text-left rounded-lg flex items-center space-x-4 transition-all duration-300">
+                <svg class="w-7 h-7 flex-shrink-0 text-emerald-600"><use href="#icon-zoho"></use></svg>
+                <div>
+                  <p class="text-xs font-semibold text-gray-500">Module 5</p>
+                  <h3 class="font-bold text-lg">Zoho</h3>
+                </div>
+              </button>
+               <button data-module="5" class="module-tab bg-white hover:bg-gray-100 text-gray-800 p-4 w-full text-left rounded-lg flex items-center space-x-4 transition-all duration-300">
+                <svg class="w-7 h-7 flex-shrink-0 text-emerald-600"><use href="#icon-tally"></use></svg>
+                <div>
+                  <p class="text-xs font-semibold text-gray-500">Module 6</p>
+                  <h3 class="font-bold text-lg">Tally</h3>
+                </div>
+              </button>
+            </div>
+          </div>
+
+          <!-- Module Content -->
+          <div class="lg:col-span-8">
+            <div class="bg-white rounded-2xl shadow-xl p-6 sm:p-8 border border-gray-200 min-h-[500px]">
+              
+              <!-- Module 0: Core Accounting -->
+              <div class="module-content active">
+                <h3 class="text-2xl font-bold text-gray-900 mb-2">Module 1: Core Accounting</h3>
+                <p class="text-gray-600 mb-6">Master accounting fundamentals, from core concepts and journal entries to final reports, based on the Ind AS edition.</p>
+                <div class="overflow-y-auto max-h-[420px] pr-4 modal-content-scroll">
+                  <ul class="space-y-3 text-sm md:text-base">
+                      <li class="flex items-start"><svg class="w-5 h-5 text-emerald-500 mr-3 flex-shrink-0 mt-1"><use href="#icon-check-circle"></use></svg><span class="font-medium text-gray-700">Basics of Accounting & Key Terms (Assets, Liabilities, Equity)</span></li>
+                      <li class="flex items-start"><svg class="w-5 h-5 text-emerald-500 mr-3 flex-shrink-0 mt-1"><use href="#icon-check-circle"></use></svg><span class="font-medium text-gray-700">Indian Accounting Standards (Ind AS): Business Entity, Accrual Concept</span></li>
+                      <li class="flex items-start"><svg class="w-5 h-5 text-emerald-500 mr-3 flex-shrink-0 mt-1"><use href="#icon-check-circle"></use></svg><span class="font-medium text-gray-700">Capital vs. Revenue Transactions</span></li>
+                      <li class="flex items-start"><svg class="w-5 h-5 text-emerald-500 mr-3 flex-shrink-0 mt-1"><use href="#icon-check-circle"></use></svg><span class="font-medium text-gray-700">Classification of Accounts & The Golden Rules</span></li>
+                      <li class="flex items-start"><svg class="w-5 h-5 text-emerald-500 mr-3 flex-shrink-0 mt-1"><use href="#icon-check-circle"></use></svg><span class="font-medium text-gray-700">The Art of Journal Entries</span></li>
+                      <li class="flex items-start"><svg class="w-5 h-5 text-emerald-500 mr-3 flex-shrink-0 mt-1"><use href="#icon-check-circle"></use></svg><span class="font-medium text-gray-700">Essential Accounting Documents (Invoice, Vouchers)</span></li>
+                      <li class="flex items-start"><svg class="w-5 h-5 text-emerald-500 mr-3 flex-shrink-0 mt-1"><use href="#icon-check-circle"></use></svg><span class="font-medium text-gray-700">Ledger Preparation & Posting</span></li>
+                      <li class="flex items-start"><svg class="w-5 h-5 text-emerald-500 mr-3 flex-shrink-0 mt-1"><use href="#icon-check-circle"></use></svg><span class="font-medium text-gray-700">Managing the Double Column Cash Book</span></li>
+                      <li class="flex items-start"><svg class="w-5 h-5 text-emerald-500 mr-3 flex-shrink-0 mt-1"><use href="#icon-check-circle"></use></svg><span class="font-medium text-gray-700">Bank Reconciliation Statement (BRS)</span></li>
+                      <li class="flex items-start"><svg class="w-5 h-5 text-emerald-500 mr-3 flex-shrink-0 mt-1"><use href="#icon-check-circle"></use></svg><span class="font-medium text-gray-700">Understanding Depreciation (SLM vs WDV)</span></li>
+                      <li class="flex items-start"><svg class="w-5 h-5 text-emerald-500 mr-3 flex-shrink-0 mt-1"><use href="#icon-check-circle"></use></svg><span class="font-medium text-gray-700">Inventory Valuation (FIFO & Weighted Average)</span></li>
+                      <li class="flex items-start"><svg class="w-5 h-5 text-emerald-500 mr-3 flex-shrink-0 mt-1"><use href="#icon-check-circle"></use></svg><span class="font-medium text-gray-700">Preparing a Trial Balance</span></li>
+                      <li class="flex items-start"><svg class="w-5 h-5 text-emerald-500 mr-3 flex-shrink-0 mt-1"><use href="#icon-check-circle"></use></svg><span class="font-medium text-gray-700">Year-End Adjustment Entries</span></li>
+                      <li class="flex items-start"><svg class="w-5 h-5 text-emerald-500 mr-3 flex-shrink-0 mt-1"><use href="#icon-check-circle"></use></svg><span class="font-medium text-gray-700">Preparation of Final Accounts (Trading, P&L, Balance Sheet)</span></li>
+                      <li class="flex items-start"><svg class="w-5 h-5 text-emerald-500 mr-3 flex-shrink-0 mt-1"><use href="#icon-check-circle"></use></svg><span class="font-medium text-gray-700">Rectification of Errors</span></li>
+                      <li class="flex items-start"><svg class="w-5 h-5 text-emerald-500 mr-3 flex-shrink-0 mt-1"><use href="#icon-check-circle"></use></svg><span class="font-medium text-gray-700">Technology in Accounting (Tally, GST Software)</span></li>
+                  </ul>
+                </div>
+              </div>
+
+              <!-- Module 1: Tax -->
+              <div class="module-content">
+                <h3 class="text-2xl font-bold text-gray-900 mb-2">Module 2: Tax (GST & Income Tax)</h3>
+                <p class="text-gray-600 mb-6">In-depth practical training on Goods & Services Tax, Income Tax, and TDS compliance.</p>
+                
+                <!-- Inner Tab Buttons -->
+                <div class="border-b border-gray-200 mb-4">
+                  <nav class="-mb-px flex space-x-6" aria-label="Tabs">
+                    <button class="tax-tab whitespace-nowrap py-3 px-1 border-b-2 font-medium text-sm text-emerald-600 border-emerald-500" data-tax-target="gst">GST</button>
+                    <button class="tax-tab whitespace-nowrap py-3 px-1 border-b-2 font-medium text-sm text-gray-500 border-transparent hover:text-gray-700 hover:border-gray-300" data-tax-target="income-tax">Income Tax</button>
+                    <button class="tax-tab whitespace-nowrap py-3 px-1 border-b-2 font-medium text-sm text-gray-500 border-transparent hover:text-gray-700 hover:border-gray-300" data-tax-target="tds">TDS</button>
+                  </nav>
+                </div>
+
+                <!-- Inner Tab Content -->
+                <div class="overflow-y-auto max-h-[420px] pr-4 modal-content-scroll">
+                  <!-- GST Content -->
+                  <div id="tax-content-gst" class="tax-content-panel active">
+                    <ul class="space-y-3 text-sm md:text-base">
+                      <li class="flex items-start"><svg class="w-5 h-5 text-emerald-500 mr-3 flex-shrink-0 mt-1"><use href="#icon-check-circle"></use></svg><span><strong>Introduction to GST Framework:</strong> Evolution, Structure (CGST, SGST, IGST), Key Concepts.</span></li>
+                      <li class="flex items-start"><svg class="w-5 h-5 text-emerald-500 mr-3 flex-shrink-0 mt-1"><use href="#icon-check-circle"></use></svg><span><strong>GST Registration:</strong> Eligibility, Documentation, and Online Process.</span></li>
+                      <li class="flex items-start"><svg class="w-5 h-5 text-emerald-500 mr-3 flex-shrink-0 mt-1"><use href="#icon-check-circle"></use></svg><span><strong>Tax Invoicing:</strong> Format, Time & Place of Supply Rules, Debit/Credit Notes.</span></li>
+                      <li class="flex items-start"><svg class="w-5 h-5 text-emerald-500 mr-3 flex-shrink-0 mt-1"><use href="#icon-check-circle"></use></svg><span><strong>Input Tax Credit (ITC):</strong> Conditions, Reversal, and Documentation.</span></li>
+                      <li class="flex items-start"><svg class="w-5 h-5 text-emerald-500 mr-3 flex-shrink-0 mt-1"><use href="#icon-check-circle"></use></svg><span><strong>GSTR 2A & 2B Reconciliation:</strong> Understanding the reports and reconciling with books.</span></li>
+                      <li class="flex items-start"><svg class="w-5 h-5 text-emerald-500 mr-3 flex-shrink-0 mt-1"><use href="#icon-check-circle"></use></svg><span><strong>GST Returns Filing (Practical):</strong> GSTR-1, GSTR-3B, GSTR-9/9C, QRMP Scheme.</span></li>
+                      <li class="flex items-start"><svg class="w-5 h-5 text-emerald-500 mr-3 flex-shrink-0 mt-1"><use href="#icon-check-circle"></use></svg><span><strong>Reverse Charge Mechanism (RCM):</strong> Compliance and Accounting.</span></li>
+                      <li class="flex items-start"><svg class="w-5 h-5 text-emerald-500 mr-3 flex-shrink-0 mt-1"><use href="#icon-check-circle"></use></svg><span><strong>E-Way Bill & E-Invoicing:</strong> Generation, Validity, and Integration.</span></li>
+                      <li class="flex items-start"><svg class="w-5 h-5 text-emerald-500 mr-3 flex-shrink-0 mt-1"><use href="#icon-check-circle"></use></svg><span><strong>GST Audit & Annual Return:</strong> Preparation and Common Issues.</span></li>
+                    </ul>
+                  </div>
+                  <!-- Income Tax Content -->
+                  <div id="tax-content-income-tax" class="tax-content-panel">
+                    <ul class="space-y-3 text-sm md:text-base">
+                      <li class="flex items-start"><svg class="w-5 h-5 text-emerald-500 mr-3 flex-shrink-0 mt-1"><use href="#icon-check-circle"></use></svg><span><strong>Introduction to Income Tax:</strong> Key provisions, Heads of Income, Residential Status.</span></li>
+                      <li class="flex items-start"><svg class="w-5 h-5 text-emerald-500 mr-3 flex-shrink-0 mt-1"><use href="#icon-check-circle"></use></svg><span><strong>5 Heads of Income:</strong> Salary, House Property, Business & Profession, Capital Gains, Other Sources.</span></li>
+                      <li class="flex items-start"><svg class="w-5 h-5 text-emerald-500 mr-3 flex-shrink-0 mt-1"><use href="#icon-check-circle"></use></svg><span><strong>Online PAN Registration:</strong> Application procedure and verification.</span></li>
+                      <li class="flex items-start"><svg class="w-5 h-5 text-emerald-500 mr-3 flex-shrink-0 mt-1"><use href="#icon-check-circle"></use></svg><span><strong>Computation and E-Filing of ITR-1:</strong> For Salaried Individuals.</span></li>
+                      <li class="flex items-start"><svg class="w-5 h-5 text-emerald-500 mr-3 flex-shrink-0 mt-1"><use href="#icon-check-circle"></use></svg><span><strong>Computation and E-Filing of ITR-2:</strong> For Capital Gains and Multiple House Properties.</span></li>
+                      <li class="flex items-start"><svg class="w-5 h-5 text-emerald-500 mr-3 flex-shrink-0 mt-1"><use href="#icon-check-circle"></use></svg><span><strong>Computation and E-Filing of ITR-3:</strong> For Income from Business or Profession.</span></li>
+                      <li class="flex items-start"><svg class="w-5 h-5 text-emerald-500 mr-3 flex-shrink-0 mt-1"><use href="#icon-check-circle"></use></svg><span><strong>Presumptive Income & E-Filing of ITR-4:</strong> For Small Businesses.</span></li>
+                      <li class="flex items-start"><svg class="w-5 h-5 text-emerald-500 mr-3 flex-shrink-0 mt-1"><use href="#icon-check-circle"></use></svg><span><strong>Partnership Firm Returns (ITR-5) & Company Returns (ITR-6).</strong></span></li>
+                    </ul>
+                  </div>
+                  <!-- TDS Content -->
+                  <div id="tax-content-tds" class="tax-content-panel">
+                    <ul class="space-y-3 text-sm md:text-base">
+                      <li class="flex items-start"><svg class="w-5 h-5 text-emerald-500 mr-3 flex-shrink-0 mt-1"><use href="#icon-check-circle"></use></svg><span><strong>Introduction to TDS:</strong> Fundamentals and Importance of compliance.</span></li>
+                      <li class="flex items-start"><svg class="w-5 h-5 text-emerald-500 mr-3 flex-shrink-0 mt-1"><use href="#icon-check-circle"></use></svg><span><strong>PAN & TAN Application:</strong> Complete step-by-step guide.</span></li>
+                      <li class="flex items-start"><svg class="w-5 h-5 text-emerald-500 mr-3 flex-shrink-0 mt-1"><use href="#icon-check-circle"></use></svg><span><strong>TDS Return Forms Overview:</strong> 24Q (Salary), 26Q (Non-Salary), 27Q (NRI), 27EQ (TCS).</span></li>
+                      <li class="flex items-start"><svg class="w-5 h-5 text-emerald-500 mr-3 flex-shrink-0 mt-1"><use href="#icon-check-circle"></use></svg><span><strong>Online TDS Challan Payment (281).</strong></span></li>
+                      <li class="flex items-start"><svg class="w-5 h-5 text-emerald-500 mr-3 flex-shrink-0 mt-1"><use href="#icon-check-circle"></use></svg><span><strong>Preparation and Filing of TDS Returns:</strong> Practical hands-on process.</span></li>
+                      <li class="flex items-start"><svg class="w-5 h-5 text-emerald-500 mr-3 flex-shrink-0 mt-1"><use href="#icon-check-circle"></use></svg><span><strong>TDS Filing on TRACES Portal:</strong> Registration, accessing statements, and corrections.</span></li>
+                      <li class="flex items-start"><svg class="w-5 h-5 text-emerald-500 mr-3 flex-shrink-0 mt-1"><use href="#icon-check-circle"></use></svg><span><strong>Form 16 / 16A Generation and Corrections.</strong></span></li>
+                      <li class="flex items-start"><svg class="w-5 h-5 text-emerald-500 mr-3 flex-shrink-0 mt-1"><use href="#icon-check-circle"></use></svg><span><strong>Interest & Penalty Calculations for non-compliance.</strong></span></li>
+                    </ul>
+                  </div>
+                </div>
+              </div>
+              
+              <!-- Module 2: Business Communication -->
+              <div class="module-content">
+                <h3 class="text-2xl font-bold text-gray-900 mb-2">Module 3: Business Communication</h3>
+                <p class="text-gray-600 mb-6">Develop essential soft skills for interviews, workplace communication, and career advancement.</p>
+                  <div class="overflow-y-auto max-h-[420px] pr-4 modal-content-scroll">
+                    <ul class="space-y-3 text-sm md:text-base">
+                      <li class="flex items-start"><svg class="w-5 h-5 text-emerald-500 mr-3 flex-shrink-0 mt-1"><use href="#icon-check-circle"></use></svg><span class="font-medium text-gray-700">Professional Interview Skills</span></li>
+                      <li class="flex items-start"><svg class="w-5 h-5 text-emerald-500 mr-3 flex-shrink-0 mt-1"><use href="#icon-check-circle"></use></svg><span class="font-medium text-gray-700">Business Communication Ethics</span></li>
+                      <li class="flex items-start"><svg class="w-5 h-5 text-emerald-500 mr-3 flex-shrink-0 mt-1"><use href="#icon-check-circle"></use></svg><span class="font-medium text-gray-700">Resume Building & LinkedIn Profile Optimization</span></li>
+                      <li class="flex items-start"><svg class="w-5 h-5 text-emerald-500 mr-3 flex-shrink-0 mt-1"><use href="#icon-check-circle"></use></svg><span class="font-medium text-gray-700">Personality Development</span></li>
+                      <li class="flex items-start"><svg class="w-5 h-5 text-emerald-500 mr-3 flex-shrink-0 mt-1"><use href="#icon-check-circle"></use></svg><span class="font-medium text-gray-700">Workplace Etiquette</span></li>
+                    </ul>
+                </div>
+              </div>
+
+              <!-- Module 3: Excel Practice -->
+              <div class="module-content">
+                  <h3 class="text-2xl font-bold text-gray-900 mb-2">Module 4: Excel Practice</h3>
+                  <p class="text-gray-600 mb-6">Build your skills from beginner to pro with hands-on exercises covering the most essential Excel functions for accountants.</p>
+                  <div class="overflow-y-auto max-h-[380px] pr-4 modal-content-scroll mb-6">
+                    <ul class="space-y-3 text-sm md:text-base">
+                      <li class="flex items-start"><svg class="w-5 h-5 text-emerald-500 mr-3 flex-shrink-0 mt-1"><use href="#icon-check-circle"></use></svg><span class="font-medium text-gray-700">Beginner: SUM, AVERAGE, IF, AND/OR, Text & Date Functions</span></li>
+                      <li class="flex items-start"><svg class="w-5 h-5 text-emerald-500 mr-3 flex-shrink-0 mt-1"><use href="#icon-check-circle"></use></svg><span class="font-medium text-gray-700">Intermediate: VLOOKUP, INDEX & MATCH</span></li>
+                      <li class="flex items-start"><svg class="w-5 h-5 text-emerald-500 mr-3 flex-shrink-0 mt-1"><use href="#icon-check-circle"></use></svg><span class="font-medium text-gray-700">Intermediate: SUMIFS & COUNTIFS</span></li>
+                      <li class="flex items-start"><svg class="w-5 h-5 text-emerald-500 mr-3 flex-shrink-0 mt-1"><use href="#icon-check-circle"></use></svg><span class="font-medium text-gray-700">Intermediate: Data Validation</span></li>
+                      <li class="flex items-start"><svg class="w-5 h-5 text-emerald-500 mr-3 flex-shrink-0 mt-1"><use href="#icon-check-circle"></use></svg><span class="font-medium text-gray-700">Pro: PivotTables & Slicers</span></li>
+                      <li class="flex items-start"><svg class="w-5 h-5 text-emerald-500 mr-3 flex-shrink-0 mt-1"><use href="#icon-check-circle"></use></svg><span class="font-medium text-gray-700">Pro: SUMPRODUCT & XLOOKUP</span></li>
+                      <li class="flex items-start"><svg class="w-5 h-5 text-emerald-500 mr-3 flex-shrink-0 mt-1"><use href="#icon-check-circle"></use></svg><span class="font-medium text-gray-700">Pro: Cell Locking & Sheet Protection</span></li>
+                      <li class="flex items-start"><svg class="w-5 h-5 text-emerald-500 mr-3 flex-shrink-0 mt-1"><use href="#icon-check-circle"></use></svg><span class="font-medium text-gray-700">Pro: Introduction to Power Query</span></li>
+                      <li class="flex items-start"><svg class="w-5 h-5 text-emerald-500 mr-3 flex-shrink-0 mt-1"><use href="#icon-check-circle"></use></svg><span class="font-medium text-gray-700">Pro: PMT Function for Loan Calculations</span></li>
+                    </ul>
+                  </div>
+                  <a href="excel-practice.html" class="inline-block bg-emerald-600 text-white px-6 py-2 rounded-lg font-semibold hover:bg-emerald-700 transition-colors shadow-md hover:shadow-lg transform hover:-translate-y-0.5">
+                    Go to Excel Practice Session &rarr;
+                  </a>
+              </div>
+
+              <!-- Module 4: Zoho -->
+              <div class="module-content">
+                <h3 class="text-2xl font-bold text-gray-900 mb-2">Module 5: Zoho</h3>
+                <p class="text-gray-600 mb-6">Gain proficiency in modern cloud accounting as a Zoho Certified Partner. Master the full suite of Zoho's financial applications.</p>
+                <div class="overflow-y-auto max-h-[420px] pr-4 modal-content-scroll">
+                  <ul class="space-y-3 text-sm md:text-base">
+                    <li class="flex items-start"><svg class="w-5 h-5 text-emerald-500 mr-3 flex-shrink-0 mt-1"><use href="#icon-check-circle"></use></svg><span class="font-medium text-gray-700">Introduction to Zoho Books: Features & Dashboard</span></li>
+                    <li class="flex items-start"><svg class="w-5 h-5 text-emerald-500 mr-3 flex-shrink-0 mt-1"><use href="#icon-check-circle"></use></svg><span class="font-medium text-gray-700">Company Setup & Basic Configurations</span></li>
+                    <li class="flex items-start"><svg class="w-5 h-5 text-emerald-500 mr-3 flex-shrink-0 mt-1"><use href="#icon-check-circle"></use></svg><span class="font-medium text-gray-700">Chart of Accounts & Items/Inventory Management</span></li>
+                    <li class="flex items-start"><svg class="w-5 h-5 text-emerald-500 mr-3 flex-shrink-0 mt-1"><use href="#icon-check-circle"></use></svg><span class="font-medium text-gray-700">Managing Customers & Vendors</span></li>
+                    <li class="flex items-start"><svg class="w-5 h-5 text-emerald-500 mr-3 flex-shrink-0 mt-1"><use href="#icon-check-circle"></use></svg><span class="font-medium text-gray-700">Sales Module: Estimates, Invoices & Payments</span></li>
+                    <li class="flex items-start"><svg class="w-5 h-5 text-emerald-500 mr-3 flex-shrink-0 mt-1"><use href="#icon-check-circle"></use></svg><span class="font-medium text-gray-700">Purchase Module: Purchase Orders & Bills</span></li>
+                    <li class="flex items-start"><svg class="w-5 h-5 text-emerald-500 mr-3 flex-shrink-0 mt-1"><use href="#icon-check-circle"></use></svg><span class="font-medium text-gray-700">Banking & Reconciliation with Bank Feeds</span></li>
+                    <li class="flex items-start"><svg class="w-5 h-5 text-emerald-500 mr-3 flex-shrink-0 mt-1"><use href="#icon-check-circle"></use></svg><span class="font-medium text-gray-700">GST & Compliance: Filing GSTR-1 & GSTR-3B through Zoho</span></li>
+                    <li class="flex items-start"><svg class="w-5 h-5 text-emerald-500 mr-3 flex-shrink-0 mt-1"><use href="#icon-check-circle"></use></svg><span class="font-medium text-gray-700">E-invoicing, E-way Bill Integration & TDS</span></li>
+                    <li class="flex items-start"><svg class="w-5 h-5 text-emerald-500 mr-3 flex-shrink-0 mt-1"><use href="#icon-check-circle"></use></svg><span class="font-medium text-gray-700">Reports & Analytics: P&L, Balance Sheet, Custom Reports</span></li>
+                  </ul>
+                </div>
+              </div>
+
+              <!-- Module 5: Tally -->
+              <div class="module-content">
+                <h3 class="text-2xl font-bold text-gray-900 mb-2">Module 6: Tally</h3>
+                <p class="text-gray-600 mb-6">Become an expert in India's leading accounting software with training from an Official Tally Partner.</p>
+                <div class="overflow-y-auto max-h-[420px] pr-4 modal-content-scroll">
+                    <ul class="space-y-3 text-sm md:text-base">
+                        <li class="flex items-start"><svg class="w-5 h-5 text-emerald-500 mr-3 flex-shrink-0 mt-1"><use href="#icon-check-circle"></use></svg><span class="font-medium text-gray-700">Introduction to TallyPrime: Features & Installation</span></li>
+                        <li class="flex items-start"><svg class="w-5 h-5 text-emerald-500 mr-3 flex-shrink-0 mt-1"><use href="#icon-check-circle"></use></svg><span class="font-medium text-gray-700">Company Creation & Configuration</span></li>
+                        <li class="flex items-start"><svg class="w-5 h-5 text-emerald-500 mr-3 flex-shrink-0 mt-1"><use href="#icon-check-circle"></use></svg><span class="font-medium text-gray-700">Maintaining Chart of Accounts (Ledgers & Groups)</span></li>
+                        <li class="flex items-start"><svg class="w-5 h-5 text-emerald-500 mr-3 flex-shrink-0 mt-1"><use href="#icon-check-circle"></use></svg><span class="font-medium text-gray-700">Recording Accounting Vouchers (Contra, Payment, Receipt, Journal, Sales, Purchase)</span></li>
+                        <li class="flex items-start"><svg class="w-5 h-5 text-emerald-500 mr-3 flex-shrink-0 mt-1"><use href="#icon-check-circle"></use></svg><span class="font-medium text-gray-700">Banking Module: Cheque Printing, Deposit Slips & Reconciliation</span></li>
+                        <li class="flex items-start"><svg class="w-5 h-5 text-emerald-500 mr-3 flex-shrink-0 mt-1"><use href="#icon-check-circle"></use></svg><span class="font-medium text-gray-700">Generating Financial Statements and MIS Reports</span></li>
+                        <li class="flex items-start"><svg class="w-5 h-5 text-emerald-500 mr-3 flex-shrink-0 mt-1"><use href="#icon-check-circle"></use></svg><span class="font-medium text-gray-700">Data Security: TallyVault and User Roles</span></li>
+                        <li class="flex items-start"><svg class="w-5 h-5 text-emerald-500 mr-3 flex-shrink-0 mt-1"><use href="#icon-check-circle"></use></svg><span class="font-medium text-gray-700">Company Data Management: Backup & Restore</span></li>
+                        <li class="flex items-start"><svg class="w-5 h-5 text-emerald-500 mr-3 flex-shrink-0 mt-1"><use href="#icon-check-circle"></use></svg><span class="font-medium text-gray-700">Goods and Services Tax (GST) in TallyPrime</span></li>
+                        <li class="flex items-start"><svg class="w-5 h-5 text-emerald-500 mr-3 flex-shrink-0 mt-1"><use href="#icon-check-circle"></use></svg><span class="font-medium text-gray-700">Recording GST compliant transactions & ITC Set Off</span></li>
+                        <li class="flex items-start"><svg class="w-5 h-5 text-emerald-500 mr-3 flex-shrink-0 mt-1"><use href="#icon-check-circle"></use></svg><span class="font-medium text-gray-700">Generating GST Returns for Regular Dealer</span></li>
+                    </ul>
+                </div>
+              </div>
+
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+  </main>
+  
+  <!-- Footer -->
+  <footer class="bg-gray-900 text-white py-12">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="grid md:grid-cols-4 gap-8">
+        <div class="md:col-span-2">
+          <h3 class="text-2xl font-bold mb-4 bg-gradient-to-r from-emerald-400 to-blue-400 bg-clip-text text-transparent">VISION CONNECTS</h3>
+          <p class="text-gray-300 mb-4">Quality training arm supported by <a href="http://accountantsfactory.com/" target="_blank" rel="noopener noreferrer" class="text-emerald-400 hover:underline">Accountants Factory LLP</a></p>
+          <p class="text-gray-400">Transforming careers through professional accounting education in Tirupati</p>
+        </div>
+        <div>
+          <h4 class="text-lg font-semibold mb-4 text-emerald-400">Quick Links</h4>
+          <div class="space-y-2">
+            <a href="course-cpa.html" class="block text-gray-300 hover:text-white transition-colors">Course Details</a>
+            <a href="index.html#about" class="block text-gray-300 hover:text-white transition-colors">About Us</a>
+            <a href="index.html#careers" class="block text-gray-300 hover:text-white transition-colors">Careers</a>
+            <a href="index.html#contact" class="block text-gray-300 hover:text-white transition-colors">Contact</a>
+          </div>
+        </div>
+        <div>
+          <h4 class="text-lg font-semibold mb-4 text-emerald-400">Our Modules</h4>
+          <div class="space-y-2 text-gray-300 text-sm">
+            <div>Core Accounting & Tax</div><div>Tally & Zoho Training</div><div>Excel & Communication</div>
+          </div>
+        </div>
+      </div>
+      <div class="border-t border-gray-800 mt-8 pt-8">
+        <div class="flex flex-col md:flex-row justify-between items-center">
+          <p class="text-gray-400 text-sm">© 2025 Vision Connects Academy. All rights reserved.</p>
+          <p class="text-gray-400 text-sm mt-2 md:mt-0">Powered by <a href="http://accountantsfactory.com/" target="_blank" rel="noopener noreferrer" class="text-emerald-400 hover:underline">Accountants Factory LLP</a></p>
+        </div>
+      </div>
+    </div>
+  </footer>
+
+  <!-- Enquiry Modal -->
+  <div id="enquiry-modal" class="fixed inset-0 bg-gray-900 bg-opacity-75 flex items-center justify-center p-4 z-[60] hidden">
+    <div class="bg-white rounded-2xl shadow-2xl p-4 max-w-md w-full relative transform transition-all" id="modal-content">
+      <button id="close-enquiry-modal-btn" class="absolute top-2 right-2 text-gray-400 hover:text-gray-700 z-10">
+        <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path></svg>
+      </button>
+      <div class="z-0">
+        <iframe aria-label='vision-website-forms' frameborder="0" style="height:500px;width:100%;border:none;" src='https://forms.zohopublic.in/accountantsfactoryllp/form/visionwebsiteforms/formperma/sBJe7hpM9Dwgcs3z09SCn9WNzx0Z8KjsmcfT_k5-oJc'></iframe>
+      </div>
+    </div>
+  </div>
+
+<script>
+document.addEventListener('DOMContentLoaded', function () {
+  // --- Main Navigation & Dropdowns ---
+  const menuButton = document.getElementById('menu-button');
+  const mobileMenu = document.getElementById('mobile-menu');
+  const menuOpenIcon = document.getElementById('menu-open-icon');
+  const menuCloseIcon = document.getElementById('menu-close-icon');
+  
+  if (menuButton) {
+      menuButton.addEventListener('click', () => {
+        mobileMenu.classList.toggle('open');
+        menuOpenIcon.classList.toggle('hidden');
+        menuCloseIcon.classList.toggle('hidden');
+      });
+  }
+
+  const setupDropdown = (buttonId, menuId) => {
+      const button = document.getElementById(buttonId);
+      const menu = document.getElementById(menuId);
+      if (!button || !menu) return;
+
+      const arrow = button.querySelector('.dropdown-arrow');
+      button.addEventListener('click', (event) => {
+          event.stopPropagation();
+          const isHidden = menu.classList.toggle('hidden');
+          if (arrow) arrow.classList.toggle('open', !isHidden);
+      });
+  };
+
+  setupDropdown('courses-dropdown-button', 'courses-dropdown-menu');
+  setupDropdown('webinar-dropdown-button', 'webinar-dropdown-menu');
+  setupDropdown('practice-dropdown-button', 'practice-dropdown-menu');
+  setupDropdown('mobile-courses-dropdown-button', 'mobile-courses-dropdown-menu');
+  setupDropdown('mobile-webinar-dropdown-button', 'mobile-webinar-dropdown-menu');
+  setupDropdown('mobile-practice-dropdown-button', 'mobile-practice-dropdown-menu');
+
+  document.addEventListener('click', (event) => {
+      if (!event.target.closest('[id$="-dropdown-container"]') && !event.target.closest('[id$="-dropdown-button"]')) {
+          document.querySelectorAll('[id$="-dropdown-menu"]').forEach(menu => menu.classList.add('hidden'));
+          document.querySelectorAll('.dropdown-arrow').forEach(arrow => arrow.classList.remove('open'));
+      }
+  });
+
+  // --- Course Module Tabs Logic ---
+  const moduleTabs = document.querySelectorAll('.module-tab');
+  const moduleContents = document.querySelectorAll('.module-content');
+
+  function setActiveModule(index) {
+    if (!moduleTabs.length) return;
+    moduleContents.forEach(content => content.classList.remove('active'));
+    moduleTabs.forEach(tab => {
+      tab.classList.remove('bg-emerald-600', 'text-white', 'shadow-lg');
+      tab.classList.add('bg-white', 'hover:bg-gray-100', 'text-gray-800');
+    });
+    if (moduleContents[index]) moduleContents[index].classList.add('active');
+    const activeTab = moduleTabs[index];
+    if (activeTab) {
+      activeTab.classList.add('bg-emerald-600', 'text-white', 'shadow-lg');
+      activeTab.classList.remove('bg-white', 'hover:bg-gray-100', 'text-gray-800');
+    }
+  }
+
+  moduleTabs.forEach((tab, index) => {
+    tab.addEventListener('click', () => setActiveModule(index));
+  });
+
+  // --- Inner Tax Module Tabs Logic ---
+  const taxTabs = document.querySelectorAll('.tax-tab');
+  const taxContentPanels = document.querySelectorAll('.tax-content-panel');
+  taxTabs.forEach(tab => {
+    tab.addEventListener('click', () => {
+      taxTabs.forEach(t => {
+        t.classList.remove('text-emerald-600', 'border-emerald-500');
+        t.classList.add('text-gray-500', 'border-transparent');
+      });
+      taxContentPanels.forEach(panel => panel.classList.remove('active'));
+      tab.classList.add('text-emerald-600', 'border-emerald-500');
+      tab.classList.remove('text-gray-500', 'border-transparent');
+      const targetId = `tax-content-${tab.dataset.taxTarget}`;
+      const targetPanel = document.getElementById(targetId);
+      if (targetPanel) targetPanel.classList.add('active');
+    });
+  });
+
+  // --- Enquiry Form Modal ---
+  const enquiryModal = document.getElementById('enquiry-modal');
+  const openEnquiryBtn = document.getElementById('open-enquiry-modal-btn');
+  const closeEnquiryBtn = document.getElementById('close-enquiry-modal-btn');
+
+  if (enquiryModal && openEnquiryBtn && closeEnquiryBtn) {
+    const openModal = () => enquiryModal.classList.remove('hidden');
+    const closeModal = () => enquiryModal.classList.add('hidden');
+    openEnquiryBtn.addEventListener('click', openModal);
+    closeEnquiryBtn.addEventListener('click', closeModal);
+    enquiryModal.addEventListener('click', (e) => {
+      if (e.target === enquiryModal) closeModal();
+    });
+  }
+  
+  setActiveModule(0);
+});
+</script>
+
+</body>
+</html>
