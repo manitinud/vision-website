@@ -71,7 +71,18 @@
           
           <div class="hidden md:flex items-center space-x-8">
             <a href="#home" class="text-gray-700 hover:text-emerald-600 transition-colors font-medium">Home</a>
-            <a href="#courses" class="text-gray-700 hover:text-emerald-600 transition-colors font-medium">Courses</a>
+            <!-- Courses Dropdown -->
+<div class="relative" id="courses-dropdown-container">
+    <button id="courses-dropdown-button" class="text-gray-700 hover:text-emerald-600 transition-colors font-medium flex items-center">
+        Courses
+        <svg class="w-5 h-5 ml-1 text-gray-500 dropdown-arrow"><use href="#icon-chevron-down"></use></svg>
+    </button>
+    <div id="courses-dropdown-menu" class="absolute left-0 mt-2 w-72 rounded-md shadow-lg bg-white ring-1 ring-black ring-opacity-5 hidden z-50">
+        <div class="py-1" role="menu" aria-orientation="vertical" aria-labelledby="courses-dropdown-button">
+            <a href="course-cpa.html" class="block px-4 py-3 text-sm text-gray-700 hover:bg-gray-100 hover:text-emerald-600 font-semibold" role="menuitem">Certified Professional Accountant</a>
+        </div>
+    </div>
+</div>
             <div class="relative" id="webinar-dropdown-container">
               <button id="webinar-dropdown-button" class="text-gray-700 hover:text-emerald-600 transition-colors font-medium flex items-center">
                 Online Webinars
@@ -111,7 +122,16 @@
       <div id="mobile-menu" class="mobile-menu md:hidden bg-white border-t border-gray-100 shadow-lg">
         <div class="px-4 py-4 space-y-4">
           <a href="#home" class="mobile-link block text-gray-700 hover:text-emerald-600 transition-colors font-medium">Home</a>
-          <a href="#courses" class="mobile-link block text-gray-700 hover:text-emerald-600 transition-colors font-medium">Courses</a>
+          <!-- Mobile Courses Dropdown -->
+<div class="relative">
+    <button id="mobile-courses-dropdown-button" class="w-full text-left mobile-link block text-gray-700 hover:text-emerald-600 transition-colors font-medium flex justify-between items-center">
+        <span>Courses</span>
+        <svg class="w-5 h-5 text-gray-500 dropdown-arrow"><use href="#icon-chevron-down"></use></svg>
+    </button>
+    <div id="mobile-courses-dropdown-menu" class="pl-4 mt-2 space-y-2 hidden">
+        <a href="course-cpa.html" class="block text-gray-600 hover:text-emerald-600">Certified Professional Accountant</a>
+    </div>
+</div>
           <div class="relative">
             <button id="mobile-webinar-dropdown-button" class="w-full text-left mobile-link block text-gray-700 hover:text-emerald-600 transition-colors font-medium flex justify-between items-center">
               <span>Online Webinars </span>
@@ -227,55 +247,56 @@
         </section>
 
         <section class="py-16 bg-gradient-to-br from-gray-50 to-blue-50">
-            <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-                <div class="text-center mb-12">
-                    <h2 class="text-3xl md:text-4xl font-bold text-gray-900 mb-4">Individual Course Offerings</h2>
-                    <p class="text-lg text-gray-600">Choose specific courses based on your career needs and learning goals</p>
-                </div>
-                <div class="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-6 gap-4">
-                    <div class="bg-white rounded-xl shadow-lg hover:shadow-xl transition-all duration-300 p-4 text-center group hover:scale-105">
-                        <div class="bg-emerald-500 w-12 h-12 rounded-full flex items-center justify-center text-white text-xl mx-auto mb-3 group-hover:scale-110 transition-transform">📊</div>
-                        <h3 class="font-semibold text-gray-900 text-sm mb-2">Professional Accounting Course</h3>
-                        <a href="#courses" class="text-xs bg-gray-100 hover:bg-emerald-100 text-gray-700 hover:text-emerald-700 px-3 py-1 rounded-full transition-colors">Learn More</a>
-                    </div>
-                    <div class="bg-white rounded-xl shadow-lg hover:shadow-xl transition-all duration-300 p-4 text-center group hover:scale-105">
-                        <div class="bg-blue-500 w-12 h-12 rounded-full flex items-center justify-center text-white text-xl mx-auto mb-3 group-hover:scale-110 transition-transform">💼</div>
-                        <h3 class="font-semibold text-gray-900 text-sm mb-2">Tally Coaching Classes</h3>
-                        <a href="#courses" class="text-xs bg-gray-100 hover:bg-emerald-100 text-gray-700 hover:text-emerald-700 px-3 py-1 rounded-full transition-colors">Learn More</a>
-                    </div>
-                    <div class="bg-white rounded-xl shadow-lg hover:shadow-xl transition-all duration-300 p-4 text-center group hover:scale-105">
-                        <div class="bg-purple-500 w-12 h-12 rounded-full flex items-center justify-center text-white text-xl mx-auto mb-3 group-hover:scale-110 transition-transform">📚</div>
-                        <h3 class="font-semibold text-gray-900 text-sm mb-2">Zoho Books Training</h3>
-                        <a href="#courses" class="text-xs bg-gray-100 hover:bg-emerald-100 text-gray-700 hover:text-emerald-700 px-3 py-1 rounded-full transition-colors">Learn More</a>
-                    </div>
-                    <div class="bg-white rounded-xl shadow-lg hover:shadow-xl transition-all duration-300 p-4 text-center group hover:scale-105">
-                        <div class="bg-orange-500 w-12 h-12 rounded-full flex items-center justify-center text-white text-xl mx-auto mb-3 group-hover:scale-110 transition-transform">🎯</div>
-                        <h3 class="font-semibold text-gray-900 text-sm mb-2">GST Training Program</h3>
-                        <a href="#courses" class="text-xs bg-gray-100 hover:bg-emerald-100 text-gray-700 hover:text-emerald-700 px-3 py-1 rounded-full transition-colors">Learn More</a>
-                    </div>
-                    <div class="bg-white rounded-xl shadow-lg hover:shadow-xl transition-all duration-300 p-4 text-center group hover:scale-105">
-                        <div class="bg-red-500 w-12 h-12 rounded-full flex items-center justify-center text-white text-xl mx-auto mb-3 group-hover:scale-110 transition-transform">📋</div>
-                        <h3 class="font-semibold text-gray-900 text-sm mb-2">Income Tax Return Filing</h3>
-                        <a href="#courses" class="text-xs bg-gray-100 hover:bg-emerald-100 text-gray-700 hover:text-emerald-700 px-3 py-1 rounded-full transition-colors">Learn More</a>
-                    </div>
-                    <div class="bg-white rounded-xl shadow-lg hover:shadow-xl transition-all duration-300 p-4 text-center group hover:scale-105">
-                        <div class="bg-green-500 w-12 h-12 rounded-full flex items-center justify-center text-white text-xl mx-auto mb-3 group-hover:scale-110 transition-transform">📈</div>
-                        <h3 class="font-semibold text-gray-900 text-sm mb-2">Excel Training Course</h3>
-                        <a href="#courses" class="text-xs bg-gray-100 hover:bg-emerald-100 text-gray-700 hover:text-emerald-700 px-3 py-1 rounded-full transition-colors">Learn More</a>
-                    </div>
-                </div>
-                <div class="text-center mt-8">
-                    <p class="text-gray-600 mb-4">All individual courses available in both online and offline modes</p>
-                    <div class="flex flex-wrap justify-center gap-2 text-xs">
-                        <span class="bg-emerald-100 text-emerald-800 px-3 py-1 rounded-full">Accounting Classes Tirupati</span>
-                        <span class="bg-blue-100 text-blue-800 px-3 py-1 rounded-full">Tally Course Near Me</span>
-                        <span class="bg-purple-100 text-purple-800 px-3 py-1 rounded-full">GST Training Institute</span>
-                        <span class="bg-red-100 text-red-800 px-3 py-1 rounded-full">Zoho Books Training Institute</span>
-                        <span class="bg-orange-100 text-orange-800 px-3 py-1 rounded-full">Excel Training Center</span>
-                    </div>
-                </div>
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div class="text-center mb-12">
+            <h2 class="text-3xl md:text-4xl font-bold text-gray-900 mb-4">Individual Course Offerings</h2>
+            <p class="text-lg text-gray-600">Choose specific courses based on your career needs and learning goals</p>
+        </div>
+        <div class="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-6 gap-4">
+            <div class="bg-white rounded-xl shadow-lg hover:shadow-xl transition-all duration-300 p-4 text-center group hover:scale-105">
+                <div class="bg-emerald-500 w-12 h-12 rounded-full flex items-center justify-center text-white text-xl mx-auto mb-3 group-hover:scale-110 transition-transform">📊</div>
+                <h3 class="font-semibold text-gray-900 text-sm mb-2">Professional Accounting Course</h3>
+                <a href="course-cpa.html" class="text-xs bg-gray-100 hover:bg-emerald-100 text-gray-700 hover:text-emerald-700 px-3 py-1 rounded-full transition-colors">Learn More</a>
             </div>
-        </section>
+            <div class="bg-white rounded-xl shadow-lg hover:shadow-xl transition-all duration-300 p-4 text-center group hover:scale-105">
+                <div class="bg-blue-500 w-12 h-12 rounded-full flex items-center justify-center text-white text-xl mx-auto mb-3 group-hover:scale-110 transition-transform">💼</div>
+                <h3 class="font-semibold text-gray-900 text-sm mb-2">Tally Coaching Classes</h3>
+                <a href="course-cpa.html" class="text-xs bg-gray-100 hover:bg-emerald-100 text-gray-700 hover:text-emerald-700 px-3 py-1 rounded-full transition-colors">Learn More</a>
+            </div>
+            <div class="bg-white rounded-xl shadow-lg hover:shadow-xl transition-all duration-300 p-4 text-center group hover:scale-105">
+                <div class="bg-purple-500 w-12 h-12 rounded-full flex items-center justify-center text-white text-xl mx-auto mb-3 group-hover:scale-110 transition-transform">📚</div>
+                <h3 class="font-semibold text-gray-900 text-sm mb-2">Zoho Books Training</h3>
+                <a href="course-cpa.html" class="text-xs bg-gray-100 hover:bg-emerald-100 text-gray-700 hover:text-emerald-700 px-3 py-1 rounded-full transition-colors">Learn More</a>
+            </div>
+            <div class="bg-white rounded-xl shadow-lg hover:shadow-xl transition-all duration-300 p-4 text-center group hover:scale-105">
+                <div class="bg-orange-500 w-12 h-12 rounded-full flex items-center justify-center text-white text-xl mx-auto mb-3 group-hover:scale-110 transition-transform">🎯</div>
+                <h3 class="font-semibold text-gray-900 text-sm mb-2">GST Training Program</h3>
+                <a href="course-cpa.html" class="text-xs bg-gray-100 hover:bg-emerald-100 text-gray-700 hover:text-emerald-700 px-3 py-1 rounded-full transition-colors">Learn More</a>
+            </div>
+            <div class="bg-white rounded-xl shadow-lg hover:shadow-xl transition-all duration-300 p-4 text-center group hover:scale-105">
+                <div class="bg-red-500 w-12 h-12 rounded-full flex items-center justify-center text-white text-xl mx-auto mb-3 group-hover:scale-110 transition-transform">📋</div>
+                <h3 class="font-semibold text-gray-900 text-sm mb-2">Income Tax Return Filing</h3>
+                <a href="course-cpa.html" class="text-xs bg-gray-100 hover:bg-emerald-100 text-gray-700 hover:text-emerald-700 px-3 py-1 rounded-full transition-colors">Learn More</a>
+            </div>
+            <div class="bg-white rounded-xl shadow-lg hover:shadow-xl transition-all duration-300 p-4 text-center group hover:scale-105">
+                <div class="bg-green-500 w-12 h-12 rounded-full flex items-center justify-center text-white text-xl mx-auto mb-3 group-hover:scale-110 transition-transform">📈</div>
+                <h3 class="font-semibold text-gray-900 text-sm mb-2">Excel Training Course</h3>
+                <a href="excel-practice.html" class="text-xs bg-gray-100 hover:bg-emerald-100 text-gray-700 hover:text-emerald-700 px-3 py-1 rounded-full transition-colors">Learn More</a>
+            </div>
+        </div>
+        <div class="text-center mt-8">
+            <p class="text-gray-600 mb-4">All individual courses available in both online and offline modes</p>
+            <div class="flex flex-wrap justify-center gap-2 text-xs">
+                <span class="bg-emerald-100 text-emerald-800 px-3 py-1 rounded-full">Accounting Classes Tirupati</span>
+                <span class="bg-blue-100 text-blue-800 px-3 py-1 rounded-full">Tally Course Near Me</span>
+                <span class="bg-purple-100 text-purple-800 px-3 py-1 rounded-full">GST Training Institute</span>
+                <span class="bg-red-100 text-red-800 px-3 py-1 rounded-full">Zoho Books Training Institute</span>
+                <span class="bg-orange-100 text-orange-800 px-3 py-1 rounded-full">Excel Training Center</span>
+            </div>
+        </div>
+    </div>
+</section>
+
 
         <section id="courses" class="py-20 bg-white">
           <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
@@ -511,7 +532,7 @@
                     <div class="w-12 h-12 bg-emerald-100 rounded-xl flex items-center justify-center flex-shrink-0"><svg class="w-6 h-6 text-emerald-600"><use href="#icon-phone"></use></svg></div>
                     <div>
                       <h4 class="font-semibold text-gray-900 mb-1">Call Us</h4>
-                      <p class="text-gray-600">+91 766 712 0606</p>
+                      <p class="text-gray-600">+91 91766 71206</p>
                       <p class="text-gray-600">+91 984 984 3020</p>
                     </div>
                   </div>
@@ -637,6 +658,8 @@ document.addEventListener('DOMContentLoaded', function () {
   setupDropdown('practice-dropdown-button', 'practice-dropdown-menu');
   setupDropdown('mobile-webinar-dropdown-button', 'mobile-webinar-dropdown-menu');
   setupDropdown('mobile-practice-dropdown-button', 'mobile-practice-dropdown-menu');
+setupDropdown('courses-dropdown-button', 'courses-dropdown-menu');
+  setupDropdown('mobile-courses-dropdown-button', 'mobile-courses-dropdown-menu');
 
   document.addEventListener('click', (event) => {
       if (!event.target.closest('[id$="-dropdown-container"]') && !event.target.closest('[id$="-dropdown-button"]')) {
