@@ -72,101 +72,10 @@
   </svg>
 
   <!-- Header / Navigation -->
-  <nav class="sticky top-0 w-full z-50 bg-white/95 backdrop-blur-lg shadow-lg border-b border-gray-100">
-    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-      <div class="flex justify-between items-center py-4">
-        <a href="index.html" class="flex items-center space-x-4">
-          <div class="text-3xl font-bold bg-gradient-to-r from-emerald-600 to-blue-600 bg-clip-text text-transparent">
-            VISION CONNECTS
-          </div>
-        </a>
-        <div class="hidden md:flex items-center space-x-8">
-          <a href="index.html" class="text-gray-700 hover:text-emerald-600 transition-colors font-medium">Home</a>
-          <div class="relative" id="courses-dropdown-container">
-            <button id="courses-dropdown-button" class="text-emerald-600 transition-colors font-bold flex items-center">
-              Courses
-              <svg class="w-5 h-5 ml-1 text-gray-500 dropdown-arrow open"><use href="#icon-chevron-down"></use></svg>
-            </button>
-            <div id="courses-dropdown-menu" class="absolute left-0 mt-2 w-72 rounded-md shadow-lg bg-white ring-1 ring-black ring-opacity-5 hidden z-50">
-              <div class="py-1" role="menu" aria-orientation="vertical" aria-labelledby="courses-dropdown-button">
-                <a href="course-cpa.html" class="block px-4 py-3 text-sm text-gray-700 hover:bg-gray-100 hover:text-emerald-600 font-semibold" role="menuitem">Certified Professional Accountant</a>
-              </div>
-            </div>
-          </div>
-          <div class="relative" id="webinar-dropdown-container">
-            <button id="webinar-dropdown-button" class="text-gray-700 hover:text-emerald-600 transition-colors font-medium flex items-center">
-              Online Webinars
-              <svg class="w-5 h-5 ml-1 text-gray-500 dropdown-arrow"><use href="#icon-chevron-down"></use></svg>
-            </button>
-            <div id="webinar-dropdown-menu" class="absolute right-0 mt-2 w-56 rounded-md shadow-lg bg-white ring-1 ring-black ring-opacity-5 hidden z-50">
-              <div class="py-1" role="menu" aria-orientation="vertical" aria-labelledby="webinar-dropdown-button">
-                <a href="incometax.html" class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 hover:text-emerald-600" role="menuitem">Income Tax Series</a>
-                <a href="ai-accounting.html" class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 hover:text-emerald-600" role="menuitem">AI in Accounting</a>
-                <a href="excel.html" class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 hover:text-emerald-600" role="menuitem">Excel Master Class</a>
-              </div>
-            </div>
-          </div>
-           <div class="relative" id="practice-dropdown-container">
-                <button id="practice-dropdown-button" class="text-gray-700 hover:text-emerald-600 transition-colors font-medium flex items-center">
-                  Practice Session
-                  <svg class="w-5 h-5 ml-1 text-gray-500 dropdown-arrow"><use href="#icon-chevron-down"></use></svg>
-                </button>
-                <div id="practice-dropdown-menu" class="absolute right-0 mt-2 w-56 rounded-md shadow-lg bg-white ring-1 ring-black ring-opacity-5 hidden z-50">
-                  <div class="py-1" role="menu" aria-orientation="vertical" aria-labelledby="practice-dropdown-button">
-                    <a href="excel-practice.html" class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 hover:text-emerald-600" role="menuitem">Excel Practice</a>
-                  </div>
-                </div>
-            </div>
-          <a href="index.html#about" class="text-gray-700 hover:text-emerald-600 transition-colors font-medium">About</a>
-          <a href="index.html#contact" class="text-gray-700 hover:text-emerald-600 transition-colors font-medium">Contact</a>
-        </div>
-        <button id="menu-button" class="md:hidden text-gray-700">
-          <svg class="w-6 h-6" id="menu-open-icon"><use href="#icon-menu"></use></svg>
-          <svg class="w-6 h-6 hidden" id="menu-close-icon"><use href="#icon-x"></use></svg>
-        </button>
-      </div>
-    </div>
-    <div id="mobile-menu" class="mobile-menu md:hidden bg-white border-t border-gray-100 shadow-lg">
-      <div class="px-4 py-4 space-y-4">
-        <a href="index.html" class="mobile-link block text-gray-700 hover:text-emerald-600 transition-colors font-medium">Home</a>
-        <div class="relative">
-          <button id="mobile-courses-dropdown-button" class="w-full text-left mobile-link block text-gray-700 hover:text-emerald-600 transition-colors font-medium flex justify-between items-center">
-            <span>Courses</span>
-            <svg class="w-5 h-5 text-gray-500 dropdown-arrow"><use href="#icon-chevron-down"></use></svg>
-          </button>
-          <div id="mobile-courses-dropdown-menu" class="pl-4 mt-2 space-y-2 hidden">
-            <a href="course-cpa.html" class="block text-emerald-600 font-semibold">Certified Professional Accountant</a>
-          </div>
-        </div>
-         <div class="relative">
-          <button id="mobile-webinar-dropdown-button" class="w-full text-left mobile-link block text-gray-700 hover:text-emerald-600 transition-colors font-medium flex justify-between items-center">
-            <span>Online Webinars</span>
-            <svg class="w-5 h-5 text-gray-500 dropdown-arrow"><use href="#icon-chevron-down"></use></svg>
-          </button>
-          <div id="mobile-webinar-dropdown-menu" class="pl-4 mt-2 space-y-2 hidden">
-            <a href="incometax.html" class="block text-gray-600 hover:text-emerald-600">Income Tax Series</a>
-            <a href="ai-accounting.html" class="block text-gray-600 hover:text-emerald-600">AI in Accounting</a>
-            <a href="excel.html" class="block text-gray-600 hover:text-emerald-600">Excel Master Class</a>
-          </div>
-        </div>
-        <div class="relative">
-            <button id="mobile-practice-dropdown-button" class="w-full text-left mobile-link block text-gray-700 hover:text-emerald-600 transition-colors font-medium flex justify-between items-center">
-              <span>Practice Session</span>
-              <svg class="w-5 h-5 text-gray-500 dropdown-arrow"><use href="#icon-chevron-down"></use></svg>
-            </button>
-            <div id="mobile-practice-dropdown-menu" class="pl-4 mt-2 space-y-2 hidden">
-              <a href="excel-practice.html" class="block text-gray-600 hover:text-emerald-600">Excel Practice</a>
-            </div>
-        </div>
-        <a href="index.html#about" class="mobile-link block text-gray-700 hover:text-emerald-600 transition-colors font-medium">About</a>
-        <a href="index.html#contact" class="mobile-link block text-gray-700 hover:text-emerald-600 transition-colors font-medium">Contact</a>
-      </div>
-    </div>
-  </nav>
-
+  <div id="navbar-placeholder"></div>
   <main>
     <!-- Course Hero Section -->
-    <section class="pt-20 pb-16 bg-white">
+    <section class="pt-28 pb-16 bg-white">
       <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div class="text-center">
           <h1 class="text-4xl md:text-5xl font-extrabold text-gray-900 mb-4 leading-tight">
@@ -466,48 +375,7 @@
 
 <script>
 document.addEventListener('DOMContentLoaded', function () {
-  // --- Main Navigation & Dropdowns ---
-  const menuButton = document.getElementById('menu-button');
-  const mobileMenu = document.getElementById('mobile-menu');
-  const menuOpenIcon = document.getElementById('menu-open-icon');
-  const menuCloseIcon = document.getElementById('menu-close-icon');
-  
-  if (menuButton) {
-      menuButton.addEventListener('click', () => {
-        mobileMenu.classList.toggle('open');
-        menuOpenIcon.classList.toggle('hidden');
-        menuCloseIcon.classList.toggle('hidden');
-      });
-  }
-
-  const setupDropdown = (buttonId, menuId) => {
-      const button = document.getElementById(buttonId);
-      const menu = document.getElementById(menuId);
-      if (!button || !menu) return;
-
-      const arrow = button.querySelector('.dropdown-arrow');
-      button.addEventListener('click', (event) => {
-          event.stopPropagation();
-          const isHidden = menu.classList.toggle('hidden');
-          if (arrow) arrow.classList.toggle('open', !isHidden);
-      });
-  };
-
-  setupDropdown('courses-dropdown-button', 'courses-dropdown-menu');
-  setupDropdown('webinar-dropdown-button', 'webinar-dropdown-menu');
-  setupDropdown('practice-dropdown-button', 'practice-dropdown-menu');
-  setupDropdown('mobile-courses-dropdown-button', 'mobile-courses-dropdown-menu');
-  setupDropdown('mobile-webinar-dropdown-button', 'mobile-webinar-dropdown-menu');
-  setupDropdown('mobile-practice-dropdown-button', 'mobile-practice-dropdown-menu');
-
-  document.addEventListener('click', (event) => {
-      if (!event.target.closest('[id$="-dropdown-container"]') && !event.target.closest('[id$="-dropdown-button"]')) {
-          document.querySelectorAll('[id$="-dropdown-menu"]').forEach(menu => menu.classList.add('hidden'));
-          document.querySelectorAll('.dropdown-arrow').forEach(arrow => arrow.classList.remove('open'));
-      }
-  });
-
-  // --- Course Module Tabs Logic ---
+    // --- Course Module Tabs Logic ---
   const moduleTabs = document.querySelectorAll('.module-tab');
   const moduleContents = document.querySelectorAll('.module-content');
 
@@ -566,6 +434,67 @@ document.addEventListener('DOMContentLoaded', function () {
   setActiveModule(0);
 });
 </script>
+<script>
+    fetch('menu.html')
+        .then(response => response.text())
+        .then(data => {
+            document.getElementById('navbar-placeholder').innerHTML = data;
+            
+            // Logic for the mobile menu (hamburger button)
+            const menuButton = document.getElementById('menu-button');
+            const mobileMenu = document.getElementById('mobile-menu');
+            const menuOpenIcon = document.getElementById('menu-open-icon');
+            const menuCloseIcon = document.getElementById('menu-close-icon');
+            
+            if (menuButton) {
+                menuButton.addEventListener('click', () => {
+                  mobileMenu.classList.toggle('open');
+                  menuOpenIcon.classList.toggle('hidden');
+                  menuCloseIcon.classList.toggle('hidden');
+                });
+            }
 
+            // Function to make dropdowns work
+            const setupDropdown = (buttonId, menuId) => {
+                const button = document.getElementById(buttonId);
+                const menu = document.getElementById(menuId);
+                if (!button || !menu) return;
+
+                const arrow = button.querySelector('.dropdown-arrow');
+
+                button.addEventListener('click', (event) => {
+                    event.stopPropagation();
+                    document.querySelectorAll('[id$="-dropdown-menu"]').forEach(otherMenu => {
+                        if (otherMenu.id !== menuId) {
+                            otherMenu.classList.add('hidden');
+                        }
+                    });
+                     document.querySelectorAll('[id$="-dropdown-button"] .dropdown-arrow').forEach(otherArrow => {
+                        if(otherArrow !== arrow) {
+                            otherArrow.classList.remove('open');
+                        }
+                    });
+
+                    const isHidden = menu.classList.toggle('hidden');
+                    if (arrow) arrow.classList.toggle('open', !isHidden);
+                });
+            };
+
+            // Re-attach the dropdown logic to all dropdown buttons from your menu
+            setupDropdown('courses-dropdown-button', 'courses-dropdown-menu');
+            setupDropdown('webinar-dropdown-button', 'webinar-dropdown-menu');
+            setupDropdown('practice-dropdown-button', 'practice-dropdown-menu');
+            setupDropdown('mobile-courses-dropdown-button', 'mobile-courses-dropdown-menu');
+            setupDropdown('mobile-webinar-dropdown-button', 'mobile-webinar-dropdown-menu');
+            setupDropdown('mobile-practice-dropdown-button', 'mobile-practice-dropdown-menu');
+            
+            document.addEventListener('click', (event) => {
+                if (!event.target.closest('[id$="-dropdown-container"]') && !event.target.closest('[id$="-dropdown-button"]')) {
+                    document.querySelectorAll('[id$="-dropdown-menu"]').forEach(menu => menu.classList.add('hidden'));
+                    document.querySelectorAll('.dropdown-arrow').forEach(arrow => arrow.classList.remove('open'));
+                }
+            });
+        });
+</script>
 </body>
 </html>

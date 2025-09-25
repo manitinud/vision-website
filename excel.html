@@ -68,31 +68,23 @@
   </style>
 </head>
 <body class="p-4 sm:p-6 md:p-8">
+    <svg width="0" height="0" style="position:absolute">
+  <symbol id="icon-chevron-down" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"></polyline></symbol>
+  <symbol id="icon-menu" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="4" x2="20" y1="12" y2="12"/><line x1="4" x2="20" y1="6" y2="6"/><line x1="4" x2="20" y1="18" y2="18"/></symbol>
+  <symbol id="icon-x" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="18" x2="6" y1="6" y2="18"/><line x1="6" x2="18" y1="6" y2="18"/></symbol>
+</svg>
 
-    <nav class="w-full z-50 bg-white/95 backdrop-blur-lg shadow-md border-b border-gray-100 mb-6">
-      <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div class="flex justify-between items-center py-4">
-          <a href="index.html" class="flex items-center space-x-4">
-            <div class="text-3xl font-bold bg-gradient-to-r from-emerald-600 to-blue-600 bg-clip-text text-transparent">
-              VISION CONNECTS
-            </div>
-          </a>
-           <a href="index.html" class="px-4 py-2 text-sm font-medium text-white bg-emerald-600 hover:bg-emerald-700 rounded-lg transition-colors">
-              ← Back to Main Site
-           </a>
-        </div>
-      </div>
-    </nav>
+    <div id="navbar-placeholder"></div>
     
-    <div class="container mx-auto">
-        <div class="excel-top-bar">
-            <div class="excel-sidebar-header">
-                <h2>Vision Connects</h2>
-                <p>Excel Mastery Course</p>
-            </div>
-            <select id="excel-session-navigation" class="session-dropdown">
-                </select>
-        </div>
+    <div class="container mx-auto pt-24">
+        <section class="text-center mb-12">
+    <h1 class="text-4xl md:text-5xl font-extrabold text-slate-800 mb-4">Excel Master Class</h1>
+    <p class="text-lg text-slate-600 max-w-3xl mx-auto">An Interactive Guide to Essential Functions</p>
+</section>
+<div class="mb-8 flex justify-center">
+  <select id="excel-session-navigation" class="w-full max-w-md bg-white p-3 border-2 border-gray-200 rounded-xl focus:ring-2 focus:ring-emerald-500 focus:border-emerald-500 transition font-semibold text-gray-700">
+    </select>
+</div>
         <div class="excel-main-content">
             <div id="excel-session-1" class="excel-page-content active">
                 <div class="excel-day-module">
@@ -549,6 +541,68 @@ document.addEventListener('DOMContentLoaded', function () {
     // Initialize with the first session
     switchExcelPage(1);
 });
+</script>
+<script>
+    fetch('menu.html')
+        .then(response => response.text())
+        .then(data => {
+            document.getElementById('navbar-placeholder').innerHTML = data;
+            
+            // Logic for the mobile menu (hamburger button)
+            const menuButton = document.getElementById('menu-button');
+            const mobileMenu = document.getElementById('mobile-menu');
+            const menuOpenIcon = document.getElementById('menu-open-icon');
+            const menuCloseIcon = document.getElementById('menu-close-icon');
+            
+            if (menuButton) {
+                menuButton.addEventListener('click', () => {
+                  mobileMenu.classList.toggle('open');
+                  menuOpenIcon.classList.toggle('hidden');
+                  menuCloseIcon.classList.toggle('hidden');
+                });
+            }
+
+            // Function to make dropdowns work
+            const setupDropdown = (buttonId, menuId) => {
+                const button = document.getElementById(buttonId);
+                const menu = document.getElementById(menuId);
+                if (!button || !menu) return;
+
+                const arrow = button.querySelector('.dropdown-arrow');
+
+                button.addEventListener('click', (event) => {
+                    event.stopPropagation();
+                    document.querySelectorAll('[id$="-dropdown-menu"]').forEach(otherMenu => {
+                        if (otherMenu.id !== menuId) {
+                            otherMenu.classList.add('hidden');
+                        }
+                    });
+                     document.querySelectorAll('[id$="-dropdown-button"] .dropdown-arrow').forEach(otherArrow => {
+                        if(otherArrow !== arrow) {
+                            otherArrow.classList.remove('open');
+                        }
+                    });
+
+                    const isHidden = menu.classList.toggle('hidden');
+                    if (arrow) arrow.classList.toggle('open', !isHidden);
+                });
+            };
+
+            // Re-attach the dropdown logic to all dropdown buttons from your menu
+            setupDropdown('courses-dropdown-button', 'courses-dropdown-menu');
+            setupDropdown('webinar-dropdown-button', 'webinar-dropdown-menu');
+            setupDropdown('practice-dropdown-button', 'practice-dropdown-menu');
+            setupDropdown('mobile-courses-dropdown-button', 'mobile-courses-dropdown-menu');
+            setupDropdown('mobile-webinar-dropdown-button', 'mobile-webinar-dropdown-menu');
+            setupDropdown('mobile-practice-dropdown-button', 'mobile-practice-dropdown-menu');
+            
+            document.addEventListener('click', (event) => {
+                if (!event.target.closest('[id$="-dropdown-container"]') && !event.target.closest('[id$="-dropdown-button"]')) {
+                    document.querySelectorAll('[id$="-dropdown-menu"]').forEach(menu => menu.classList.add('hidden'));
+                    document.querySelectorAll('.dropdown-arrow').forEach(arrow => arrow.classList.remove('open'));
+                }
+            });
+        });
 </script>
 </body>
 </html>
