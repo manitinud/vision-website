@@ -1,0 +1,574 @@
+<!DOCTYPE html>
+<html lang="en" class="scroll-smooth">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Zoho Books Practice Session - Vision Connects</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <style>
+    body { font-family: 'Inter', sans-serif; }
+    .module-content {
+      display: none;
+      animation: fadeIn 0.7s ease-in-out;
+    }
+    .module-content.active {
+      display: block;
+    }
+    @keyframes fadeIn {
+      from { opacity: 0; transform: translateY(10px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+    .mobile-menu {
+        max-height: 0;
+        overflow: hidden;
+        transition: max-height 0.3s ease-out;
+    }
+    .mobile-menu.open {
+        max-height: 500px;
+    }
+    .dropdown-arrow.open {
+        transform: rotate(180deg);
+    }
+    .dropdown-arrow {
+        transition: transform 0.2s ease-in-out;
+    }
+  </style>
+</head>
+<body class="bg-gray-50">
+
+  <svg width="0" height="0" style="position:absolute">
+    <symbol id="icon-book-open" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M2 3h6a4 4 0 0 1 4 4v14a3 3 0 0 0-3-3H2z"/><path d="M22 3h-6a4 4 0 0 0-4 4v14a3 3 0 0 1 3-3h7z"/></symbol>
+    <symbol id="icon-chevron-down" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"></polyline></symbol>
+    <symbol id="icon-menu" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="4" x2="20" y1="12" y2="12"/><line x1="4" x2="20" y1="6" y2="6"/><line x1="4" x2="20" y1="18" y2="18"/></symbol>
+    <symbol id="icon-x" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="18" x2="6" y1="6" y2="18"/><line x1="6" x2="18" y1="6" y2="18"/></symbol>
+  </svg>
+
+  <nav class="sticky top-0 w-full z-50 bg-white/95 backdrop-blur-lg shadow-lg border-b border-gray-100">
+      <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div class="flex justify-between items-center py-4">
+          <a href="index.html" class="flex items-center space-x-4">
+            <div class="text-3xl font-bold bg-gradient-to-r from-emerald-600 to-blue-600 bg-clip-text text-transparent">
+              VISION CONNECTS
+            </div>
+          </a>
+          
+          <div class="hidden md:flex items-center space-x-8">
+            <a href="index.html#home" class="text-gray-700 hover:text-emerald-600 transition-colors font-medium">Home</a>
+            <div class="relative" id="courses-dropdown-container">
+                <button id="courses-dropdown-button" class="text-gray-700 hover:text-emerald-600 transition-colors font-medium flex items-center">
+                    Courses<svg class="w-5 h-5 ml-1 text-gray-500 dropdown-arrow"><use href="#icon-chevron-down"></use></svg>
+                </button>
+                <div id="courses-dropdown-menu" class="absolute left-0 mt-2 w-72 rounded-md shadow-lg bg-white ring-1 ring-black ring-opacity-5 hidden z-50">
+                    <div class="py-1"><a href="course-cpa.html" class="block px-4 py-3 text-sm text-gray-700 hover:bg-gray-100 hover:text-emerald-600 font-semibold">Certified Professional Accountant</a></div>
+                </div>
+            </div>
+            <div class="relative" id="webinar-dropdown-container">
+              <button id="webinar-dropdown-button" class="text-gray-700 hover:text-emerald-600 transition-colors font-medium flex items-center">
+                Online Webinars<svg class="w-5 h-5 ml-1 text-gray-500 dropdown-arrow"><use href="#icon-chevron-down"></use></svg>
+              </button>
+              <div id="webinar-dropdown-menu" class="absolute right-0 mt-2 w-56 rounded-md shadow-lg bg-white ring-1 ring-black ring-opacity-5 hidden z-50">
+                <div class="py-1">
+                  <a href="incometax.html" class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 hover:text-emerald-600">Income Tax Series</a>
+                  <a href="ai-accounting.html" class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 hover:text-emerald-600">AI in Accounting</a>
+                  <a href="excel.html" class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 hover:text-emerald-600">Excel Master Class</a>
+                </div>
+              </div>
+            </div>
+            <div class="relative" id="practice-dropdown-container">
+                <button id="practice-dropdown-button" class="text-gray-700 hover:text-emerald-600 transition-colors font-medium flex items-center">
+                  Practice Session<svg class="w-5 h-5 ml-1 text-gray-500 dropdown-arrow"><use href="#icon-chevron-down"></use></svg>
+                </button>
+                <div id="practice-dropdown-menu" class="absolute right-0 mt-2 w-56 rounded-md shadow-lg bg-white ring-1 ring-black ring-opacity-5 hidden z-50">
+                  <div class="py-1">
+                    <a href="excel-practice.html" class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 hover:text-emerald-600">Excel Practice</a>
+                    <a href="zohobooks-practice.html" class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 hover:text-emerald-600">Zoho Books Practice</a>
+                  </div>
+                </div>
+            </div>
+            <a href="index.html#about" class="text-gray-700 hover:text-emerald-600 transition-colors font-medium">About</a>
+            <a href="index.html#careers" class="text-gray-700 hover:text-emerald-600 transition-colors font-medium">Careers</a>
+            <a href="index.html#contact" class="text-gray-700 hover:text-emerald-600 transition-colors font-medium">Contact</a>
+          </div>
+
+          <button id="menu-button" class="md:hidden text-gray-700">
+            <svg class="w-6 h-6" id="menu-open-icon"><use href="#icon-menu"></use></svg>
+            <svg class="w-6 h-6 hidden" id="menu-close-icon"><use href="#icon-x"></use></svg>
+          </button>
+        </div>
+      </div>
+
+      <div id="mobile-menu" class="mobile-menu md:hidden bg-white border-t border-gray-100 shadow-lg">
+        <div class="px-4 py-4 space-y-4">
+          <a href="index.html#home" class="mobile-link block text-gray-700 hover:text-emerald-600 font-medium">Home</a>
+          <div class="relative">
+            <button id="mobile-courses-dropdown-button" class="w-full text-left mobile-link text-gray-700 hover:text-emerald-600 font-medium flex justify-between items-center">
+                <span>Courses</span><svg class="w-5 h-5 text-gray-500 dropdown-arrow"><use href="#icon-chevron-down"></use></svg>
+            </button>
+            <div id="mobile-courses-dropdown-menu" class="pl-4 mt-2 space-y-2 hidden">
+                <a href="course-cpa.html" class="block text-gray-600 hover:text-emerald-600">Certified Professional Accountant</a>
+            </div>
+          </div>
+          <div class="relative">
+            <button id="mobile-webinar-dropdown-button" class="w-full text-left mobile-link text-gray-700 hover:text-emerald-600 font-medium flex justify-between items-center">
+              <span>Online Webinars </span><svg class="w-5 h-5 text-gray-500 dropdown-arrow"><use href="#icon-chevron-down"></use></svg>
+            </button>
+            <div id="mobile-webinar-dropdown-menu" class="pl-4 mt-2 space-y-2 hidden">
+              <a href="incometax.html" class="block text-gray-600 hover:text-emerald-600">Income Tax Series</a>
+              <a href="ai-accounting.html" class="block text-gray-600 hover:text-emerald-600">AI in Accounting</a>
+              <a href="excel.html" class="block text-gray-600 hover:text-emerald-600">Excel Master Class</a>
+            </div>
+          </div>
+           <div class="relative">
+            <button id="mobile-practice-dropdown-button" class="w-full text-left mobile-link text-gray-700 hover:text-emerald-600 font-medium flex justify-between items-center">
+              <span>Practice Session</span><svg class="w-5 h-5 text-gray-500 dropdown-arrow"><use href="#icon-chevron-down"></use></svg>
+            </button>
+            <div id="mobile-practice-dropdown-menu" class="pl-4 mt-2 space-y-2 hidden">
+              <a href="excel-practice.html" class="block text-gray-600 hover:text-emerald-600">Excel Practice</a>
+              <a href="zohobooks-practice.html" class="block text-gray-600 hover:text-emerald-600">Zoho Books Practice</a>
+            </div>
+          </div>
+          <a href="index.html#about" class="mobile-link block text-gray-700 hover:text-emerald-600 font-medium">About</a>
+          <a href="index.html#careers" class="mobile-link block text-gray-700 hover:text-emerald-600 font-medium">Careers</a>
+          <a href="index.html#contact" class="mobile-link block text-gray-700 hover:text-emerald-600 font-medium">Contact</a>
+        </div>
+      </div>
+  </nav>
+
+  <main>
+    <section class="py-20 bg-gradient-to-br from-emerald-50 via-teal-50 to-blue-50">
+      <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div class="text-center mb-16">
+          <h1 class="text-4xl md:text-5xl font-bold text-gray-900 mb-6">
+            Zoho Books <span class="bg-gradient-to-r from-emerald-600 to-blue-600 bg-clip-text text-transparent">Practice Session</span>
+          </h1>
+          <p class="text-xl text-gray-600 max-w-3xl mx-auto">
+            Hands-on, step-by-step exercises to master every core feature of Zoho Books.
+          </p>
+        </div>
+
+        <div class="max-w-3xl mx-auto bg-white p-6 rounded-2xl shadow-lg mb-12 flex flex-col sm:flex-row items-center gap-4">
+          <label for="module-selector" class="text-lg font-semibold text-gray-800 flex-shrink-0">Select an Exercise Module:</label>
+          <select id="module-selector" onchange="showModule()" class="w-full p-3 border-2 border-gray-200 rounded-xl focus:ring-2 focus:ring-emerald-500 focus:border-emerald-500 transition">
+            <option value="module-1">1. Introduction to Zoho Books</option>
+            <option value="module-2">2. Company Setup & Basic Configurations</option>
+            <option value="module-3">3. Chart of Accounts & Items</option>
+            <option value="module-4">4. Customers & Vendors</option>
+            <option value="module-5">5. Sales Module</option>
+            <option value="module-6">6. Purchase Module</option>
+            <option value="module-7">7. Banking & Reconciliation</option>
+            <option value="module-8">8. GST & Compliance</option>
+            <option value="module-9">9. Reports & Analytics</option>
+            <option value="module-10">10. Revision Case Study</option>
+          </select>
+        </div>
+
+        <div class="max-w-5xl mx-auto">
+          
+            <div id="module-1" class="module-content active bg-white rounded-2xl shadow-xl p-8 border border-gray-100">
+                <h2 class="text-3xl font-bold text-gray-800 border-b-2 border-emerald-500 pb-3 mb-6">1. Introduction to Zoho Books</h2>
+                <div class="space-y-8">
+                    <div>
+                        <h3 class="text-2xl font-semibold text-emerald-700 mb-3">Exercise 1.1: Dashboard Overview</h3>
+                        <p class="text-gray-600 mb-4"><strong>Objective:</strong> To understand and interpret the key information presented on the Zoho Books dashboard.</p>
+                        <ol class="list-decimal list-inside space-y-2 text-gray-700">
+                            <li>Log in to your Zoho Books organization.</li>
+                            <li>Identify the <strong>"Total Receivables"</strong> and <strong>"Total Payables"</strong> widgets.</li>
+                            <li>Locate the <strong>"Cash Flow"</strong> chart.</li>
+                            <li>Find the <strong>"Income and Expense"</strong> widget and note the figures.</li>
+                        </ol>
+                    </div>
+                    <div class="pt-8 border-t border-gray-200">
+                        <h3 class="text-2xl font-semibold text-emerald-700 mb-3">Exercise 1.2: Core Module Navigation</h3>
+                        <p class="text-gray-600 mb-4"><strong>Objective:</strong> To confidently navigate between the core modules using the left-hand panel.</p>
+                        <ol class="list-decimal list-inside space-y-2 text-gray-700">
+                            <li>Use the left navigation panel to go to <code class="bg-gray-200 text-red-700 font-mono px-2 py-1 rounded">Sales > Customers</code>.</li>
+                            <li>Navigate to <code class="bg-gray-200 text-red-700 font-mono px-2 py-1 rounded">Purchases > Bills</code>.</li>
+                            <li>Go to <code class="bg-gray-200 text-red-700 font-mono px-2 py-1 rounded">Items > Items</code>.</li>
+                            <li>Navigate to <code class="bg-gray-200 text-red-700 font-mono px-2 py-1 rounded">Reports > Accountant > Profit and Loss</code>.</li>
+                        </ol>
+                    </div>
+                </div>
+            </div>
+
+            <div id="module-2" class="module-content bg-white rounded-2xl shadow-xl p-8 border border-gray-100">
+                <h2 class="text-3xl font-bold text-gray-800 border-b-2 border-emerald-500 pb-3 mb-6">2. Company Setup & Basic Configurations</h2>
+                <div class="space-y-8">
+                    <div>
+                        <h3 class="text-2xl font-semibold text-emerald-700 mb-3">Exercise 2.1: Create & Configure New Organization</h3>
+                        <div class="bg-emerald-50 border-l-4 border-emerald-500 text-emerald-800 p-4 rounded-r-lg my-4">
+                            <p><strong class="font-semibold">Scenario:</strong> You are the accountant for a new startup, "Tirupati Tech Solutions," based in Tirupati.</p>
+                        </div>
+                        <ol class="list-decimal list-inside space-y-2 text-gray-700">
+                            <li>Create a new organization named <code class="bg-gray-200 text-red-700 font-mono px-2 py-1 rounded">Tirupati Tech Solutions</code>.</li>
+                            <li>During setup, set the business location to <strong>Andhra Pradesh, India</strong>.</li>
+                            <li>Enter the company address: <code class="bg-gray-200 text-red-700 font-mono px-2 py-1 rounded">19-8-114/A1, Kora Towers, Air Bypass Rd, Tirupati, 517501</code>.</li>
+                            <li>Set the <strong>Financial Year</strong> to start on <code class="bg-gray-200 text-red-700 font-mono px-2 py-1 rounded">April 1st</code> and confirm currency is <strong>INR</strong>.</li>
+                        </ol>
+                    </div>
+                    <div class="pt-8 border-t border-gray-200">
+                       <h3 class="text-2xl font-semibold text-emerald-700 mb-3">Exercise 2.2: User Roles & Permissions</h3>
+                        <div class="bg-emerald-50 border-l-4 border-emerald-500 text-emerald-800 p-4 rounded-r-lg my-4">
+                           <p><strong class="font-semibold">Scenario:</strong> "Tirupati Tech Solutions" has hired a new sales executive. You need to provide them with appropriate access.</p>
+                        </div>
+                        <ol class="list-decimal list-inside space-y-2 text-gray-700">
+                            <li>Navigate to <code class="bg-gray-200 text-red-700 font-mono px-2 py-1 rounded">Settings > Users & Roles</code>.</li>
+                            <li>Invite a new user with the email <code class="bg-gray-200 text-red-700 font-mono px-2 py-1 rounded">sales.exec@tirupatitech.in</code> and assign them the predefined <strong>"Sales Person"</strong> role.</li>
+                        </ol>
+                    </div>
+                </div>
+            </div>
+            
+            <div id="module-3" class="module-content bg-white rounded-2xl shadow-xl p-8 border border-gray-100">
+                <h2 class="text-3xl font-bold text-gray-800 border-b-2 border-emerald-500 pb-3 mb-6">3. Chart of Accounts & Items</h2>
+                <div class="space-y-8">
+                    <div>
+                        <h3 class="text-2xl font-semibold text-emerald-700 mb-3">Exercise 3.1: Expanding the Chart of Accounts</h3>
+                        <div class="bg-emerald-50 border-l-4 border-emerald-500 text-emerald-800 p-4 rounded-r-lg my-4">
+                           <p><strong class="font-semibold">Scenario:</strong> The company needs more specific ledgers to categorize its transactions accurately.</p>
+                        </div>
+                        <ol class="list-decimal list-inside space-y-2 text-gray-700">
+                            <li>Go to <code class="bg-gray-200 text-red-700 font-mono px-2 py-1 rounded">Accountant > Chart of Accounts</code> and click <strong>"+ New Account"</strong>.</li>
+                            <li>Create a new <strong>Expense</strong> account named <code class="bg-gray-200 text-red-700 font-mono px-2 py-1 rounded">Rent Expense</code>.</li>
+                            <li>Create a new <strong>Fixed Asset</strong> account named <code class="bg-gray-200 text-red-700 font-mono px-2 py-1 rounded">Computer Equipment</code>.</li>
+                        </ol>
+                    </div>
+                    <div class="pt-8 border-t border-gray-200">
+                        <h3 class="text-2xl font-semibold text-emerald-700 mb-3">Exercise 3.2: Adding Services and Inventory Items</h3>
+                         <div class="bg-emerald-50 border-l-4 border-emerald-500 text-emerald-800 p-4 rounded-r-lg my-4">
+                           <p><strong class="font-semibold">Scenario:</strong> "Tirupati Tech Solutions" sells hardware and provides repair services.</p>
+                        </div>
+                        <ol class="list-decimal list-inside space-y-2 text-gray-700">
+                            <li>Navigate to <code class="bg-gray-200 text-red-700 font-mono px-2 py-1 rounded">Items > Items</code> and add a new <strong>Service</strong>.</li>
+                            <li>Name it <code class="bg-gray-200 text-red-700 font-mono px-2 py-1 rounded">Computer Repair Service (Hourly)</code>, with a selling price of ₹800.</li>
+                            <li>Now, add a new <strong>Good</strong> (Inventory Item) named <code class="bg-gray-200 text-red-700 font-mono px-2 py-1 rounded">Dell Inspiron Laptop</code>.</li>
+                            <li>Check <strong>"Track Inventory"</strong>, set Cost Price to ₹45,000, Selling Price to ₹52,000, and an Opening Stock of 10 units.</li>
+                        </ol>
+                    </div>
+                </div>
+            </div>
+
+            <div id="module-4" class="module-content bg-white rounded-2xl shadow-xl p-8 border border-gray-100">
+                <h2 class="text-3xl font-bold text-gray-800 border-b-2 border-emerald-500 pb-3 mb-6">4. Customers & Vendors</h2>
+                <div class="space-y-8">
+                     <div>
+                        <h3 class="text-2xl font-semibold text-emerald-700 mb-3">Exercise 4.1: Adding Customers and Vendors</h3>
+                        <div class="bg-emerald-50 border-l-4 border-emerald-500 text-emerald-800 p-4 rounded-r-lg my-4">
+                           <p><strong class="font-semibold">Scenario:</strong> Add records for a new key customer and a primary supplier.</p>
+                        </div>
+                        <ol class="list-decimal list-inside space-y-2 text-gray-700">
+                            <li>Navigate to <code class="bg-gray-200 text-red-700 font-mono px-2 py-1 rounded">Sales > Customers > + New</code>. Add <strong>"Prakasham Steel Corp"</strong> from Ongole, AP.</li>
+                            <li>Set their Payment Terms to <strong>"Net 30"</strong>.</li>
+                            <li>Navigate to <code class="bg-gray-200 text-red-700 font-mono px-2 py-1 rounded">Purchases > Vendors > + New</code>. Add <strong>"Delta Computers"</strong> from Vijayawada.</li>
+                        </ol>
+                    </div>
+                    <div class="pt-8 border-t border-gray-200">
+                        <h3 class="text-2xl font-semibold text-emerald-700 mb-3">Exercise 4.2: Credit Limits and Portals</h3>
+                        <ol class="list-decimal list-inside space-y-2 text-gray-700">
+                            <li>Go to the customer record for <strong>"Prakasham Steel Corp"</strong>.</li>
+                            <li>Set a <strong>Credit Limit</strong> of ₹2,00,000.</li>
+                            <li>Under "More" actions, select <strong>"Configure Customer Portal"</strong> and enable it.</li>
+                        </ol>
+                    </div>
+                </div>
+            </div>
+
+            <div id="module-5" class="module-content bg-white rounded-2xl shadow-xl p-8 border border-gray-100">
+                <h2 class="text-3xl font-bold text-gray-800 border-b-2 border-emerald-500 pb-3 mb-6">5. Sales Module</h2>
+                <div class="space-y-8">
+                    <div>
+                        <h3 class="text-2xl font-semibold text-emerald-700 mb-3">Exercise 5.1: Create an Estimate</h3>
+                        <div class="bg-emerald-50 border-l-4 border-emerald-500 text-emerald-800 p-4 rounded-r-lg my-4">
+                           <p><strong class="font-semibold">Scenario:</strong> "Prakasham Steel Corp" has requested a formal quote for 5 new laptops.</p>
+                        </div>
+                        <ol class="list-decimal list-inside space-y-2 text-gray-700">
+                            <li>Go to <code class="bg-gray-200 text-red-700 font-mono px-2 py-1 rounded">Sales > Estimates</code> and create a new estimate for "Prakasham Steel Corp".</li>
+                            <li>Add a line item for 5 units of the <code class="bg-gray-200 text-red-700 font-mono px-2 py-1 rounded">Dell Inspiron Laptop</code>. Save it.</li>
+                        </ol>
+                    </div>
+                    <div class="pt-8 border-t border-gray-200">
+                        <h3 class="text-2xl font-semibold text-emerald-700 mb-3">Exercise 5.2: Convert to Sales Order</h3>
+                        <div class="bg-emerald-50 border-l-4 border-emerald-500 text-emerald-800 p-4 rounded-r-lg my-4">
+                           <p><strong class="font-semibold">Scenario:</strong> The customer has approved the estimate. Confirm the sale.</p>
+                        </div>
+                        <ol class="list-decimal list-inside space-y-2 text-gray-700">
+                            <li>Open the estimate you created and click <strong>"Convert to Sales Order"</strong>. Verify details and save.</li>
+                        </ol>
+                    </div>
+                    <div class="pt-8 border-t border-gray-200">
+                        <h3 class="text-2xl font-semibold text-emerald-700 mb-3">Exercise 5.3: Convert to Invoice</h3>
+                        <div class="bg-emerald-50 border-l-4 border-emerald-500 text-emerald-800 p-4 rounded-r-lg my-4">
+                           <p><strong class="font-semibold">Scenario:</strong> The laptops have been delivered. Bill the customer.</p>
+                        </div>
+                        <ol class="list-decimal list-inside space-y-2 text-gray-700">
+                            <li>Open the Sales Order and click <strong>"Convert to Invoice"</strong>. Check the dates and terms, then save.</li>
+                        </ol>
+                    </div>
+                    <div class="pt-8 border-t border-gray-200">
+                        <h3 class="text-2xl font-semibold text-emerald-700 mb-3">Exercise 5.4: Record Payment & Issue Credit Note</h3>
+                         <div class="bg-emerald-50 border-l-4 border-emerald-500 text-emerald-800 p-4 rounded-r-lg my-4">
+                           <p><strong class="font-semibold">Scenario:</strong> You received a payment, but the customer returned one damaged item.</p>
+                        </div>
+                        <ol class="list-decimal list-inside space-y-2 text-gray-700">
+                            <li>Open the invoice for "Prakasham Steel Corp" and <strong>"Record Payment"</strong> for an advance of ₹1,00,000.</li>
+                            <li>Go to <code class="bg-gray-200 text-red-700 font-mono px-2 py-1 rounded">Sales > Credit Notes</code> and create a credit note for 1 returned laptop.</li>
+                            <li>Apply this credit note to their outstanding invoice.</li>
+                        </ol>
+                    </div>
+                </div>
+            </div>
+
+            <div id="module-6" class="module-content bg-white rounded-2xl shadow-xl p-8 border border-gray-100">
+                <h2 class="text-3xl font-bold text-gray-800 border-b-2 border-emerald-500 pb-3 mb-6">6. Purchase Module</h2>
+                 <div class="space-y-8">
+                    <div>
+                        <h3 class="text-2xl font-semibold text-emerald-700 mb-3">Exercise 6.1: Create Purchase Order</h3>
+                        <ol class="list-decimal list-inside space-y-2 text-gray-700">
+                            <li>Create a new Purchase Order for "Delta Computers" to buy 15 <code class="bg-gray-200 text-red-700 font-mono px-2 py-1 rounded">Dell Inspiron Laptop</code> units.</li>
+                        </ol>
+                    </div>
+                    <div class="pt-8 border-t border-gray-200">
+                        <h3 class="text-2xl font-semibold text-emerald-700 mb-3">Exercise 6.2: Create Bill from PO</h3>
+                        <ol class="list-decimal list-inside space-y-2 text-gray-700">
+                            <li>Open the Purchase Order and <strong>"Convert to Bill"</strong>. Enter a bill number and save.</li>
+                        </ol>
+                    </div>
+                    <div class="pt-8 border-t border-gray-200">
+                        <h3 class="text-2xl font-semibold text-emerald-700 mb-3">Exercise 6.3: Record Expense</h3>
+                        <ol class="list-decimal list-inside space-y-2 text-gray-700">
+                             <li>Go to <code class="bg-gray-200 text-red-700 font-mono px-2 py-1 rounded">Purchases > Expenses</code> and record an expense of ₹15,000 for <code class="bg-gray-200 text-red-700 font-mono px-2 py-1 rounded">Rent Expense</code>.</li>
+                        </ol>
+                    </div>
+                </div>
+            </div>
+            
+            <div id="module-7" class="module-content bg-white rounded-2xl shadow-xl p-8 border border-gray-100">
+                <h2 class="text-3xl font-bold text-gray-800 border-b-2 border-emerald-500 pb-3 mb-6">7. Banking & Reconciliation</h2>
+                <div class="space-y-8">
+                    <div>
+                        <h3 class="text-2xl font-semibold text-emerald-700 mb-3">Exercise 7.1: Add Bank & Import Statement</h3>
+                        <ol class="list-decimal list-inside space-y-2 text-gray-700">
+                            <li>Add a new bank account manually: <code class="bg-gray-200 text-red-700 font-mono px-2 py-1 rounded">HDFC Current A/c - Tirupati</code>.</li>
+                            <li>Click the button below to download the sample bank statement.</li>
+                            <li><button onclick="downloadBankStatementCSV()" class="mt-2 mb-2 bg-emerald-600 hover:bg-emerald-700 text-white px-6 py-2 rounded-lg text-sm font-semibold transition-all">Download bank_statement.csv</button></li>
+                            <li>In your new bank account, import the statement.</li>
+                        </ol>
+                    </div>
+                    <div class="pt-8 border-t border-gray-200">
+                        <h3 class="text-2xl font-semibold text-emerald-700 mb-3">Exercise 7.2: Reconcile Account</h3>
+                        <ol class="list-decimal list-inside space-y-2 text-gray-700">
+                            <li>Find the deposit of ₹1,00,000 and match it with the payment from "Prakasham Steel Corp".</li>
+                            <li>Find the withdrawal of ₹15,000 and categorize it under the <code class="bg-gray-200 text-red-700 font-mono px-2 py-1 rounded">Rent Expense</code> account.</li>
+                            <li>After handling all transactions, go to <strong>Reconcile Account</strong>, enter a closing balance, and complete the reconciliation.</li>
+                        </ol>
+                    </div>
+                </div>
+            </div>
+
+            <div id="module-8" class="module-content bg-white rounded-2xl shadow-xl p-8 border border-gray-100">
+                <h2 class="text-3xl font-bold text-gray-800 border-b-2 border-emerald-500 pb-3 mb-6">8. GST & Compliance</h2>
+                <div class="space-y-8">
+                    <div>
+                        <h3 class="text-2xl font-semibold text-emerald-700 mb-3">Exercise 8.1: GST Invoice Types</h3>
+                        <ol class="list-decimal list-inside space-y-2 text-gray-700">
+                            <li>Create a B2B invoice for <strong>"Prakasham Steel Corp"</strong> (intra-state). Observe that CGST & SGST are applied.</li>
+                            <li>Create a new B2B customer, <strong>"Bangalore Traders"</strong> (Karnataka), and create an invoice for them (inter-state). Observe that IGST is applied.</li>
+                        </ol>
+                    </div>
+                    <div class="pt-8 border-t border-gray-200">
+                        <h3 class="text-2xl font-semibold text-emerald-700 mb-3">Exercise 8.2: GST Reports & TDS</h3>
+                        <ol class="list-decimal list-inside space-y-2 text-gray-700">
+                             <li>Navigate to <code class="bg-gray-200 text-red-700 font-mono px-2 py-1 rounded">Reports > Taxes</code> and generate the <strong>GSTR-1</strong> report.</li>
+                             <li>Create a bill for professional services of ₹50,000 and deduct TDS at the applicable rate.</li>
+                        </ol>
+                    </div>
+                </div>
+            </div>
+
+            <div id="module-9" class="module-content bg-white rounded-2xl shadow-xl p-8 border border-gray-100">
+                <h2 class="text-3xl font-bold text-gray-800 border-b-2 border-emerald-500 pb-3 mb-6">9. Reports & Analytics</h2>
+                 <div class="space-y-8">
+                    <div>
+                        <h3 class="text-2xl font-semibold text-emerald-700 mb-3">Exercise 9.1: Financial & Sales Reports</h3>
+                        <ol class="list-decimal list-inside space-y-2 text-gray-700">
+                            <li>Generate the <strong>Profit & Loss</strong> report for the current financial year.</li>
+                            <li>Run the <strong>Balance Sheet</strong> report as of today's date.</li>
+                            <li>Generate the <strong>Accounts Receivable Aging</strong> report to identify overdue invoices.</li>
+                        </ol>
+                    </div>
+                    <div class="pt-8 border-t border-gray-200">
+                        <h3 class="text-2xl font-semibold text-emerald-700 mb-3">Exercise 9.2: Customizing & Scheduling Reports</h3>
+                        <ol class="list-decimal list-inside space-y-2 text-gray-700">
+                             <li>Run a <strong>Sales by Item</strong> report.</li>
+                             <li>Click <strong>"Customize Report"</strong> and add a filter for the last 30 days.</li>
+                             <li>Save this as a new custom report named "Monthly Item Sales".</li>
+                             <li>Schedule the report to be emailed to you every Monday morning.</li>
+                        </ol>
+                    </div>
+                </div>
+            </div>
+
+            <div id="module-10" class="module-content bg-white rounded-2xl shadow-xl p-8 border border-gray-100">
+                <h2 class="text-3xl font-bold text-gray-800 border-b-2 border-emerald-500 pb-3 mb-6">10. Revision Case Study</h2>
+                <div class="space-y-8">
+                    <div>
+                        <h3 class="text-2xl font-semibold text-emerald-700 mb-3">Case Study: "Tirumala Textiles"</h3>
+                        <div class="bg-emerald-50 border-l-4 border-emerald-500 text-emerald-800 p-4 rounded-r-lg my-4">
+                           <p><strong class="font-semibold">Scenario:</strong> Handle the books for "Tirumala Textiles" from Tirupati, who sells fabrics to domestic corporations.</p>
+                        </div>
+                        <ol class="list-decimal list-inside space-y-2 text-gray-700">
+                            <li><strong>Setup:</strong> Create a customer "Mumbai Fashion House" (Maharashtra) and an inventory item "Pattu Silk Fabric" (Selling Price: ₹4,000/meter).</li>
+                            <li><strong>Sales Cycle:</strong> Invoice "Mumbai Fashion House" for 100 meters of fabric. Note the IGST application.</li>
+                            <li><strong>Purchase Cycle:</strong> Create a bill from a local vendor "Tirupati Weavers" for 100 meters of the fabric at a cost of ₹2,000/meter.</li>
+                            <li><strong>Payments:</strong> Record payments for the bill and the invoice.</li>
+                            <li><strong>Reporting:</strong> Generate a Profit and Loss report. What is the net profit from this cycle?</li>
+                        </ol>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer class="bg-gray-900 text-white py-12">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="grid md:grid-cols-4 gap-8">
+        <div class="md:col-span-2">
+          <h3 class="text-2xl font-bold mb-4 bg-gradient-to-r from-emerald-400 to-blue-400 bg-clip-text text-transparent">VISION CONNECTS</h3>
+          <p class="text-gray-300 mb-4">Quality training arm supported by <a href="http://accountantsfactory.com/" target="_blank" rel="noopener noreferrer" class="text-emerald-400 hover:underline">Accountants Factory LLP</a></p>
+          <p class="text-gray-400">Transforming careers through professional accounting education in Tirupati.</p>
+        </div>
+        <div>
+          <h4 class="text-lg font-semibold mb-4 text-emerald-400">Quick Links</h4>
+          <div class="space-y-2">
+            <a href="index.html#courses" class="block text-gray-300 hover:text-white transition-colors">Courses</a>
+            <a href="index.html#about" class="block text-gray-300 hover:text-white transition-colors">About Us</a>
+            <a href="index.html#careers" class="block text-gray-300 hover:text-white transition-colors">Careers</a>
+            <a href="index.html#contact" class="block text-gray-300 hover:text-white transition-colors">Contact</a>
+          </div>
+        </div>
+        <div>
+          <h4 class="text-lg font-semibold mb-4 text-emerald-400">Individual Courses</h4>
+          <div class="space-y-2 text-gray-300 text-sm">
+            <div>Professional Accounting Course</div><div>Tally Coaching Classes</div><div>Zoho Books Training</div><div>GST Training Program</div><div>Income Tax Return Filing</div><div>Excel Training Course</div>
+          </div>
+        </div>
+      </div>
+      <div class="border-t border-gray-800 mt-8 pt-8">
+        <div class="flex flex-col md:flex-row justify-between items-center">
+          <p class="text-gray-400 text-sm">© 2025 Vision Connects Academy. All rights reserved.</p>
+          <p class="text-gray-400 text-sm mt-2 md:mt-0">Powered by <a href="http://accountantsfactory.com/" target="_blank" rel="noopener noreferrer" class="text-emerald-400 hover:underline">Accountants Factory LLP</a></p>
+        </div>
+      </div>
+    </div>
+  </footer>
+
+<script>
+document.addEventListener('DOMContentLoaded', function () {
+  // --- START: Code for Nav & Dropdowns ---
+  const menuButton = document.getElementById('menu-button');
+  const mobileMenu = document.getElementById('mobile-menu');
+  const menuOpenIcon = document.getElementById('menu-open-icon');
+  const menuCloseIcon = document.getElementById('menu-close-icon');
+  
+  if (menuButton) {
+    menuButton.addEventListener('click', () => {
+      mobileMenu.classList.toggle('open');
+      menuOpenIcon.classList.toggle('hidden');
+      menuCloseIcon.classList.toggle('hidden');
+    });
+  }
+  
+  const setupDropdown = (buttonId, menuId) => {
+      const button = document.getElementById(buttonId);
+      const menu = document.getElementById(menuId);
+      if (!button || !menu) return;
+      const arrow = button.querySelector('.dropdown-arrow');
+      button.addEventListener('click', (event) => {
+          event.stopPropagation();
+          const isHidden = menu.classList.toggle('hidden');
+          if (arrow) arrow.classList.toggle('open', !isHidden);
+      });
+  };
+
+  setupDropdown('webinar-dropdown-button', 'webinar-dropdown-menu');
+  setupDropdown('practice-dropdown-button', 'practice-dropdown-menu');
+  setupDropdown('mobile-webinar-dropdown-button', 'mobile-webinar-dropdown-menu');
+  setupDropdown('mobile-practice-dropdown-button', 'mobile-practice-dropdown-menu');
+  setupDropdown('courses-dropdown-button', 'courses-dropdown-menu');
+  setupDropdown('mobile-courses-dropdown-button', 'mobile-courses-dropdown-menu');
+
+  document.addEventListener('click', (event) => {
+      if (!event.target.closest('[id$="-dropdown-container"]') && !event.target.closest('[id$="-dropdown-button"]')) {
+          document.querySelectorAll('[id$="-dropdown-menu"]').forEach(menu => menu.classList.add('hidden'));
+          document.querySelectorAll('.dropdown-arrow').forEach(arrow => arrow.classList.remove('open'));
+      }
+  });
+
+  // --- START: Corrected code for this page (Module Switching) ---
+    const modules = document.querySelectorAll('.module-content');
+    modules.forEach((module, index) => {
+        if (index === 0) {
+            module.classList.add('active');
+        }
+    });
+});
+
+// --- START: Functions for this page (Module Switching & Downloads) ---
+function showModule() {
+    const modules = document.querySelectorAll('.module-content');
+    const selectedModuleId = document.getElementById('module-selector').value;
+    
+    // This loop hides ALL modules first by removing the 'active' class.
+    modules.forEach(module => {
+        module.classList.remove('active');
+    });
+    
+    // This line finds ONLY the selected module and displays it by adding the 'active' class.
+    const selectedModule = document.getElementById(selectedModuleId);
+    if (selectedModule) {
+        selectedModule.classList.add('active');
+    }
+}
+
+function triggerDownload(content, fileName) {
+    const blob = new Blob([content], { type: 'text/csv;charset=utf-8;' });
+    const link = document.createElement("a");
+    const url = URL.createObjectURL(blob);
+    link.setAttribute("href", url);
+    link.setAttribute("download", fileName);
+    link.style.visibility = 'hidden';
+    document.body.appendChild(link);
+    link.click();
+    document.body.removeChild(link);
+}
+
+function downloadBankStatementCSV() {
+    const csvHeader = "Transaction Date,Description,Deposit Amount,Withdrawal Amount\n";
+    const csvRows = [
+        "2025-09-10,NEFT from Prakasham Steel,100000.00,",
+        "2025-09-11,Cash Payment for Repair,800.00,",
+        "2025-09-12,Payment for Rent,,15000.00",
+        "2025-09-15,ATM Withdrawal,,500.00"
+    ];
+    const csvContent = csvHeader + csvRows.join("\n");
+    triggerDownload(csvContent, 'bank_statement.csv');
+}
+
+function downloadCustomerCSV() {
+    const csvHeader = "Customer Name,Email,Phone,Company Name\n";
+    const csvRows = [
+        '"Innovate Solutions","contact@innovatesol.com","9876543210","Innovate Solutions Ltd."',
+        '"Sunrise Bakers","info@sunrisebakers.net","8765432109","Sunrise Bakers"',
+        '"Global Exports","admin@globalexports.co","7654321098","Global Exports Inc."'
+    ];
+    const csvContent = csvHeader + csvRows.join("\n");
+    triggerDownload(csvContent, 'customers.csv');
+}
+</script>
+</body>
+</html>
