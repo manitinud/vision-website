@@ -440,5 +440,38 @@
             });
         });
 </script>
+<script>
+    // Paste the new function here!
+    function showModule() {
+      // 1. Get the ID of the selected module from the dropdown (e.g., "module-5")
+      const selectedValue = document.getElementById('module-selector').value;
+
+      // 2. Find all elements that are module content sections
+      const allModules = document.querySelectorAll('.module-content');
+      
+      // 3. Loop through all of them and remove the 'active' class to hide them
+      allModules.forEach(module => {
+        module.classList.remove('active');
+      });
+
+      // 4. Find the specific module you selected
+      const moduleToShow = document.getElementById(selectedValue);
+      
+      // 5. Add the 'active' class to the selected module to make it visible
+      if (moduleToShow) {
+        moduleToShow.classList.add('active');
+      }
+    }
+
+    // This is your existing code for the navbar, leave it as is
+    fetch('menu.html')
+        .then(response => response.text())
+        .then(data => {
+            // ... all your existing menu logic here ...
+        });
+</script>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>
 </body>
 </html>
