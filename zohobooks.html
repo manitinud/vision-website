@@ -1,0 +1,346 @@
+<!DOCTYPE html>
+<html lang="en" class="scroll-smooth">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Zoho Books Masterclass - Vision Connects</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <style>
+    body { font-family: 'Inter', sans-serif; }
+    .dropdown-arrow { transition: transform 0.3s ease; }
+    .dropdown-arrow.open { transform: rotate(180deg); }
+    .mobile-menu {
+        max-height: 0;
+        overflow: hidden;
+        transition: max-height 0.3s ease-out;
+    }
+    .mobile-menu.open {
+        max-height: 500px;
+    }
+
+    /* Styles for Zoho Form Pop-up */
+    .zf_lB_Dimmer_830413{ 
+      position: fixed; top: 0px; left: 0px; right: 0px; bottom: 0px;
+      background: rgb(0, 0, 0); opacity: 0.8; z-index: 10000000;
+    }
+    .zf_lB_Container_830413{
+        position: fixed; background-color: white; margin: 0; padding: 0;
+        height: 1551px; width:  70%; top: 50%; left: 50%;
+        transform: translate(-50%, -50%); border: 7px solid none;
+        max-height: calc(100% - 60px); z-index: 999999;
+        transition: height 0.5s ease; outline : none;
+    }
+    .zf_lB_Wrapper_830413{
+        position: fixed; top: 50%; left: 50%; margin-left: 0;
+        margin-top: -180px; z-index: 10000001;
+    }
+    .zf_main_id_830413{
+        height: calc(100% - 0px); display: flex;
+        overflow-y: auto; overflow-x: hidden;
+    }
+    .zf_lb_closeform_830413 {
+        position: absolute; right: -20px; background: #2f2e2e; padding: 0;
+        border-radius: 50%; width: 34px; height: 34px; top: -15px;
+        cursor: pointer; border: 2px solid #d9d9d9;
+    }
+    .zf_lb_closeform_830413:before, .zf_lb_closeform_830413:after {
+        position: absolute; left: 16px; content: ' '; height: 19px;
+        width: 2px; top: 7px; background-color: #f7f7f7;
+    }
+    .zf_lb_closeform_830413:before { transform: rotate(45deg); }
+    .zf_lb_closeform_830413:after { transform: rotate(-45deg); } 
+  </style>
+</head>
+
+<body>
+<svg width="0" height="0" style="position:absolute">
+  <symbol id="icon-menu" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="4" x2="20" y1="12" y2="12"/><line x1="4" x2="20" y1="6" y2="6"/><line x1="4" x2="20" y1="18" y2="18"/></symbol>
+  <symbol id="icon-x" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="18" x2="6" y1="6" y2="18"/><line x1="6" x2="18" y1="6" y2="18"/></symbol>
+  <symbol id="icon-chevron-down" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"></polyline></symbol>
+</svg>
+
+<div id="navbar-placeholder"></div>
+
+<main class="pt-24 bg-gray-50">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12 lg:py-16">
+        <div class="lg:grid lg:grid-cols-2 lg:gap-12">
+            <div class="space-y-8">
+                <h1 class="text-4xl sm:text-5xl font-extrabold text-gray-900 leading-tight">
+                    <span class="block text-emerald-600">Free Live Webinar:</span>
+                    Zoho Books Masterclass - <br>
+                    <span class="bg-gradient-to-r from-emerald-600 to-blue-600 bg-clip-text text-transparent">
+                        Start Your Accounting Journey
+                    </span>
+                </h1>
+
+                <div class="bg-white p-6 rounded-xl shadow-lg border border-gray-200 space-y-4">
+                    <p class="text-xl text-gray-800 font-semibold flex items-center">
+                        <svg class="w-6 h-6 mr-3 text-blue-600" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z"></path></svg>
+                        Date: <span class="font-bold">Thursday, 12th January</span>
+                    </p>
+                    <p class="text-xl text-gray-800 font-semibold flex items-center">
+                        <svg class="w-6 h-6 mr-3 text-blue-600" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z"></path></svg>
+                        Time: <span class="font-bold">7:00 PM</span>
+                    </p>
+                    <p class="text-xl text-gray-800 font-semibold flex items-center">
+                        <svg class="w-6 h-6 mr-3 text-blue-600" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 9V7a2 2 0 00-2-2H5a2 2 0 00-2 2v6m2 2h2m-2 0h2m0 0h10a2 2 0 002-2V9a2 2 0 00-2-2h-2m-8 6V9m5 5V9m5 5v5m-8 0v-5m5 5H9m0-5h6"></path></svg>
+                        Topic: <span class="font-bold">The A to Z of Zoho Books</span>
+                    </p>
+                </div>
+
+                <div class="space-y-4">
+                    <h3 class="text-2xl font-bold text-gray-900">What You Will Master:</h3>
+                    <ul class="space-y-3 text-lg text-gray-700">
+                        <li class="flex items-start">
+                            <svg class="w-6 h-6 mr-2 flex-shrink-0 text-emerald-600 mt-1" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd"></path></svg>
+                            <span class="font-bold">Setting up a new client company</span> from scratch.
+                        </li>
+                        <li class="flex items-start">
+                            <svg class="w-6 h-6 mr-2 flex-shrink-0 text-emerald-600 mt-1" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd"></path></svg>
+                            The <span class="font-bold">end-to-end client journey</span> and workflow in Zoho Books.
+                        </li>
+                        <li class="flex items-start">
+                            <svg class="w-6 h-6 mr-2 flex-shrink-0 text-emerald-600 mt-1" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd"></path></svg>
+                            Best practices for <span class="font-bold">data entry and bank reconciliation</span>.
+                        </li>
+                        <li class="flex items-start">
+                            <svg class="w-6 h-6 mr-2 flex-shrink-0 text-emerald-600 mt-1" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd"></path></svg>
+                            How to generate and interpret <span class="font-bold">essential financial reports</span>.
+                        </li>
+                        <li class="flex items-start">
+                            <svg class="w-6 h-6 mr-2 flex-shrink-0 text-emerald-600 mt-1" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd"></path></svg>
+                            <span class="font-bold">Q&A Session</span> with the Expert!
+                        </li>
+                    </ul>
+                </div>
+            </div>
+
+            <div class="mt-10 lg:mt-0 lg:sticky lg:top-28">
+                <div class="p-6 sm:p-8 bg-white rounded-xl shadow-2xl border-4 border-emerald-600 space-y-6 text-center">
+                    <h2 class="text-3xl font-extrabold text-center text-gray-900">
+                        Secure Your FREE Spot!
+                    </h2>
+                    
+                    <div id="countdown-timer" class="text-center p-3 bg-red-100 border border-red-400 rounded-lg text-red-700 font-bold text-xl">
+                        Registration is Open!
+                    </div>
+
+                    <button id="zf_button_830413" class="w-full py-4 px-6 bg-blue-600 text-white text-xl font-bold rounded-lg hover:bg-blue-700 transition-colors shadow-lg">
+                        Register Now
+                    </button>
+                </div>
+                
+                <p class="text-center mt-4 text-sm text-gray-500">
+                    *The webinar will be hosted on a secure platform. Click 'Register Now' to open the form.
+                </p>
+            </div>
+        </div>
+    </div>
+</main>
+
+
+<footer class="bg-gray-900 text-white py-12">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="grid md:grid-cols-4 gap-8">
+        <div class="md:col-span-2">
+          <h3 class="text-2xl font-bold mb-4 bg-gradient-to-r from-emerald-400 to-blue-400 bg-clip-text text-transparent">VISION CONNECTS</h3>
+          <p class="text-gray-300 mb-4">Quality training arm supported by <a href="http://accountantsfactory.com/" target="_blank" rel="noopener noreferrer" class="text-emerald-400 hover:underline">Accountants Factory LLP</a></p>
+          <p class="text-gray-400">Transforming careers through professional accounting education in Tirupati</p>
+        </div>
+        <div>
+          <h4 class="text-lg font-semibold mb-4 text-emerald-400">Quick Links</h4>
+          <div class="space-y-2">
+            <a href="index.html#courses" class="block text-gray-300 hover:text-white transition-colors">Courses</a>
+            <a href="index.html#about" class="block text-gray-300 hover:text-white transition-colors">About Us</a>
+            <a href="index.html#careers" class="block text-gray-300 hover:text-white transition-colors">Careers</a>
+            <a href="index.html#contact" class="block text-gray-300 hover:text-white transition-colors">Contact</a>
+          </div>
+        </div>
+        <div>
+          <h4 class="text-lg font-semibold mb-4 text-emerald-400">Individual Courses</h4>
+          <div class="space-y-2 text-gray-300 text-sm">
+            <div>Professional Accounting Course</div><div>Tally Coaching Classes</div><div>Zoho Books Training</div><div>GST Training Program</div><div>Income Tax Return Filing</div><div>Excel Training Course</div>
+          </div>
+        </div>
+      </div>
+      <div class="border-t border-gray-800 mt-8 pt-8">
+        <div class="flex flex-col md:flex-row justify-between items-center">
+          <p class="text-gray-400 text-sm">© 2025 Vision Connects Academy. All rights reserved.</p>
+          <p class="text-gray-400 text-sm mt-2 md:mt-0">Powered by <a href="http://accountantsfactory.com/" target="_blank" rel="noopener noreferrer" class="text-emerald-400 hover:underline">Accountants Factory LLP</a></p>
+        </div>
+      </div>
+    </div>
+  </footer>
+
+<script type="text/javascript">(function() {
+	try{
+        if( document.readyState == "complete" ){ onloadActions_830413(); }
+        else { window.addEventListener('load', function (){ onloadActions_830413(); }, false); }
+
+        function onloadActions_830413(){
+            constructDiv_830413();
+            document.getElementById("zf_button_830413").addEventListener('click', showZForm_830413);
+        }
+
+        function constructDiv_830413(){
+            var iframeDiv = document.createElement("div");
+            iframeDiv.setAttribute('id','7gqrU5pT04Vd1pntOhluyR83piKZ7XciG260M3xoejA_830413');
+            iframeDiv.setAttribute('class','zf_main_id_830413');
+
+            var closeFormDiv = document.createElement("div");
+            closeFormDiv.setAttribute('id','deleteform_830413');
+            closeFormDiv.setAttribute('class','zf_lb_closeform_830413');
+            closeFormDiv.setAttribute('tabindex', 0);
+            
+            var containerDiv = document.createElement("div");
+            containerDiv.setAttribute('id','containerDiv_830413');
+            containerDiv.setAttribute('class','zf_lB_Container_830413 ');
+            containerDiv.appendChild(iframeDiv);
+            containerDiv.appendChild(closeFormDiv);
+            
+            var wrapperDiv = document.createElement("div");
+            wrapperDiv.setAttribute('class','zf_lB_Wrapper_830413');
+            wrapperDiv.appendChild(containerDiv);
+
+            var dimmerDiv = document.createElement("div");
+            dimmerDiv.setAttribute('class','zf_lB_Dimmer_830413');
+            dimmerDiv.setAttribute('elname','popup_box');
+
+            var mainDiv = document.createElement("div");
+            mainDiv.setAttribute('id','formsLightBox_830413');
+            mainDiv.style.display = "none";
+            mainDiv.appendChild(wrapperDiv);
+            mainDiv.appendChild(dimmerDiv);
+
+            document.body.appendChild(mainDiv);
+        }
+
+        function showZForm_830413(){
+            var iframe = document.getElementById("7gqrU5pT04Vd1pntOhluyR83piKZ7XciG260M3xoejA_830413").getElementsByTagName("iframe")[0];
+            if(iframe == undefined ||iframe.length == 0){ loadZForm_830413(); } 
+            document.getElementById("formsLightBox_830413").style.display = "block"; 
+            document.body.style.overflow = "hidden";
+            setTimeout(function() {
+                 var containerDiv = document.getElementById("containerDiv_830413");
+                 containerDiv.setAttribute('tabindex', '-1');
+                 containerDiv.focus();
+            }, 100);
+        }
+
+        function deleteZForm_830413() {
+            var divCont = document.getElementById("formsLightBox_830413");
+            divCont.style.display="none";
+            document.body.style.overflow = "";
+            var iframe = document.getElementById("7gqrU5pT04Vd1pntOhluyR83piKZ7XciG260M3xoejA_830413").getElementsByTagName("iframe")[0];
+            if (iframe) { iframe.remove(); }
+        }
+
+        function loadZForm_830413() {
+            var iframe = document.getElementById("7gqrU5pT04Vd1pntOhluyR83piKZ7XciG260M3xoejA_830413").getElementsByTagName("iframe")[0];
+            if(iframe == undefined ||iframe.length == 0){
+                var f = document.createElement("iframe");
+                f.src = 'https://forms.zohopublic.in/accountantsfactoryllp/form/ZohoBooksWorkshop/formperma/7gqrU5pT04Vd1pntOhluyR83piKZ7XciG260M3xoejA?zf_rszfm=1';
+                f.style.border="none"; f.style.minWidth="100%"; f.style.overflow="hidden";
+                var d = document.getElementById("7gqrU5pT04Vd1pntOhluyR83piKZ7XciG260M3xoejA_830413");
+                d.appendChild(f);
+
+                var deleteForm = document.getElementById("deleteform_830413");
+                deleteForm.onclick =  deleteZForm_830413;
+                deleteForm.addEventListener("keydown", function (event) {
+                    if (event.key === "Enter" || event.key === " " ) {
+                        event.preventDefault();
+                        deleteZForm_830413();
+                    }
+                });
+
+                window.addEventListener('message', function (){
+                    var evntData = event.data;
+                    if( evntData && evntData.constructor == String ){
+                        var zf_ifrm_data = evntData.split("|");
+                        if ( zf_ifrm_data.length == 2 || zf_ifrm_data.length == 3 ) {
+                            var zf_perma = zf_ifrm_data[0];
+                            var zf_ifrm_ht_nw = ( parseInt(zf_ifrm_data[1], 10) + 15 ) + "px";
+                            var iframe = document.getElementById("7gqrU5pT04Vd1pntOhluyR83piKZ7XciG260M3xoejA_830413").getElementsByTagName("iframe")[0];
+                            if ( (iframe.src).indexOf('formperma') > 0 && (iframe.src).indexOf(zf_perma) > 0 ) {
+                                iframe.style.minHeight = zf_ifrm_ht_nw;
+                                var containerDiv = document.getElementById("containerDiv_830413");
+                                containerDiv.style.height=zf_ifrm_ht_nw;
+                            }
+                        }
+                    }
+                }, false);
+            }
+        }
+	}catch(e){}
+})();
+</script>
+
+<script>
+    fetch('menu.html')
+        .then(response => response.text())
+        .then(data => {
+            document.getElementById('navbar-placeholder').innerHTML = data;
+            
+            // Logic for the mobile menu (hamburger button)
+            const menuButton = document.getElementById('menu-button');
+            const mobileMenu = document.getElementById('mobile-menu');
+            const menuOpenIcon = document.getElementById('menu-open-icon');
+            const menuCloseIcon = document.getElementById('menu-close-icon');
+            
+            if (menuButton) {
+                menuButton.addEventListener('click', () => {
+                  mobileMenu.classList.toggle('open');
+                  menuOpenIcon.classList.toggle('hidden');
+                  menuCloseIcon.classList.toggle('hidden');
+                });
+            }
+
+            // Function to make dropdowns work
+            const setupDropdown = (buttonId, menuId) => {
+                const button = document.getElementById(buttonId);
+                const menu = document.getElementById(menuId);
+                if (!button || !menu) return;
+
+                const arrow = button.querySelector('.dropdown-arrow');
+
+                button.addEventListener('click', (event) => {
+                    event.stopPropagation();
+                    // Close other dropdowns
+                    document.querySelectorAll('[id$="-dropdown-menu"]').forEach(otherMenu => {
+                        if (otherMenu.id !== menuId) {
+                            otherMenu.classList.add('hidden');
+                        }
+                    });
+                     document.querySelectorAll('[id$="-dropdown-button"] .dropdown-arrow').forEach(otherArrow => {
+                        if(otherArrow !== arrow) {
+                            otherArrow.classList.remove('open');
+                        }
+                    });
+
+                    const isHidden = menu.classList.toggle('hidden');
+                    if (arrow) arrow.classList.toggle('open', !isHidden);
+                });
+            };
+
+            // Re-attach the dropdown logic to all dropdown buttons from the loaded menu
+            setupDropdown('courses-dropdown-button', 'courses-dropdown-menu');
+            setupDropdown('webinar-dropdown-button', 'webinar-dropdown-menu');
+            setupDropdown('practice-dropdown-button', 'practice-dropdown-menu');
+            setupDropdown('mobile-courses-dropdown-button', 'mobile-courses-dropdown-menu');
+            setupDropdown('mobile-webinar-dropdown-button', 'mobile-webinar-dropdown-menu');
+            setupDropdown('mobile-practice-dropdown-button', 'mobile-practice-dropdown-menu');
+            
+            // Close dropdowns if clicking elsewhere on the page
+            document.addEventListener('click', (event) => {
+                if (!event.target.closest('[id$="-dropdown-container"]') && !event.target.closest('[id$="-dropdown-button"]')) {
+                    document.querySelectorAll('[id$="-dropdown-menu"]').forEach(menu => menu.classList.add('hidden'));
+                    document.querySelectorAll('.dropdown-arrow').forEach(arrow => arrow.classList.remove('open'));
+                }
+            });
+        });
+</script>
+</body>
+</html>
