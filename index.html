@@ -488,10 +488,10 @@
               <div>
                 <h4 class="text-lg font-semibold mb-4 text-emerald-400">Quick Links</h4>
                 <div class="space-y-2">
-                  <a href="#courses" class="block text-gray-300 hover:text-white transition-colors">Courses</a>
-                  <a href="#about" class="block text-gray-300 hover:text-white transition-colors">About Us</a>
-                  <a href="#careers" class="block text-gray-300 hover:text-white transition-colors">Careers</a>
-                  <a href="#contact" class="block text-gray-300 hover:text-white transition-colors">Contact</a>
+                  <a href="index.html#courses" class="block text-gray-300 hover:text-white transition-colors">Courses</a>
+  <a href="index.html#about" class="block text-gray-300 hover:text-white transition-colors">About Us</a>
+  <a href="index.html#careers" class="block text-gray-300 hover:text-white transition-colors">Careers</a>
+  <a href="index.html#contact" class="block text-gray-300 hover:text-white transition-colors">Contact</a>
                 </div>
               </div>
               <div>
@@ -642,9 +642,11 @@
             setupDropdown('courses-dropdown-button', 'courses-dropdown-menu');
             setupDropdown('webinar-dropdown-button', 'webinar-dropdown-menu');
             setupDropdown('practice-dropdown-button', 'practice-dropdown-menu');
+setupDropdown('quicklinks-dropdown-button', 'quicklinks-dropdown-menu');
             setupDropdown('mobile-courses-dropdown-button', 'mobile-courses-dropdown-menu');
             setupDropdown('mobile-webinar-dropdown-button', 'mobile-webinar-dropdown-menu');
             setupDropdown('mobile-practice-dropdown-button', 'mobile-practice-dropdown-menu');
+setupDropdown('mobile-quicklinks-dropdown-button', 'mobile-quicklinks-dropdown-menu');
             
             document.addEventListener('click', (event) => {
                 if (!event.target.closest('[id$="-dropdown-container"]') && !event.target.closest('[id$="-dropdown-button"]')) {
