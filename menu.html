@@ -10,9 +10,11 @@
         </div>
       </a>
       
-      <div class="hidden md:flex items-center space-x-8">
+      <!-- Desktop Navigation Links -->
+      <div class="hidden md:flex items-center space-x-4 lg:space-x-6">
         <a href="index.html" class="text-gray-700 hover:text-emerald-600 transition-colors font-medium">Home</a>
         
+        <!-- Courses Dropdown -->
         <div class="relative" id="courses-dropdown-container">
             <button id="courses-dropdown-button" class="text-gray-700 hover:text-emerald-600 transition-colors font-medium flex items-center">
                 Courses
@@ -25,6 +27,14 @@
             </div>
         </div>
 
+        <!-- LMS Login - HIGHLIGHTED BUTTON -->
+        <a href="https://visionconnects.trainercentralsite.in/index" target="_blank" rel="noopener noreferrer" 
+           class="font-semibold bg-emerald-500 text-white px-3 py-2 rounded-lg shadow-md text-sm
+                  hover:bg-emerald-600 transition-colors transform hover:scale-[1.02] whitespace-nowrap">
+          LMS Login
+        </a>
+
+        <!-- Webinars Dropdown -->
         <div class="relative" id="webinar-dropdown-container">
           <button id="webinar-dropdown-button" class="text-gray-700 hover:text-emerald-600 transition-colors font-medium flex items-center">
             Online Webinars
@@ -40,6 +50,7 @@
           </div>
         </div>
         
+        <!-- Practice Session Dropdown -->
         <div class="relative" id="practice-dropdown-container">
             <button id="practice-dropdown-button" class="text-gray-700 hover:text-emerald-600 transition-colors font-medium flex items-center">
               Practice Session
@@ -52,10 +63,26 @@
               </div>
             </div>
         </div>
-
-        <a href="#about" class="text-gray-700 hover:text-emerald-600 transition-colors font-medium">About</a>
-        <a href="#careers" class="text-gray-700 hover:text-emerald-600 transition-colors font-medium">Careers</a>
-        <a href="#contact" class="text-gray-700 hover:text-emerald-600 transition-colors font-medium">Contact</a>
+        
+        <!-- Quick Links Dropdown (containing About, Verification, Careers, Contact) -->
+        <div class="relative" id="quicklinks-dropdown-container">
+          <button id="quicklinks-dropdown-button" class="text-gray-700 hover:text-emerald-600 transition-colors font-medium flex items-center">
+            Quick Links
+            <svg class="w-5 h-5 ml-1 text-gray-500 dropdown-arrow"><use href="#icon-chevron-down"></use></svg>
+          </button>
+          <div id="quicklinks-dropdown-menu" class="absolute right-0 mt-2 w-56 rounded-md shadow-lg bg-white ring-1 ring-black ring-opacity-5 hidden z-50">
+            <div class="py-1" role="menu" aria-orientation="vertical" aria-labelledby="quicklinks-dropdown-button">
+              <!-- About -->
+              <a href="index.html#about" class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 hover:text-emerald-600" role="menuitem">About</a>
+              <!-- Certificate Verification -->
+              <a href="certificate-verification.html" class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 hover:text-emerald-600" role="menuitem">Certificate Verification</a>
+              <!-- Careers -->
+              <a href="index.html#careers" class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 hover:text-emerald-600" role="menuitem">Careers</a>
+              <!-- Contact -->
+              <a href="index.html#contact" class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 hover:text-emerald-600" role="menuitem">Contact</a>
+            </div>
+          </div>
+        </div>
       </div>
 
       <button id="menu-button" class="md:hidden text-gray-700">
@@ -69,6 +96,7 @@
     <div class="px-4 py-4 space-y-4">
       <a href="index.html" class="mobile-link block text-gray-700 hover:text-emerald-600 transition-colors font-medium">Home</a>
       
+      <!-- Mobile Courses Dropdown -->
       <div class="relative">
         <button id="mobile-courses-dropdown-button" class="w-full text-left mobile-link block text-gray-700 hover:text-emerald-600 transition-colors font-medium flex justify-between items-center">
           <span>Courses</span>
@@ -78,7 +106,15 @@
           <a href="course-cpa.html" class="block text-gray-600 hover:text-emerald-600">Certified Professional Accountant</a>
         </div>
       </div>
+      
+      <!-- NEW: Mobile LMS Login - HIGHLIGHTED BUTTON -->
+      <a href="https://visionconnects.trainercentralsite.in/index" target="_blank" rel="noopener noreferrer"
+         class="mobile-link block font-semibold bg-emerald-500 text-white px-4 py-2 rounded-lg shadow-md 
+                hover:bg-emerald-600 transition-colors text-center">
+        LMS Login
+      </a>
 
+      <!-- Mobile Webinars Dropdown -->
       <div class="relative">
         <button id="mobile-webinar-dropdown-button" class="w-full text-left mobile-link block text-gray-700 hover:text-emerald-600 transition-colors font-medium flex justify-between items-center">
           <span>Online Webinars</span>
@@ -92,6 +128,7 @@
         </div>
       </div>
 
+      <!-- Mobile Practice Session Dropdown -->
       <div class="relative">
         <button id="mobile-practice-dropdown-button" class="w-full text-left mobile-link block text-gray-700 hover:text-emerald-600 transition-colors font-medium flex justify-between items-center">
           <span>Practice Session</span>
@@ -103,9 +140,23 @@
         </div>
       </div>
 
-      <a href="#about" class="mobile-link block text-gray-700 hover:text-emerald-600 transition-colors font-medium">About</a>
-      <a href="#careers" class="mobile-link block text-gray-700 hover:text-emerald-600 transition-colors font-medium">Careers</a>
-      <a href="#contact" class="mobile-link block text-gray-700 hover:text-emerald-600 transition-colors font-medium">Contact</a>
+      <!-- NEW: Mobile Quick Links Dropdown -->
+      <div class="relative">
+        <button id="mobile-quicklinks-dropdown-button" class="w-full text-left mobile-link block text-gray-700 hover:text-emerald-600 transition-colors font-medium flex justify-between items-center">
+          <span>Quick Links</span>
+          <svg class="w-5 h-5 text-gray-500 dropdown-arrow"><use href="#icon-chevron-down"></use></svg>
+        </button>
+        <div id="mobile-quicklinks-dropdown-menu" class="pl-4 mt-2 space-y-2 hidden">
+          <!-- About -->
+          <a href="index.html#about" class="block text-gray-600 hover:text-emerald-600">About</a>
+          <!-- Certificate Verification -->
+          <a href="certificate-verification.html" class="block text-gray-600 hover:text-emerald-600">Certificate Verification</a>
+          <!-- Careers -->
+          <a href="index.html#careers" class="block text-gray-600 hover:text-emerald-600">Careers</a>
+          <!-- Contact -->
+          <a href="index.html#contact" class="block text-gray-600 hover:text-emerald-600">Contact</a>
+        </div>
+      </div>
     </div>
   </div>
 </nav>
