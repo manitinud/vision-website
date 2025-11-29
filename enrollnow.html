@@ -151,13 +151,15 @@
                 });
             };
 
-            // Re-attach the dropdown logic to all dropdown buttons from your menu
+                       // Re-attach the dropdown logic to all dropdown buttons from your menu
             setupDropdown('courses-dropdown-button', 'courses-dropdown-menu');
             setupDropdown('webinar-dropdown-button', 'webinar-dropdown-menu');
             setupDropdown('practice-dropdown-button', 'practice-dropdown-menu');
+setupDropdown('quicklinks-dropdown-button', 'quicklinks-dropdown-menu');
             setupDropdown('mobile-courses-dropdown-button', 'mobile-courses-dropdown-menu');
             setupDropdown('mobile-webinar-dropdown-button', 'mobile-webinar-dropdown-menu');
             setupDropdown('mobile-practice-dropdown-button', 'mobile-practice-dropdown-menu');
+setupDropdown('mobile-quicklinks-dropdown-button', 'mobile-quicklinks-dropdown-menu');
             
             document.addEventListener('click', (event) => {
                 if (!event.target.closest('[id$="-dropdown-container"]') && !event.target.closest('[id$="-dropdown-button"]')) {

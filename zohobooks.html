@@ -1,3 +1,4 @@
+
 <!DOCTYPE html>
 <html lang="en" class="scroll-smooth">
 <head>
@@ -325,13 +326,15 @@
                 });
             };
 
-            // Re-attach the dropdown logic to all dropdown buttons from the loaded menu
+                        // Re-attach the dropdown logic to all dropdown buttons from your menu
             setupDropdown('courses-dropdown-button', 'courses-dropdown-menu');
             setupDropdown('webinar-dropdown-button', 'webinar-dropdown-menu');
             setupDropdown('practice-dropdown-button', 'practice-dropdown-menu');
+setupDropdown('quicklinks-dropdown-button', 'quicklinks-dropdown-menu');
             setupDropdown('mobile-courses-dropdown-button', 'mobile-courses-dropdown-menu');
             setupDropdown('mobile-webinar-dropdown-button', 'mobile-webinar-dropdown-menu');
             setupDropdown('mobile-practice-dropdown-button', 'mobile-practice-dropdown-menu');
+setupDropdown('mobile-quicklinks-dropdown-button', 'mobile-quicklinks-dropdown-menu');
             
             // Close dropdowns if clicking elsewhere on the page
             document.addEventListener('click', (event) => {
