@@ -142,9 +142,10 @@
 
   <script>
     document.addEventListener('DOMContentLoaded', () => {
-        // --- 1. REAL GOOGLE SHEETS CONNECTION ---
+        // --- DEBUGGING VERSION ---
         const form = document.getElementById('verification-form');
-        // This is your Version 2 URL from the screenshot
+        
+        // PASTE YOUR NEW GOOGLE URL HERE CAREFULLY:
         const API_URL = "https://script.google.com/macros/s/AKfycbwVz7iIHFBjjLV4aH6-vfGqyrYB-dK3g433crwwqkuHJy7KJjAcXaXrNBKKwWnUpiUx0g/exec"; 
 
         if (form) {
@@ -159,72 +160,74 @@
 
                 // Loading State
                 const originalBtnText = verifyBtn.innerText;
-                verifyBtn.innerText = 'Searching Database...';
+                verifyBtn.innerText = 'Testing Connection...';
                 verifyBtn.disabled = true;
                 verifyBtn.classList.add('opacity-75', 'cursor-not-allowed');
                 resultContainer.classList.add('hidden'); 
 
-                // Fetch Data from Google Sheet
+                // Fetch Data with Error Catching
                 fetch(API_URL)
-                    .then(response => response.json())
-                    .then(data => {
-                        // Find the student matching "Code of the Student"
-                        const student = data.find(record => 
-                            String(record['Code of the Student']).toLowerCase().trim() === refNumberInput.toLowerCase().trim()
-                        );
+                    .then(response => {
+                        if (!response.ok) {
+                            throw new Error("HTTP Error: " + response.status); 
+                        }
+                        return response.text(); // Get text first to debug
+                    })
+                    .then(textData => {
+                        try {
+                            const data = JSON.parse(textData); // Try to parse JSON
+                            
+                            // If successful, find student
+                            const student = data.find(record => 
+                                String(record['Code of the Student']).toLowerCase().trim() === refNumberInput.toLowerCase().trim()
+                            );
 
-                        if (student) {
-                            // SUCCESS: Student Found
-                            
-                            // 1. Map simple text fields
-                            document.getElementById('student-name').innerText = student['Name of the Student'] || 'N/A';
-                            document.getElementById('course-name').innerText = student['Course Name'] || 'N/A';
-                            
-                            // Format date
-                            let dateRaw = student['Completion date'];
-                            if (dateRaw && String(dateRaw).length > 10) {
-                                dateRaw = String(dateRaw).substring(0, 10);
-                            }
-                            document.getElementById('completion-date').innerText = dateRaw || 'N/A';
-                            
-                            document.getElementById('student-grade').innerText = student['Grade'] || 'N/A';
+                            if (student) {
+                                // SUCCESS - Fill Data
+                                document.getElementById('student-name').innerText = student['Name of the Student'] || 'N/A';
+                                document.getElementById('course-name').innerText = student['Course Name'] || 'N/A';
+                                
+                                let dateRaw = student['Completion date'];
+                                if (dateRaw && String(dateRaw).length > 10) dateRaw = String(dateRaw).substring(0, 10);
+                                document.getElementById('completion-date').innerText = dateRaw || 'N/A';
+                                
+                                document.getElementById('student-grade').innerText = student['Grade'] || 'N/A';
 
-                            // 2. Map Modules List (Comma separated in Sheet)
-                            const modulesList = document.getElementById('modules-list');
-                            modulesList.innerHTML = ''; // Clear previous results
-                            
-                            const modulesString = String(student['Modules Completed'] || '');
-                            if (modulesString.trim()) {
-                                const modulesArray = modulesString.split(',');
-                                modulesArray.forEach(mod => {
-                                    if(mod.trim()) {
-                                        const li = document.createElement('li');
-                                        li.className = 'flex items-start text-sm text-gray-700';
-                                        li.innerHTML = `
-                                            <svg class="w-5 h-5 text-emerald-500 mr-2 flex-shrink-0"><use href="#icon-check-badge"></use></svg>
-                                            ${mod.trim()}
-                                        `;
-                                        modulesList.appendChild(li);
-                                    }
-                                });
+                                const modulesList = document.getElementById('modules-list');
+                                modulesList.innerHTML = ''; 
+                                const modulesString = String(student['Modules Completed'] || '');
+                                if (modulesString.trim()) {
+                                    const modulesArray = modulesString.split(',');
+                                    modulesArray.forEach(mod => {
+                                        if(mod.trim()) {
+                                            const li = document.createElement('li');
+                                            li.className = 'flex items-start text-sm text-gray-700';
+                                            li.innerHTML = `<svg class="w-5 h-5 text-emerald-500 mr-2 flex-shrink-0"><use href="#icon-check-badge"></use></svg>${mod.trim()}`;
+                                            modulesList.appendChild(li);
+                                        }
+                                    });
+                                } else {
+                                    modulesList.innerHTML = '<li class="text-sm text-gray-500 italic">No modules details available</li>';
+                                }
+                                
+                                resultContainer.classList.remove('hidden');
+                                resultContainer.scrollIntoView({ behavior: 'smooth', block: 'center' });
                             } else {
-                                modulesList.innerHTML = '<li class="text-sm text-gray-500 italic">No modules details available</li>';
+                                alert("Connection Successful, but ID not found.\nSearched for: " + refNumberInput);
                             }
-                            
-                            // Show Result
-                            resultContainer.classList.remove('hidden');
-                            resultContainer.scrollIntoView({ behavior: 'smooth', block: 'center' });
-                        } else {
-                            // ERROR: Student Not Found
-                            alert("No record found for Student Code: " + refNumberInput + "\nPlease check the Code and try again.");
+
+                        } catch (e) {
+                            // JSON PARSE ERROR
+                            alert("CRITICAL ERROR: Google sent HTML instead of Data.\n\nThis means permissions are wrong.\n\n" + e.message);
+                            console.log("Received Data:", textData); // Check console for the HTML
                         }
                     })
                     .catch(error => {
-                        console.error('Error:', error);
-                        alert("Network error. Please try again later.");
+                        // NETWORK ERROR
+                        alert("NETWORK ERROR DETAILS:\n" + error.message + "\n\n1. Check your internet.\n2. Check if the URL is copied correctly.\n3. Check CORS permissions.");
+                        console.error('Full Error:', error);
                     })
                     .finally(() => {
-                        // Reset Button
                         verifyBtn.innerText = originalBtnText;
                         verifyBtn.disabled = false;
                         verifyBtn.classList.remove('opacity-75', 'cursor-not-allowed');
@@ -233,18 +236,16 @@
         }
     });
 
-    // --- 2. DYNAMIC MENU LOADER ---
+    // --- DYNAMIC MENU LOADER ---
     fetch('menu.html')
         .then(response => response.text())
         .then(data => {
             document.getElementById('navbar-placeholder').innerHTML = data;
-            
-            // Mobile Menu Logic
+            // ... (Menu logic stays the same) ...
             const menuButton = document.getElementById('menu-button');
             const mobileMenu = document.getElementById('mobile-menu');
             const menuOpenIcon = document.getElementById('menu-open-icon');
             const menuCloseIcon = document.getElementById('menu-close-icon');
-            
             if (menuButton) {
                 menuButton.addEventListener('click', () => {
                   mobileMenu.classList.toggle('open');
@@ -252,45 +253,31 @@
                   menuCloseIcon.classList.toggle('hidden');
                 });
             }
-
-            // Universal Dropdown Logic
             const setupDropdown = (buttonId, menuId) => {
                 const button = document.getElementById(buttonId);
                 const menu = document.getElementById(menuId);
                 if (!button || !menu) return;
-
                 const arrow = button.querySelector('.dropdown-arrow');
-
                 button.addEventListener('click', (event) => {
                     event.stopPropagation();
                     document.querySelectorAll('[id$="-dropdown-menu"]').forEach(otherMenu => {
-                        if (otherMenu.id !== menuId) {
-                            otherMenu.classList.add('hidden');
-                        }
+                        if (otherMenu.id !== menuId) otherMenu.classList.add('hidden');
                     });
                      document.querySelectorAll('[id$="-dropdown-button"] .dropdown-arrow').forEach(otherArrow => {
-                        if(otherArrow !== arrow) {
-                            otherArrow.classList.remove('open');
-                        }
+                        if(otherArrow !== arrow) otherArrow.classList.remove('open');
                     });
-
                     const isHidden = menu.classList.toggle('hidden');
                     if (arrow) arrow.classList.toggle('open', !isHidden);
                 });
             };
-
-            // Initialize all dropdowns
             setupDropdown('courses-dropdown-button', 'courses-dropdown-menu');
             setupDropdown('webinar-dropdown-button', 'webinar-dropdown-menu');
             setupDropdown('practice-dropdown-button', 'practice-dropdown-menu');
             setupDropdown('quicklinks-dropdown-button', 'quicklinks-dropdown-menu');
-
             setupDropdown('mobile-courses-dropdown-button', 'mobile-courses-dropdown-menu');
             setupDropdown('mobile-webinar-dropdown-button', 'mobile-webinar-dropdown-menu');
             setupDropdown('mobile-practice-dropdown-button', 'mobile-practice-dropdown-menu');
             setupDropdown('mobile-quicklinks-dropdown-button', 'mobile-quicklinks-dropdown-menu');
-            
-            // Close on outside click
             document.addEventListener('click', (event) => {
                 if (!event.target.closest('[id$="-dropdown-container"]') && !event.target.closest('[id$="-dropdown-button"]')) {
                     document.querySelectorAll('[id$="-dropdown-menu"]').forEach(menu => menu.classList.add('hidden'));
@@ -298,7 +285,6 @@
                 }
             });
         });
-  </script>
+</script>
 </body>
 </html>
-
